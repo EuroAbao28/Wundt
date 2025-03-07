@@ -5,11 +5,19 @@ import { MdLocationOn, MdOutlineFacebook } from "react-icons/md";
 import SectionHeader from "../SectionHeader";
 
 function ContactsSection() {
+  const recipient = "recipient@example.com";
+  const subject = "Hello from React";
+  const body = "This is the body of the email.";
+
+  const mailtoLink = `mailto:${recipient}?subject=${encodeURIComponent(
+    subject
+  )}&body=${encodeURIComponent(body)}`;
+
   const contents = [
     {
       header: "Dagupan City",
       phoneNo: "0939-902-6188",
-      fb: "https://www.facebook.com/wundtpsychologicalinstitute",
+      fb: "www.facebook.com/wundtpsychologicalinstitute",
       email: "wundt_inst@yahoo.com.ph",
       loc: "2/F ENCARNACION BLDG., RIOFERIO RD., COR. ARELLANO ST., DAGUPAN CITY",
     },
@@ -58,7 +66,7 @@ function ContactsSection() {
                     </span>
                     {content.phoneNo}
                   </div>
-                  <div className="flex items-center text-xs sm:text-sm overflow-x-auto">
+                  <div className="flex items-center text-xs sm:text-sm overflow-x-auto scrollbar scrollbar-thumb-white/10 scrollbar-thin scrollbar-track-white/0">
                     <span className="text-emerald-600 text-base sticky start-0 bg-white pr-3 sm:pr-4">
                       <MdOutlineFacebook />
                     </span>
