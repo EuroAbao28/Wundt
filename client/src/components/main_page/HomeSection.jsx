@@ -5,7 +5,7 @@ function HomeSection() {
   return (
     <div
       style={{ backgroundImage: `url(${b1})` }}
-      className="h-screen bg-cover bg-center"
+      className="h-svh bg-cover bg-center"
     >
       <div className="h-full backdrop-blur-sm bg-gradient-to-r from-white to-white/0 max-sm:to-white/10 px-6 lg:px-12">
         <div className="h-full max-w-7xl mx-auto flex items-center gap-8">
