@@ -4,55 +4,46 @@ import s2 from "../../assets/s2.jpg";
 import SectionHeader from "../SectionHeader";
 
 function WhyUsSection() {
+  const contents = [
+    {
+      icon: <TbShieldCheck />,
+      title: "Licensed Professionals",
+      desc: "Experienced and certified experts providing ethical and reliable care.",
+    },
+    {
+      icon: <TbHeartHandshake />,
+      title: "Client-Centered Approach",
+      desc: "Personalized services tailored to meet every client’s unique needs.",
+    },
+    {
+      icon: <TbUsers />,
+      title: "Accessible for All",
+      desc: "Making psychological services affordable and accessible for everyone.",
+    },
+  ];
+
   return (
     <div className="mt-40 px-6 lg:px-12">
       <div className="  max-w-7xl mx-auto ">
         <SectionHeader title={"Why Choose Wundt Psychological Institute?"} />
 
-        <div className="flex max-sm:flex-col-reverse mt-12 gap-6 xs:gap-8">
+        <div className="flex max-sm:flex-col-reverse mt-12 gap-10">
           <div className="flex-1 flex flex-col gap-8 justify-center">
-            <div className="flex items-start gap-4">
-              <div className="text-emerald-600 text-4xl">
-                <TbShieldCheck />
+            {contents.map((content, index) => (
+              <div key={index} className="flex items-start gap-4">
+                <div className="text-emerald-600 text-3xl sm:text-4xl">
+                  {content.icon}
+                </div>
+                <div>
+                  <h3 className="text-base sm:text-lg font-semibold">
+                    {content.title}
+                  </h3>
+                  <p className="text-xs sm:text-sm text-slate-500">
+                    {content.desc}
+                  </p>
+                </div>
               </div>
-              <div>
-                <h3 className="text-lg font-semibold">
-                  Licensed Professionals
-                </h3>
-                <p className="text-sm text-slate-500">
-                  Experienced and certified experts providing ethical and
-                  reliable care.
-                </p>
-              </div>
-            </div>
-
-            <div className="flex items-start gap-4">
-              <div className="text-emerald-600 text-4xl">
-                <TbHeartHandshake />
-              </div>
-              <div>
-                <h3 className="text-lg font-semibold">
-                  Client-Centered Approach
-                </h3>
-                <p className="text-sm text-slate-500">
-                  Personalized services tailored to meet every client’s unique
-                  needs.
-                </p>
-              </div>
-            </div>
-
-            <div className="flex items-start gap-4">
-              <div className="text-emerald-600 text-4xl">
-                <TbUsers />
-              </div>
-              <div>
-                <h3 className="text-lg font-semibold">Accessible for All</h3>
-                <p className="text-sm text-slate-500">
-                  Making psychological services affordable and accessible for
-                  everyone.
-                </p>
-              </div>
-            </div>
+            ))}
           </div>
 
           <div className="flex-1 h-[20rem] rounded relative">
