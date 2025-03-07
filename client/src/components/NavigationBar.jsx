@@ -7,7 +7,7 @@ function NavigationBar() {
       <div className=" max-w-7xl mx-auto py-4 flex justify-between">
         <div className="flex items-center gap-2">
           <img src={logo} alt="logo" className="w-10 rounded-full" />
-          <h1 className="font-black text-emerald-600 uppercase font-cardo text-sm sm:text-xl leading-6">
+          <h1 className="font-black text-emerald-600 uppercase font-cardo text-sm sm:text-xl leading-4">
             Wundt Psychological Institute
           </h1>
         </div>
