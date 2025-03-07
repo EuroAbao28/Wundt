@@ -24,7 +24,7 @@ function AboutSection() {
                   className="bg-center bg-cover grid grid-rows-2 rounded overflow-hidden flex-1"
                 >
                   <div className="h-full p-4 bg-white/80 text-emerald-800 backdrop-blur-sm text-xs md:text-sm row-start-2">
-                    <h3 className="font-semibold">Compassion</h3>
+                    <h3 className="font-semibold uppercase">Compassion</h3>
                     <p className="mt-4">
                       Deliver services with utmost care founded on love for
                       humanity.
@@ -37,7 +37,7 @@ function AboutSection() {
                   className="bg-center bg-cover grid grid-rows-2 rounded overflow-hidden flex-1"
                 >
                   <div className="h-full p-4 bg-white/80 text-emerald-800 backdrop-blur-sm text-xs md:text-sm row-start-2">
-                    <h3 className="font-semibold">Accessibility</h3>
+                    <h3 className="font-semibold uppercase">Accessibility</h3>
                     <p className="mt-4">Bring services closer to clients.</p>
                   </div>
                 </div>
@@ -50,7 +50,7 @@ function AboutSection() {
                   className="bg-center bg-cover grid grid-rows-2 rounded overflow-hidden flex-1"
                 >
                   <div className="h-full p-4 bg-white/80 text-emerald-800 backdrop-blur-sm text-xs md:text-sm row-start-2">
-                    <h3 className="font-semibold">Responsibility</h3>
+                    <h3 className="font-semibold uppercase">Responsibility</h3>
                     <p className="mt-4">
                       Respond to clients needs the best possible way without
                       prejudice to race, sex, socio-economic status, or any
@@ -64,7 +64,7 @@ function AboutSection() {
                   className="bg-center bg-cover grid grid-rows-2 rounded overflow-hidden flex-1"
                 >
                   <div className="h-full p-4 bg-white/80 text-emerald-800 backdrop-blur-sm text-xs md:text-sm row-start-2">
-                    <h3 className="font-semibold">Excellence</h3>
+                    <h3 className="font-semibold uppercase">Excellence</h3>
                     <p className="mt-4">
                       Deliver services at par professional and ethical standards
                       through licensed and competent human resources.
@@ -106,7 +106,7 @@ function AboutSection() {
                     className="bg-center bg-cover grid grid-rows-2 rounded overflow-hidden flex-1"
                   >
                     <div className="h-full p-4 bg-white/80 text-emerald-800 backdrop-blur-sm text-xs md:text-sm row-start-2">
-                      <h3 className="font-semibold">Compassion</h3>
+                      <h3 className="font-semibold uppercase">Compassion</h3>
                       <p className="mt-4">
                         Deliver services with utmost care founded on love for
                         humanity.
@@ -119,7 +119,7 @@ function AboutSection() {
                     className="bg-center bg-cover grid grid-rows-2 rounded overflow-hidden flex-1"
                   >
                     <div className="h-full p-4 bg-white/80 text-emerald-800 backdrop-blur-sm text-xs md:text-sm row-start-2">
-                      <h3 className="font-semibold">Accessibility</h3>
+                      <h3 className="font-semibold uppercase">Accessibility</h3>
                       <p className="mt-4">Bring services closer to clients.</p>
                     </div>
                   </div>
@@ -132,7 +132,9 @@ function AboutSection() {
                     className="bg-center bg-cover grid grid-rows-2 rounded overflow-hidden flex-1"
                   >
                     <div className="h-full p-4 bg-white/80 text-emerald-800 backdrop-blur-sm text-xs md:text-sm row-start-2">
-                      <h3 className="font-semibold">Responsibility</h3>
+                      <h3 className="font-semibold uppercase">
+                        Responsibility
+                      </h3>
                       <p className="mt-4">
                         Respond to clients needs the best possible way without
                         prejudice to race, sex, socio-economic status, or any
@@ -146,7 +148,7 @@ function AboutSection() {
                     className="bg-center bg-cover grid grid-rows-2 rounded overflow-hidden flex-1"
                   >
                     <div className="h-full p-4 bg-white/80 text-emerald-800 backdrop-blur-sm text-xs md:text-sm row-start-2">
-                      <h3 className="font-semibold">Excellence</h3>
+                      <h3 className="font-semibold uppercase">Excellence</h3>
                       <p className="mt-4">
                         Deliver services at par professional and ethical
                         standards through licensed and competent human
