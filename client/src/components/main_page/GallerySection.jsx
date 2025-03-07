@@ -15,7 +15,7 @@ function GallerySection() {
       <div className="mt-40  max-w-7xl mx-auto">
         <SectionHeader title={"Our gallery"} />
 
-        <div className="mt-12 rounded grid grid-cols-5 gap-2">
+        <div className="mt-12 rounded grid grid-cols-2 grid-rows-2 md:grid-cols-5 gap-2">
           <div className="overflow-hidden rounded">
             <img
               src={s10}
@@ -23,7 +23,7 @@ function GallerySection() {
               className="object-cover object-center w-full h-[20rem] hover:scale-105 transition-all duration-500"
             />
           </div>
-          <div className="col-span-2 overflow-hidden rounded">
+          <div className="md:col-span-2 overflow-hidden rounded">
             <img
               src={s9}
               alt=""
@@ -58,7 +58,7 @@ function GallerySection() {
               className="object-cover object-center w-full h-[20rem] hover:scale-105 transition-all duration-500"
             />
           </div>
-          <div className="col-span-2 overflow-hidden rounded">
+          <div className="md:col-span-2 overflow-hidden rounded">
             <img
               src={s4}
               alt=""
