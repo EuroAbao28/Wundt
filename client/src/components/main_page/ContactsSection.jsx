@@ -66,7 +66,7 @@ function ContactsSection() {
                     </span>
                     {content.phoneNo}
                   </div>
-                  <div className="flex items-center text-xs sm:text-sm overflow-x-auto scrollbar scrollbar-thumb-white/10 scrollbar-thin scrollbar-track-white/0">
+                  <div className="flex items-center text-xs sm:text-sm overflow-x-auto scrollbar-none">
                     <span className="text-emerald-600 text-base sticky start-0 bg-white pr-3 sm:pr-4">
                       <MdOutlineFacebook />
                     </span>
