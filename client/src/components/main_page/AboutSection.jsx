@@ -98,7 +98,7 @@ function AboutSection() {
                 </p>
               </div>
 
-              <div className="flex-1 gap-4 flex max-md:flex-col lg:hidden">
+              <div className="flex-1 gap-4 flex max-sm:flex-col lg:hidden">
                 {/* horizontal div */}
                 <div className="flex flex-col flex-1 gap-4">
                   <div
