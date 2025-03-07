@@ -23,7 +23,7 @@ function WhyUsSection() {
   ];
 
   return (
-    <div className="mt-40 px-6 lg:px-12">
+    <div className="mt-20 sm:mt-40 px-6 lg:px-12">
       <div className="  max-w-7xl mx-auto ">
         <SectionHeader title={"Why Choose Wundt Psychological Institute?"} />
 

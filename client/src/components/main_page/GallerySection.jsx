@@ -11,8 +11,8 @@ import SectionHeader from "../SectionHeader";
 
 function GallerySection() {
   return (
-    <div className="px-6 lg:px-12">
-      <div className="mt-40  max-w-7xl mx-auto">
+    <div className="mt-20 sm:mt-40 px-6 lg:px-12">
+      <div className="  max-w-7xl mx-auto">
         <SectionHeader title={"Our gallery"} />
 
         <div className="mt-12 rounded grid grid-cols-2 grid-rows-2 md:grid-cols-5 gap-2">

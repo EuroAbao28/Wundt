@@ -50,8 +50,8 @@ function ServicesSection() {
   ];
 
   return (
-    <div className="px-6 lg:px-12">
-      <div className="mt-40  max-w-7xl mx-auto">
+    <div className="mt-20 sm:mt-40 px-6 lg:px-12">
+      <div className="max-w-7xl mx-auto">
         <SectionHeader title={"Comprehensive Services We Offer"} />
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-12">

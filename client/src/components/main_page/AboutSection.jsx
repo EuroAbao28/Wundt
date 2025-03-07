@@ -9,7 +9,7 @@ function AboutSection() {
   return (
     <div
       style={{ backgroundImage: `url(${b1})` }}
-      className="mt-40 bg-center bg-cover"
+      className="mt-20 sm:mt-40 bg-center bg-cover"
     >
       <div className="p-6 lg:p-12 bg-radial-[at_-35%_15%] from-green-500/90 to-emerald-600/90 to-75%">
         <div className=" max-w-7xl mx-auto">

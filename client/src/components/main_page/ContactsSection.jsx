@@ -37,8 +37,8 @@ function ContactsSection() {
   ];
 
   return (
-    <div className="px-6 lg:px-12">
-      <div className="mt-40 mb-12  max-w-7xl mx-auto">
+    <div className="mt-20 sm:mt-40 px-6 lg:px-12">
+      <div className=" mb-12  max-w-7xl mx-auto">
         <SectionHeader title={"Reach Out to Us"} />
 
         <div className="mt-12 flex max-lg:flex-col-reverse gap-4">

@@ -56,7 +56,7 @@ function NewsSection() {
   return (
     <div
       style={{ backgroundImage: `url(${b1})` }}
-      className="mt-40  bg-center bg-cover"
+      className="mt-20 sm:mt-40  bg-center bg-cover"
     >
       <div className="px-6 pb-6 lg:px-12 lg:pb-12 bg-gradient-to-b from-white from-5% to-emerald-600/60 backdrop-blur-sm">
         <div className=" max-w-7xl mx-auto">
