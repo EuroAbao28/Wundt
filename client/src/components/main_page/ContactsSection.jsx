@@ -52,26 +52,26 @@ function ContactsSection() {
                   {content.header}
                 </h3>
                 <div className="mt-2 text-slate-500 flex flex-col gap-1">
-                  <div className="flex items-center gap-4 text-xs sm:text-sm ">
-                    <span className="text-emerald-600 text-base">
+                  <div className="flex items-center  text-xs sm:text-sm overflow-x-auto">
+                    <span className="text-emerald-600 text-base sticky start-0 bg-white pr-3 sm:pr-4">
                       <BiSolidPhone />
                     </span>
                     {content.phoneNo}
                   </div>
-                  <div className="flex items-center gap-4 text-xs sm:text-sm truncate">
-                    <span className="text-emerald-600 text-base">
+                  <div className="flex items-center text-xs sm:text-sm overflow-x-auto">
+                    <span className="text-emerald-600 text-base sticky start-0 bg-white pr-3 sm:pr-4">
                       <MdOutlineFacebook />
                     </span>
                     {content.fb}
                   </div>
-                  <div className="flex items-center gap-4 text-xs sm:text-sm truncate">
-                    <span className="text-emerald-600 text-base">
+                  <div className="flex items-center  text-xs sm:text-sm overflow-x-auto">
+                    <span className="text-emerald-600 text-base sticky start-0 bg-white pr-3 sm:pr-4">
                       <TbMailFilled />
                     </span>
                     {content.email}
                   </div>
-                  <div className="flex items-start gap-4 text-xs sm:text-sm">
-                    <span className="text-emerald-600 text-base">
+                  <div className="flex items-start text-xs sm:text-sm overflow-x-auto">
+                    <span className="text-emerald-600 text-base sticky start-0 bg-white pr-3 sm:pr-4">
                       <MdLocationOn />
                     </span>
                     {content.loc}
