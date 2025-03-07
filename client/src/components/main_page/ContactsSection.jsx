@@ -3,7 +3,6 @@ import { TbMailFilled } from "react-icons/tb";
 import { BiSolidPhone } from "react-icons/bi";
 import { MdLocationOn, MdOutlineFacebook } from "react-icons/md";
 import SectionHeader from "../SectionHeader";
-import pin from "../../assets/pin.png";
 
 const contents = [
   {
