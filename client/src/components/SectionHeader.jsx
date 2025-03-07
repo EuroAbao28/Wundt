@@ -7,7 +7,7 @@ function SectionHeader({ title, colorMode }) {
       <h1
         className={`${
           colorMode === "white" && "text-white"
-        } text-xl sm:text-2xl md:text-3xl font-semibold text-center w-[70%]`}
+        }  text-2xl md:text-3xl font-semibold text-center `}
       >
         {title}
       </h1>
