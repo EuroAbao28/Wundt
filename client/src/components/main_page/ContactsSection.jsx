@@ -5,6 +5,37 @@ import { MdLocationOn, MdOutlineFacebook } from "react-icons/md";
 import SectionHeader from "../SectionHeader";
 
 function ContactsSection() {
+  const contents = [
+    {
+      header: "Dagupan City",
+      phoneNo: "0939-902-6188",
+      fb: "https://www.facebook.com/wundtpsychologicalinstitute",
+      email: "wundt_inst@yahoo.com.ph",
+      loc: "2/F ENCARNACION BLDG., RIOFERIO RD., COR. ARELLANO ST., DAGUPAN CITY",
+    },
+    {
+      header: "Vigan City",
+      phoneNo: "0955-896-7345",
+      fb: "https://www.facebook.com/wundtvigan",
+      email: "wundt_inst@yahoo.com.ph",
+      loc: "2/F EL SENOR JESUS APT., QUIRINO AVE., TAMAG VIGAN CITY, ILOCOS SUR",
+    },
+    {
+      header: "Urdaneta City",
+      phoneNo: "0969-265-3903",
+      fb: "https://www.facebook.com/wundturdaneta",
+      email: "wundt_inst@yahoo.com.ph",
+      loc: "3/F GR8 CORPORATE CENTRE BYPASS RD., ANONAS URDANETA CITY, PANGASINAN",
+    },
+    {
+      header: "Mangaldan",
+      phoneNo: "0939-902-6188",
+      fb: "https://www.facebook.com/wundtpsychologicalinstitute",
+      email: "wundt_inst@yahoo.com.ph",
+      loc: "F&M BLDG. NATIONAL HI-WAY BARI MANGALDAN, PANGASINAN",
+    },
+  ];
+
   return (
     <div className="px-6 lg:px-12">
       <div className="mt-40 mb-12  max-w-7xl mx-auto">
@@ -12,128 +43,42 @@ function ContactsSection() {
 
         <div className="mt-12 flex max-lg:flex-col-reverse gap-4">
           <div className="flex flex-col gap-2  flex-1">
-            <div className="outline outline-slate-300 p-4 rounded">
-              <h3 className="font-semibold text-sm">Dagupan City</h3>
-              <div className="mt-2 text-slate-500 flex flex-col gap-1">
-                <div className="flex items-center gap-4 text-sm ">
-                  <span className="text-emerald-600 text-base">
-                    <BiSolidPhone />
-                  </span>
-                  0939-902-6188
-                </div>
-                <div className="flex items-center gap-4 text-sm truncate">
-                  <span className="text-emerald-600 text-base">
-                    <MdOutlineFacebook />
-                  </span>
-                  https://www.facebook.com/wundtpsychologicalinstitute
-                </div>
-                <div className="flex items-center gap-4 text-sm truncate">
-                  <span className="text-emerald-600 text-base">
-                    <TbMailFilled />
-                  </span>
-                  wundt_inst@yahoo.com.ph
-                </div>
-                <div className="flex items-start gap-4 text-sm">
-                  <span className="text-emerald-600 text-base">
-                    <MdLocationOn />
-                  </span>
-                  2/F ENCARNACION BLDG., RIOFERIO RD., COR. ARELLANO ST.,
-                  DAGUPAN CITY
-                </div>
-              </div>
-            </div>
-
-            <div className="outline outline-slate-300 p-4 rounded">
-              <h3 className="font-semibold text-sm">Vigan City</h3>
-              <div className="mt-2 text-slate-500 flex flex-col gap-1">
-                <div className="flex items-center gap-4 text-sm ">
-                  <span className="text-emerald-600 text-base">
-                    <BiSolidPhone />
-                  </span>
-                  0955-896-7345
-                </div>
-                <div className="flex items-center gap-4 text-sm truncate">
-                  <span className="text-emerald-600 text-base">
-                    <MdOutlineFacebook />
-                  </span>
-                  https://www.facebook.com/wundtvigan
-                </div>
-                <div className="flex items-center gap-4 text-sm truncate">
-                  <span className="text-emerald-600 text-base">
-                    <TbMailFilled />
-                  </span>
-                  wundt_inst@yahoo.com.ph
-                </div>
-                <div className="flex items-start gap-4 text-sm ">
-                  <span className="text-emerald-600 text-base">
-                    <MdLocationOn />
-                  </span>
-                  2/F EL SENOR JESUS APT., QUIRINO AVE., TAMAG VIGAN CITY,
-                  ILOCOS SUR
+            {contents.map((content, index) => (
+              <div
+                key={index}
+                className="outline outline-slate-300 p-4 rounded"
+              >
+                <h3 className="font-semibold text-xs sm:text-sm">
+                  {content.header}
+                </h3>
+                <div className="mt-2 text-slate-500 flex flex-col gap-1">
+                  <div className="flex items-center gap-4 text-xs sm:text-sm ">
+                    <span className="text-emerald-600 text-base">
+                      <BiSolidPhone />
+                    </span>
+                    {content.phoneNo}
+                  </div>
+                  <div className="flex items-center gap-4 text-xs sm:text-sm truncate">
+                    <span className="text-emerald-600 text-base">
+                      <MdOutlineFacebook />
+                    </span>
+                    {content.fb}
+                  </div>
+                  <div className="flex items-center gap-4 text-xs sm:text-sm truncate">
+                    <span className="text-emerald-600 text-base">
+                      <TbMailFilled />
+                    </span>
+                    {content.email}
+                  </div>
+                  <div className="flex items-start gap-4 text-xs sm:text-sm">
+                    <span className="text-emerald-600 text-base">
+                      <MdLocationOn />
+                    </span>
+                    {content.loc}
+                  </div>
                 </div>
               </div>
-            </div>
-
-            <div className="outline outline-slate-300 p-4 rounded">
-              <h3 className="font-semibold text-sm">Urdaneta City</h3>
-              <div className="mt-2 text-slate-500 flex flex-col gap-1">
-                <div className="flex items-center gap-4 text-sm ">
-                  <span className="text-emerald-600 text-base">
-                    <BiSolidPhone />
-                  </span>
-                  0969-265-3903
-                </div>
-                <div className="flex items-center gap-4 text-sm truncate">
-                  <span className="text-emerald-600 text-base">
-                    <MdOutlineFacebook />
-                  </span>
-                  https://www.facebook.com/wundturdaneta
-                </div>
-                <div className="flex items-center gap-4 text-sm truncate">
-                  <span className="text-emerald-600 text-base">
-                    <TbMailFilled />
-                  </span>
-                  wundt_inst@yahoo.com.ph
-                </div>
-                <div className="flex items-start gap-4 text-sm ">
-                  <span className="text-emerald-600 text-base">
-                    <MdLocationOn />
-                  </span>
-                  3/F GR8 CORPORATE CENTRE BYPASS RD., ANONAS URDANETA CITY,
-                  PANGASINAN
-                </div>
-              </div>
-            </div>
-
-            <div className="outline outline-slate-300 p-4 rounded">
-              <h3 className="font-semibold text-sm">Mangaldan</h3>
-              <div className="mt-2 text-slate-500 flex flex-col gap-1">
-                <div className="flex items-center gap-4 text-sm ">
-                  <span className="text-emerald-600 text-base">
-                    <BiSolidPhone />
-                  </span>
-                  0939-902-6188
-                </div>
-                <div className="flex items-center gap-4 text-sm truncate">
-                  <span className="text-emerald-600 text-base">
-                    <MdOutlineFacebook />
-                  </span>
-                  https://www.facebook.com/wundtpsychologicalinstitute
-                </div>
-                <div className="flex items-center gap-4 text-sm truncate">
-                  <span className="text-emerald-600 text-base">
-                    <TbMailFilled />
-                  </span>
-                  wundt_inst@yahoo.com.ph
-                </div>
-                <div className="flex items-start gap-4 text-sm ">
-                  <span className="text-emerald-600 text-base">
-                    <MdLocationOn />
-                  </span>
-                  F&M BLDG. NATIONAL HI-WAY BARI MANGALDAN, PANGASINAN
-                </div>
-              </div>
-            </div>
+            ))}
           </div>
 
           <div className="flex-1 max-lg:aspect-video outline outline-slate-300 rounded overflow-hidden">
