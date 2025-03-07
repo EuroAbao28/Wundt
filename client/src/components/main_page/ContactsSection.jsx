@@ -5,14 +5,6 @@ import { MdLocationOn, MdOutlineFacebook } from "react-icons/md";
 import SectionHeader from "../SectionHeader";
 
 function ContactsSection() {
-  const recipient = "recipient@example.com";
-  const subject = "Hello from React";
-  const body = "This is the body of the email.";
-
-  const mailtoLink = `mailto:${recipient}?subject=${encodeURIComponent(
-    subject
-  )}&body=${encodeURIComponent(body)}`;
-
   const contents = [
     {
       header: "Dagupan City",
