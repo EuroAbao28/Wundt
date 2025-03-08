@@ -7,9 +7,9 @@ function NavigationBar() {
   const [isDropDownOpen, setDropDownOpen] = useState(false);
 
   return (
-    <header className=" bg-white fixed top-0 left-0 right-0 z-20 shadow-card2 px-6 lg:px-12">
+    <header className=" bg-white fixed top-0 left-0 right-0 z-20 shadow-card2 px-4 sm:px-6 lg:px-12">
       <div className=" max-w-7xl mx-auto ">
-        <div className="py-4 flex justify-between">
+        <div className="py-2 sm:py-4 flex justify-between ">
           {/* logo */}
           <div className=" flex items-center gap-2">
             <img src={logo} alt="logo" className="w-10 rounded-full" />
@@ -70,7 +70,7 @@ function NavigationBar() {
         {/* dropdown menu */}
         <div
           className={classNames(
-            " text-center overflow-hidden transition-all duration-300 flex lg:hidden flex-col",
+            " text-center overflow-hidden text-sm transition-all duration-300 flex lg:hidden flex-col",
             {
               "max-h-0": !isDropDownOpen,
               "max-h-96 mb-4": isDropDownOpen,
