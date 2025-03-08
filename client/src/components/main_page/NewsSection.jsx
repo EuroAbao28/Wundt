@@ -73,6 +73,7 @@ function NewsSection(props, ref) {
                 <img
                   src={content.image}
                   alt=""
+                  loading="lazy"
                   className="object-center object-cover h-full w-full"
                 />
                 <div className="absolute inset-0 flex flex-col justify-end p-2  gap-2 bg-gradient-to-b from-black/10 to-black/80 group-hover:to-black/90 transition-all duration-500">

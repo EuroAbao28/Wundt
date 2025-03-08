@@ -50,6 +50,7 @@ function WhyUsSection() {
             <img
               src={s2}
               alt=""
+              loading="lazy"
               className="w-full h-full object-cover rounded"
             />
             <span className="absolute inset-0 bg-emerald-600 -z-10 translate-y-2 translate-x-2 rounded"></span>

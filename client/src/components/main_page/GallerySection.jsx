@@ -21,6 +21,7 @@ function GallerySection(props, ref) {
               src={s10}
               alt=""
               className="object-cover object-center w-full h-[20rem] hover:scale-105 transition-all duration-500"
+              loading="lazy" // Add lazy loading
             />
           </div>
           <div className="md:col-span-2 overflow-hidden rounded">
@@ -28,6 +29,7 @@ function GallerySection(props, ref) {
               src={s9}
               alt=""
               className="object-cover object-center w-full h-[20rem] hover:scale-105 transition-all duration-500"
+              loading="lazy" // Add lazy loading
             />
           </div>
           <div className="overflow-hidden rounded">
@@ -35,6 +37,7 @@ function GallerySection(props, ref) {
               src={s8}
               alt=""
               className="object-cover object-center w-full h-[20rem] hover:scale-105 transition-all duration-500"
+              loading="lazy" // Add lazy loading
             />
           </div>
           <div className="overflow-hidden rounded">
@@ -42,6 +45,7 @@ function GallerySection(props, ref) {
               src={s7}
               alt=""
               className="object-cover object-center w-full h-[20rem] hover:scale-105 transition-all duration-500"
+              loading="lazy" // Add lazy loading
             />
           </div>
           <div className="overflow-hidden rounded">
@@ -49,6 +53,7 @@ function GallerySection(props, ref) {
               src={s6}
               alt=""
               className="object-cover object-center w-full h-[20rem] hover:scale-105 transition-all duration-500"
+              loading="lazy" // Add lazy loading
             />
           </div>
           <div className="overflow-hidden rounded">
@@ -56,6 +61,7 @@ function GallerySection(props, ref) {
               src={s5}
               alt=""
               className="object-cover object-center w-full h-[20rem] hover:scale-105 transition-all duration-500"
+              loading="lazy" // Add lazy loading
             />
           </div>
           <div className="md:col-span-2 overflow-hidden rounded">
@@ -63,6 +69,7 @@ function GallerySection(props, ref) {
               src={s4}
               alt=""
               className="object-cover object-center w-full h-[20rem] hover:scale-105 transition-all duration-500"
+              loading="lazy" // Add lazy loading
             />
           </div>
           <div className="overflow-hidden rounded">
@@ -70,6 +77,7 @@ function GallerySection(props, ref) {
               src={s3}
               alt=""
               className="object-cover object-center w-full h-[20rem] hover:scale-105 transition-all duration-500"
+              loading="lazy" // Add lazy loading
             />
           </div>
         </div>
