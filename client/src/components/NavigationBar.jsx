@@ -80,7 +80,7 @@ function NavigationBar({
             <div
               key={index}
               onClick={() => scrollToSection(content.ref)}
-              className="py-3 capitalize"
+              className="py-3 capitalize active:bg-slate-800/5 rounded active:scale-95 transition-all"
             >
               {content.name}
             </div>
