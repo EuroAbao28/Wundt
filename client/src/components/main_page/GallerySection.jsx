@@ -9,9 +9,9 @@ import s9 from "../../assets/s9.jpg";
 import s10 from "../../assets/s10.jpg";
 import SectionHeader from "../SectionHeader";
 
-function GallerySection() {
+function GallerySection(props, ref) {
   return (
-    <div className="mt-20 sm:mt-40 px-6 lg:px-12">
+    <div ref={ref} id="gallery" className="mt-20 sm:mt-40 px-6 lg:px-12">
       <div className="  max-w-7xl mx-auto">
         <SectionHeader title={"Our gallery"} />
 
@@ -84,4 +84,4 @@ function GallerySection() {
   );
 }
 
-export default GallerySection;
+export default React.forwardRef(GallerySection);

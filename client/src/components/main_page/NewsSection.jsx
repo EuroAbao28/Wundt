@@ -6,7 +6,7 @@ import s9 from "../../assets/s9.jpg";
 import b1 from "../../assets/b1.jpg";
 import SectionHeader from "../SectionHeader";
 
-function NewsSection() {
+function NewsSection(props, ref) {
   const contents = [
     {
       image: s9,
@@ -55,6 +55,8 @@ function NewsSection() {
 
   return (
     <div
+      ref={ref}
+      id="news"
       style={{ backgroundImage: `url(${b1})` }}
       className="mt-20 sm:mt-40  bg-center bg-cover"
     >
@@ -93,4 +95,4 @@ function NewsSection() {
   );
 }
 
-export default NewsSection;
+export default React.forwardRef(NewsSection);

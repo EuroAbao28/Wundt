@@ -9,7 +9,7 @@ import {
 } from "react-icons/tb";
 import SectionHeader from "../SectionHeader";
 
-function ServicesSection() {
+function ServicesSection(props, ref) {
   const contents = [
     {
       icon: <TbHeartRateMonitor />,
@@ -50,7 +50,7 @@ function ServicesSection() {
   ];
 
   return (
-    <div className="mt-20 sm:mt-40 px-6 lg:px-12">
+    <div ref={ref} id="services" className="mt-20 sm:mt-40 px-6 lg:px-12">
       <div className="max-w-7xl mx-auto">
         <SectionHeader title={"Comprehensive Services We Offer"} />
 
@@ -74,4 +74,4 @@ function ServicesSection() {
   );
 }
 
-export default ServicesSection;
+export default React.forwardRef(ServicesSection);

@@ -3,8 +3,31 @@ import logo from "../assets/wundt_logo.jpg";
 import { MdMenu } from "react-icons/md";
 import classNames from "classnames";
 
-function NavigationBar() {
+function NavigationBar({
+  homeSectionRef,
+  servicesSectionRef,
+  aboutSectionRef,
+  gallerySectionRef,
+  newsSectionRef,
+  contactSectionRef,
+}) {
   const [isDropDownOpen, setDropDownOpen] = useState(false);
+
+  const navContents = [
+    { name: "home", ref: homeSectionRef },
+    { name: "services", ref: servicesSectionRef },
+    { name: "about", ref: aboutSectionRef },
+    { name: "gallery", ref: gallerySectionRef },
+    { name: "news", ref: newsSectionRef },
+    { name: "contact", ref: contactSectionRef },
+  ];
+
+  const scrollToSection = (ref) => {
+    if (ref.current) {
+      ref.current.scrollIntoView({ behavior: "smooth" });
+    }
+    setDropDownOpen(false);
+  };
 
   return (
     <header className=" bg-white fixed top-0 left-0 right-0 z-20 shadow-card2 px-4 sm:px-6 lg:px-12">
@@ -20,42 +43,18 @@ function NavigationBar() {
 
           {/* nav for big screen */}
           <nav className="hidden lg:flex gap-2 text-sm ">
-            <li className="list-none relative group py-2 px-4 cursor-pointer">
-              <p className="group-hover:text-emerald-600 transition-all duration-500">
-                Home
-              </p>
-              <span className="absolute left-0 bottom-0 right-0 scale-x-0 origin-left group-hover:scale-x-100 h-0.5 transition-all duration-500 bg-emerald-600 rounded-full opacity-0 group-hover:opacity-100"></span>
-            </li>
-            <li className="list-none relative group py-2 px-4 cursor-pointer">
-              <p className="group-hover:text-emerald-600 transition-all duration-500">
-                Services
-              </p>
-              <span className="absolute left-0 bottom-0 right-0 scale-x-0 origin-left group-hover:scale-x-100 h-0.5 transition-all duration-500 bg-emerald-600 rounded-full"></span>
-            </li>
-            <li className="list-none relative group py-2 px-4 cursor-pointer">
-              <p className="group-hover:text-emerald-600 transition-all duration-500">
-                About
-              </p>
-              <span className="absolute left-0 bottom-0 right-0 scale-x-0 origin-left group-hover:scale-x-100 h-0.5 transition-all duration-500 bg-emerald-600 rounded-full"></span>
-            </li>
-            <li className="list-none relative group py-2 px-4 cursor-pointer">
-              <p className="group-hover:text-emerald-600 transition-all duration-500">
-                Gallery
-              </p>
-              <span className="absolute left-0 bottom-0 right-0 scale-x-0 origin-left group-hover:scale-x-100 h-0.5 transition-all duration-500 bg-emerald-600 rounded-full"></span>
-            </li>
-            <li className="list-none relative group py-2 px-4 cursor-pointer">
-              <p className="group-hover:text-emerald-600 transition-all duration-500">
-                News
-              </p>
-              <span className="absolute left-0 bottom-0 right-0 scale-x-0 origin-left group-hover:scale-x-100 h-0.5 transition-all duration-500 bg-emerald-600 rounded-full"></span>
-            </li>
-            <li className="list-none relative group py-2 px-4 cursor-pointer">
-              <p className="group-hover:text-emerald-600 transition-all duration-500">
-                Contact
-              </p>
-              <span className="absolute left-0 bottom-0 right-0 scale-x-0 origin-left group-hover:scale-x-100 h-0.5 transition-all duration-500 bg-emerald-600 rounded-full"></span>
-            </li>
+            {navContents.map((content, index) => (
+              <li
+                key={index}
+                onClick={() => scrollToSection(content.ref)}
+                className="list-none relative group py-2 px-4 cursor-pointer"
+              >
+                <p className="group-hover:text-emerald-600 transition-all duration-500 capitalize">
+                  {content.name}
+                </p>
+                <span className="absolute left-0 bottom-0 right-0 scale-x-0 origin-left group-hover:scale-x-100 h-0.5 transition-all duration-500 bg-emerald-600 rounded-full opacity-0 group-hover:opacity-100"></span>
+              </li>
+            ))}
           </nav>
 
           {/* nav for small screen */}
@@ -77,12 +76,15 @@ function NavigationBar() {
             }
           )}
         >
-          <div className="py-3">Home</div>
-          <div className="py-3">Services</div>
-          <div className="py-3">About</div>
-          <div className="py-3">Gallery</div>
-          <div className="py-3">News</div>
-          <div className="py-3">Contact</div>
+          {navContents.map((content, index) => (
+            <div
+              key={index}
+              onClick={() => scrollToSection(content.ref)}
+              className="py-3 capitalize"
+            >
+              {content.name}
+            </div>
+          ))}
         </div>
       </div>
     </header>
