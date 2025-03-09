@@ -58,14 +58,22 @@ function ServicesSection(props, ref) {
           {contents.map((content, index) => (
             <div
               key={index}
-              className="p-8 rounded flex flex-col items-center text-center text-slate-500 shadow-card2 transition-all hover:shadow-card duration-500"
+              className="p-8 rounded flex flex-col  text-slate-500 shadow-card2 transition-all hover:shadow-card duration-500"
             >
-              <p className="text-4xl text-emerald-600">{content.icon}</p>
-              <h3 className="font-semibold text-slate-800 text-base md:text-lg mt-4">
-                {content.title}
-              </h3>
-              <p className="text-xs md:text-sm italic">{content.subtitle}</p>
-              <p className="mt-6 text-xs md:text-sm">{content.desc}</p>
+              <div className="flex md:flex-col gap-4 items-start md:items-center">
+                <p className="text-4xl text-emerald-600">{content.icon}</p>
+                <div className="md:text-center md:mt-2">
+                  <h3 className="font-semibold text-slate-800 text-base md:text-lg">
+                    {content.title}
+                  </h3>
+                  <p className="text-xs md:text-sm italic">
+                    {content.subtitle}
+                  </p>
+                </div>
+              </div>
+              <p className="mt-6 text-xs md:text-sm md:text-center">
+                {content.desc}
+              </p>
             </div>
           ))}
         </div>
