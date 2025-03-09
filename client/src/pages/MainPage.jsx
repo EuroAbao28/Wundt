@@ -1,4 +1,3 @@
-import { useRef } from "react";
 import Footer from "../components/Footer";
 import AboutSection from "../components/main_page/AboutSection";
 import ContactsSection from "../components/main_page/ContactsSection";
@@ -11,31 +10,11 @@ import NavigationBar from "../components/NavigationBar";
 import b1 from "../assets/b1.jpg";
 
 function MainPage() {
-  // Create refs for each section
-  const homeRef = useRef(null);
-  const servicesRef = useRef(null);
-  const aboutRef = useRef(null);
-  const galleryRef = useRef(null);
-  const newsRef = useRef(null);
-  const contactsRef = useRef(null);
-
   return (
-    <div className="font-poppins text-slate-800">
-      <NavigationBar
-        homeSectionRef={homeRef}
-        servicesSectionRef={servicesRef}
-        aboutSectionRef={aboutRef}
-        gallerySectionRef={galleryRef}
-        newsSectionRef={newsRef}
-        contactSectionRef={contactsRef}
-      />
-
-      <HomeSection ref={homeRef} />
+    <div className="text-slate-800">
+      <HomeSection />
       <WhyUsSection />
-      <ServicesSection ref={servicesRef} />
-      {/* <AboutSection ref={aboutRef} />
-      <GallerySection ref={galleryRef} />
-      <NewsSection ref={newsRef} /> */}
+      <ServicesSection />
 
       <div style={{ backgroundImage: `url(${b1})` }} className="mt-40">
         <div className="px-6 py-12 lg:p-20 bg-radial-[at_-35%_15%] from-green-500/80 to-emerald-600/80 to-75% flex flex-col items-center justify-center text-center">
@@ -51,7 +30,7 @@ function MainPage() {
         </div>
       </div>
 
-      <ContactsSection ref={contactsRef} />
+      <ContactsSection />
 
       <Footer />
     </div>

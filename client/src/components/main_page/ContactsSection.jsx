@@ -79,11 +79,11 @@ const contents = [
   },
 ];
 
-function ContactsSection(props, ref) {
+function ContactsSection() {
   const [selectedLocation, setSelectionLocation] = useState(0);
 
   return (
-    <div ref={ref} id="contact" className="mt-20 sm:mt-40 px-6 lg:px-12">
+    <div className="mt-20 sm:mt-40 px-6 lg:px-12">
       <div className=" mb-12  max-w-7xl mx-auto">
         <SectionHeader title={"Reach Out to Us"} />
 
@@ -143,4 +143,4 @@ function ContactsSection(props, ref) {
   );
 }
 
-export default React.forwardRef(ContactsSection);
+export default ContactsSection;

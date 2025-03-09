@@ -5,11 +5,9 @@ import s2 from "../../assets/s2.jpg";
 import s5 from "../../assets/s5.jpg";
 import SectionHeader from "../SectionHeader";
 
-function AboutSection(props, ref) {
+function AboutSection() {
   return (
     <div
-      ref={ref}
-      id="about"
       style={{ backgroundImage: `url(${b1})` }}
       className="mt-20 sm:mt-40 bg-center bg-cover"
     >
@@ -203,4 +201,4 @@ function AboutSection(props, ref) {
   );
 }
 
-export default React.forwardRef(AboutSection);
+export default AboutSection;

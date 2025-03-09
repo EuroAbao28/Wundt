@@ -1,11 +1,9 @@
 import React from "react";
 import b1 from "../../assets/b1.jpg";
 
-function HomeSection(props, ref) {
+function HomeSection() {
   return (
     <div
-      ref={ref}
-      id="home"
       style={{ backgroundImage: `url(${b1})` }}
       className="h-svh bg-cover bg-center"
     >
@@ -36,4 +34,4 @@ function HomeSection(props, ref) {
   );
 }
 
-export default React.forwardRef(HomeSection);
+export default HomeSection;
