@@ -42,10 +42,10 @@ function MainPage() {
           <h1 className="text-white text-xl md:text-2xl font-semibold ">
             Your Path to Growth and Well-Being Starts Here
           </h1>
-          <p className="text-white text-sm italic mt-4">
+          <p className="text-white text-xs md:text-sm italic mt-2 w-[70%]">
             Psychological, Counseling, and Educational Services Tailored for You
           </p>
-          <button className="bg-white text-emerald-600 text-base font-semibold py-4 px-6 rounded mt-12">
+          <button className="bg-white text-emerald-600 text-sm md:text-base font-semibold  px-8 py-4 rounded mt-12">
             Book an Appointment
           </button>
         </div>
