@@ -8,6 +8,7 @@ import {
   TbPresentation,
 } from "react-icons/tb";
 import SectionHeader from "../SectionHeader";
+import { FaArrowRightLong } from "react-icons/fa6";
 
 function ServicesSection(props, ref) {
   const contents = [
@@ -77,6 +78,10 @@ function ServicesSection(props, ref) {
             </div>
           ))}
         </div>
+
+        <button className="bg-white outline outline-emerald-600 text-emerald-600 flex items-center gap-4 text-sm md:text-base font-semibold  px-8 py-4 rounded mt-12 mx-auto">
+          See More
+        </button>
       </div>
     </div>
   );
