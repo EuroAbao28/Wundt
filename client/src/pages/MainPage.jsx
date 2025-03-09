@@ -38,7 +38,7 @@ function MainPage() {
       <NewsSection ref={newsRef} /> */}
 
       <div style={{ backgroundImage: `url(${b1})` }} className="mt-40">
-        <div className="p-6 lg:p-20 bg-radial-[at_-35%_15%] from-green-500/80 to-emerald-600/80 to-75% flex flex-col items-center justify-center text-center">
+        <div className="px-6 py-12 lg:p-20 bg-radial-[at_-35%_15%] from-green-500/80 to-emerald-600/80 to-75% flex flex-col items-center justify-center text-center">
           <h1 className="text-white text-xl md:text-2xl font-semibold ">
             Your Path to Growth and Well-Being Starts Here
           </h1>
