@@ -64,7 +64,7 @@ const InputField = ({
         onChange={onChange}
         autoComplete={autoComplete}
         required
-        className="outline outline-slate-300 py-2 px-4 rounded text-base"
+        className="outline outline-slate-300 py-2 px-4 rounded"
       />
     </label>
   );
