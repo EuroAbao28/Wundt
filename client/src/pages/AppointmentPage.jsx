@@ -74,27 +74,27 @@ const InputField = ({
 function AppointmentPage() {
   const [isModalOpen, setModalOpen] = useState(false);
   const [formData, setFormData] = useState({
-    firstname: "Juan",
-    lastname: "Dela Cruz",
-    phone: "09693037581",
-    email: "juandelacruz@gmail.com",
-    date: "04/16/25",
-    time: "9:00 AM",
-    selectedServices: [
-      servicesContents[3],
-      servicesContents[5],
-      servicesContents[0],
-    ],
-    comments: "I wanna psychological test for my internship, Im from UCU.",
+    // firstname: "Juan",
+    // lastname: "Dela Cruz",
+    // phone: "09693037581",
+    // email: "juandelacruz@gmail.com",
+    // date: "04/16/25",
+    // time: "9:00 AM",
+    // selectedServices: [
+    //   servicesContents[3],
+    //   servicesContents[5],
+    //   servicesContents[0],
+    // ],
+    // comments: "I wanna psychological test for my internship, Im from UCU.",
 
-    // firstname: "",
-    // lastname: "",
-    // phone: "",
-    // email: "",
-    // date: "",
-    // time: "",
-    // selectedServices: [],
-    // comments: "",
+    firstname: "",
+    lastname: "",
+    phone: "",
+    email: "",
+    date: "",
+    time: "",
+    selectedServices: [],
+    comments: "",
   });
 
   const handleChange = (e) => {
@@ -330,45 +330,52 @@ function AppointmentPage() {
           "modal-open": isModalOpen,
         })}
       >
-        <div className="modal-box bg-white rounded p-2 py-6 max-w-2xl w-full ">
+        <div className="modal-box bg-white rounded p-4 sm:px-6 py-6 max-w-2xl w-full ">
           <h3 className="text-xl font-semibold text-center">Review Details</h3>
           <h5 className="text-xs italic text-center text-emerald-600">
             Confirm your details before submission.
           </h5>
 
-          <div className="flex flex-col mt-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 mt-6 gap-x-4">
             {Object.entries(formData).map(([key, value], index) => (
               <section
                 key={index}
-                className={classNames("text-xs flex py-2 gap-x-4 gap-y-2", {
-                  "flex-col": key === "selectedServices" || key === "comments",
-                })}
+                className={classNames(
+                  "text-xs sm:text-sm flex py-2 gap-x-4 gap-y-2",
+                  {
+                    "flex-col":
+                      key === "selectedServices" || key === "comments",
+                  }
+                )}
               >
                 <p
-                  className={classNames("font-semibold   capitalize", {
-                    "w-full text-start":
-                      key === "selectedServices" || key === "comments",
-                    "w-[25%] text-end":
-                      key !== "selectedServices" || key !== "comments",
-                  })}
+                  className={classNames(
+                    "font-semibold text-nowrap capitalize",
+                    {
+                      "w-full text-start mt-6":
+                        key === "selectedServices" || key === "comments",
+                      "w-[20%] sm:w-[25%]":
+                        key !== "selectedServices" || key !== "comments",
+                    }
+                  )}
                 >
                   {key === "comments"
-                    ? `${key} / notes`
-                    : key.replace(/([A-Z])/g, " $1")}
+                    ? `${key} / notes :`
+                    : key.replace(/([A-Z])/g, " $1") + " :"}
                 </p>
                 {Array.isArray(value) ? (
                   <div className="flex gap-2 flex-1 flex-wrap">
                     {value.map((service, index) => (
                       <p
                         key={index}
-                        className="bg-emerald-300/10 rounded py-1 px-2 w-fit"
+                        className="bg-emerald-300/10 rounded py-1 px-2 w-fit text-xs"
                       >
                         {service}
                       </p>
                     ))}
                   </div>
                 ) : key === "comments" ? (
-                  <p className="outline outline-slate-300 p-2 rounded flex-1 h-24 overflow-y-auto">
+                  <p className="outline outline-slate-300 p-2 rounded flex-1 h-24 overflow-y-auto text-xs">
                     {value}
                   </p>
                 ) : (
