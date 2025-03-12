@@ -43,7 +43,11 @@ function NavigationBar() {
               </Link>
             ))}
 
-            <Link className="bg-radial-[at_-50%_-50%] from-green-500 to-emerald-600 to-75% text-sm text-white  p-2 px-3 rounded ml-4 whitespace-nowrap">
+            <Link
+              to={"/appointment"}
+              onClick={() => setDropDownOpen(!isDropDownOpen)}
+              className="bg-radial-[at_-50%_-50%] from-green-500 to-emerald-600 to-75% text-sm text-white  p-2 px-3 rounded ml-4 whitespace-nowrap"
+            >
               Get Appointment
             </Link>
           </nav>

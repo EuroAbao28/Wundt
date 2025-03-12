@@ -9,7 +9,7 @@ import AppointmentPage from "./pages/AppointmentPage";
 
 function App() {
   return (
-    <div className="font-poppins">
+    <div className="font-poppins text-slate-800">
       <NavigationBar />
       <Routes>
         <Route path="/" element={<MainPage />} />
