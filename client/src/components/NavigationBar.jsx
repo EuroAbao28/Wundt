@@ -80,10 +80,10 @@ function NavigationBar() {
       {/* dropdown menu */}
       <div
         className={classNames(
-          " text-center overflow-hidden text-sm transition-all duration-300 flex lg:hidden flex-col absolute left-0 right-0  bg-white",
+          " text-center overflow-hidden text-sm transition-all shadow-bottom duration-300 flex lg:hidden flex-col absolute left-0 right-0  bg-white",
           {
             "max-h-0": !isDropDownOpen,
-            "max-h-[100rem] border-b border-slate-300/50": isDropDownOpen,
+            "max-h-[100rem]": isDropDownOpen,
           }
         )}
       >
