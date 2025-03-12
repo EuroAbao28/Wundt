@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { FaRegClock } from "react-icons/fa";
+import { FaRegClock, FaRegCalendar } from "react-icons/fa";
 import b1 from "../assets/b1.jpg";
 
 const instructionContents = [
@@ -195,19 +195,23 @@ function AppointmentPage() {
             />
 
             {/* date */}
-            <label className="flex flex-col gap-2">
+            <label className="flex flex-col gap-2 relative">
               <span className="uppercase text-xs font-semibold">
                 Appointment Date
               </span>
-              <input
-                name="date"
-                type="date"
-                value={formData.date}
-                min={new Date().toISOString().split("T")[0]} // so that user cant go back in time xD
-                onChange={handleChange}
-                required
-                className="outline outline-slate-300 py-2 px-4 rounded w-full"
-              />
+              <div className="relative">
+                <input
+                  name="date"
+                  type="date"
+                  value={formData.date}
+                  min={new Date().toISOString().split("T")[0]} // so that user cant go back in time xD
+                  onChange={handleChange}
+                  required
+                  className="outline outline-slate-300 py-2 px-4 rounded w-full  max-sm:[&::-webkit-calendar-picker-indicator]:hidden"
+                />
+
+                <FaRegCalendar className="absolute top-3 right-4 max-sm:block hidden" />
+              </div>
             </label>
 
             {/* time */}
