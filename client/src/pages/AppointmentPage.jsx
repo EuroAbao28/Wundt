@@ -294,7 +294,7 @@ function AppointmentPage() {
 
             <button
               type="submit"
-              className="bg-emerald-600 text-white rounded w-full sm:w-fit py-2 px-8 mt-4 font-semibold uppercase"
+              className="bg-radial-[at_-50%_-50%] from-green-500 to-emerald-600 to-75% text-white rounded w-full sm:w-fit py-2 px-8 mt-4 font-semibold uppercase active:scale-95 transition-all "
             >
               Submit
             </button>
