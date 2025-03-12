@@ -135,7 +135,7 @@ function AppointmentPage() {
           </div>
         </div>
 
-        <div className="flex-1 px-12 py-8">
+        <div className="flex-1 px-6 md:px-12 py-8">
           <h1 className="text-2xl font-semibold">Appointment Form</h1>
           <form
             onSubmit={handleSubmit}
