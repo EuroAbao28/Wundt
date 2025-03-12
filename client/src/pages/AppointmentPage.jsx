@@ -74,27 +74,27 @@ const InputField = ({
 function AppointmentPage() {
   const [isModalOpen, setModalOpen] = useState(false);
   const [formData, setFormData] = useState({
-    // firstname: "Juan",
-    // lastname: "Dela Cruz",
-    // phone: "09693037581",
-    // email: "juandelacruz@gmail.com",
-    // date: "04/16/25",
-    // time: "9:00 AM",
-    // selectedServices: [
-    //   servicesContents[3],
-    //   servicesContents[5],
-    //   servicesContents[0],
-    // ],
-    // comments: "I wanna psychological test for my internship, Im from UCU.",
+    firstname: "Juan",
+    lastname: "Dela Cruz",
+    phone: "09693037581",
+    email: "juandelacruz@gmail.com",
+    date: "04/16/25",
+    time: "9:00 AM",
+    selectedServices: [
+      servicesContents[3],
+      servicesContents[5],
+      servicesContents[0],
+    ],
+    comments: "I wanna psychological test for my internship, Im from UCU.",
 
-    firstname: "",
-    lastname: "",
-    phone: "",
-    email: "",
-    date: "",
-    time: "",
-    selectedServices: [],
-    comments: "",
+    // firstname: "",
+    // lastname: "",
+    // phone: "",
+    // email: "",
+    // date: "",
+    // time: "",
+    // selectedServices: [],
+    // comments: "",
   });
 
   const handleChange = (e) => {
@@ -341,7 +341,7 @@ function AppointmentPage() {
               <section
                 key={index}
                 className={classNames(
-                  "text-xs sm:text-sm flex py-2 gap-x-4 gap-y-2",
+                  "text-xs sm:text-sm flex py-1 gap-x-4 gap-y-2",
                   {
                     "flex-col":
                       key === "selectedServices" || key === "comments",
@@ -352,9 +352,9 @@ function AppointmentPage() {
                   className={classNames(
                     "font-semibold text-nowrap capitalize",
                     {
-                      "w-full text-start mt-6":
+                      "w-full text-start mt-4":
                         key === "selectedServices" || key === "comments",
-                      "w-[20%] sm:w-[25%]":
+                      "w-16 sm:w-[25%]":
                         key !== "selectedServices" || key !== "comments",
                     }
                   )}
@@ -364,7 +364,7 @@ function AppointmentPage() {
                     : key.replace(/([A-Z])/g, " $1") + " :"}
                 </p>
                 {Array.isArray(value) ? (
-                  <div className="flex gap-2 flex-1 flex-wrap">
+                  <div className="flex gap-2 flex-wrap max-h-32 overflow-y-auto">
                     {value.map((service, index) => (
                       <p
                         key={index}
@@ -375,7 +375,7 @@ function AppointmentPage() {
                     ))}
                   </div>
                 ) : key === "comments" ? (
-                  <p className="outline outline-slate-300 p-2 rounded flex-1 h-24 overflow-y-auto text-xs">
+                  <p className="outline outline-slate-300 p-2 rounded flex-1 max-h-32 overflow-y-auto text-xs">
                     {value}
                   </p>
                 ) : (
