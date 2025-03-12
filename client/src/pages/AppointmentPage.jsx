@@ -206,7 +206,7 @@ function AppointmentPage() {
                 min={new Date().toISOString().split("T")[0]} // so that user cant go back in time xD
                 onChange={handleChange}
                 required
-                className="outline outline-slate-300 py-2 px-4 rounded"
+                className="outline outline-slate-300 py-2 px-4 rounded w-full"
               />
             </label>
 
