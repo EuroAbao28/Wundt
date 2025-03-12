@@ -74,27 +74,27 @@ const InputField = ({
 function AppointmentPage() {
   const [isModalOpen, setModalOpen] = useState(false);
   const [formData, setFormData] = useState({
-    // firstname: "Juan",
-    // lastname: "Dela Cruz",
-    // phone: "09693037581",
-    // email: "juandelacruz@gmail.com",
-    // date: "04/16/25",
-    // time: "9:00 AM",
-    // selectedServices: [
-    //   servicesContents[3],
-    //   servicesContents[5],
-    //   servicesContents[0],
-    // ],
-    // comments: "I wanna psychological test for my internship, Im from UCU.",
+    firstname: "Juan",
+    lastname: "Dela Cruz",
+    phone: "09693037581",
+    email: "juandelacruz@gmail.com",
+    date: "04/16/25",
+    time: "9:00 AM",
+    selectedServices: [
+      servicesContents[3],
+      servicesContents[5],
+      servicesContents[0],
+    ],
+    comments: "I wanna psychological test for my internship, Im from UCU.",
 
-    firstname: "",
-    lastname: "",
-    phone: "",
-    email: "",
-    date: "",
-    time: "",
-    selectedServices: [],
-    comments: "",
+    // firstname: "",
+    // lastname: "",
+    // phone: "",
+    // email: "",
+    // date: "",
+    // time: "",
+    // selectedServices: [],
+    // comments: "",
   });
 
   const handleChange = (e) => {
@@ -326,11 +326,11 @@ function AppointmentPage() {
       </div>
 
       <dialog
-        className={classNames("modal p-6 backdrop-blur-sm", {
+        className={classNames("modal p-2 sm:p-6 backdrop-blur-sm", {
           "modal-open": isModalOpen,
         })}
       >
-        <div className="modal-box bg-white rounded p-6 pb-6 max-w-2xl w-full ">
+        <div className="modal-box bg-white rounded p-2 py-6 max-w-2xl w-full ">
           <h3 className="text-xl font-semibold text-center">Review Details</h3>
           <h5 className="text-xs italic text-center text-emerald-600">
             Confirm your details before submission.
@@ -342,22 +342,21 @@ function AppointmentPage() {
                 <p className="font-semibold text-end w-[25%] capitalize">
                   {key === "comments"
                     ? `${key} / notes`
-                    : key.replace(/([A-Z])/g, " $1")}{" "}
-                  :
+                    : key.replace(/([A-Z])/g, " $1")}
                 </p>
                 {Array.isArray(value) ? (
                   <div className="flex gap-2 flex-1 flex-wrap">
                     {value.map((service, index) => (
                       <p
                         key={index}
-                        className="bg-emerald-300/10 rounded py-1 px-2"
+                        className="bg-emerald-300/10 rounded py-1 px-2 text-xs"
                       >
                         {service}
                       </p>
                     ))}
                   </div>
                 ) : key === "comments" ? (
-                  <p className="outline outline-slate-300 py-2 px-4 rounded flex-1 h-24 overflow-y-auto">
+                  <p className="outline outline-slate-300 p-2 text-xs rounded flex-1 h-24 overflow-y-auto">
                     {value}
                   </p>
                 ) : (
