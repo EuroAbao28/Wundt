@@ -207,7 +207,7 @@ function AppointmentPage() {
                   min={new Date().toISOString().split("T")[0]} // so that user cant go back in time xD
                   onChange={handleChange}
                   required
-                  className="outline outline-slate-300 py-2 px-4 rounded w-full  max-sm:[&::-webkit-calendar-picker-indicator]:hidden"
+                  className="outline outline-slate-300 py-2 px-4 rounded w-full max-sm:appearance-none  max-sm:[&::-webkit-calendar-picker-indicator]:hidden"
                 />
 
                 <FaRegCalendar className="absolute top-3 right-4 max-sm:block hidden" />
