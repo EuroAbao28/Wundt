@@ -74,18 +74,27 @@ const InputField = ({
 function AppointmentPage() {
   const [isModalOpen, setModalOpen] = useState(false);
   const [formData, setFormData] = useState({
-    firstname: "Juan",
-    lastname: "Dela Cruz",
-    phone: "09693037581",
-    email: "juandelacruz@gmail.com",
-    date: "04/16/25",
-    time: "9:00 AM",
-    selectedServices: [
-      servicesContents[3],
-      servicesContents[5],
-      servicesContents[0],
-    ],
-    comments: "I wanna psychological test for my internship, Im from UCU.",
+    // firstname: "Juan",
+    // lastname: "Dela Cruz",
+    // phone: "09693037581",
+    // email: "juandelacruz@gmail.com",
+    // date: "04/16/25",
+    // time: "9:00 AM",
+    // selectedServices: [
+    //   servicesContents[3],
+    //   servicesContents[5],
+    //   servicesContents[0],
+    // ],
+    // comments: "I wanna psychological test for my internship, Im from UCU.",
+
+    firstname: "",
+    lastname: "",
+    phone: "",
+    email: "",
+    date: "",
+    time: "",
+    selectedServices: [],
+    comments: "",
   });
 
   const handleChange = (e) => {
