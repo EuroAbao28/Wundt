@@ -83,7 +83,7 @@ function NavigationBar() {
           " text-center overflow-hidden text-sm transition-all duration-300 flex lg:hidden flex-col absolute left-0 right-0  bg-white",
           {
             "max-h-0": !isDropDownOpen,
-            "max-h-[100rem]": isDropDownOpen,
+            "max-h-[100rem] shadow-card2": isDropDownOpen,
           }
         )}
       >
@@ -100,7 +100,7 @@ function NavigationBar() {
         <Link
           to={"/appointment"}
           onClick={() => setDropDownOpen(!isDropDownOpen)}
-          className="py-3 capitalize active:bg-slate-800/5 rounded  active:scale-95 transition-all text-emerald-600 w-fit mx-auto mb-4"
+          className="py-3 capitalize active:bg-slate-800/5 rounded w-full active:scale-95 transition-all text-emerald-600 mx-auto mb-4"
         >
           Get an Appointment
         </Link>
