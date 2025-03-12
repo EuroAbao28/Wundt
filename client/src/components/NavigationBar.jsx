@@ -24,7 +24,7 @@ function NavigationBar() {
   return (
     <div
       className={classNames(
-        " bg-white top-0 left-0 right-0 z-20 shadow-card2 px-4 sm:px-6 lg:px-12 ",
+        " bg-white top-0 left-0 right-0 z-20 shadow-card2 px-4 sm:px-6 lg:px-12",
         {
           fixed: location.pathname === "/",
           sticky: location.pathname !== "/",
@@ -83,7 +83,7 @@ function NavigationBar() {
           " text-center overflow-hidden text-sm transition-all duration-300 flex lg:hidden flex-col absolute left-0 right-0  bg-white",
           {
             "max-h-0": !isDropDownOpen,
-            "max-h-[100rem] shadow-card2": isDropDownOpen,
+            "max-h-[100rem] border-b border-slate-300/50": isDropDownOpen,
           }
         )}
       >
