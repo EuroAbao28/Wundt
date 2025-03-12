@@ -330,7 +330,7 @@ function AppointmentPage() {
           "modal-open": isModalOpen,
         })}
       >
-        <div className="modal-box bg-white rounded p-4 sm:px-6 py-6 max-w-2xl w-full ">
+        <div className="modal-box bg-white rounded p-4 sm:p-6 max-w-2xl w-full ">
           <h3 className="text-xl font-semibold text-center">Review Details</h3>
           <h5 className="text-xs italic text-center text-emerald-600">
             Confirm your details before submission.
@@ -364,7 +364,7 @@ function AppointmentPage() {
                     : key.replace(/([A-Z])/g, " $1") + " :"}
                 </p>
                 {Array.isArray(value) ? (
-                  <div className="flex gap-2 flex-wrap max-h-32 overflow-y-auto">
+                  <div className="flex gap-1 sm:gap-2 flex-wrap max-h-32 overflow-y-auto">
                     {value.map((service, index) => (
                       <p
                         key={index}
