@@ -338,8 +338,20 @@ function AppointmentPage() {
 
           <div className="flex flex-col mt-6">
             {Object.entries(formData).map(([key, value], index) => (
-              <section key={index} className="text-sm flex gap-4 py-2">
-                <p className="font-semibold text-end w-[25%] capitalize">
+              <section
+                key={index}
+                className={classNames("text-xs flex py-2 gap-x-4 gap-y-2", {
+                  "flex-col": key === "selectedServices" || key === "comments",
+                })}
+              >
+                <p
+                  className={classNames("font-semibold   capitalize", {
+                    "w-full text-start":
+                      key === "selectedServices" || key === "comments",
+                    "w-[25%] text-end":
+                      key !== "selectedServices" || key !== "comments",
+                  })}
+                >
                   {key === "comments"
                     ? `${key} / notes`
                     : key.replace(/([A-Z])/g, " $1")}
@@ -349,14 +361,14 @@ function AppointmentPage() {
                     {value.map((service, index) => (
                       <p
                         key={index}
-                        className="bg-emerald-300/10 rounded py-1 px-2 text-xs"
+                        className="bg-emerald-300/10 rounded py-1 px-2 w-fit"
                       >
                         {service}
                       </p>
                     ))}
                   </div>
                 ) : key === "comments" ? (
-                  <p className="outline outline-slate-300 p-2 text-xs rounded flex-1 h-24 overflow-y-auto">
+                  <p className="outline outline-slate-300 p-2 rounded flex-1 h-24 overflow-y-auto">
                     {value}
                   </p>
                 ) : (
@@ -369,12 +381,12 @@ function AppointmentPage() {
           <div className="flex gap-4 items-center justify-center mt-4">
             <button
               onClick={() => setModalOpen(false)}
-              className="bg-slate-600 text-white rounded py-2 px-8 font-semibold uppercase active:scale-95 transition-all text-sm"
+              className="bg-slate-600 text-white rounded py-2 px-8 font-semibold uppercase active:scale-95 transition-all text-sm max-sm:flex-1"
             >
               Cancel
             </button>
 
-            <button className="bg-radial-[at_-50%_-50%] from-green-500 to-emerald-600 to-75% text-white rounded py-2 px-8 font-semibold uppercase active:scale-95 transition-all text-sm">
+            <button className="bg-radial-[at_-50%_-50%] from-green-500 to-emerald-600 to-75% text-white rounded py-2 px-8 font-semibold uppercase active:scale-95 transition-all text-sm max-sm:flex-1">
               Submit
             </button>
           </div>
