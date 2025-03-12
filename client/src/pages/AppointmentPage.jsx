@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { FaRegClock, FaRegCalendar } from "react-icons/fa";
 import b1 from "../assets/b1.jpg";
+import classNames from "classnames";
 
 const instructionContents = [
   {
@@ -71,15 +72,20 @@ const InputField = ({
 };
 
 function AppointmentPage() {
+  const [isModalOpen, setModalOpen] = useState(false);
   const [formData, setFormData] = useState({
-    firstname: "",
-    lastname: "",
-    phone: "",
-    email: "",
-    date: "",
-    time: "",
-    selectedServices: [],
-    comments: "",
+    firstname: "Juan",
+    lastname: "Dela Cruz",
+    phone: "09693037581",
+    email: "juandelacruz@gmail.com",
+    date: "04/16/25",
+    time: "9:00 AM",
+    selectedServices: [
+      servicesContents[3],
+      servicesContents[5],
+      servicesContents[0],
+    ],
+    comments: "I wanna psychological test for my internship, Im from UCU.",
   });
 
   const handleChange = (e) => {
@@ -105,203 +111,268 @@ function AppointmentPage() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
+    setModalOpen(true);
+
     console.log("Form Data:", formData);
   };
 
   return (
-    <div className="sm:px-6 lg:px-12 sm:my-6 lg:mt-10">
-      <div className="max-w-7xl w-full mx-auto sm:rounded flex max-lg:flex-col  sm:shadow-card2 overflow-hidden">
-        <div
-          style={{ backgroundImage: `url(${b1})` }}
-          className="w-full lg:w-1/3 bg-center bg-cover"
-        >
-          <div className="p-6 lg:p-8 bg-radial-[at_-35%_15%] from-green-500/90 to-emerald-600/90 to-75% h-full text-white flex flex-col">
-            <h1 className="text-2xl font-semibold">Appointment Guidelines </h1>
-            <div className="flex flex-col gap-4 mt-8 flex-1">
-              {instructionContents.map((insruction, index) => (
-                <div key={index} className="flex gap-4 items-start flex-1">
-                  <span className="bg-white w-6 aspect-square rounded-full flex items-center justify-center text-sm font-bold text-emerald-600 mt-1">
-                    {index + 1}
-                  </span>
-                  <section className="flex-1">
-                    <h3 className="text-sm font-semibold">
-                      {insruction.header}
-                    </h3>
-                    <p className="text-xs">{insruction.desc}</p>
-                  </section>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-
-        <div className="flex-1 px-6 md:px-12 py-8">
-          <h1 className="text-2xl font-semibold">Appointment Form</h1>
-          <form
-            onSubmit={handleSubmit}
-            className="text-sm grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-4 mt-8"
+    <>
+      <div className="sm:px-6 lg:px-12 sm:my-6 lg:mt-10">
+        <div className="max-w-7xl w-full mx-auto sm:rounded flex max-lg:flex-col  sm:shadow-card2 overflow-hidden">
+          {/* instructions */}
+          <div
+            style={{ backgroundImage: `url(${b1})` }}
+            className="w-full lg:w-1/3 bg-center bg-cover"
           >
-            {/* Firstname */}
-            <InputField
-              label="Firstname"
-              name="firstname"
-              value={formData.firstname}
-              type="text"
-              minLength={2}
-              maxLength={50}
-              placeholder="Juan"
-              onChange={handleChange}
-              required
-            />
-
-            {/* Lastname */}
-            <InputField
-              label="Lastname"
-              name="lastname"
-              value={formData.lastname}
-              type="text"
-              minLength={2}
-              maxLength={50}
-              placeholder="Dela Cruz"
-              onChange={handleChange}
-              required
-            />
-
-            {/* Phone */}
-            <InputField
-              label="Phone No."
-              name="phone"
-              value={formData.phone}
-              type="tel"
-              pattern="^(09\d{9}|\+639\d{9})$"
-              maxLength={11}
-              placeholder="09XXXXXXXXX"
-              onChange={handleChange}
-              required
-              autoComplete="tel"
-            />
-
-            {/* Email */}
-            <InputField
-              label="Email"
-              name="email"
-              value={formData.email}
-              type="email"
-              pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$"
-              placeholder="juan@gmail.com"
-              onChange={handleChange}
-              required
-              autoComplete="email"
-            />
-
-            {/* date */}
-            <label className="flex flex-col gap-2 relative">
-              <span className="uppercase text-xs font-semibold">
-                Appointment Date
-              </span>
-              <div className="relative">
-                <input
-                  name="date"
-                  type="date"
-                  value={formData.date}
-                  min={new Date().toISOString().split("T")[0]} // so that user cant go back in time xD
-                  onChange={handleChange}
-                  required
-                  className="outline outline-slate-300 py-2 px-4 rounded w-full max-sm:appearance-none  max-sm:[&::-webkit-calendar-picker-indicator]:hidden"
-                />
-
-                <FaRegCalendar className="absolute top-3 right-4 max-sm:block hidden" />
-              </div>
-            </label>
-
-            {/* time */}
-            <label className="flex flex-col gap-2">
-              <span className="uppercase text-xs font-semibold">
-                Appointment Time
-              </span>
-              <div className="relative">
-                <select
-                  name="time"
-                  value={formData.time}
-                  onChange={handleChange}
-                  className="outline outline-slate-300 py-2 px-4 rounded appearance-none w-full"
-                  required
-                >
-                  <option value="" disabled hidden>
-                    Select time
-                  </option>
-                  {[
-                    "09:00 AM",
-                    "10:00 AM",
-                    "11:00 AM",
-                    "12:00 PM",
-                    "01:00 PM",
-                    "02:00 PM",
-                    "03:00 PM",
-                    "04:00 PM",
-                  ].map((time) => (
-                    <option key={time} value={time}>
-                      {time}
-                    </option>
-                  ))}
-                </select>
-                <FaRegClock className="absolute top-3 right-4" />
-              </div>
-            </label>
-
-            {/* services */}
-            <div className="flex flex-col gap-2 ">
-              <div className=" text-xs font-semibold flex justify-between">
-                <label className="uppercase">Available Services</label>
-                {formData.selectedServices.length < 1 && (
-                  <span className=" text-red-500 font-normal italic text-xxs">
-                    *Select at least one service
-                  </span>
-                )}
-              </div>
-
-              <div className="flex flex-col gap-2 outline outline-slate-300 rounded p-4">
-                {servicesContents.map((service, index) => (
-                  <label key={index} className="flex items-center gap-2 ">
-                    <input
-                      type="checkbox"
-                      value={service}
-                      onChange={handleChange}
-                      className="w-4 aspect-square accent-emerald-600 "
-                    />
-                    <span className="text-xs">{service}</span>
-                  </label>
+            <div className="p-6 lg:p-8 bg-radial-[at_-35%_15%] from-green-500/90 to-emerald-600/90 to-75% h-full text-white flex flex-col">
+              <h1 className="text-2xl font-semibold">
+                Appointment Guidelines{" "}
+              </h1>
+              <div className="flex flex-col gap-4 mt-8 flex-1">
+                {instructionContents.map((insruction, index) => (
+                  <div key={index} className="flex gap-4 items-start flex-1">
+                    <span className="bg-white w-6 aspect-square rounded-full flex items-center justify-center text-sm font-bold text-emerald-600 mt-1">
+                      {index + 1}
+                    </span>
+                    <section className="flex-1">
+                      <h3 className="text-sm font-semibold">
+                        {insruction.header}
+                      </h3>
+                      <p className="text-xs">{insruction.desc}</p>
+                    </section>
+                  </div>
                 ))}
               </div>
             </div>
+          </div>
 
-            {/* comments */}
-            <label className="flex flex-col gap-2  max-md:h-44">
-              <span className="uppercase text-xs font-semibold">
-                Comments or Notes
-              </span>
-              <textarea
-                name="comments"
-                value={formData.comments}
+          {/* form */}
+          <div className="flex-1 px-6 md:px-12 py-8">
+            <h1 className="text-2xl font-semibold">Appointment Form</h1>
+            <form
+              onSubmit={handleSubmit}
+              className="text-sm grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-4 mt-8"
+            >
+              {/* Firstname */}
+              <InputField
+                label="Firstname"
+                name="firstname"
+                value={formData.firstname}
                 type="text"
-                placeholder="Specify your concern"
-                maxLength={700}
+                minLength={2}
+                maxLength={50}
+                placeholder="Juan"
                 onChange={handleChange}
                 required
-                className="outline outline-slate-300 py-2 px-4 rounded  resize-none flex-1"
               />
-            </label>
 
-            <button
-              type="submit"
-              className="bg-radial-[at_-50%_-50%] from-green-500 to-emerald-600 to-75% text-white rounded w-full sm:w-fit py-2 px-8 mt-4 font-semibold uppercase active:scale-95 transition-all "
-            >
-              Submit
-            </button>
-          </form>
+              {/* Lastname */}
+              <InputField
+                label="Lastname"
+                name="lastname"
+                value={formData.lastname}
+                type="text"
+                minLength={2}
+                maxLength={50}
+                placeholder="Dela Cruz"
+                onChange={handleChange}
+                required
+              />
+
+              {/* Phone */}
+              <InputField
+                label="Phone No."
+                name="phone"
+                value={formData.phone}
+                type="tel"
+                pattern="^(09\d{9}|\+639\d{9})$"
+                maxLength={11}
+                placeholder="09XXXXXXXXX"
+                onChange={handleChange}
+                required
+                autoComplete="tel"
+              />
+
+              {/* Email */}
+              <InputField
+                label="Email"
+                name="email"
+                value={formData.email}
+                type="email"
+                pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$"
+                placeholder="juan@gmail.com"
+                onChange={handleChange}
+                required
+                autoComplete="email"
+              />
+
+              {/* date */}
+              <label className="flex flex-col gap-2 relative">
+                <span className="uppercase text-xs font-semibold">
+                  Appointment Date
+                </span>
+                <div className="relative">
+                  <input
+                    name="date"
+                    type="date"
+                    value={formData.date}
+                    min={new Date().toISOString().split("T")[0]} // so that user cant go back in time xD
+                    onChange={handleChange}
+                    required
+                    className="outline outline-slate-300 py-2 px-4 rounded w-full max-sm:appearance-none  max-sm:[&::-webkit-calendar-picker-indicator]:hidden"
+                  />
+
+                  <FaRegCalendar className="absolute top-3 right-4 max-sm:block hidden" />
+                </div>
+              </label>
+
+              {/* time */}
+              <label className="flex flex-col gap-2">
+                <span className="uppercase text-xs font-semibold">
+                  Appointment Time
+                </span>
+                <div className="relative">
+                  <select
+                    name="time"
+                    value={formData.time}
+                    onChange={handleChange}
+                    className="outline outline-slate-300 py-2 px-4 rounded appearance-none w-full"
+                    required
+                  >
+                    <option value="" disabled hidden>
+                      Select time
+                    </option>
+                    {[
+                      "09:00 AM",
+                      "10:00 AM",
+                      "11:00 AM",
+                      "12:00 PM",
+                      "01:00 PM",
+                      "02:00 PM",
+                      "03:00 PM",
+                      "04:00 PM",
+                    ].map((time) => (
+                      <option key={time} value={time}>
+                        {time}
+                      </option>
+                    ))}
+                  </select>
+                  <FaRegClock className="absolute top-3 right-4" />
+                </div>
+              </label>
+
+              {/* services */}
+              <div className="flex flex-col gap-2 ">
+                <div className=" text-xs font-semibold flex justify-between">
+                  <label className="uppercase">Available Services</label>
+                  {formData.selectedServices.length < 1 && (
+                    <span className=" text-red-500 font-normal italic text-xxs">
+                      *Select at least one service
+                    </span>
+                  )}
+                </div>
+
+                <div className="flex flex-col gap-2 outline outline-slate-300 rounded p-4">
+                  {servicesContents.map((service, index) => (
+                    <label key={index} className="flex items-center gap-2 ">
+                      <input
+                        type="checkbox"
+                        value={service}
+                        onChange={handleChange}
+                        className="w-4 aspect-square accent-emerald-600 "
+                      />
+                      <span className="text-xs">{service}</span>
+                    </label>
+                  ))}
+                </div>
+              </div>
+
+              {/* comments */}
+              <label className="flex flex-col gap-2  max-md:h-44">
+                <span className="uppercase text-xs font-semibold">
+                  Comments / Notes
+                </span>
+                <textarea
+                  name="comments"
+                  value={formData.comments}
+                  type="text"
+                  placeholder="Specify your concern"
+                  maxLength={700}
+                  onChange={handleChange}
+                  required
+                  className="outline outline-slate-300 py-2 px-4 rounded  resize-none flex-1"
+                />
+              </label>
+
+              <button
+                type="submit"
+                className="bg-radial-[at_-50%_-50%] from-green-500 to-emerald-600 to-75% text-white rounded w-full sm:w-fit py-2 px-8 mt-4 font-semibold uppercase active:scale-95 transition-all "
+              >
+                Submit
+              </button>
+            </form>
+          </div>
         </div>
       </div>
-    </div>
+
+      <dialog
+        className={classNames("modal p-6 backdrop-blur-sm", {
+          "modal-open": isModalOpen,
+        })}
+      >
+        <div className="modal-box bg-white rounded p-6 pb-6 max-w-2xl w-full ">
+          <h3 className="text-xl font-semibold text-center">Review Details</h3>
+          <h5 className="text-xs italic text-center text-emerald-600">
+            Confirm your details before submission.
+          </h5>
+
+          <div className="flex flex-col mt-6">
+            {Object.entries(formData).map(([key, value], index) => (
+              <section key={index} className="text-sm flex gap-4 py-2">
+                <p className="font-semibold text-end w-[25%] capitalize">
+                  {key === "comments"
+                    ? `${key} / notes`
+                    : key.replace(/([A-Z])/g, " $1")}{" "}
+                  :
+                </p>
+                {Array.isArray(value) ? (
+                  <div className="flex gap-2 flex-1 flex-wrap">
+                    {value.map((service, index) => (
+                      <p
+                        key={index}
+                        className="bg-emerald-300/10 rounded py-1 px-2"
+                      >
+                        {service}
+                      </p>
+                    ))}
+                  </div>
+                ) : key === "comments" ? (
+                  <p className="outline outline-slate-300 py-2 px-4 rounded flex-1 h-24 overflow-y-auto">
+                    {value}
+                  </p>
+                ) : (
+                  <p>{value}</p>
+                )}
+              </section>
+            ))}
+          </div>
+
+          <div className="flex gap-4 items-center justify-center mt-4">
+            <button
+              onClick={() => setModalOpen(false)}
+              className="bg-slate-600 text-white rounded py-2 px-8 font-semibold uppercase active:scale-95 transition-all text-sm"
+            >
+              Cancel
+            </button>
+
+            <button className="bg-radial-[at_-50%_-50%] from-green-500 to-emerald-600 to-75% text-white rounded py-2 px-8 font-semibold uppercase active:scale-95 transition-all text-sm">
+              Submit
+            </button>
+          </div>
+        </div>
+      </dialog>
+    </>
   );
 }
 

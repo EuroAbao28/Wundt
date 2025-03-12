@@ -18,3 +18,7 @@
   nocompatible: true;
   preferredstrategy: "pseudoelements";
 }
+
+@plugin "daisyui" {
+  themes: false;
+}
