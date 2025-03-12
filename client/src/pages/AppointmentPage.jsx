@@ -64,7 +64,7 @@ const InputField = ({
         onChange={onChange}
         autoComplete={autoComplete}
         required
-        className="outline outline-slate-300 py-2 px-4 rounded"
+        className="outline outline-slate-300 py-2 px-4 rounded text-base"
       />
     </label>
   );
@@ -109,8 +109,8 @@ function AppointmentPage() {
   };
 
   return (
-    <div className="px-6 lg:px-12 ">
-      <div className="max-w-7xl w-full mx-auto rounded flex max-lg:flex-col mt-32 shadow-card2 overflow-hidden">
+    <div className="sm:px-6 lg:px-12 sm:my-6 lg:mt-10">
+      <div className="max-w-7xl w-full mx-auto sm:rounded flex max-lg:flex-col  sm:shadow-card2 overflow-hidden">
         <div
           style={{ backgroundImage: `url(${b1})` }}
           className="w-full lg:w-1/3 bg-center bg-cover"
@@ -250,7 +250,7 @@ function AppointmentPage() {
               <div className=" text-xs font-semibold flex justify-between">
                 <label className="uppercase">Available Services</label>
                 {formData.selectedServices.length < 1 && (
-                  <span className=" text-red-500 font-normal italic">
+                  <span className=" text-red-500 font-normal italic text-xxs">
                     *Select at least one service
                   </span>
                 )}
