@@ -1,5 +1,4 @@
 import React from "react";
-import SectionHeader from "../components/SectionHeader";
 import {
   TbBook,
   TbBrain,
@@ -8,50 +7,98 @@ import {
   TbClipboardList,
   TbPresentation,
 } from "react-icons/tb";
+import classNames from "classnames";
+import SectionHeader from "../components/SectionHeader";
+
+const servicesOffered = [
+  {
+    icon: <TbHeartRateMonitor />,
+    category: "Psychological/Psychiatric Testing/Assessment",
+    details: [
+      "Employment/Industrial purposes",
+      "Internship/OJT purposes",
+      "Criminal/civil court cases",
+      "Diagnostic/Clinical purposes",
+      "Academic and research purposes",
+    ],
+  },
+  {
+    icon: <TbBrain />,
+    category:
+      "Assessment and Therapy for Children with Special Needs and Concerns",
+    details: [
+      "Behavioral Concerns (e.g., Conduct Disorder, ADHD, etc.)",
+      "Developmental Concerns (ASD, GDD, etc.)",
+      "Intellectual Ability Assessment",
+      "Emotional Quotient Assessment",
+      "Other special concerns of children and adolescents",
+    ],
+  },
+  {
+    icon: <TbUsersGroup />,
+    category:
+      "Clinical Consultation, Counseling, Psycho-social Interventions, and Referrals",
+    details: [
+      "Interpersonal and interpersonal concerns",
+      "Marital and parenting concerns",
+      "Trauma assessment and management",
+      "Other special concerns",
+    ],
+  },
+  {
+    icon: <TbBook />,
+    category: "Tutorial and Review Classes for PRC Board Examinations",
+    details: [
+      "Guidance and Counseling",
+      "Psychology/Psychometrician",
+      "Education",
+    ],
+  },
+  {
+    icon: <TbClipboardList />,
+    category:
+      "Program Development and Administration for Students, Employees, and Organizations",
+    details: [],
+  },
+  {
+    icon: <TbPresentation />,
+    category:
+      "Trainings, Seminars, Workshops, Recollection, and Team Building Organizing and Facilitating",
+    details: [],
+  },
+];
 
 function ServicesPage() {
-  const contents = [
-    {
-      icon: <TbHeartRateMonitor />,
-      title: "Psychological & Psychiatric Testing",
-      subtitle: "For Employment, Legal, Clinical, and Academic Purposes",
-      desc: " Comprehensive assessments tailored for employment screenings, academic needs, clinical diagnostics, and legal cases.",
-    },
-    {
-      icon: <TbBrain />,
-      title: "Child & Adolescent Assessments",
-      subtitle: "Supporting Young Minds with Care",
-      desc: "Specialized therapy for behavioral issues, developmental concerns, intellectual evaluations, and emotional quotient assessments.",
-    },
-    {
-      icon: <TbUsersGroup />,
-      title: "Clinical Consultation & Counseling",
-      subtitle: "Personalized Care for Mental Well-being",
-      desc: "Address interpersonal, marital, and trauma-related concerns through professional counseling and interventions.",
-    },
-    {
-      icon: <TbBook />,
-      title: "Tutorial & Review Classes",
-      subtitle: "Guiding Future Professionals",
-      desc: "Prepare for PRC Board Examinations with expert-led tutorials in psychology, psychometrics, and education.",
-    },
-    {
-      icon: <TbClipboardList />,
-      title: "Program Development & Administration",
-      subtitle: "For Students, Employees, and Organizations",
-      desc: "Tailored programs fostering growth through psychological insights and strategic development plans.",
-    },
-    {
-      icon: <TbPresentation />,
-      title: "Trainings & Workshops",
-      subtitle: "Building Stronger Teams and Communities",
-      desc: "Engage in seminars, workshops, and team-building activities promoting mental wellness and harmony.",
-    },
-  ];
-
   return (
-    <div className="h-screen flex items-center justify-center">
-      ServicesPage
+    <div className="px-6 lg:px-12 mt-10">
+      <SectionHeader title={"Our Services"} />
+      <div className="max-w-7xl w-full mx-auto grid grid-cols-1 lg:grid-cols-3 mt-12">
+        {servicesOffered.map((service, index) => (
+          <div
+            key={index}
+            className={classNames(
+              "lg:px-6 py-6 flex gap-4 bg-center bg-cover",
+              {
+                "lg:border-r border-slate-300": (index + 1) % 3 !== 0,
+                "lg:border-b border-slate-300":
+                  index < servicesOffered.length - 3,
+                "max-lg:border-b border-slate-300":
+                  index !== servicesOffered.length,
+              }
+            )}
+          >
+            <p className="text-4xl text-emerald-600 mt-1">{service.icon}</p>
+            <div className="flex-1">
+              <h2 className="text-base font-semibold">{service.category}</h2>
+              <ul className="text-sm mt-6 list-disc marker:text-emerald-600 flex flex-col gap-2">
+                {service.details.map((detail, index) => (
+                  <li key={index}>{detail}</li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        ))}
+      </div>
     </div>
   );
 }

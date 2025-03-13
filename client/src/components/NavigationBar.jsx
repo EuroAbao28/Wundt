@@ -16,10 +16,11 @@ function NavigationBar() {
   const [isDropDownOpen, setDropDownOpen] = useState(false);
 
   const location = useLocation();
+  const path = location.pathname.replace("/", "");
 
   useEffect(() => {
-    console.log(location);
-  }, [location]);
+    console.log(path);
+  }, [path]);
 
   return (
     <div
@@ -53,7 +54,10 @@ function NavigationBar() {
                   <p className="group-hover:text-emerald-600 transition-all duration-500 capitalize">
                     {content.name}
                   </p>
-                  <span className="absolute left-0 bottom-0 right-0 scale-x-0 origin-left group-hover:scale-x-100 h-0.5 transition-all duration-500 bg-emerald-600 rounded-full opacity-0 group-hover:opacity-100"></span>
+                  {(path === content.name ||
+                    (path === "" && content.name === "home")) && (
+                    <span className="absolute left-0 bottom-0 right-0 h-0.5 transition-all  bg-emerald-600 rounded-full"></span>
+                  )}
                 </Link>
               ))}
 

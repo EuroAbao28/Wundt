@@ -8,7 +8,7 @@ import {
   TbPresentation,
 } from "react-icons/tb";
 import SectionHeader from "../SectionHeader";
-import { useNavigate } from "react-router";
+import { Link } from "react-router";
 
 const contents = [
   {
@@ -50,8 +50,6 @@ const contents = [
 ];
 
 function ServicesSection(props, ref) {
-  const navigate = useNavigate();
-
   return (
     <div ref={ref} id="services" className="mt-20 sm:mt-40 px-6 lg:px-12">
       <div className="max-w-7xl mx-auto">
@@ -81,12 +79,12 @@ function ServicesSection(props, ref) {
           ))}
         </div>
 
-        <button
-          onClick={() => navigate("services")}
-          className="bg-white outline outline-emerald-600 text-emerald-600 flex items-center gap-4 text-sm md:text-base font-semibold  px-8 py-4 rounded mt-12 mx-auto"
+        <Link
+          to={"services"}
+          className="bg-white outline outline-emerald-600 text-emerald-600 flex items-center gap-4 text-sm   font-semibold  px-4 py-2 rounded mt-12 mx-auto w-fit"
         >
           See More
-        </button>
+        </Link>
       </div>
     </div>
   );
