@@ -72,7 +72,8 @@ function ServicesPage() {
   return (
     <div className="px-6 lg:px-12 mt-10">
       <SectionHeader title={"Our Services"} />
-      <div className="max-w-7xl w-full mx-auto grid grid-cols-1 lg:grid-cols-3 mt-12">
+
+      <div className="max-w-7xl w-full mx-auto grid grid-cols-1 lg:grid-cols-3 mt-6 md:mt-12">
         {servicesOffered.map((service, index) => (
           <div
             key={index}
