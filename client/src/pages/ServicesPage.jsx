@@ -87,12 +87,18 @@ function ServicesPage() {
               }
             )}
           >
-            <p className="text-4xl text-emerald-600 mt-1">{service.icon}</p>
+            <p className="text-3xl md:text-4xl text-emerald-600 mt-1">
+              {service.icon}
+            </p>
             <div className="flex-1">
-              <h2 className="text-base font-semibold">{service.category}</h2>
+              <h2 className="text-sm md:text-base font-semibold">
+                {service.category}
+              </h2>
               <ul className="text-sm mt-6 list-disc marker:text-emerald-600 flex flex-col gap-2">
                 {service.details.map((detail, index) => (
-                  <li key={index}>{detail}</li>
+                  <li key={index} className="text-xs md:text-sm">
+                    {detail}
+                  </li>
                 ))}
               </ul>
             </div>
