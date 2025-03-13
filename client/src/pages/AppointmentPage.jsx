@@ -127,8 +127,8 @@ function AppointmentPage() {
 
   return (
     <>
-      <div className="sm:px-6 lg:px-12 sm:my-6 lg:mt-10">
-        <div className="max-w-7xl w-full mx-auto sm:rounded flex max-lg:flex-col  sm:shadow-card2 overflow-hidden mb-20">
+      <div className="flex-1 sm:mt-6 md:mt-10 sm:mb-16 sm:px-6 lg:px-12">
+        <div className="max-w-7xl w-full mx-auto sm:rounded flex max-lg:flex-col  sm:shadow-card2 overflow-hidden">
           {/* instructions */}
           <div
             style={{ backgroundImage: `url(${b1})` }}

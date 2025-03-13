@@ -7,7 +7,7 @@ import WhyUsSection from "../components/main_page/WhyUsSection";
 
 function MainPage() {
   return (
-    <div>
+    <div className="flex-1 mb-16">
       <HomeSection />
       <WhyUsSection />
       <ServicesSection />

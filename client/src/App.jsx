@@ -10,7 +10,7 @@ import Footer from "./components/Footer";
 
 function App() {
   return (
-    <div className="font-poppins text-slate-800">
+    <div className="font-poppins text-slate-800 flex flex-col min-h-screen">
       <NavigationBar />
       <Routes>
         <Route path="/" element={<MainPage />} />
