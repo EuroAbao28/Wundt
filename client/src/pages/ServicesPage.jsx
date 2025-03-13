@@ -70,7 +70,7 @@ const servicesOffered = [
 
 function ServicesPage() {
   return (
-    <div className="px-6 lg:px-12 mt-10">
+    <div className="px-6 lg:px-12 mt-10 mb-16">
       <SectionHeader title={"Our Services"} />
 
       <div className="max-w-7xl w-full mx-auto grid grid-cols-1 lg:grid-cols-3 mt-6 md:mt-12">
@@ -84,7 +84,7 @@ function ServicesPage() {
                 "lg:border-b border-slate-300":
                   index < servicesOffered.length - 3,
                 "max-lg:border-b border-slate-300":
-                  index !== servicesOffered.length,
+                  index + 1 !== servicesOffered.length,
               }
             )}
           >

@@ -13,7 +13,6 @@ function MainPage() {
       <ServicesSection />
       <BannerSection />
       <ContactsSection />
-      <Footer />
     </div>
   );
 }
