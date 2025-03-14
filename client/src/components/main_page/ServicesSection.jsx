@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   TbBook,
   TbBrain,
@@ -9,6 +9,8 @@ import {
 } from "react-icons/tb";
 import SectionHeader from "../SectionHeader";
 import { Link } from "react-router";
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 const contents = [
   {
@@ -49,9 +51,13 @@ const contents = [
   },
 ];
 
-function ServicesSection(props, ref) {
+function ServicesSection() {
+  useEffect(() => {
+    AOS.init({ duration: 1000 });
+  }, []);
+
   return (
-    <div ref={ref} id="services" className="mt-20 sm:mt-40 px-6 lg:px-12">
+    <div data-aos="fade-left" className="mt-20 sm:mt-40 px-6 lg:px-12">
       <div className="max-w-7xl mx-auto">
         <SectionHeader title={"Comprehensive Services We Offer"} />
 
@@ -90,4 +96,4 @@ function ServicesSection(props, ref) {
   );
 }
 
-export default React.forwardRef(ServicesSection);
+export default ServicesSection;

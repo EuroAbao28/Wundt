@@ -1,8 +1,10 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { TbMailFilled } from "react-icons/tb";
 import { BiSolidPhone } from "react-icons/bi";
 import { MdLocationOn, MdOutlineFacebook } from "react-icons/md";
 import SectionHeader from "../SectionHeader";
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 const contents = [
   {
@@ -82,8 +84,12 @@ const contents = [
 function ContactsSection() {
   const [selectedLocation, setSelectionLocation] = useState(0);
 
+  useEffect(() => {
+    AOS.init({ duration: 1000 });
+  }, []);
+
   return (
-    <div className="mt-20 sm:mt-40 px-6 lg:px-12">
+    <div data-aos="fade-up" className="mt-20 sm:mt-40 px-6 lg:px-12">
       <div className=" mb-12  max-w-7xl mx-auto">
         <SectionHeader title={"Reach Out to Us"} />
 

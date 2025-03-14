@@ -1,9 +1,16 @@
-import React from "react";
+import React, { useEffect } from "react";
 import b1 from "../../assets/b1.jpg";
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 function HomeSection() {
+  useEffect(() => {
+    AOS.init({ duration: 1000 });
+  }, []);
+
   return (
     <div
+      data-aos="fade-up"
       style={{ backgroundImage: `url(${b1})` }}
       className="h-svh bg-cover bg-center"
     >

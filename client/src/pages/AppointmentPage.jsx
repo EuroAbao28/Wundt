@@ -1,7 +1,9 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FaRegClock, FaRegCalendar } from "react-icons/fa";
 import b1 from "../assets/b1.jpg";
 import classNames from "classnames";
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 const instructionContents = [
   {
@@ -74,19 +76,6 @@ const InputField = ({
 function AppointmentPage() {
   const [isModalOpen, setModalOpen] = useState(false);
   const [formData, setFormData] = useState({
-    // firstname: "Juan",
-    // lastname: "Dela Cruz",
-    // phone: "09693037581",
-    // email: "juandelacruz@gmail.com",
-    // date: "04/16/25",
-    // time: "9:00 AM",
-    // selectedServices: [
-    //   servicesContents[3],
-    //   servicesContents[5],
-    //   servicesContents[0],
-    // ],
-    // comments: "I wanna psychological test for my internship, Im from UCU.",
-
     firstname: "",
     lastname: "",
     phone: "",
@@ -125,9 +114,16 @@ function AppointmentPage() {
     console.log("Form Data:", formData);
   };
 
+  useEffect(() => {
+    AOS.init({ duration: 1000 });
+  }, []);
+
   return (
     <>
-      <div className="flex-1 sm:mt-6 md:mt-10 sm:mb-16 sm:px-6 lg:px-12">
+      <div
+        data-aos="fade-up"
+        className="flex-1 sm:mt-6 md:mt-10 sm:mb-16 sm:px-6 lg:px-12"
+      >
         <div className="max-w-7xl w-full mx-auto sm:rounded flex max-lg:flex-col  sm:shadow-card2 overflow-hidden">
           {/* instructions */}
           <div

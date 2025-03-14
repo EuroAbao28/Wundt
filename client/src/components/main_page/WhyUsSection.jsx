@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { TbHeartHandshake, TbShieldCheck, TbUsers } from "react-icons/tb";
 import s2 from "../../assets/s2.jpg";
 import SectionHeader from "../SectionHeader";
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 function WhyUsSection() {
   const contents = [
@@ -22,8 +24,12 @@ function WhyUsSection() {
     },
   ];
 
+  useEffect(() => {
+    AOS.init({ duration: 1000 });
+  }, []);
+
   return (
-    <div className="mt-20 sm:mt-40 px-6 lg:px-12">
+    <div data-aos="fade-right" className="mt-20 sm:mt-40 px-6 lg:px-12">
       <div className="  max-w-7xl mx-auto ">
         <SectionHeader title={"Why Choose Wundt Psychological Institute?"} />
 

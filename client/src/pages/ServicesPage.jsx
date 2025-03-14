@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   TbBook,
   TbBrain,
@@ -9,6 +9,8 @@ import {
 } from "react-icons/tb";
 import classNames from "classnames";
 import SectionHeader from "../components/SectionHeader";
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 const servicesOffered = [
   {
@@ -69,8 +71,12 @@ const servicesOffered = [
 ];
 
 function ServicesPage() {
+  useEffect(() => {
+    AOS.init({ duration: 1000 });
+  }, []);
+
   return (
-    <div className="flex-1 px-6 lg:px-12 mt-10 mb-16">
+    <div data-aos="fade-up" className="flex-1 px-6 lg:px-12 mt-10 mb-16">
       <SectionHeader title={"Our Services"} />
 
       <div className="max-w-7xl w-full mx-auto grid grid-cols-1 lg:grid-cols-3 mt-6 md:mt-12">

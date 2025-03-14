@@ -1,10 +1,17 @@
-import React from "react";
+import React, { useEffect } from "react";
 import b1 from "../../assets/b1.jpg";
 import { Link } from "react-router";
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 function BannerSection() {
+  useEffect(() => {
+    AOS.init({ duration: 1000 });
+  }, []);
+
   return (
     <div
+      data-aos="fade-up"
       style={{ backgroundImage: `url(${b1})` }}
       className="mt-40 bg-center bg-cover"
     >
