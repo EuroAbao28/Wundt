@@ -1,9 +1,9 @@
 import React, { useEffect } from "react";
-import b1 from "../assets/b1.jpg";
-import s1 from "../assets/s1.jpg";
-import s2 from "../assets/s2.jpg";
-import s5 from "../assets/s5.jpg";
-import SectionHeader from "../components/SectionHeader";
+import b1 from "../../assets/b1.jpg";
+import s1 from "../../assets/s1.jpg";
+import s2 from "../../assets/s2.jpg";
+import s5 from "../../assets/s5.jpg";
+import SectionHeader from "../../components/SectionHeader";
 import AOS from "aos";
 import "aos/dist/aos.css";
 

@@ -12,13 +12,15 @@
     rgba(0, 0, 0, 0.1) 0px 0px 1px 0px;
   --shadow-bottom: rgba(17, 17, 26, 0.1) 0px 1px 0px;
   --text-xxs: 0.65rem;
-}
-
-@plugin 'tailwind-scrollbar' {
-  nocompatible: true;
-  preferredstrategy: "pseudoelements";
+  --shadow-card3: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px;
 }
 
 @plugin "daisyui" {
   themes: false;
 }
+
+@plugin 'tailwind-scrollbar' {
+  nocompatible: true;
+}
+
+/* sa loob to ng scrollbar - preferredstrategy: "pseudoelements";    */

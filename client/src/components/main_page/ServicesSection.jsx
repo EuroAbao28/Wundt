@@ -65,12 +65,12 @@ function ServicesSection() {
           {contents.map((content, index) => (
             <div
               key={index}
-              className="p-8 rounded flex flex-col  text-slate-500 shadow-card2 transition-all hover:shadow-card duration-500"
+              className="p-8 rounded flex flex-col  text-gray-500 shadow-card2 transition-all hover:shadow-card duration-500"
             >
               <div className="flex md:flex-col gap-4 items-start md:items-center">
                 <p className="text-4xl text-emerald-600">{content.icon}</p>
                 <div className="md:text-center md:mt-2">
-                  <h3 className="font-semibold text-slate-800 text-base md:text-lg">
+                  <h3 className="font-semibold text-gray-600 text-base md:text-lg">
                     {content.title}
                   </h3>
                   <p className="text-xs md:text-sm italic">

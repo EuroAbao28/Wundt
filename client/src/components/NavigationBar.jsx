@@ -73,7 +73,7 @@ function NavigationBar() {
             {/* button nav for small screen */}
             <div
               onClick={() => setDropDownOpen(!isDropDownOpen)}
-              className=" flex lg:hidden justify-center items-center rounded active:scale-95 transition-all active:bg-slate-800/5"
+              className=" flex lg:hidden justify-center items-center rounded active:scale-95 transition-all active:bg-gray-800/5"
             >
               <MdMenu className="text-3xl m-1" />
             </div>
@@ -96,7 +96,7 @@ function NavigationBar() {
             key={index}
             to={`/${content.name === "home" ? "" : content.name}`}
             onClick={() => setDropDownOpen(!isDropDownOpen)}
-            className="py-3 capitalize active:bg-slate-800/5 rounded active:scale-95 transition-all"
+            className="py-3 capitalize active:bg-gray-800/5 rounded active:scale-95 transition-all"
           >
             {content.name}
           </Link>
@@ -104,7 +104,7 @@ function NavigationBar() {
         <Link
           to={"/appointment"}
           onClick={() => setDropDownOpen(!isDropDownOpen)}
-          className="py-3 capitalize active:bg-slate-800/5 rounded w-full active:scale-95 transition-all text-emerald-600 mx-auto mb-4"
+          className="py-3 capitalize active:bg-gray-800/5 rounded w-full active:scale-95 transition-all text-emerald-600 mx-auto mb-4"
         >
           Get an Appointment
         </Link>

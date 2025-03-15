@@ -99,14 +99,14 @@ function ContactsSection() {
               <div
                 key={index}
                 onClick={() => setSelectionLocation(index)}
-                className={`outline outline-slate-300 p-4 rounded cursor-pointer hover: transition-all relative  ${
+                className={`outline outline-gray-300 p-4 rounded cursor-pointer hover: transition-all relative  ${
                   index === selectedLocation && " shadow-card2"
                 }`}
               >
                 <h3 className="font-semibold text-xs sm:text-sm">
                   {content.header}
                 </h3>
-                <div className="mt-2 text-slate-500 flex flex-col gap-1">
+                <div className="mt-2 text-gray-500 flex flex-col gap-1">
                   <div className="flex items-center  text-xs sm:text-sm">
                     <span className="text-emerald-600 text-base sticky start-0 bg-white pr-3 sm:pr-4">
                       <BiSolidPhone />
@@ -140,7 +140,7 @@ function ContactsSection() {
             ))}
           </div>
 
-          <div className="flex-1 max-lg:aspect-video outline outline-slate-300 rounded overflow-hidden">
+          <div className="flex-1 max-lg:aspect-video outline outline-gray-300 rounded overflow-hidden">
             {contents[selectedLocation].map}
           </div>
         </div>

@@ -44,7 +44,7 @@ function WhyUsSection() {
                   <h3 className="text-base md:text-lg font-semibold">
                     {content.title}
                   </h3>
-                  <p className="text-xs md:text-sm text-slate-500">
+                  <p className="text-xs md:text-sm text-gray-500">
                     {content.desc}
                   </p>
                 </div>

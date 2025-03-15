@@ -1,13 +1,13 @@
 import React, { useEffect } from "react";
-import s3 from "../assets/s3.jpg";
-import s4 from "../assets/s4.jpg";
-import s5 from "../assets/s5.jpg";
-import s6 from "../assets/s6.jpg";
-import s7 from "../assets/s7.jpg";
-import s8 from "../assets/s8.jpg";
-import s9 from "../assets/s9.jpg";
-import s10 from "../assets/s10.jpg";
-import SectionHeader from "../components/SectionHeader";
+import s3 from "../../assets/s3.jpg";
+import s4 from "../../assets/s4.jpg";
+import s5 from "../../assets/s5.jpg";
+import s6 from "../../assets/s6.jpg";
+import s7 from "../../assets/s7.jpg";
+import s8 from "../../assets/s8.jpg";
+import s9 from "../../assets/s9.jpg";
+import s10 from "../../assets/s10.jpg";
+import SectionHeader from "../../components/SectionHeader";
 import AOS from "aos";
 import "aos/dist/aos.css";
 

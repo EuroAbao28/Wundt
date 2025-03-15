@@ -8,7 +8,7 @@ import {
   TbPresentation,
 } from "react-icons/tb";
 import classNames from "classnames";
-import SectionHeader from "../components/SectionHeader";
+import SectionHeader from "../../components/SectionHeader";
 import AOS from "aos";
 import "aos/dist/aos.css";
 
@@ -86,10 +86,10 @@ function ServicesPage() {
             className={classNames(
               "lg:px-6 py-6 flex gap-4 bg-center bg-cover",
               {
-                "lg:border-r border-slate-300": (index + 1) % 3 !== 0,
-                "lg:border-b border-slate-300":
+                "lg:border-r border-gray-300": (index + 1) % 3 !== 0,
+                "lg:border-b border-gray-300":
                   index < servicesOffered.length - 3,
-                "max-lg:border-b border-slate-300":
+                "max-lg:border-b border-gray-300":
                   index + 1 !== servicesOffered.length,
               }
             )}

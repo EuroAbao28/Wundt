@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { FaRegClock, FaRegCalendar } from "react-icons/fa";
-import b1 from "../assets/b1.jpg";
+import b1 from "../../assets/b1.jpg";
 import classNames from "classnames";
 import AOS from "aos";
 import "aos/dist/aos.css";
@@ -67,7 +67,7 @@ const InputField = ({
         onChange={onChange}
         autoComplete={autoComplete}
         required
-        className="outline outline-slate-300 py-2 px-4 rounded"
+        className="outline outline-gray-300 py-2 px-4 rounded"
       />
     </label>
   );
@@ -225,7 +225,7 @@ function AppointmentPage() {
                     min={new Date().toISOString().split("T")[0]} // so that user cant go back in time xD
                     onChange={handleChange}
                     required
-                    className="outline outline-slate-300 py-2 px-4 rounded w-full max-sm:appearance-none  max-sm:[&::-webkit-calendar-picker-indicator]:hidden"
+                    className="outline outline-gray-300 py-2 px-4 rounded w-full max-sm:appearance-none  max-sm:[&::-webkit-calendar-picker-indicator]:hidden"
                   />
 
                   <FaRegCalendar className="absolute top-3 right-4 max-sm:block hidden" />
@@ -242,7 +242,7 @@ function AppointmentPage() {
                     name="time"
                     value={formData.time}
                     onChange={handleChange}
-                    className="outline outline-slate-300 py-2 px-4 rounded appearance-none w-full"
+                    className="outline outline-gray-300 py-2 px-4 rounded appearance-none w-full"
                     required
                   >
                     <option value="" disabled hidden>
@@ -278,7 +278,7 @@ function AppointmentPage() {
                   )}
                 </div>
 
-                <div className="flex flex-col gap-2 outline outline-slate-300 rounded p-4">
+                <div className="flex flex-col gap-2 outline outline-gray-300 rounded p-4">
                   {servicesContents.map((service, index) => (
                     <label key={index} className="flex items-center gap-2 ">
                       <input
@@ -306,7 +306,7 @@ function AppointmentPage() {
                   maxLength={700}
                   onChange={handleChange}
                   required
-                  className="outline outline-slate-300 py-2 px-4 rounded  resize-none flex-1"
+                  className="outline outline-gray-300 py-2 px-4 rounded  resize-none flex-1"
                 />
               </label>
 
@@ -373,7 +373,7 @@ function AppointmentPage() {
                     ))}
                   </div>
                 ) : key === "comments" ? (
-                  <p className="outline outline-slate-300 p-2 rounded flex-1 max-h-32 overflow-y-auto text-xs">
+                  <p className="outline outline-gray-300 p-2 rounded flex-1 max-h-32 overflow-y-auto text-xs">
                     {value}
                   </p>
                 ) : (
@@ -386,7 +386,7 @@ function AppointmentPage() {
           <div className="flex gap-4 items-center justify-center mt-4">
             <button
               onClick={() => setModalOpen(false)}
-              className="bg-slate-600 text-white rounded py-2 px-8 font-semibold uppercase active:scale-95 transition-all text-sm max-sm:flex-1"
+              className="bg-gray-600 text-white rounded py-2 px-8 font-semibold uppercase active:scale-95 transition-all text-sm max-sm:flex-1"
             >
               Cancel
             </button>
