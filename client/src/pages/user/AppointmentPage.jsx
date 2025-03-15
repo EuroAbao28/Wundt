@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { FaRegClock, FaRegCalendar } from "react-icons/fa";
+import { RiMapPin2Line } from "react-icons/ri";
 import b1 from "../../assets/b1.jpg";
 import classNames from "classnames";
 import AOS from "aos";
@@ -41,37 +42,23 @@ const servicesContents = [
   "Trainings & Workshops",
 ];
 
-const InputField = ({
-  label,
-  type = "text",
-  placeholder,
-  name,
-  value,
-  pattern,
-  minLength,
-  maxLength,
-  autoComplete = "off",
-  onChange,
-}) => {
-  return (
-    <label className="flex flex-col gap-2">
-      <span className="uppercase text-xs font-semibold">{label}</span>
-      <input
-        type={type}
-        name={name}
-        value={value}
-        pattern={pattern}
-        minLength={minLength}
-        maxLength={maxLength}
-        placeholder={placeholder}
-        onChange={onChange}
-        autoComplete={autoComplete}
-        required
-        className="outline outline-gray-300 py-2 px-4 rounded"
-      />
-    </label>
-  );
-};
+const timeContents = [
+  "09:00 AM",
+  "10:00 AM",
+  "11:00 AM",
+  "12:00 PM",
+  "01:00 PM",
+  "02:00 PM",
+  "03:00 PM",
+  "04:00 PM",
+];
+
+const branchesContents = [
+  "Dagupan City",
+  "Vigan City",
+  "Urdaneta City",
+  "Mangaldan",
+];
 
 function AppointmentPage() {
   const [isModalOpen, setModalOpen] = useState(false);
@@ -82,6 +69,7 @@ function AppointmentPage() {
     email: "",
     date: "",
     time: "",
+    branch: "",
     selectedServices: [],
     comments: "",
   });
@@ -248,16 +236,7 @@ function AppointmentPage() {
                     <option value="" disabled hidden>
                       Select time
                     </option>
-                    {[
-                      "09:00 AM",
-                      "10:00 AM",
-                      "11:00 AM",
-                      "12:00 PM",
-                      "01:00 PM",
-                      "02:00 PM",
-                      "03:00 PM",
-                      "04:00 PM",
-                    ].map((time) => (
+                    {timeContents.map((time) => (
                       <option key={time} value={time}>
                         {time}
                       </option>
@@ -268,7 +247,7 @@ function AppointmentPage() {
               </label>
 
               {/* services */}
-              <div className="flex flex-col gap-2 ">
+              <div className="flex flex-col gap-2">
                 <div className=" text-xs font-semibold flex justify-between">
                   <label className="uppercase">Available Services</label>
                   {formData.selectedServices.length < 1 && (
@@ -293,22 +272,51 @@ function AppointmentPage() {
                 </div>
               </div>
 
-              {/* comments */}
-              <label className="flex flex-col gap-2  max-md:h-44">
-                <span className="uppercase text-xs font-semibold">
-                  Comments / Notes
-                </span>
-                <textarea
-                  name="comments"
-                  value={formData.comments}
-                  type="text"
-                  placeholder="Specify your concern"
-                  maxLength={700}
-                  onChange={handleChange}
-                  required
-                  className="outline outline-gray-300 py-2 px-4 rounded  resize-none flex-1"
-                />
-              </label>
+              {/* branch & comments */}
+              <div className="flex flex-col gap-y-4">
+                {/* branch */}
+                <label className="flex flex-col gap-2">
+                  <span className="uppercase text-xs font-semibold">
+                    Branch / Location
+                  </span>
+                  <div className="relative">
+                    <select
+                      name="branch"
+                      value={formData.branch}
+                      onChange={handleChange}
+                      className="outline outline-gray-300 py-2 px-4 rounded appearance-none w-full"
+                      required
+                    >
+                      <option value="" disabled hidden>
+                        Select branch
+                      </option>
+                      {branchesContents.map((branch) => (
+                        <option key={branch} value={branch}>
+                          {branch}
+                        </option>
+                      ))}
+                    </select>
+                    <RiMapPin2Line className="absolute top-2.5 right-4 text-base" />
+                  </div>
+                </label>
+
+                {/* comments */}
+                <label className="flex flex-col gap-2  max-md:h-44 flex-1">
+                  <span className="uppercase text-xs font-semibold">
+                    Comments / Notes
+                  </span>
+                  <textarea
+                    name="comments"
+                    value={formData.comments}
+                    type="text"
+                    placeholder="Specify your concern"
+                    maxLength={700}
+                    onChange={handleChange}
+                    required
+                    className="outline outline-gray-300 py-2 px-4 rounded resize-none flex-1 scrollbar-thin"
+                  />
+                </label>
+              </div>
 
               <button
                 type="submit"
@@ -332,7 +340,7 @@ function AppointmentPage() {
             Confirm your details before submission.
           </h5>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 mt-6 gap-x-4">
+          {/* <div className="grid grid-cols-1 sm:grid-cols-2 mt-6 gap-x-4">
             {Object.entries(formData).map(([key, value], index) => (
               <section
                 key={index}
@@ -381,9 +389,55 @@ function AppointmentPage() {
                 )}
               </section>
             ))}
+          </div> */}
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 mt-6 gap-x-4 outline outline-gray-200 rounded p-6">
+            <ReviewDetailsSection
+              label="Firstname"
+              value={formData.firstname}
+            />
+
+            <ReviewDetailsSection label="Lastname" value={formData.lastname} />
+
+            <ReviewDetailsSection label="Phone No." value={formData.phone} />
+
+            <ReviewDetailsSection label="Email" value={formData.email} />
+
+            <ReviewDetailsSection label="Date" value={formData.date} />
+
+            <ReviewDetailsSection label="Time" value={formData.time} />
+
+            <ReviewDetailsSection label="Branch" value={formData.branch} />
+
+            <div className="grid sm:grid-cols-2 sm:col-span-2  border-t border-gray-200  mt-2  pt-2">
+              <section className="text-xs sm:text-sm flex flex-col py-1 gap-y-2">
+                <p className="font-semibold text-nowrap capitalize">
+                  Selected Services :
+                </p>
+                <div className="flex gap-1 sm:gap-2 flex-wrap max-h-32 overflow-y-auto">
+                  {formData.selectedServices.map((service, index) => (
+                    <p
+                      key={index}
+                      className="bg-emerald-300/10 rounded py-1 px-2 w-fit text-xs"
+                    >
+                      {service}
+                    </p>
+                  ))}
+                </div>
+              </section>
+
+              <section className="text-xs sm:text-sm flex flex-col py-1 gap-y-2">
+                <p className="font-semibold text-nowrap capitalize">
+                  Comments / Notes :
+                </p>
+                <p className="outline outline-gray-300 p-2 rounded flex-1 max-h-32 overflow-y-auto text-xs scrollbar-thin">
+                  {formData.comments}
+                </p>
+              </section>
+            </div>
           </div>
 
-          <div className="flex gap-4 items-center justify-center mt-4">
+          <div className="flex gap-4 items-center justify-center mt-6">
             <button
               onClick={() => setModalOpen(false)}
               className="bg-gray-600 text-white rounded py-2 px-8 font-semibold uppercase active:scale-95 transition-all text-sm max-sm:flex-1"
@@ -400,5 +454,48 @@ function AppointmentPage() {
     </>
   );
 }
+
+const InputField = ({
+  label,
+  type = "text",
+  placeholder,
+  name,
+  value,
+  pattern,
+  minLength,
+  maxLength,
+  autoComplete = "off",
+  onChange,
+}) => {
+  return (
+    <label className="flex flex-col gap-2">
+      <span className="uppercase text-xs font-semibold">{label}</span>
+      <input
+        type={type}
+        name={name}
+        value={value}
+        pattern={pattern}
+        minLength={minLength}
+        maxLength={maxLength}
+        placeholder={placeholder}
+        onChange={onChange}
+        autoComplete={autoComplete}
+        required
+        className="outline outline-gray-300 py-2 px-4 rounded"
+      />
+    </label>
+  );
+};
+
+const ReviewDetailsSection = ({ label, value }) => {
+  return (
+    <section className="text-xs sm:text-sm flex py-1 gap-x-4 gap-y-2">
+      <p className="font-semibold text-nowrap capitalize w-18 sm:min-w-[25%]">
+        {label} :
+      </p>
+      <p className="flex-1">{value}</p>
+    </section>
+  );
+};
 
 export default AppointmentPage;
