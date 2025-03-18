@@ -57,7 +57,7 @@ const appointmentSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-// **Indexes for Faster Queries**
+// for Faster Queries
 appointmentSchema.index({ email: 1 });
 appointmentSchema.index({ date: 1 });
 

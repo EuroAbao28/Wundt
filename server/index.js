@@ -18,7 +18,8 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 // routes
-app.use("/api/appointments", require("./routes/appointmentRoute"));
+app.use("/api/appointment", require("./routes/appointmentRoute"));
+app.use("/api/admin", require("./routes/adminRoute"));
 
 // start the server
 app.listen(PORT, () =>
