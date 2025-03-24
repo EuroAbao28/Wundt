@@ -1,5 +1,5 @@
 const Appointment = require("../models/appointmentModel");
-const { validateAppointmentFields } = require("../utils/validationField");
+const { validateFields } = require("../utils/validationField");
 const createError = require("http-errors");
 
 const createAppointment = async (req, res, next) => {
@@ -16,7 +16,7 @@ const createAppointment = async (req, res, next) => {
     } = req.body;
 
     // specified field, might change later to req.body for scalability
-    validateAppointmentFields({
+    validateFields({
       firstname,
       lastname,
       phone,

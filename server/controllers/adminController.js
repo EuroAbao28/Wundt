@@ -1,10 +1,8 @@
 const Admin = require("../models/adminModel");
 const createError = require("http-errors");
 const bcrypt = require("bcrypt");
-const {
-  validateRole,
-  validateAdminFields,
-} = require("../utils/validationField");
+const jwt = require("jsonwebtoken");
+const { validateRole, validateFields } = require("../utils/validationField");
 const { isValidFileType } = require("../utils/validationFile");
 const { uploadImageToCloudinary } = require("../utils/cloudinaryUtils");
 
@@ -15,7 +13,7 @@ const createAdmin = async (req, res, next) => {
       req.body;
 
     // validate required fields
-    validateAdminFields({ firstname, lastname, email, phone, password });
+    validateFields({ firstname, lastname, email, phone, password }, false);
 
     // check if email already exists
     const isAdminAlreadyExist = await Admin.findOne({ email });
@@ -65,7 +63,50 @@ const createAdmin = async (req, res, next) => {
       .status(201)
       .json({ message: "Admin created successfully.", admin: newAdmin });
   } catch (error) {
-    next(createError(500, "Failed to create admin. Please try again"));
+    next(error);
+  }
+};
+
+const loginAdmin = async (req, res, next) => {
+  try {
+    const { email, password } = req.body;
+
+    // validate required fields
+    validateFields({ email, password });
+
+    // check if admin exist
+    const admin = await Admin.findOne({ email });
+    if (!admin) {
+      return next(createError(401, "Invalid email or password"));
+    }
+
+    // compare passwords
+    const isPasswordValid = await bcrypt.compare(password, admin.password);
+    if (!isPasswordValid) {
+      return next(createError(401, "Invalid email or password"));
+    }
+
+    // Generate JWT token
+    const token = jwt.sign(
+      { id: admin._id, role: admin.role },
+      process.env.JWT_SECRET,
+      { expiresIn: "1d" }
+    );
+
+    res.status(200).json({
+      message: "Login successful",
+      token,
+      admin: {
+        id: admin._id,
+        firstname: admin.firstname,
+        lastname: admin.lastname,
+        email: admin.email,
+        role: admin.role,
+        profilePic: admin.profilePic,
+      },
+    });
+  } catch (error) {
+    next(error);
   }
 };
 
@@ -84,4 +125,4 @@ const getAllAdmins = async (req, res, next) => {
   }
 };
 
-module.exports = { createAdmin, getAllAdmins };
+module.exports = { createAdmin, getAllAdmins, loginAdmin };

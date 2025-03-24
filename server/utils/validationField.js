@@ -1,20 +1,16 @@
 const createError = require("http-errors");
 
-const validateAppointmentFields = (fields) => {
+const validateFields = (fields, isStrict = true) => {
   const allFieldsFilled = Object.values(fields).every((value) =>
     Array.isArray(value) ? value.length > 0 : Boolean(value)
   );
 
   if (!allFieldsFilled) {
-    throw createError(400, "All fields are required");
-  }
-};
-
-const validateAdminFields = (fields) => {
-  const allFieldsFilled = Object.values(fields).every(Boolean);
-
-  if (!allFieldsFilled) {
-    throw createError(400, "Some required fields are missing");
+    if (isStrict) {
+      throw createError(400, "All fields are required");
+    } else {
+      throw createError(400, "Required fields are missing");
+    }
   }
 };
 
@@ -25,7 +21,6 @@ const validateRole = (role = "admin") => {
 };
 
 module.exports = {
-  validateAppointmentFields,
-  validateAdminFields,
+  validateFields,
   validateRole,
 };

@@ -7,9 +7,9 @@ const routeNotFoundHandler = (req, res, next) => {
 
 // global error
 const globalErrorHandler = (err, req, res, next) => {
-  console.log(err);
+  console.error(err);
 
-  // default catch error (if not provided)
+  // default catch error (if not provided) for unexpected errors to prevent server crashes
   let statusCode = err.status || 500;
   let message = err.message || "Internal Server Error";
 
@@ -17,6 +17,12 @@ const globalErrorHandler = (err, req, res, next) => {
   if (err.name === "ValidationError") {
     statusCode = 400;
     message = Object.values(err.errors).map((error) => error.message)[0];
+  }
+
+  // for the mongoose CastErrors (invalid ObjectId)
+  if (err.name === "CastError") {
+    statusCode = 400;
+    message = `Invalid ${err.path}: ${err.value}`;
   }
 
   res.status(statusCode).json({ message });
