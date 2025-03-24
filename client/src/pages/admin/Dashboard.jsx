@@ -12,7 +12,7 @@ const appointments = [
     lastname: "Doe",
     phone: "0917-123-4567",
     email: "johndoe@gmail.com",
-    date: "2025-03-15",
+    date: "2025-03-26",
     time: "9:00 AM",
     selectedServices: ["Cognitive Therapy"],
     comments: "Feeling stressed at work.",
@@ -23,7 +23,7 @@ const appointments = [
     lastname: "Smith",
     phone: "0928-987-6543",
     email: "janesmith@yahoo.com",
-    date: "2025-03-15",
+    date: "2025-03-26",
     time: "10:30 AM",
     selectedServices: ["Behavioral Therapy"],
     comments: "Having trouble sleeping.",
@@ -34,7 +34,7 @@ const appointments = [
     lastname: "Johnson",
     phone: "0998-765-4321",
     email: "michaelj@gmail.com",
-    date: "2025-03-15",
+    date: "2025-03-26",
     time: "1:00 PM",
     selectedServices: ["Depression Counseling"],
     comments: "Feeling down for a few weeks.",
@@ -45,7 +45,7 @@ const appointments = [
     lastname: "Brown",
     phone: "0915-234-5678",
     email: "emilybrown@outlook.com",
-    date: "2025-03-15",
+    date: "2025-03-27",
     time: "3:00 PM",
     selectedServices: ["Couples Therapy"],
     comments: "Relationship struggles.",
@@ -56,7 +56,7 @@ const appointments = [
     lastname: "Wilson",
     phone: "0921-456-7890",
     email: "davidwilson@live.com",
-    date: "2025-03-15",
+    date: "2025-03-27",
     time: "5:00 PM",
     selectedServices: ["Anger Management"],
     comments: "Difficulty controlling emotions.",
@@ -67,7 +67,7 @@ const appointments = [
     lastname: "Martinez",
     phone: "0973-789-1234",
     email: "sophia.m@gmail.com",
-    date: "2025-03-15",
+    date: "2025-03-27",
     time: "6:30 PM",
     selectedServices: ["Stress Management"],
     comments: "Overwhelmed with school.",
@@ -78,7 +78,7 @@ const appointments = [
     lastname: "Anderson",
     phone: "0908-321-6547",
     email: "daniel.a@hotmail.com",
-    date: "2025-03-15",
+    date: "2025-03-28",
     time: "8:00 PM",
     selectedServices: ["Self-Esteem Coaching"],
     comments: "Struggling with confidence.",
@@ -89,7 +89,7 @@ const appointments = [
     lastname: "Taylor",
     phone: "0916-654-0987",
     email: "olivia.t@gmail.com",
-    date: "2025-03-16",
+    date: "2025-03-28",
     time: "9:30 AM",
     selectedServices: ["Grief Counseling"],
     comments: "Lost a family member recently.",
@@ -100,7 +100,7 @@ const appointments = [
     lastname: "White",
     phone: "0933-214-5678",
     email: "liam.white@gmail.com",
-    date: "2025-03-16",
+    date: "2025-03-28",
     time: "11:00 AM",
     selectedServices: ["Therapy Session"],
     comments: "Anxiety about public speaking.",
@@ -111,7 +111,7 @@ const appointments = [
     lastname: "Harris",
     phone: "0977-111-2222",
     email: "avaharris@outlook.com",
-    date: "2025-03-16",
+    date: "2025-03-29",
     time: "1:30 PM",
     selectedServices: ["Family Therapy"],
     comments: "Family communication issues.",
@@ -122,110 +122,11 @@ const appointments = [
     lastname: "Clark",
     phone: "0925-333-4444",
     email: "noahclark@gmail.com",
-    date: "2025-03-16",
+    date: "2025-03-29",
     time: "3:00 PM",
     selectedServices: ["Trauma Counseling"],
     comments: "Experienced a traumatic event.",
     status: "pending",
-  },
-  {
-    firstname: "Isabella",
-    lastname: "Lewis",
-    phone: "0945-555-6666",
-    email: "isabella.lewis@gmail.com",
-    date: "2025-03-16",
-    time: "4:30 PM",
-    selectedServices: ["Stress Management"],
-    comments: "Work pressure is overwhelming.",
-    status: "completed",
-  },
-  {
-    firstname: "Mason",
-    lastname: "Walker",
-    phone: "0911-777-8888",
-    email: "masonw@gmail.com",
-    date: "2025-03-17",
-    time: "9:00 AM",
-    selectedServices: ["Anxiety Therapy"],
-    comments: "Constant worrying and overthinking.",
-    status: "pending",
-  },
-  {
-    firstname: "Charlotte",
-    lastname: "Hall",
-    phone: "0909-999-0000",
-    email: "charlotte.hall@gmail.com",
-    date: "2025-03-17",
-    time: "10:30 AM",
-    selectedServices: ["Couples Therapy"],
-    comments: "Trying to improve communication.",
-    status: "confirmed",
-  },
-  {
-    firstname: "Ethan",
-    lastname: "Allen",
-    phone: "0952-111-2222",
-    email: "ethan.a@gmail.com",
-    date: "2025-03-17",
-    time: "1:00 PM",
-    selectedServices: ["Addiction Counseling"],
-    comments: "Struggling with substance abuse.",
-    status: "canceled",
-  },
-  {
-    firstname: "Amelia",
-    lastname: "Young",
-    phone: "0936-333-4444",
-    email: "amelia.y@gmail.com",
-    date: "2025-03-17",
-    time: "2:30 PM",
-    selectedServices: ["Depression Therapy"],
-    comments: "Feeling low energy for months.",
-    status: "completed",
-  },
-  {
-    firstname: "Logan",
-    lastname: "King",
-    phone: "0994-555-6666",
-    email: "logank@hotmail.com",
-    date: "2025-03-17",
-    time: "4:00 PM",
-    selectedServices: ["Grief Counseling"],
-    comments: "Lost a close friend recently.",
-    status: "pending",
-  },
-  {
-    firstname: "Mia",
-    lastname: "Wright",
-    phone: "0912-777-8888",
-    email: "miawright@gmail.com",
-    date: "2025-03-18",
-    time: "9:30 AM",
-    selectedServices: ["Anger Management"],
-    comments: "Having trouble managing emotions.",
-    status: "confirmed",
-  },
-  {
-    firstname: "Lucas",
-    lastname: "Scott",
-    phone: "0976-999-0000",
-    email: "lucasscott@gmail.com",
-    date: "2025-03-18",
-    time: "11:00 AM",
-    selectedServices: ["Self-Esteem Coaching"],
-    comments: "Wants to build self-confidence.",
-    status: "completed",
-  },
-  {
-    firstname: "Harper",
-    lastname: "Green",
-    phone: "0907-222-3333",
-    email: "harper.green@gmail.com",
-    date: "2025-03-18",
-    time: "1:30 PM",
-    selectedServices: ["Family Therapy"],
-    comments: "Parent-child relationship issues.",
-    status: "canceled",
   },
 ];
 
@@ -287,8 +188,7 @@ function Dashboard() {
                   return (
                     <div
                       key={index}
-                      className="border-b border-gray-200 py-2 last:border-none flex gap-6 items-center"
-                    >
+                      className="border-b border-gray-200 py-2 last:border-none flex gap-6 items-center">
                       <p className="text-xs font-bold">{index + 1}</p>
                       <div className="flex flex-col gap-1">
                         <p className="text-sm">{`${appointment.firstname} ${appointment.lastname}`}</p>
@@ -343,8 +243,7 @@ function Dashboard() {
                   return (
                     <div
                       key={index}
-                      className="border-b border-gray-200 py-2 last:border-none flex gap-6 items-center"
-                    >
+                      className="border-b border-gray-200 py-2 last:border-none flex gap-6 items-center">
                       <p className="text-xs font-bold">{index + 1}</p>
                       <div className="flex flex-col gap-1">
                         <p className="text-sm">{`${appointment.firstname} ${appointment.lastname}`}</p>
@@ -389,8 +288,7 @@ function Dashboard() {
                   return (
                     <div
                       key={index}
-                      className="border-b border-gray-200 py-2 last:border-none flex gap-6 items-center"
-                    >
+                      className="border-b border-gray-200 py-2 last:border-none flex gap-6 items-center">
                       <p className="text-xs font-bold">{index + 1}</p>
                       <div className="flex flex-col gap-1">
                         <p className="text-sm">{`${appointment.firstname} ${appointment.lastname}`}</p>
