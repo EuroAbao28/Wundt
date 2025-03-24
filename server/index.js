@@ -1,7 +1,10 @@
 const express = require("express");
-const mongoose = require("mongoose");
 const cors = require("cors");
 const connectDB = require("./config/db");
+const {
+  routeNotFoundHandler,
+  globalErrorHandler,
+} = require("./middleware/errorHandler");
 
 require("dotenv").config();
 require("colors");
@@ -20,6 +23,10 @@ app.use(express.urlencoded({ extended: false }));
 // routes
 app.use("/api/appointment", require("./routes/appointmentRoute"));
 app.use("/api/admin", require("./routes/adminRoute"));
+
+// error-handling middleware
+app.use(routeNotFoundHandler);
+app.use(globalErrorHandler);
 
 // start the server
 app.listen(PORT, () =>

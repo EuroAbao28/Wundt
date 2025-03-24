@@ -1,6 +1,8 @@
 const Appointment = require("../models/appointmentModel");
+const { validateAppointmentFields } = require("../utils/validationField");
+const createError = require("http-errors");
 
-const createAppointment = async (req, res) => {
+const createAppointment = async (req, res, next) => {
   try {
     const {
       firstname,
@@ -13,29 +15,38 @@ const createAppointment = async (req, res) => {
       comments,
     } = req.body;
 
-    // validate the fields
-    if (
-      !firstname ||
-      !lastname ||
-      !phone ||
-      !email ||
-      !date ||
-      !time ||
-      !selectedServices ||
-      !comments
-    )
-      return res.status(400).json({ message: "All fields are required" });
+    // specified field, might change later to req.body for scalability
+    validateAppointmentFields({
+      firstname,
+      lastname,
+      phone,
+      email,
+      date,
+      time,
+      selectedServices,
+      comments,
+    });
 
-    // Ensure appointment date is in the future
-    const appointmentDate = new Date(date);
-    const now = new Date();
-    if (appointmentDate < now) {
-      return res
-        .status(400)
-        .json({ message: "Appointment date must be in the future" });
+    // ensure appointment date is in the future
+    if (new Date(date) < new Date()) {
+      return next(createError(400, "Appointment date must be in the future"));
     }
 
-    // Create new appointment
+    // check if an appointment with the same details already exists
+    const existingAppointment = await Appointment.findOne({
+      email,
+      firstname,
+      lastname,
+      date,
+      time,
+    });
+    if (existingAppointment) {
+      return next(
+        createError(409, "An appointment with the same details already exists")
+      );
+    }
+
+    // create new appointment
     const newAppointment = await Appointment.create({
       firstname,
       lastname,
@@ -45,7 +56,6 @@ const createAppointment = async (req, res) => {
       time,
       selectedServices,
       comments,
-      status: "pending", // set the default status
     });
 
     res.status(201).json({
@@ -53,18 +63,16 @@ const createAppointment = async (req, res) => {
       appointment: newAppointment,
     });
   } catch (error) {
-    console.error("Error creating appointment:", error);
-    res.status(500).json({ message: "Internal server error" });
+    next(error);
   }
 };
 
-const getAllAppointments = async (req, res) => {
+const getAllAppointments = async (req, res, next) => {
   try {
     const appointments = await Appointment.find();
     res.status(200).json(appointments);
   } catch (error) {
-    console.error("Error fetching all appointments:", error);
-    res.status(500).json({ message: "Internal Server Error" });
+    next(createError(500, "Internal Server Error"));
   }
 };
 
