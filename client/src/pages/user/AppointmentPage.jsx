@@ -110,14 +110,12 @@ function AppointmentPage() {
     <>
       <div
         data-aos="fade-up"
-        className="flex-1 sm:mt-6 md:mt-10 sm:mb-16 sm:px-6 lg:px-12"
-      >
+        className="flex-1 sm:mt-6 md:mt-10 sm:mb-16 sm:px-6 lg:px-12">
         <div className="max-w-7xl w-full mx-auto sm:rounded flex max-lg:flex-col  sm:shadow-card2 overflow-hidden">
           {/* instructions */}
           <div
             style={{ backgroundImage: `url(${b1})` }}
-            className="w-full lg:w-1/3 bg-center bg-cover"
-          >
+            className="w-full lg:w-1/3 bg-center bg-cover">
             <div className="p-6 lg:p-8 bg-radial-[at_-35%_15%] from-green-500/90 to-emerald-600/90 to-75% h-full text-white flex flex-col">
               <h1 className="text-2xl font-semibold">
                 Appointment Guidelines{" "}
@@ -145,8 +143,7 @@ function AppointmentPage() {
             <h1 className="text-2xl font-semibold">Appointment Form</h1>
             <form
               onSubmit={handleSubmit}
-              className="text-sm grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-4 mt-8"
-            >
+              className="text-sm grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-4 mt-8">
               {/* Firstname */}
               <InputField
                 label="Firstname"
@@ -213,7 +210,7 @@ function AppointmentPage() {
                     min={new Date().toISOString().split("T")[0]} // so that user cant go back in time xD
                     onChange={handleChange}
                     required
-                    className="outline outline-gray-300 py-2 px-4 rounded w-full max-sm:appearance-none  max-sm:[&::-webkit-calendar-picker-indicator]:hidden"
+                    className="outline outline-gray-300 py-2 px-4 rounded w-full max-sm:appearance-none  max-sm:[&::-webkit-calendar-picker-indicator]:hidden focus:outline-gray-400 transition-all"
                   />
 
                   <FaRegCalendar className="absolute top-3 right-4 max-sm:block hidden" />
@@ -230,9 +227,8 @@ function AppointmentPage() {
                     name="time"
                     value={formData.time}
                     onChange={handleChange}
-                    className="outline outline-gray-300 py-2 px-4 rounded appearance-none w-full"
-                    required
-                  >
+                    className="outline outline-gray-300 py-2 px-4 rounded appearance-none w-full focus:outline-gray-400 transition-all"
+                    required>
                     <option value="" disabled hidden>
                       Select time
                     </option>
@@ -284,9 +280,8 @@ function AppointmentPage() {
                       name="branch"
                       value={formData.branch}
                       onChange={handleChange}
-                      className="outline outline-gray-300 py-2 px-4 rounded appearance-none w-full"
-                      required
-                    >
+                      className="outline outline-gray-300 py-2 px-4 rounded appearance-none w-full focus:outline-gray-400 transition-all"
+                      required>
                       <option value="" disabled hidden>
                         Select branch
                       </option>
@@ -313,15 +308,14 @@ function AppointmentPage() {
                     maxLength={700}
                     onChange={handleChange}
                     required
-                    className="outline outline-gray-300 py-2 px-4 rounded resize-none flex-1 scrollbar-thin"
+                    className="outline outline-gray-300 py-2 px-4 rounded resize-none flex-1 scrollbar-thin focus:outline-gray-400 transition-all"
                   />
                 </label>
               </div>
 
               <button
                 type="submit"
-                className="bg-radial-[at_-50%_-50%] from-green-500 to-emerald-600 to-75% text-white rounded w-full sm:w-fit py-2 px-8 mt-4 font-semibold uppercase active:scale-95 transition-all "
-              >
+                className="bg-radial-[at_-50%_-50%] from-green-500 to-emerald-600 to-75% text-white rounded w-full sm:w-fit py-2 px-8 mt-4 font-semibold uppercase active:scale-95 transition-all focus:outline-emerald-700">
                 Submit
               </button>
             </form>
@@ -332,64 +326,12 @@ function AppointmentPage() {
       <dialog
         className={classNames("modal p-2 sm:p-6 backdrop-blur-sm", {
           "modal-open": isModalOpen,
-        })}
-      >
+        })}>
         <div className="modal-box bg-white rounded p-4 sm:p-6 max-w-2xl w-full ">
           <h3 className="text-xl font-semibold text-center">Review Details</h3>
           <h5 className="text-xs italic text-center text-emerald-600">
             Confirm your details before submission.
           </h5>
-
-          {/* <div className="grid grid-cols-1 sm:grid-cols-2 mt-6 gap-x-4">
-            {Object.entries(formData).map(([key, value], index) => (
-              <section
-                key={index}
-                className={classNames(
-                  "text-xs sm:text-sm flex py-1 gap-x-4 gap-y-2",
-                  {
-                    "flex-col":
-                      key === "selectedServices" || key === "comments",
-                  }
-                )}
-              >
-                <p
-                  className={classNames(
-                    "font-semibold text-nowrap capitalize",
-                    {
-                      "w-full text-start mt-4":
-                        key === "selectedServices" || key === "comments",
-                      "w-16 sm:w-[25%]":
-                        key !== "selectedServices" || key !== "comments",
-                    }
-                  )}
-                >
-                  {key === "comments"
-                    ? `${key} / notes :`
-                    : key === "phone"
-                    ? `${key} No. :`
-                    : key.replace(/([A-Z])/g, " $1") + " :"}
-                </p>
-                {Array.isArray(value) ? (
-                  <div className="flex gap-1 sm:gap-2 flex-wrap max-h-32 overflow-y-auto">
-                    {value.map((service, index) => (
-                      <p
-                        key={index}
-                        className="bg-emerald-300/10 rounded py-1 px-2 w-fit text-xs"
-                      >
-                        {service}
-                      </p>
-                    ))}
-                  </div>
-                ) : key === "comments" ? (
-                  <p className="outline outline-gray-300 p-2 rounded flex-1 max-h-32 overflow-y-auto text-xs">
-                    {value}
-                  </p>
-                ) : (
-                  <p>{value}</p>
-                )}
-              </section>
-            ))}
-          </div> */}
 
           <div className="grid grid-cols-1 sm:grid-cols-2 mt-6 gap-x-4 outline outline-gray-200 rounded p-6">
             <ReviewDetailsSection
@@ -418,8 +360,7 @@ function AppointmentPage() {
                   {formData.selectedServices.map((service, index) => (
                     <p
                       key={index}
-                      className="bg-emerald-300/10 rounded py-1 px-2 w-fit text-xs"
-                    >
+                      className="bg-emerald-300/10 rounded py-1 px-2 w-fit text-xs">
                       {service}
                     </p>
                   ))}
@@ -440,8 +381,7 @@ function AppointmentPage() {
           <div className="flex gap-4 items-center justify-center mt-6">
             <button
               onClick={() => setModalOpen(false)}
-              className="bg-gray-600 text-white rounded py-2 px-8 font-semibold uppercase active:scale-95 transition-all text-sm max-sm:flex-1"
-            >
+              className="bg-gray-600 text-white rounded py-2 px-8 font-semibold uppercase active:scale-95 transition-all text-sm max-sm:flex-1">
               Cancel
             </button>
 
@@ -481,7 +421,7 @@ const InputField = ({
         onChange={onChange}
         autoComplete={autoComplete}
         required
-        className="outline outline-gray-300 py-2 px-4 rounded"
+        className="outline outline-gray-300 py-2 px-4 rounded focus:outline-gray-400 transition-all"
       />
     </label>
   );
