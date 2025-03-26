@@ -1,7 +1,7 @@
 import React from "react";
 import { Outlet } from "react-router";
-import NavigationBar from "../NavigationBar";
-import Footer from "../Footer";
+import NavigationBar from "../components/NavigationBar";
+import Footer from "../components/Footer";
 
 function UserLayout() {
   return (

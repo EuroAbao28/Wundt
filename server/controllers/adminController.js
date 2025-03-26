@@ -67,6 +67,7 @@ const createAdmin = async (req, res, next) => {
   }
 };
 
+// login admin
 const loginAdmin = async (req, res, next) => {
   try {
     const { email, password } = req.body;
@@ -99,11 +100,33 @@ const loginAdmin = async (req, res, next) => {
       admin: {
         id: admin._id,
         firstname: admin.firstname,
+        middlename: admin.middlename,
         lastname: admin.lastname,
         email: admin.email,
+        phone: admin.phone,
         role: admin.role,
         profilePic: admin.profilePic,
       },
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
+// get current admin
+const getCurrentAdmin = async (req, res, next) => {
+  try {
+    // get the admin ID from the authenticated request
+    const adminId = req.user.id;
+
+    // find the admin in the database
+    const admin = await Admin.findById(adminId).select("-password");
+
+    if (!admin) return next(createError(404, "Admin not found"));
+
+    res.status(200).json({
+      message: "Admin fetched successfully",
+      admin,
     });
   } catch (error) {
     next(error);
@@ -125,4 +148,4 @@ const getAllAdmins = async (req, res, next) => {
   }
 };
 
-module.exports = { createAdmin, getAllAdmins, loginAdmin };
+module.exports = { createAdmin, getAllAdmins, loginAdmin, getCurrentAdmin };

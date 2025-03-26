@@ -5,20 +5,27 @@ import AboutPage from "./pages/user/AboutPage";
 import GalleryPage from "./pages/user/GalleryPage";
 import NewsPage from "./pages/user/NewsPage";
 import AppointmentPage from "./pages/user/AppointmentPage";
-import Footer from "./components/Footer";
-import UserLayout from "./components/layout/UserLayout";
-import AdminLayout from "./components/layout/AdminLayout";
+import UserLayout from "./layouts/UserLayout";
+import AdminLayout from "./layouts/AdminLayout";
 import Dashboard from "./pages/admin/Dashboard";
 import AdminLogin from "./pages/admin/AdminLogin";
 import Appointments from "./pages/admin/Appointments";
 import AddAdmin from "./pages/admin/AddAdmin";
 import AdminList from "./pages/admin/AdminList";
-import ActivityLog from "./pages/admin/ActivityLog";
 import DashboardDummy from "./pages/admin/DashboardDummy";
+import { Toaster } from "react-hot-toast";
+import { AdminProvider } from "./contexts/AdminContext";
 
 function App() {
   return (
     <>
+      <Toaster
+        position="top-right"
+        toastOptions={{
+          className: "font-poppins text-gray-600 text-sm",
+        }}
+      />
+
       <Routes>
         {/* user route */}
         <Route element={<UserLayout />}>
@@ -34,7 +41,12 @@ function App() {
         <Route path="/admin/login" element={<AdminLogin />} />
 
         {/* admin route */}
-        <Route element={<AdminLayout />}>
+        <Route
+          element={
+            <AdminProvider>
+              <AdminLayout />
+            </AdminProvider>
+          }>
           <Route path="/admin/dashboard" element={<Dashboard />} />
           <Route path="/admin/appointments" element={<Appointments />} />
           <Route path="/admin/add_admin" element={<AddAdmin />} />

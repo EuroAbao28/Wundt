@@ -1,9 +1,49 @@
-import React from "react";
+import React, { useState } from "react";
 import logo from "../../assets/wundt_logo.jpg";
 import b1 from "../../assets/b1.jpg";
 import bgGradient from "../../assets/bg_gradient.png";
+import { useMutation } from "@tanstack/react-query";
+import axios from "axios";
+import { URL_LOGIN } from "../../utils/APIRuotes";
+import toast from "react-hot-toast";
+import { useNavigate } from "react-router";
+import { useAdminContext } from "../../contexts/AdminContext";
 
 function AdminLogin() {
+  const navigate = useNavigate();
+  const [formData, setFormData] = useState({
+    email: "",
+    password: "",
+  });
+
+  const { mutate, isPending } = useMutation({
+    mutationFn: async (formData) => {
+      const response = await axios.post(URL_LOGIN, formData);
+      return response.data;
+    },
+    onSuccess: (data) => {
+      toast.success(data.message);
+      console.log(data);
+
+      localStorage.setItem("adminToken", data.token);
+
+      navigate("/admin/dashboard");
+    },
+    onError: (error) => {
+      toast.error(error.response.data.message);
+    },
+  });
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    mutate(formData);
+  };
+
   return (
     <div
       style={{ backgroundImage: `url(${bgGradient})` }}
@@ -32,11 +72,19 @@ function AdminLogin() {
 
           <h1 className="text-xl font-bold">Admin Login</h1>
 
-          <form className="text-sm flex flex-col gap-4 mt-6">
+          <form
+            onSubmit={handleSubmit}
+            className="text-sm flex flex-col gap-4 mt-6">
             <label className="flex flex-col gap-2">
-              <span className="uppercase text-xs font-semibold">Username</span>
+              <span className="uppercase text-xs font-semibold">Email</span>
               <input
-                type="text"
+                type="email"
+                name="email"
+                value={formData.email}
+                pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
+                onChange={handleChange}
+                maxLength={50}
+                required
                 className="outline outline-gray-300 py-2 px-4 rounded focus:outline-gray-400 transition-all"
               />
             </label>
@@ -45,14 +93,26 @@ function AdminLogin() {
               <span className="uppercase text-xs font-semibold">Password</span>
               <input
                 type="password"
+                name="password"
+                value={formData.password}
+                onChange={handleChange}
+                required
                 className="outline outline-gray-300 py-2 px-4 rounded focus:outline-gray-400 transition-all"
               />
             </label>
 
             <button
               type="submit"
-              className="bg-radial-[at_-50%_-50%] from-green-500 to-emerald-600 to-75% text-white rounded py-2 px-8 mt-4 font-semibold uppercase active:scale-95 transition-all focus:outline-emerald-700">
-              Login
+              disabled={isPending}
+              className="bg-radial-[at_-50%_-50%] from-green-500 to-emerald-600 to-75% text-white rounded py-2 px-8 mt-4 font-semibold uppercase active:to-95% transition-all focus:outline-emerald-700 flex cursor-pointer justify-center items-center gap-2">
+              {isPending ? (
+                <>
+                  <span className="loading loading-spinner loading-xs"></span>
+                  Loading
+                </>
+              ) : (
+                "Login"
+              )}
             </button>
           </form>
 
