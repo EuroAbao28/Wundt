@@ -20,6 +20,8 @@ export const AdminProvider = ({ children }) => {
     isSuccess: adminSuccess,
   } = useAdminAuth();
 
+  // if (isAdminError) return console.log(adminError );
+
   const {
     data: appointmentsData,
     isLoading: isAppointmentsLoading,
@@ -62,7 +64,7 @@ export const AdminProvider = ({ children }) => {
     ]
   );
 
-  if (isAdminLoading) return <LoaderAuth />;
+  if (isAdminLoading || isAdminError) return <LoaderAuth />;
 
   return (
     <AdminContext.Provider value={contextValue}>

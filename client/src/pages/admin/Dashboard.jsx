@@ -239,14 +239,29 @@ const ApptDescModal = ({ isModalOpen, handleCloseModal, appt }) => {
         "modal-open": isModalOpen,
       })}>
       <div className="modal-box bg-white rounded max-w-2xl w-full p-0">
-        <div className="p-6 flex justify-between items-center border-b border-gray-200">
+        <div className="p-6 flex justify-between items-center border-b border-gray-200 relative">
           <h1 className="font-semibold ">Appointment Details</h1>
 
-          <button
-            onClick={handleCloseModal}
-            className=" rounded-full p-1 cursor-pointer hover:bg-gray-50 text-gray-500 hover:text-gray-600">
-            <IoClose className="text-2xl" />
-          </button>
+          {/* <p className="absolute top-0 right-6 bg-orange-400 text-white font-semibold px-4 capitalize pt-2 pb-2 rounded-b shadow-card">
+            {appt?.status}
+          </p> */}
+
+          <div className="flex gap-2 items-center">
+            {/* <span className="font-bold uppercase text-xs">Status: </span> */}
+            <p
+              className={classNames(
+                "px-4 py-2  rounded uppercase font-semibold text-sm",
+                {
+                  "bg-orange-100 text-orange-500": appt?.status === "pending",
+                  "bg-blue-100 text-blue-500": appt?.status === "comfirmed",
+                  "bg-emerald-100 text-emerald-500":
+                    appt?.status === "completed",
+                  "bg-red-100 text-red-500": appt?.status === "canceled",
+                }
+              )}>
+              Pending
+            </p>
+          </div>
         </div>
 
         <div className="p-6 grid grid-cols-2 gap-x-6 gap-y-4">
@@ -283,9 +298,16 @@ const ApptDescModal = ({ isModalOpen, handleCloseModal, appt }) => {
         </div>
 
         <div className="flex gap-4 justify-center p-6">
+          <button
+            onClick={handleCloseModal}
+            className="bg-radial-[at_-50%_-50%] from-gray-400 to-gray-500 to-75% text-white rounded py-2 px-8 font-semibold uppercase active:scale-95 transition-all text-sm max-sm:flex-1 cursor-pointer mr-auto">
+            Close
+          </button>
+
           <button className="bg-radial-[at_-50%_-50%] from-red-400 to-red-500 to-75% text-white rounded py-2 px-8 font-semibold uppercase active:scale-95 transition-all text-sm max-sm:flex-1 cursor-pointer">
             Decline
           </button>
+
           <button className="bg-radial-[at_-50%_-50%] from-green-500 to-emerald-600 to-75% text-white rounded py-2 px-8 font-semibold uppercase active:scale-95 transition-all text-sm max-sm:flex-1 cursor-pointer">
             Approve
           </button>

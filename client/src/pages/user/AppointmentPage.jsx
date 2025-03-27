@@ -381,7 +381,7 @@ function AppointmentPage() {
           <div className="flex gap-4 items-center justify-center mt-6">
             <button
               onClick={() => setModalOpen(false)}
-              className="bg-gray-600 text-white rounded py-2 px-8 font-semibold uppercase active:scale-95 transition-all text-sm max-sm:flex-1">
+              className="bg-radial-[at_-50%_-50%] from-gray-400 to-gray-500 to-75% text-white rounded py-2 px-8 font-semibold uppercase active:scale-95 transition-all text-sm max-sm:flex-1">
               Cancel
             </button>
 
