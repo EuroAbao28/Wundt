@@ -7,3 +7,4 @@ export const URL_GET_CURRENT_ADMIN = `${LOCAL}/api/admin/current-admin`;
 
 // appointment
 export const URL_APPTS = `${LOCAL}/api/appointment`;
+export const URL_APPROVE_APPT = `${LOCAL}/api/appointment/approve`;

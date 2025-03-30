@@ -23,7 +23,7 @@ const useGetAllAppts = (adminSuccess) => {
   });
 };
 
-export const useCreateNewAppt = (onSuccessCallback, onErrorCallback) => {
+const useCreateNewAppt = (onSuccessCallback, onErrorCallback) => {
   const queryClient = useQueryClient();
 
   return useMutation({

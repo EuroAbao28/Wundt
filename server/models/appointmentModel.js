@@ -38,6 +38,11 @@ const appointmentSchema = new mongoose.Schema(
       required: [true, "Appointment time is required"],
       trim: true,
     },
+    branch: {
+      type: String,
+      required: [true, "Branch is required"],
+      enum: ["Dagupan City", "Vigan City", "Urdaneta City", "Mangaldan"],
+    },
     selectedServices: {
       type: [String],
       required: [true, "At least one service must be selected"],

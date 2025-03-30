@@ -6,7 +6,7 @@ import classNames from "classnames";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import toast from "react-hot-toast";
-import { useCreateNewAppt } from "../../api/appointments";
+import useCreateNewAppt from "../../hooks/useCreateNewAppt";
 
 const instructionContents = [
   {
@@ -76,6 +76,8 @@ function AppointmentPage() {
     comments: "",
   });
 
+  const { createNewApptFunction, isLoading } = useCreateNewAppt();
+
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
 
@@ -96,40 +98,56 @@ function AppointmentPage() {
     });
   };
 
-  const onSuccess = (response) => {
-    setModalOpen(false);
-    toast.success(response.message);
+  // const onSuccess = (response) => {
+  //   setModalOpen(false);
+  //   toast.success(response.message);
 
-    // Reset form
-    // setFormData({
-    //   firstname: "",
-    //   lastname: "",
-    //   phone: "",
-    //   email: "",
-    //   date: "",
-    //   time: "",
-    //   branch: "",
-    //   selectedServices: [],
-    //   comments: "",
-    // });
-  };
+  //   // Reset form
+  //   // setFormData({
+  //   //   firstname: "",
+  //   //   lastname: "",
+  //   //   phone: "",
+  //   //   email: "",
+  //   //   date: "",
+  //   //   time: "",
+  //   //   branch: "",
+  //   //   selectedServices: [],
+  //   //   comments: "",
+  //   // });
+  // };
 
-  const onError = (error) => {
-    console.error("Submission failed:", error);
-  };
+  // const onError = (error) => {
+  //   console.error("Submission failed:", error);
+  // };
 
-  const { mutate: createAppointment, isPending } = useCreateNewAppt(
-    onSuccess,
-    onError
-  );
+  // const { mutate: createAppointment, isPending } = useCreateNewAppt(
+  //   onSuccess,
+  //   onError
+  // );
 
   const handleSubmit = (e) => {
     e.preventDefault();
     setModalOpen(true);
+
+    console.log(formData);
   };
 
   const handleConfirmSubmit = () => {
-    createAppointment(formData);
+    createNewApptFunction(formData);
+
+    setFormData({
+      firstname: "",
+      lastname: "",
+      phone: "",
+      email: "",
+      date: "",
+      time: "",
+      branch: "",
+      selectedServices: [],
+      comments: "",
+    });
+
+    setModalOpen(false);
   };
 
   useEffect(() => {
@@ -410,7 +428,7 @@ function AppointmentPage() {
 
           <div className="flex gap-4 items-center justify-center mt-6">
             <button
-              disabled={isPending}
+              disabled={isLoading}
               onClick={() => setModalOpen(false)}
               className="bg-radial-[at_-50%_-50%] from-gray-400 to-gray-500 to-75% text-white rounded py-2 px-8 font-semibold uppercase active:scale-95 transition-all text-sm max-sm:flex-1">
               Cancel
@@ -418,9 +436,9 @@ function AppointmentPage() {
 
             <button
               onClick={handleConfirmSubmit}
-              disabled={isPending}
+              disabled={isLoading}
               className="bg-radial-[at_-50%_-50%] from-green-500 to-emerald-600 to-75% text-white rounded py-2 px-8 font-semibold uppercase active:scale-95 transition-all text-sm max-sm:flex-1 flex gap-2">
-              {isPending ? (
+              {isLoading ? (
                 <>
                   <span className="loading loading-spinner loading-xs"></span>
                   Submitting
