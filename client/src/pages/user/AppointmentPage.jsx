@@ -5,6 +5,8 @@ import b1 from "../../assets/b1.jpg";
 import classNames from "classnames";
 import AOS from "aos";
 import "aos/dist/aos.css";
+import toast from "react-hot-toast";
+import { useCreateNewAppt } from "../../api/appointments";
 
 const instructionContents = [
   {
@@ -94,12 +96,40 @@ function AppointmentPage() {
     });
   };
 
+  const onSuccess = (response) => {
+    setModalOpen(false);
+    toast.success(response.message);
+
+    // Reset form
+    // setFormData({
+    //   firstname: "",
+    //   lastname: "",
+    //   phone: "",
+    //   email: "",
+    //   date: "",
+    //   time: "",
+    //   branch: "",
+    //   selectedServices: [],
+    //   comments: "",
+    // });
+  };
+
+  const onError = (error) => {
+    console.error("Submission failed:", error);
+  };
+
+  const { mutate: createAppointment, isPending } = useCreateNewAppt(
+    onSuccess,
+    onError
+  );
+
   const handleSubmit = (e) => {
     e.preventDefault();
-
     setModalOpen(true);
+  };
 
-    console.log("Form Data:", formData);
+  const handleConfirmSubmit = () => {
+    createAppointment(formData);
   };
 
   useEffect(() => {
@@ -351,7 +381,7 @@ function AppointmentPage() {
 
             <ReviewDetailsSection label="Branch" value={formData.branch} />
 
-            <div className="grid sm:grid-cols-2 sm:col-span-2  border-t border-gray-200  mt-2  pt-2">
+            <div className="grid sm:grid-cols-2 sm:col-span-2  border-t border-gray-200  mt-2  pt-2 gap-x-4">
               <section className="text-xs sm:text-sm flex flex-col py-1 gap-y-2">
                 <p className="font-semibold text-nowrap capitalize">
                   Selected Services :
@@ -380,13 +410,24 @@ function AppointmentPage() {
 
           <div className="flex gap-4 items-center justify-center mt-6">
             <button
+              disabled={isPending}
               onClick={() => setModalOpen(false)}
               className="bg-radial-[at_-50%_-50%] from-gray-400 to-gray-500 to-75% text-white rounded py-2 px-8 font-semibold uppercase active:scale-95 transition-all text-sm max-sm:flex-1">
               Cancel
             </button>
 
-            <button className="bg-radial-[at_-50%_-50%] from-green-500 to-emerald-600 to-75% text-white rounded py-2 px-8 font-semibold uppercase active:scale-95 transition-all text-sm max-sm:flex-1">
-              Submit
+            <button
+              onClick={handleConfirmSubmit}
+              disabled={isPending}
+              className="bg-radial-[at_-50%_-50%] from-green-500 to-emerald-600 to-75% text-white rounded py-2 px-8 font-semibold uppercase active:scale-95 transition-all text-sm max-sm:flex-1 flex gap-2">
+              {isPending ? (
+                <>
+                  <span className="loading loading-spinner loading-xs"></span>
+                  Submitting
+                </>
+              ) : (
+                "Confirm"
+              )}
             </button>
           </div>
         </div>

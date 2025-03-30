@@ -8,6 +8,7 @@ import { URL_LOGIN } from "../../utils/APIRuotes";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router";
 import { useAdminContext } from "../../contexts/AdminContext";
+import useLogin from "../../hooks/useLogin";
 
 function AdminLogin() {
   const navigate = useNavigate();
@@ -15,24 +16,7 @@ function AdminLogin() {
     email: "",
     password: "",
   });
-
-  const { mutate, isPending } = useMutation({
-    mutationFn: async (formData) => {
-      const response = await axios.post(URL_LOGIN, formData);
-      return response.data;
-    },
-    onSuccess: (data) => {
-      toast.success(data.message);
-      console.log(data);
-
-      localStorage.setItem("adminToken", data.token);
-
-      navigate("/admin/dashboard");
-    },
-    onError: (error) => {
-      toast.error(error.response.data.message);
-    },
-  });
+  const { loginFunction, isLoading, error, data } = useLogin();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -41,7 +25,8 @@ function AdminLogin() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    mutate(formData);
+
+    await loginFunction(formData);
   };
 
   return (
@@ -103,9 +88,9 @@ function AdminLogin() {
 
             <button
               type="submit"
-              disabled={isPending}
+              disabled={isLoading}
               className="bg-radial-[at_-50%_-50%] from-green-500 to-emerald-600 to-75% text-white rounded py-2 px-8 mt-4 font-semibold uppercase active:to-95% transition-all focus:outline-emerald-700 flex cursor-pointer justify-center items-center gap-2">
-              {isPending ? (
+              {isLoading ? (
                 <>
                   <span className="loading loading-spinner loading-xs"></span>
                   Loading

@@ -15,12 +15,7 @@ function Dashboard() {
   const [isModalOpen, setModalOpen] = useState(false);
   const [selectedAppointment, setSelectedAppointment] = useState(null);
 
-  const {
-    appointmentsData,
-    isAppointmentsLoading,
-    isAppointmentsError,
-    appointmentsError,
-  } = useAdminContext();
+  const { isAllApptsLoading, allApptsError, allApptsData } = useAdminContext();
 
   const handleSelectAppt = (appt) => {
     setSelectedAppointment(appt);
@@ -68,7 +63,7 @@ function Dashboard() {
             </h1>
             <div className="flex-1 overflow-y-auto relative scrollbar-thin">
               <div className="absolute inset-0 p-4">
-                {isAppointmentsLoading ? (
+                {isAllApptsLoading ? (
                   <>
                     {Array.from({ length: 5 }).map((_, index) => (
                       <div
@@ -80,13 +75,13 @@ function Dashboard() {
                       </div>
                     ))}
                   </>
-                ) : isAppointmentsError ? (
+                ) : allApptsError ? (
                   <p className="text-red-500 text-sm">
-                    {appointmentsError.response.data.message}
+                    {allApptsError.response.data.message}
                   </p>
                 ) : (
                   <>
-                    {appointmentsData
+                    {allApptsData
                       .filter((data) => data.status === "pending")
                       .map((data, index) => (
                         <div
@@ -117,7 +112,7 @@ function Dashboard() {
             </h1>
             <div className="flex-1 overflow-y-auto relative scrollbar-thin">
               <div className="absolute inset-0 p-4">
-                {isAppointmentsLoading ? (
+                {isAllApptsLoading ? (
                   <>
                     {Array.from({ length: 5 }).map((_, index) => (
                       <div
@@ -129,13 +124,13 @@ function Dashboard() {
                       </div>
                     ))}
                   </>
-                ) : isAppointmentsError ? (
+                ) : allApptsError ? (
                   <p className="text-red-500 text-sm">
-                    {appointmentsError.response.data.message}
+                    {allApptsError.response.data.message}
                   </p>
                 ) : (
                   <>
-                    {appointmentsData
+                    {allApptsData
                       .filter((data) => data.status === "pending")
                       .map((data, index) => (
                         <div
@@ -166,7 +161,7 @@ function Dashboard() {
             </h1>
             <div className="flex-1 overflow-y-auto relative scrollbar-thin">
               <div className="absolute inset-0 p-4">
-                {isAppointmentsLoading ? (
+                {isAllApptsLoading ? (
                   <>
                     {Array.from({ length: 5 }).map((_, index) => (
                       <div
@@ -178,13 +173,13 @@ function Dashboard() {
                       </div>
                     ))}
                   </>
-                ) : isAppointmentsError ? (
+                ) : allApptsError ? (
                   <p className="text-red-500 text-sm">
-                    {appointmentsError.response.data.message}
+                    {allApptsError.response.data.message}
                   </p>
                 ) : (
                   <>
-                    {appointmentsData
+                    {allApptsData
                       .filter((data) => data.status === "pending")
                       .map((data, index) => (
                         <div
@@ -304,7 +299,7 @@ const ApptDescModal = ({ isModalOpen, handleCloseModal, appt }) => {
             Close
           </button>
 
-          <button className="bg-radial-[at_-50%_-50%] from-red-400 to-red-500 to-75% text-white rounded py-2 px-8 font-semibold uppercase active:scale-95 transition-all text-sm max-sm:flex-1 cursor-pointer">
+          <button className="bg-radial-[at_-50%_-50%] from-red-500 to-rose-600 to-75% text-white rounded py-2 px-8 font-semibold uppercase active:scale-95 transition-all text-sm max-sm:flex-1 cursor-pointer">
             Decline
           </button>
 

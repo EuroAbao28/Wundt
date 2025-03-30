@@ -33,18 +33,18 @@ const createAppointment = async (req, res, next) => {
     }
 
     // check if an appointment with the same details already exists
-    const existingAppointment = await Appointment.findOne({
-      email,
-      firstname,
-      lastname,
-      date,
-      time,
-    });
-    if (existingAppointment) {
-      return next(
-        createError(409, "An appointment with the same details already exists")
-      );
-    }
+    // const existingAppointment = await Appointment.findOne({
+    //   email,
+    //   firstname,
+    //   lastname,
+    //   date,
+    //   time,
+    // });
+    // if (existingAppointment) {
+    //   return next(
+    //     createError(409, "An appointment with the same details already exists")
+    //   );
+    // }
 
     // create new appointment
     const newAppointment = await Appointment.create({

@@ -1,73 +1,53 @@
-import axios from "axios";
-import { createContext, useContext, useEffect, useMemo } from "react";
-import { useQuery, useQueryClient } from "@tanstack/react-query";
-import { useLocation, useNavigate } from "react-router";
+import { createContext, useContext, useEffect, useState } from "react";
 import LoaderAuth from "../components/LoaderAuth";
-import { useAdminAuth } from "../api/admin";
-import { useGetAllAppts } from "../api/appointments";
+import { socket } from "../lib/socket";
+import useAdminAuth from "../hooks/useAdminAuth";
+import useGetAllAppts from "../hooks/useGetAllAppts";
+import LoaderLogout from "../components/LoaderLogout";
 
 const AdminContext = createContext();
 
 export const AdminProvider = ({ children }) => {
-  const queryClient = useQueryClient();
-  const navigate = useNavigate();
+  const [isLogoutLoading, setLogoutLoading] = useState(false);
 
+  // admin auth
   const {
-    data: adminData,
     isLoading: isAdminLoading,
-    isError: isAdminError,
     error: adminError,
-    isSuccess: adminSuccess,
+    data: adminData,
   } = useAdminAuth();
 
-  // if (isAdminError) return console.log(adminError );
-
+  // get all appointments
   const {
-    data: appointmentsData,
-    isLoading: isAppointmentsLoading,
-    isError: isAppointmentsError,
-    error: appointmentsError,
-  } = useGetAllAppts(adminSuccess);
+    getAllApptsFunction,
+    isLoading: isAllApptsLoading,
+    error: allApptsError,
+    data: allApptsData,
+  } = useGetAllAppts();
 
-  const handleLogout = () => {
-    localStorage.removeItem("adminToken");
-    queryClient.removeQueries(); // clear all cache (currentAdmin, allAppts)
-    navigate("/admin/login");
-
-    console.log("logged out and cleared all");
-  };
-
+  // get all appt when admin is successfully logged in
   useEffect(() => {
-    if (isAdminError) {
-      console.error("Auth error:", adminError);
-      handleLogout();
+    if (!isAdminLoading && !adminError) {
+      getAllApptsFunction();
     }
-  }, [isAdminError]);
+  }, [isAdminLoading]);
 
-  const contextValue = useMemo(
-    () => ({
-      handleLogout,
-      adminData,
-      isAdminLoading,
-      isAppointmentsLoading,
-      appointmentsData,
-      isAppointmentsError,
-      appointmentsError,
-    }),
-    [
-      adminData,
-      isAdminLoading,
-      isAppointmentsLoading,
-      appointmentsData,
-      isAppointmentsError,
-      appointmentsError,
-    ]
-  );
+  if (isAdminLoading || adminError) return <LoaderAuth />;
 
-  if (isAdminLoading || isAdminError) return <LoaderAuth />;
+  if (isLogoutLoading) return <LoaderLogout />;
 
   return (
-    <AdminContext.Provider value={contextValue}>
+    <AdminContext.Provider
+      value={{
+        isLogoutLoading,
+        setLogoutLoading,
+        isAdminLoading,
+        adminError,
+        adminData,
+        isAllApptsLoading,
+        allApptsError,
+        allApptsData,
+      }}>
       {children}
     </AdminContext.Provider>
   );

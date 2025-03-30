@@ -1,6 +1,8 @@
 const express = require("express");
 const cors = require("cors");
 const connectDB = require("./config/db");
+const http = require("http");
+const { Server } = require("socket.io");
 const {
   routeNotFoundHandler,
   globalErrorHandler,
@@ -28,7 +30,26 @@ app.use("/api/admin", require("./routes/adminRoute"));
 app.use(routeNotFoundHandler);
 app.use(globalErrorHandler);
 
+// create a server
+const server = http.createServer(app);
+const io = new Server(server, {
+  cors: {
+    origin: "http://localhost:5173",
+    methods: ["GET", "POST"],
+  },
+});
+
+// socket io event
+io.on("connection", (socket) => {
+  console.log(`New user connected: ${socket.id}`);
+
+  // handle disconnect
+  socket.on("disconnect", () => {
+    console.log(`User disconnected: ${socket.id}`);
+  });
+});
+
 // start the server
-app.listen(PORT, () =>
+server.listen(PORT, () =>
   console.log(`Server running on port: ${PORT}`.yellow.underline)
 );

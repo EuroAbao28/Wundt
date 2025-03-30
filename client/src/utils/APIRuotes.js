@@ -6,4 +6,4 @@ export const URL_LOGIN = `${LOCAL}/api/admin/login`;
 export const URL_GET_CURRENT_ADMIN = `${LOCAL}/api/admin/current-admin`;
 
 // appointment
-export const URL_GET_ALL_APPTS = `${LOCAL}/api/appointment`;
+export const URL_APPTS = `${LOCAL}/api/appointment`;

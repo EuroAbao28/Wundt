@@ -18,9 +18,9 @@ function NavigationBar() {
   const location = useLocation();
   const path = location.pathname.replace("/", "");
 
-  useEffect(() => {
-    console.log(path);
-  }, [path]);
+  // useEffect(() => {
+  //   console.log(path);
+  // }, [path]);
 
   return (
     <div
@@ -30,8 +30,7 @@ function NavigationBar() {
           fixed: location.pathname === "/",
           sticky: location.pathname !== "/",
         }
-      )}
-    >
+      )}>
       <header>
         <div className=" max-w-7xl mx-auto ">
           <div className="py-2 sm:py-4 flex justify-between gap-8">
@@ -49,8 +48,7 @@ function NavigationBar() {
                 <Link
                   to={`/${content.name === "home" ? "" : content.name}`}
                   key={index}
-                  className="list-none relative group py-2 px-4 cursor-pointer"
-                >
+                  className="list-none relative group py-2 px-4 cursor-pointer">
                   <p className="group-hover:text-emerald-600 transition-all duration-500 capitalize">
                     {content.name}
                   </p>
@@ -64,8 +62,7 @@ function NavigationBar() {
               <Link
                 to={"/appointment"}
                 onClick={() => setDropDownOpen(!isDropDownOpen)}
-                className="bg-radial-[at_-50%_-50%] from-green-500 to-emerald-600 to-75% text-sm text-white  p-2 px-3 rounded ml-4 whitespace-nowrap"
-              >
+                className="bg-radial-[at_-50%_-50%] from-green-500 to-emerald-600 to-75% text-sm text-white  p-2 px-3 rounded ml-4 whitespace-nowrap">
                 Get Appointment
               </Link>
             </nav>
@@ -73,8 +70,7 @@ function NavigationBar() {
             {/* button nav for small screen */}
             <div
               onClick={() => setDropDownOpen(!isDropDownOpen)}
-              className=" flex lg:hidden justify-center items-center rounded active:scale-95 transition-all active:bg-gray-800/5"
-            >
+              className=" flex lg:hidden justify-center items-center rounded active:scale-95 transition-all active:bg-gray-800/5">
               <MdMenu className="text-3xl m-1" />
             </div>
           </div>
@@ -89,23 +85,20 @@ function NavigationBar() {
             "max-h-0": !isDropDownOpen,
             "max-h-[100rem]": isDropDownOpen,
           }
-        )}
-      >
+        )}>
         {navContents.map((content, index) => (
           <Link
             key={index}
             to={`/${content.name === "home" ? "" : content.name}`}
             onClick={() => setDropDownOpen(!isDropDownOpen)}
-            className="py-3 capitalize active:bg-gray-800/5 rounded active:scale-95 transition-all"
-          >
+            className="py-3 capitalize active:bg-gray-800/5 rounded active:scale-95 transition-all">
             {content.name}
           </Link>
         ))}
         <Link
           to={"/appointment"}
           onClick={() => setDropDownOpen(!isDropDownOpen)}
-          className="py-3 capitalize active:bg-gray-800/5 rounded w-full active:scale-95 transition-all text-emerald-600 mx-auto mb-4"
-        >
+          className="py-3 capitalize active:bg-gray-800/5 rounded w-full active:scale-95 transition-all text-emerald-600 mx-auto mb-4">
           Get an Appointment
         </Link>
       </div>

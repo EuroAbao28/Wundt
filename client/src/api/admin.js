@@ -2,7 +2,7 @@ import axios from "axios";
 import { URL_GET_CURRENT_ADMIN } from "../utils/APIRuotes";
 import { useQuery } from "@tanstack/react-query";
 
-export const useAdminAuth = () => {
+const useAdminAuth = () => {
   return useQuery({
     queryKey: ["currentAdmin"],
     queryFn: async () => {
