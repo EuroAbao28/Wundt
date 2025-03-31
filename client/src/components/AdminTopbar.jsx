@@ -12,7 +12,7 @@ function AdminTopbar() {
 
   const handleLogout = () => {
     setLogoutLoading(true);
-    localStorage.removeItem("adminToken");
+    sessionStorage.removeItem("adminToken");
 
     setTimeout(() => {
       navigate("/admin/login");

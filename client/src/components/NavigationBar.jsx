@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import logo from "../assets/wundt_logo.jpg";
+import logo from "../assets/wundt_logo.png";
 import { MdMenu } from "react-icons/md";
 import classNames from "classnames";
 import { Link, useLocation } from "react-router";

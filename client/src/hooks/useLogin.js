@@ -14,7 +14,7 @@ const useLogin = () => {
     try {
       const response = await axios.post(URL_LOGIN, credentials);
 
-      localStorage.setItem("adminToken", response.data.token);
+      sessionStorage.setItem("adminToken", response.data.token);
       toast.success(response.data.message);
 
       navigate("/admin/dashboard");

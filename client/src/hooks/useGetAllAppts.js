@@ -8,7 +8,7 @@ const useGetAllAppts = () => {
   const [data, setData] = useState(null);
 
   const getAllApptsFunction = async () => {
-    const token = localStorage.getItem("adminToken");
+    const token = sessionStorage.getItem("adminToken");
 
     try {
       const response = await axios.get(`${URL_APPTS}`, {

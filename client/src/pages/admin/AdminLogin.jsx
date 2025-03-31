@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import logo from "../../assets/wundt_logo.jpg";
+import logo from "../../assets/wundt_logo.png";
 import b1 from "../../assets/b1.jpg";
 import bgGradient from "../../assets/bg_gradient.png";
 import { useMutation } from "@tanstack/react-query";

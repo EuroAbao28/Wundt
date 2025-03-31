@@ -9,7 +9,7 @@ const useGetAllAppts = (adminSuccess) => {
     // retry: false,
     // refetchOnWindowFocus: false,
     queryFn: async () => {
-      const token = localStorage.getItem("adminToken");
+      const token = sessionStorage.getItem("adminToken");
       // Add 5-second delay
       //   await new Promise((resolve) => setTimeout(resolve, 5000));
 

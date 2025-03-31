@@ -11,7 +11,7 @@ const useAdminAuth = () => {
   const [data, setData] = useState(null);
 
   const adminAuthFunction = async () => {
-    const token = localStorage.getItem("adminToken");
+    const token = sessionStorage.getItem("adminToken");
 
     try {
       const response = await axios.get(URL_GET_CURRENT_ADMIN, {

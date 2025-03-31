@@ -1,17 +1,15 @@
 import axios from "axios";
 import { useState } from "react";
-import toast from "react-hot-toast";
-import { URL_APPTS } from "../utils/APIRuotes";
+import { URL_APPROVE_APPT } from "../utils/APIRuotes";
 
-const useCreateNewAppt = () => {
+const useApproveAppt = () => {
   const [isLoading, setIsLoading] = useState(false);
 
-  const createNewApptFunction = async (newAppt) => {
+  const approveApptFunction = async (id) => {
     setIsLoading(true);
 
-    console.log(newAppt);
     try {
-      const response = await axios.post(URL_APPTS, newAppt);
+      const response = await axios.patch(`${URL_APPROVE_APPT}/${id}`);
 
       return { success: true, data: response.data, error: null };
     } catch (error) {
@@ -25,7 +23,7 @@ const useCreateNewAppt = () => {
     }
   };
 
-  return { createNewApptFunction, isLoading };
+  return { approveApptFunction, isLoading };
 };
 
-export default useCreateNewAppt;
+export default useApproveAppt;

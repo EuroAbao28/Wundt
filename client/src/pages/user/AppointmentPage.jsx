@@ -31,7 +31,7 @@ const instructionContents = [
   },
   {
     header: "Wait for Confirmation",
-    desc: "You will receive an email at the address you provided regarding the status of your appointment.",
+    desc: "You will receive an email at the email address you provided regarding the status of your appointment.",
   },
 ];
 
@@ -76,7 +76,7 @@ function AppointmentPage() {
     comments: "",
   });
 
-  const { createNewApptFunction, isLoading } = useCreateNewAppt();
+  const { createNewApptFunction, isLoading, error } = useCreateNewAppt();
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -98,33 +98,6 @@ function AppointmentPage() {
     });
   };
 
-  // const onSuccess = (response) => {
-  //   setModalOpen(false);
-  //   toast.success(response.message);
-
-  //   // Reset form
-  //   // setFormData({
-  //   //   firstname: "",
-  //   //   lastname: "",
-  //   //   phone: "",
-  //   //   email: "",
-  //   //   date: "",
-  //   //   time: "",
-  //   //   branch: "",
-  //   //   selectedServices: [],
-  //   //   comments: "",
-  //   // });
-  // };
-
-  // const onError = (error) => {
-  //   console.error("Submission failed:", error);
-  // };
-
-  // const { mutate: createAppointment, isPending } = useCreateNewAppt(
-  //   onSuccess,
-  //   onError
-  // );
-
   const handleSubmit = (e) => {
     e.preventDefault();
     setModalOpen(true);
@@ -132,22 +105,30 @@ function AppointmentPage() {
     console.log(formData);
   };
 
-  const handleConfirmSubmit = () => {
-    createNewApptFunction(formData);
+  const handleConfirmSubmit = async () => {
+    const result = await createNewApptFunction(formData);
 
-    setFormData({
-      firstname: "",
-      lastname: "",
-      phone: "",
-      email: "",
-      date: "",
-      time: "",
-      branch: "",
-      selectedServices: [],
-      comments: "",
-    });
+    console.log(result);
 
-    setModalOpen(false);
+    if (result.success) {
+      setFormData({
+        firstname: "",
+        lastname: "",
+        phone: "",
+        email: "",
+        date: "",
+        time: "",
+        branch: "",
+        selectedServices: [],
+        comments: "",
+      });
+
+      toast.success(result.data.message);
+      setModalOpen(false);
+    } else {
+      toast.error(result.error);
+      setModalOpen(false);
+    }
   };
 
   useEffect(() => {
@@ -437,7 +418,7 @@ function AppointmentPage() {
             <button
               onClick={handleConfirmSubmit}
               disabled={isLoading}
-              className="bg-radial-[at_-50%_-50%] from-green-500 to-emerald-600 to-75% text-white rounded py-2 px-8 font-semibold uppercase active:scale-95 transition-all text-sm max-sm:flex-1 flex gap-2">
+              className="bg-radial-[at_-50%_-50%] from-green-500 to-emerald-600 to-75% text-white rounded py-2 px-8 font-semibold uppercase active:scale-95 transition-all text-sm max-sm:flex-1 flex gap-2 items-center cursor-pointer">
               {isLoading ? (
                 <>
                   <span className="loading loading-spinner loading-xs"></span>

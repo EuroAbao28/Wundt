@@ -8,7 +8,7 @@ import {
   TbClipboardText,
 } from "react-icons/tb";
 import { Link, useLocation } from "react-router";
-import logo from "../assets/wundt_logo.jpg";
+import logo from "../assets/wundt_logo.png";
 
 const sidebarContents = [
   {

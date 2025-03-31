@@ -6,7 +6,7 @@ const useAdminAuth = () => {
   return useQuery({
     queryKey: ["currentAdmin"],
     queryFn: async () => {
-      const token = localStorage.getItem("adminToken");
+      const token = sessionStorage.getItem("adminToken");
       if (!token) throw new Error("No token found");
 
       const response = await axios.get(URL_GET_CURRENT_ADMIN, {
