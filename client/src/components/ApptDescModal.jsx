@@ -24,13 +24,13 @@ function ApptDescModal({
                 "px-4 py-2  rounded uppercase font-semibold text-sm",
                 {
                   "bg-orange-100 text-orange-500": appt?.status === "pending",
-                  "bg-blue-100 text-blue-500": appt?.status === "comfirmed",
+                  "bg-blue-100 text-blue-500": appt?.status === "confirmed",
                   "bg-emerald-100 text-emerald-500":
                     appt?.status === "completed",
                   "bg-red-100 text-red-500": appt?.status === "canceled",
                 }
               )}>
-              Pending
+              {appt?.status}
             </p>
           </div>
         </div>

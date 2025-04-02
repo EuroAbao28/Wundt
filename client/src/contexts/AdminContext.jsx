@@ -10,43 +10,43 @@ const AdminContext = createContext();
 export const AdminProvider = ({ children }) => {
   const [isLogoutLoading, setLogoutLoading] = useState(false);
 
-  // admin auth
-  const {
-    isLoading: isAdminLoading,
-    error: adminError,
-    data: adminData,
-  } = useAdminAuth();
+  // // admin auth
+  // const {
+  //   isLoading: isAdminLoading,
+  //   error: adminError,
+  //   data: adminData,
+  // } = useAdminAuth();
 
-  // get all appointments
-  const {
-    getAllApptsFunction,
-    isLoading: isAllApptsLoading,
-    error: allApptsError,
-    data: allApptsData,
-  } = useGetAllAppts();
+  // // get all appointments
+  // const {
+  //   getAllApptsFunction,
+  //   isLoading: isAllApptsLoading,
+  //   error: allApptsError,
+  //   data: allApptsData,
+  // } = useGetAllAppts();
 
-  // get all appt when admin is successfully logged in
-  useEffect(() => {
-    if (!isAdminLoading && !adminError) {
-      getAllApptsFunction();
-    }
-  }, [isAdminLoading]);
+  // // get all appt when admin is successfully logged in
+  // useEffect(() => {
+  //   if (!isAdminLoading && !adminError) {
+  //     getAllApptsFunction();
+  //   }
+  // }, [isAdminLoading]);
 
-  if (isAdminLoading || adminError) return <LoaderAuth />;
+  // if (isAdminLoading || adminError) return <LoaderAuth />;
 
   if (isLogoutLoading) return <LoaderLogout />;
 
   return (
     <AdminContext.Provider
       value={{
-        isLogoutLoading,
+        // isLogoutLoading,
         setLogoutLoading,
-        isAdminLoading,
-        adminError,
-        adminData,
-        isAllApptsLoading,
-        allApptsError,
-        allApptsData,
+        // // isAdminLoading,
+        // adminError,
+        // adminData,
+        // isAllApptsLoading,
+        // allApptsError,
+        // allApptsData,
       }}>
       {children}
     </AdminContext.Provider>

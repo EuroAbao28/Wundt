@@ -1,7 +1,7 @@
 import React from "react";
 
-function ActivityLog() {
+function ActivityLogs() {
   return <div>ActivityLog</div>;
 }
 
-export default ActivityLog;
+export default ActivityLogs;

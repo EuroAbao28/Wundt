@@ -105,12 +105,10 @@ function AppointmentPage() {
     console.log(formData);
   };
 
+  const [dummyLoading, setDummyLoading] = useState(false);
   const handleConfirmSubmit = async () => {
-    const result = await createNewApptFunction(formData);
-
-    console.log(result);
-
-    if (result.success) {
+    setDummyLoading(true);
+    setTimeout(() => {
       setFormData({
         firstname: "",
         lastname: "",
@@ -123,13 +121,37 @@ function AppointmentPage() {
         comments: "",
       });
 
-      toast.success(result.data.message);
+      setDummyLoading(false);
+      toast.success("Appointment created successfully");
       setModalOpen(false);
-    } else {
-      toast.error(result.error);
-      setModalOpen(false);
-    }
+    }, 3000);
   };
+
+  // const handleConfirmSubmit = async () => {
+  //   const result = await createNewApptFunction(formData);
+
+  //   console.log(result);
+
+  //   if (result.success) {
+  //     setFormData({
+  //       firstname: "",
+  //       lastname: "",
+  //       phone: "",
+  //       email: "",
+  //       date: "",
+  //       time: "",
+  //       branch: "",
+  //       selectedServices: [],
+  //       comments: "",
+  //     });
+
+  //     toast.success(result.data.message);
+  //     setModalOpen(false);
+  //   } else {
+  //     toast.error(result.error);
+  //     setModalOpen(false);
+  //   }
+  // };
 
   useEffect(() => {
     AOS.init({ duration: 1000 });
@@ -419,7 +441,7 @@ function AppointmentPage() {
               onClick={handleConfirmSubmit}
               disabled={isLoading}
               className="bg-radial-[at_-50%_-50%] from-green-500 to-emerald-600 to-75% text-white rounded py-2 px-8 font-semibold uppercase active:scale-95 transition-all text-sm max-sm:flex-1 flex gap-2 items-center cursor-pointer">
-              {isLoading ? (
+              {dummyLoading ? (
                 <>
                   <span className="loading loading-spinner loading-xs"></span>
                   Submitting

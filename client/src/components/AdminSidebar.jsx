@@ -22,26 +22,25 @@ const sidebarContents = [
     path: "/admin/appointments",
   },
   {
-    icon: <TbUserPlus />,
-    name: "Add Admin",
-    path: "/admin/add_admin",
-  },
-
-  {
     icon: <TbUsers />,
     name: "Admin List",
     path: "/admin/admin_list",
   },
   {
-    icon: <TbClipboardText />,
-    name: "Activity Log",
-    path: "/admin/activity_log",
+    icon: <TbUserPlus />,
+    name: "Add Admin",
+    path: "/admin/add_admin",
   },
   {
-    icon: <TbHome2 />,
-    name: "Dashboard Dummy",
-    path: "/admin/dashboard_dummy",
+    icon: <TbClipboardText />,
+    name: "Activity Logs",
+    path: "/admin/activity_logs",
   },
+  // {
+  //   icon: <TbHome2 />,
+  //   name: "Dashboard Dummy",
+  //   path: "/admin/dashboard_dummy",
+  // },
 ];
 
 function AdminSidebar() {

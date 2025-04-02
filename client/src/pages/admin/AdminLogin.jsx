@@ -23,11 +23,21 @@ function AdminLogin() {
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
+  const [dummyLoading, setDummyLoading] = useState(false);
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    await loginFunction(formData);
+    setDummyLoading(true);
+    setTimeout(() => {
+      navigate("/admin/dashboard");
+    }, 1000);
   };
+
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
+
+  //   await loginFunction(formData);
+  // };
 
   return (
     <div
@@ -69,7 +79,7 @@ function AdminLogin() {
                 pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
                 onChange={handleChange}
                 maxLength={50}
-                required
+                // required
                 className="outline outline-gray-300 py-2 px-4 rounded focus:outline-gray-400 transition-all"
               />
             </label>
@@ -81,7 +91,7 @@ function AdminLogin() {
                 name="password"
                 value={formData.password}
                 onChange={handleChange}
-                required
+                // required
                 className="outline outline-gray-300 py-2 px-4 rounded focus:outline-gray-400 transition-all"
               />
             </label>
@@ -90,7 +100,7 @@ function AdminLogin() {
               type="submit"
               disabled={isLoading}
               className="bg-radial-[at_-50%_-50%] from-green-500 to-emerald-600 to-75% text-white rounded py-2 px-8 mt-4 font-semibold uppercase active:to-95% transition-all focus:outline-emerald-700 flex cursor-pointer justify-center items-center gap-2">
-              {isLoading ? (
+              {dummyLoading ? (
                 <>
                   <span className="loading loading-spinner loading-xs"></span>
                   Loading

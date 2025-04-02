@@ -4,6 +4,8 @@ import { Link, useNavigate } from "react-router";
 import { TbLogout, TbUserSquareRounded } from "react-icons/tb";
 import { useAdminContext } from "../contexts/AdminContext";
 import classNames from "classnames";
+import { DUMMY_ADMINS } from "../utils/DummyAdmins";
+import dummy_id from "../assets/dummy_id.jpeg";
 
 function AdminTopbar() {
   const { adminData, setLogoutLoading } = useAdminContext();
@@ -25,6 +27,42 @@ function AdminTopbar() {
         <LiveClock />
 
         <div className="ml-auto dropdown">
+          <div
+            tabIndex={0}
+            role="button"
+            className="flex items-center gap-4 cursor-pointer">
+            <div className="  flex flex-col items-end">
+              <p className="text-xs font-semibold">{`${DUMMY_ADMINS[1].firstname} ${DUMMY_ADMINS[0].lastname}`}</p>
+
+              <span className="text-xxs capitalize">
+                {DUMMY_ADMINS[0].role}
+              </span>
+            </div>
+            <img
+              src={dummy_id}
+              alt=""
+              className="w-10 aspect-square rounded-full object-cover object-center outline outline-emerald-600"
+            />
+          </div>
+
+          <div
+            tabIndex={0}
+            className="dropdown-content right-0 mt-2 bg-white shadow-sm rounded flex flex-col w-60 outline outline-gray-300">
+            <Link className="flex gap-3 items-center px-6 py-3 hover:bg-gray-50">
+              <TbUserSquareRounded className="text-xl" />
+              <p className="text-sm">My Profile</p>
+            </Link>
+
+            <button
+              onClick={() => setModalOpen(true)}
+              className="flex gap-3 items-center px-6 py-3 hover:bg-gray-50 cursor-pointer">
+              <TbLogout className="text-xl" />
+              <p className="text-sm">Logout</p>
+            </button>
+          </div>
+        </div>
+
+        {/* <div className="ml-auto dropdown">
           <div
             tabIndex={0}
             role="button"
@@ -58,7 +96,7 @@ function AdminTopbar() {
               <p className="text-sm">Logout</p>
             </button>
           </div>
-        </div>
+        </div> */}
       </header>
 
       <dialog

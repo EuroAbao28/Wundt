@@ -9,12 +9,13 @@ import UserLayout from "./layouts/UserLayout";
 import AdminLayout from "./layouts/AdminLayout";
 import Dashboard from "./pages/admin/Dashboard";
 import AdminLogin from "./pages/admin/AdminLogin";
-import Appointments from "./pages/admin/Appointments";
 import AddAdmin from "./pages/admin/AddAdmin";
 import AdminList from "./pages/admin/AdminList";
 import DashboardDummy from "./pages/admin/DashboardDummy";
 import { Toaster } from "react-hot-toast";
 import { AdminProvider } from "./contexts/AdminContext";
+import AllAppointments from "./pages/admin/AllAppointments";
+import ActivityLogs from "./pages/admin/ActivityLogs";
 
 function App() {
   return (
@@ -48,11 +49,13 @@ function App() {
             </AdminProvider>
           }>
           <Route path="/admin/dashboard" element={<Dashboard />} />
-          <Route path="/admin/appointments" element={<Appointments />} />
-          <Route path="/admin/add_admin" element={<AddAdmin />} />
+          <Route path="/admin/appointments" element={<AllAppointments />} />
           <Route path="/admin/admin_list" element={<AdminList />} />
+          <Route path="/admin/add_admin" element={<AddAdmin />} />
           <Route path="/admin/dashboard" element={<Dashboard />} />
-          <Route path="/admin/dashboard_dummy" element={<DashboardDummy />} />
+          <Route path="/admin/activity_logs" element={<ActivityLogs />} />
+
+          {/* <Route path="/admin/dashboard_dummy" element={<DashboardDummy />} /> */}
         </Route>
       </Routes>
     </>

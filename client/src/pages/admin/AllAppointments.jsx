@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { format } from "date-fns";
 import { DUMMY_APPOINTMENTS } from "../../utils/DummyAppts";
 import classNames from "classnames";
@@ -7,33 +7,12 @@ import {
   MdOutlineKeyboardArrowLeft,
   MdOutlineKeyboardArrowRight,
 } from "react-icons/md";
-import user from "../../assets/user_placeholder.png";
-import axios from "axios";
-import { DUMMY_ADMINS } from "../../utils/DummyAdmins";
 
-function AdminList() {
-  const [data, setData] = useState({});
-
-  useEffect(() => {
-    const fetchUsers = async () => {
-      try {
-        const response = await axios.get(
-          "https://randomuser.me/api/?results=25&inc=picture"
-        );
-        console.log(response.data);
-        setData(response.data.results);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-
-    fetchUsers();
-  }, []);
-
+function AllAppointments() {
   return (
     <div className="h-full flex flex-col gap-6">
       <div className="flex justify-between gap-4">
-        <h1 className="font-semibold textarea-lg mr-auto"> Admins List</h1>
+        <h1 className="font-semibold textarea-lg mr-auto">All Appointments</h1>
 
         {/* filter */}
         <div className="dropdown dropdown-center">
@@ -151,51 +130,46 @@ function AdminList() {
             <thead>
               <tr className="bg-white border-b border-gray-200">
                 <th></th>
-                <th></th>
                 <td>Name</td>
-                <td>Role</td>
-                <td>Status</td>
-                <td>Branch</td>
-                <td>Email.</td>
+                <td>Date</td>
+                <td>Time</td>
+                <td>Service Selected</td>
                 <td>Phone No.</td>
+                <td>Email</td>
+                <td>Status</td>
               </tr>
             </thead>
             <tbody>
-              {DUMMY_ADMINS.map((admin, index) => (
+              {DUMMY_APPOINTMENTS.map((appt, index) => (
                 <tr
                   key={index}
                   className="border-b border-gray-200 last:border-none hover:bg-gray-50">
                   <td className="text-xs font-bold">{index + 1}</td>
-                  <td className="text-xs font-bold">
-                    <img
-                      src={data[index]?.picture.medium || user}
-                      alt=""
-                      className="w-10 aspect-square mask mask-squircle"
-                    />
-                  </td>
-                  <td>{`${admin.firstname} ${admin.lastname}`}</td>
-                  <td>
-                    <p className="capitalize">
-                      {admin.role.replace(/_/g, " ")}
-                    </p>
-                  </td>
+                  <td>{`${appt.firstname} ${appt.lastname}`}</td>
+                  <td>{`${format(new Date(appt.date), "EEEE, MMMM d")}`}</td>
+                  <td>{appt.time}</td>
+                  <td>{appt.selectedServices}</td>
+
+                  <td>{appt.phone}</td>
+                  <td>{appt.email}</td>
                   <td>
                     <p
                       className={classNames(
                         "rounded-full w-fit px-2 py-1 text-xs capitalize",
                         {
+                          "text-blue-500 bg-blue-500/10":
+                            appt.status === "completed",
                           "text-emerald-600 bg-emerald-500/10":
-                            admin.status === "active",
+                            appt.status === "confirmed",
+                          "text-amber-600 bg-amber-500/10":
+                            appt.status === "pending",
                           "text-red-600 bg-red-500/10":
-                            admin.status === "inactive",
+                            appt.status === "canceled",
                         }
                       )}>
-                      {admin.status}
+                      {appt.status}
                     </p>
                   </td>
-                  <td>{admin.branch}</td>
-                  <td>{admin.email}</td>
-                  <td>{admin.phone}</td>
                 </tr>
               ))}
             </tbody>
@@ -206,4 +180,4 @@ function AdminList() {
   );
 }
 
-export default AdminList;
+export default AllAppointments;
