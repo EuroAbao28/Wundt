@@ -21,7 +21,7 @@ export const DUMMY_APPOINTMENTS = [
     branch: "Vigan City",
     selectedServices: ["Consultation", "Counseling"],
     comments: "Need help with stress management.",
-    status: "confirmed",
+    status: "approved",
   },
   {
     firstname: "Pedro",
@@ -69,7 +69,7 @@ export const DUMMY_APPOINTMENTS = [
     branch: "Vigan City",
     selectedServices: ["Consultation"],
     comments: "General check-up.",
-    status: "confirmed",
+    status: "approved",
   },
   {
     firstname: "Elena",
@@ -117,7 +117,7 @@ export const DUMMY_APPOINTMENTS = [
     branch: "Vigan City",
     selectedServices: ["Psychological Assessment"],
     comments: "Need a formal assessment for work.",
-    status: "confirmed",
+    status: "approved",
   },
   {
     firstname: "Cecilia",
@@ -165,7 +165,7 @@ export const DUMMY_APPOINTMENTS = [
     branch: "Vigan City",
     selectedServices: ["Mental Health Screening"],
     comments: "Annual mental check.",
-    status: "confirmed",
+    status: "approved",
   },
   {
     firstname: "Angela",
@@ -213,7 +213,7 @@ export const DUMMY_APPOINTMENTS = [
     branch: "Vigan City",
     selectedServices: ["Therapy Session"],
     comments: "Depression management.",
-    status: "confirmed",
+    status: "approved",
   },
   {
     firstname: "Valeria",

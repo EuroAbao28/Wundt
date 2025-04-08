@@ -18,29 +18,24 @@ const sidebarContents = [
   },
   {
     icon: <TbCalendarClock />,
-    name: "Appointments",
-    path: "/admin/appointments",
+    name: "All Appointments",
+    path: "/admin/all-appointments",
   },
   {
     icon: <TbUsers />,
     name: "Admin List",
-    path: "/admin/admin_list",
+    path: "/admin/admin-list",
   },
   {
     icon: <TbUserPlus />,
     name: "Add Admin",
-    path: "/admin/add_admin",
+    path: "/admin/add-admin",
   },
   {
     icon: <TbClipboardText />,
     name: "Activity Logs",
-    path: "/admin/activity_logs",
+    path: "/admin/activity-logs",
   },
-  // {
-  //   icon: <TbHome2 />,
-  //   name: "Dashboard Dummy",
-  //   path: "/admin/dashboard_dummy",
-  // },
 ];
 
 function AdminSidebar() {

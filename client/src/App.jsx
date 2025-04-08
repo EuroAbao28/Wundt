@@ -16,6 +16,7 @@ import { Toaster } from "react-hot-toast";
 import { AdminProvider } from "./contexts/AdminContext";
 import AllAppointments from "./pages/admin/AllAppointments";
 import ActivityLogs from "./pages/admin/ActivityLogs";
+import { AppointmentProvider } from "./contexts/AppointmentContext";
 
 function App() {
   return (
@@ -45,17 +46,17 @@ function App() {
         <Route
           element={
             <AdminProvider>
-              <AdminLayout />
+              <AppointmentProvider>
+                <AdminLayout />
+              </AppointmentProvider>
             </AdminProvider>
           }>
           <Route path="/admin/dashboard" element={<Dashboard />} />
-          <Route path="/admin/appointments" element={<AllAppointments />} />
-          <Route path="/admin/admin_list" element={<AdminList />} />
-          <Route path="/admin/add_admin" element={<AddAdmin />} />
+          <Route path="/admin/all-appointments" element={<AllAppointments />} />
+          <Route path="/admin/admin-list" element={<AdminList />} />
+          <Route path="/admin/add-admin" element={<AddAdmin />} />
           <Route path="/admin/dashboard" element={<Dashboard />} />
-          <Route path="/admin/activity_logs" element={<ActivityLogs />} />
-
-          {/* <Route path="/admin/dashboard_dummy" element={<DashboardDummy />} /> */}
+          <Route path="/admin/activity-logs" element={<ActivityLogs />} />
         </Route>
       </Routes>
     </>

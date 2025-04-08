@@ -27,7 +27,7 @@ const appointments = [
     time: "10:30 AM",
     selectedServices: ["Behavioral Therapy"],
     comments: "Having trouble sleeping.",
-    status: "confirmed",
+    status: "approved",
   },
   {
     firstname: "Michael",
@@ -71,7 +71,7 @@ const appointments = [
     time: "6:30 PM",
     selectedServices: ["Stress Management"],
     comments: "Overwhelmed with school.",
-    status: "confirmed",
+    status: "approved",
   },
   {
     firstname: "Daniel",
@@ -115,7 +115,7 @@ const appointments = [
     time: "1:30 PM",
     selectedServices: ["Family Therapy"],
     comments: "Family communication issues.",
-    status: "confirmed",
+    status: "approved",
   },
   {
     firstname: "Noah",

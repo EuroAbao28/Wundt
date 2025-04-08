@@ -4,16 +4,20 @@ import { format } from "date-fns";
 import ApptDescModal from "./ApptDescModal";
 import axios from "axios";
 import { URL_APPROVE_APPT } from "../utils/APIRuotes";
-import useApproveAppt from "../hooks/useApproveAppt";
+import useUpdateStatusAppt from "../hooks/useUpdateStatusAppt";
 import toast from "react-hot-toast";
 import { DUMMY_APPOINTMENTS } from "../utils/DummyAppts";
 
 function TodaysAppointments() {
-  const { isAllApptsLoading, allApptsError, allApptsData } = useAdminContext();
+  const {
+    isCategorizedApptsLoading,
+    categorizedApptsError,
+    categorizedApptsData,
+  } = useAdminContext();
 
   const [isModalOpen, setModalOpen] = useState(false);
   const [selectedAppointment, setSelectedAppointment] = useState(null);
-  const { approveApptFunction, isLoading } = useApproveAppt();
+  const { approveApptFunction, isLoading } = useUpdateStatusAppt();
 
   const handleSelectAppt = (appt) => {
     setSelectedAppointment(appt);
@@ -70,7 +74,7 @@ function TodaysAppointments() {
           </div>
 
           {/* <div className="absolute inset-0 p-4">
-            {isAllApptsLoading ? (
+            {isCategorizedApptsLoading ? (
               <>
                 {Array.from({ length: 5 }).map((_, index) => (
                   <div
@@ -82,13 +86,13 @@ function TodaysAppointments() {
                   </div>
                 ))}
               </>
-            ) : allApptsError ? (
+            ) : categorizedApptsError ? (
               <p className="text-red-500 text-sm">
-                {allApptsError.response.data.message}
+                {categorizedApptsError.response.data.message}
               </p>
             ) : (
               <>
-                {allApptsData.pending.map((data, index) => (
+                {categorizedApptsData.pending.map((data, index) => (
                   <div
                     key={index}
                     onClick={() => handleSelectAppt(data)}

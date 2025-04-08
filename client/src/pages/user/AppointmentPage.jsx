@@ -7,60 +7,11 @@ import AOS from "aos";
 import "aos/dist/aos.css";
 import toast from "react-hot-toast";
 import useCreateNewAppt from "../../hooks/useCreateNewAppt";
-
-const instructionContents = [
-  {
-    header: "Fill in Your Details",
-    desc: "Enter your first name, last name, phone number, and email address.",
-  },
-  {
-    header: "Select a Date & Time",
-    desc: "Choose your preferred appointment schedule.",
-  },
-  {
-    header: "Choose a Service",
-    desc: "Select at least one service that suits your needs.",
-  },
-  {
-    header: "Add Additional Notes",
-    desc: " Specify any concerns or special requests.",
-  },
-  {
-    header: "Submit Your Form",
-    desc: " Click the submit to complete your appointment request.",
-  },
-  {
-    header: "Wait for Confirmation",
-    desc: "You will receive an email at the email address you provided regarding the status of your appointment.",
-  },
-];
-
-const servicesContents = [
-  "Psychological & Psychiatric Testing/Assessments",
-  "Child & Adolescent Assessments",
-  "Clinical Consultation & Counseling",
-  "Tutorial & Review Classes",
-  "Program Development & Administration",
-  "Trainings & Workshops",
-];
-
-const timeContents = [
-  "09:00 AM",
-  "10:00 AM",
-  "11:00 AM",
-  "12:00 PM",
-  "01:00 PM",
-  "02:00 PM",
-  "03:00 PM",
-  "04:00 PM",
-];
-
-const branchesContents = [
-  "Dagupan City",
-  "Vigan City",
-  "Urdaneta City",
-  "Mangaldan",
-];
+import { Dialog, DialogBackdrop, DialogPanel } from "@headlessui/react";
+import TIME_CONTENTS from "../../constants/TIME_CONSTANTS.JS";
+import BRANCHES_CONSTANTS from "../../constants/BRANCHES_CONSTANTS.JS";
+import SERVICES_CONSTANTS from "../../constants/SERVICES_CONSTANTS.JS";
+import INSTRUCTIONS_CONSTANTS from "../../constants/INSTRUCTIONS_CONSTANTS.JS";
 
 function AppointmentPage() {
   const [isModalOpen, setModalOpen] = useState(false);
@@ -105,53 +56,31 @@ function AppointmentPage() {
     console.log(formData);
   };
 
-  const [dummyLoading, setDummyLoading] = useState(false);
   const handleConfirmSubmit = async () => {
-    setDummyLoading(true);
-    setTimeout(() => {
-      setFormData({
-        firstname: "",
-        lastname: "",
-        phone: "",
-        email: "",
-        date: "",
-        time: "",
-        branch: "",
-        selectedServices: [],
-        comments: "",
-      });
+    const result = await createNewApptFunction(formData);
 
-      setDummyLoading(false);
-      toast.success("Appointment created successfully");
+    console.log(result);
+
+    if (result.success) {
+      // setFormData({
+      //   firstname: "",
+      //   lastname: "",
+      //   phone: "",
+      //   email: "",
+      //   date: "",
+      //   time: "",
+      //   branch: "",
+      //   selectedServices: [],
+      //   comments: "",
+      // });
+
+      toast.success(result.data.message);
       setModalOpen(false);
-    }, 3000);
+    } else {
+      toast.error(result.error);
+      setModalOpen(false);
+    }
   };
-
-  // const handleConfirmSubmit = async () => {
-  //   const result = await createNewApptFunction(formData);
-
-  //   console.log(result);
-
-  //   if (result.success) {
-  //     setFormData({
-  //       firstname: "",
-  //       lastname: "",
-  //       phone: "",
-  //       email: "",
-  //       date: "",
-  //       time: "",
-  //       branch: "",
-  //       selectedServices: [],
-  //       comments: "",
-  //     });
-
-  //     toast.success(result.data.message);
-  //     setModalOpen(false);
-  //   } else {
-  //     toast.error(result.error);
-  //     setModalOpen(false);
-  //   }
-  // };
 
   useEffect(() => {
     AOS.init({ duration: 1000 });
@@ -172,7 +101,7 @@ function AppointmentPage() {
                 Appointment Guidelines{" "}
               </h1>
               <div className="flex flex-col gap-4 mt-8 flex-1">
-                {instructionContents.map((insruction, index) => (
+                {INSTRUCTIONS_CONSTANTS.map((insruction, index) => (
                   <div key={index} className="flex gap-4 items-start flex-1">
                     <span className="bg-white w-6 aspect-square rounded-full flex items-center justify-center text-sm font-bold text-emerald-600 mt-1">
                       {index + 1}
@@ -283,9 +212,9 @@ function AppointmentPage() {
                     <option value="" disabled hidden>
                       Select time
                     </option>
-                    {timeContents.map((time) => (
-                      <option key={time} value={time}>
-                        {time}
+                    {TIME_CONTENTS.map((time, index) => (
+                      <option key={index} value={time.value}>
+                        {time.name}
                       </option>
                     ))}
                   </select>
@@ -305,7 +234,7 @@ function AppointmentPage() {
                 </div>
 
                 <div className="flex flex-col gap-2 outline outline-gray-300 rounded p-4">
-                  {servicesContents.map((service, index) => (
+                  {SERVICES_CONSTANTS.map((service, index) => (
                     <label key={index} className="flex items-center gap-2 ">
                       <input
                         type="checkbox"
@@ -336,7 +265,7 @@ function AppointmentPage() {
                       <option value="" disabled hidden>
                         Select branch
                       </option>
-                      {branchesContents.map((branch) => (
+                      {BRANCHES_CONSTANTS.map((branch) => (
                         <option key={branch} value={branch}>
                           {branch}
                         </option>
@@ -374,85 +303,94 @@ function AppointmentPage() {
         </div>
       </div>
 
-      <dialog
-        className={classNames("modal p-2 sm:p-6 backdrop-blur-sm", {
-          "modal-open": isModalOpen,
-        })}>
-        <div className="modal-box bg-white rounded p-4 sm:p-6 max-w-2xl w-full ">
-          <h3 className="text-xl font-semibold text-center">Review Details</h3>
-          <h5 className="text-xs italic text-center text-emerald-600">
-            Confirm your details before submission.
-          </h5>
+      <Dialog
+        open={isModalOpen}
+        as="div"
+        onClose={() => setModalOpen(false)}
+        className="relative z-10">
+        <DialogBackdrop className="fixed inset-0 bg-black/30" />
+        <div className="fixed inset-0 flex w-screen items-center justify-center p-4">
+          <DialogPanel className="bg-white rounded max-w-2xl w-full text-gray-600 p-6 shadow">
+            <h3 className="text-xl font-semibold text-center">
+              Review Details
+            </h3>
+            <h5 className="text-xs italic text-center text-emerald-600">
+              Confirm your details before submission.
+            </h5>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 mt-6 gap-x-4 outline outline-gray-200 rounded p-6">
-            <ReviewDetailsSection
-              label="Firstname"
-              value={formData.firstname}
-            />
+            <div className="grid grid-cols-1 sm:grid-cols-2 mt-6 gap-x-4 outline outline-gray-200 rounded p-6">
+              <ReviewDetailsSection
+                label="Firstname"
+                value={formData.firstname}
+              />
 
-            <ReviewDetailsSection label="Lastname" value={formData.lastname} />
+              <ReviewDetailsSection
+                label="Lastname"
+                value={formData.lastname}
+              />
 
-            <ReviewDetailsSection label="Phone No." value={formData.phone} />
+              <ReviewDetailsSection label="Phone No." value={formData.phone} />
 
-            <ReviewDetailsSection label="Email" value={formData.email} />
+              <ReviewDetailsSection label="Email" value={formData.email} />
 
-            <ReviewDetailsSection label="Date" value={formData.date} />
+              <ReviewDetailsSection label="Date" value={formData.date} />
 
-            <ReviewDetailsSection label="Time" value={formData.time} />
+              <ReviewDetailsSection label="Time" value={formData.time} />
 
-            <ReviewDetailsSection label="Branch" value={formData.branch} />
+              <ReviewDetailsSection label="Branch" value={formData.branch} />
 
-            <div className="grid sm:grid-cols-2 sm:col-span-2  border-t border-gray-200  mt-2  pt-2 gap-x-4">
-              <section className="text-xs sm:text-sm flex flex-col py-1 gap-y-2">
-                <p className="font-semibold text-nowrap capitalize">
-                  Selected Services :
-                </p>
-                <div className="flex gap-1 sm:gap-2 flex-wrap max-h-32 overflow-y-auto">
-                  {formData.selectedServices.map((service, index) => (
-                    <p
-                      key={index}
-                      className="bg-emerald-300/10 rounded py-1 px-2 w-fit text-xs">
-                      {service}
-                    </p>
-                  ))}
-                </div>
-              </section>
+              <div className="grid sm:grid-cols-2 sm:col-span-2  border-t border-gray-200  mt-2  pt-2 gap-x-4">
+                <section className="text-xs sm:text-sm flex flex-col py-1 gap-y-2">
+                  <p className="font-semibold text-nowrap capitalize">
+                    Selected Services :
+                  </p>
+                  <div className="flex gap-1 sm:gap-2 flex-wrap max-h-32 overflow-y-auto">
+                    {formData.selectedServices.map((service, index) => (
+                      <p
+                        key={index}
+                        className="bg-emerald-300/10 rounded py-1 px-2 w-fit text-xs">
+                        {service}
+                      </p>
+                    ))}
+                  </div>
+                </section>
 
-              <section className="text-xs sm:text-sm flex flex-col py-1 gap-y-2">
-                <p className="font-semibold text-nowrap capitalize">
-                  Comments / Notes :
-                </p>
-                <p className="outline outline-gray-300 p-2 rounded flex-1 max-h-32 overflow-y-auto text-xs scrollbar-thin">
-                  {formData.comments}
-                </p>
-              </section>
+                <section className="text-xs sm:text-sm flex flex-col py-1 gap-y-2">
+                  <p className="font-semibold text-nowrap capitalize">
+                    Comments / Notes :
+                  </p>
+                  <p className="outline outline-gray-300 p-2 rounded flex-1 max-h-32 overflow-y-auto text-xs scrollbar-thin">
+                    {formData.comments}
+                  </p>
+                </section>
+              </div>
             </div>
-          </div>
 
-          <div className="flex gap-4 items-center justify-center mt-6">
-            <button
-              disabled={isLoading}
-              onClick={() => setModalOpen(false)}
-              className="bg-radial-[at_-50%_-50%] from-gray-400 to-gray-500 to-75% text-white rounded py-2 px-8 font-semibold uppercase active:scale-95 transition-all text-sm max-sm:flex-1">
-              Cancel
-            </button>
+            <div className="flex gap-4 items-center justify-center mt-6">
+              <button
+                disabled={isLoading}
+                onClick={() => setModalOpen(false)}
+                className="bg-radial-[at_-50%_-50%] from-gray-400 to-gray-500 to-75% text-white rounded py-2 px-8 font-semibold uppercase active:scale-95 transition-all text-sm max-sm:flex-1">
+                Cancel
+              </button>
 
-            <button
-              onClick={handleConfirmSubmit}
-              disabled={isLoading}
-              className="bg-radial-[at_-50%_-50%] from-green-500 to-emerald-600 to-75% text-white rounded py-2 px-8 font-semibold uppercase active:scale-95 transition-all text-sm max-sm:flex-1 flex gap-2 items-center cursor-pointer">
-              {dummyLoading ? (
-                <>
-                  <span className="loading loading-spinner loading-xs"></span>
-                  Submitting
-                </>
-              ) : (
-                "Confirm"
-              )}
-            </button>
-          </div>
+              <button
+                onClick={handleConfirmSubmit}
+                disabled={isLoading}
+                className="bg-radial-[at_-50%_-50%] from-green-500 to-emerald-600 to-75% text-white rounded py-2 px-8 font-semibold uppercase active:scale-95 transition-all text-sm max-sm:flex-1 flex gap-2 items-center cursor-pointer">
+                {isLoading ? (
+                  <>
+                    <span className="loading loading-spinner loading-xs"></span>
+                    Submitting
+                  </>
+                ) : (
+                  "Confirm"
+                )}
+              </button>
+            </div>
+          </DialogPanel>
         </div>
-      </dialog>
+      </Dialog>
     </>
   );
 }
@@ -483,7 +421,12 @@ const InputField = ({
         onChange={onChange}
         autoComplete={autoComplete}
         required
-        className="outline outline-gray-300 py-2 px-4 rounded focus:outline-gray-400 transition-all"
+        className={classNames(
+          "outline outline-gray-300 py-2 px-4 rounded focus:outline-gray-400 transition-all",
+          {
+            capitalize: name === "firstname" || name === "lastname",
+          }
+        )}
       />
     </label>
   );

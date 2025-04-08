@@ -1,28 +1,23 @@
 import axios from "axios";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { URL_APPTS } from "../utils/APIRuotes";
 
-const useGetAllAppts = () => {
+const useGetCategorizedAppts = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  const getAllApptsFunction = async (filters = {}) => {
-    setIsLoading(true);
-
+  const getCategorizedApptsFunction = async () => {
     const token = sessionStorage.getItem("adminToken");
 
     try {
-      const response = await axios.get(`${URL_APPTS}`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-        params: filters,
+      const response = await axios.get(`${URL_APPTS}/categorized`, {
+        headers: { Authorization: `Bearer ${token}` },
       });
 
       // 🕒 Delay 3 seconds before returning the data
       // await new Promise((resolve) => setTimeout(resolve, 3000));
 
-      console.log("ALL APPTS", response.data);
+      console.log("CATEG APPTS", response.data);
 
       return response.data;
     } catch (error) {
@@ -33,7 +28,7 @@ const useGetAllAppts = () => {
     }
   };
 
-  return { getAllApptsFunction, isLoading, error };
+  return { getCategorizedApptsFunction, isLoading, error };
 };
 
-export default useGetAllAppts;
+export default useGetCategorizedAppts;

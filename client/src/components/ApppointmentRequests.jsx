@@ -4,16 +4,20 @@ import { format } from "date-fns";
 import ApptDescModal from "./ApptDescModal";
 import axios from "axios";
 import { URL_APPROVE_APPT } from "../utils/APIRuotes";
-import useApproveAppt from "../hooks/useApproveAppt";
+import useUpdateStatusAppt from "../hooks/useUpdateStatusAppt";
 import toast from "react-hot-toast";
 import { DUMMY_APPOINTMENTS } from "../utils/DummyAppts";
 
 function ApppointmentRequests() {
-  const { isAllApptsLoading, allApptsError, allApptsData } = useAdminContext();
+  const {
+    isCategorizedApptsLoading,
+    categorizedApptsError,
+    categorizedApptsData,
+  } = useAdminContext();
 
   const [isModalOpen, setModalOpen] = useState(false);
   const [selectedAppointment, setSelectedAppointment] = useState(null);
-  const { approveApptFunction, isLoading } = useApproveAppt();
+  const { approveApptFunction, isLoading } = useUpdateStatusAppt();
 
   const handleSelectAppt = (appt) => {
     setSelectedAppointment(appt);
@@ -25,29 +29,18 @@ function ApppointmentRequests() {
     setModalOpen(false);
   };
 
-  const [dummyLoading, setDummyLoading] = useState(false);
-  const handleApprove = () => {
-    setDummyLoading(true);
+  const handleApprove = async () => {
+    const result = await approveApptFunction(selectedAppointment._id);
 
-    setTimeout(() => {
-      setDummyLoading(false);
-      toast.success("Appointment approved successfully");
+    console.log(result);
+
+    if (result.success) {
+      toast.success(result.data.message);
       setModalOpen(false);
-    }, 3000);
+    } else {
+      toast.error(result.error);
+    }
   };
-
-  // const handleApprove = async () => {
-  //   const result = await approveApptFunction(selectedAppointment._id);
-
-  //   console.log(result);
-
-  //   if (result.success) {
-  //     toast.success(result.data.message);
-  //     setModalOpen(false);
-  //   } else {
-  //     toast.error(result.error);
-  //   }
-  // };
 
   return (
     <>
@@ -57,31 +50,7 @@ function ApppointmentRequests() {
         </h1>
         <div className="flex-1 overflow-y-auto relative scrollbar-thin">
           <div className="absolute inset-0 p-4">
-            {DUMMY_APPOINTMENTS.filter((data) => data.status === "pending").map(
-              (data, index) => (
-                <div
-                  key={index}
-                  onClick={() => handleSelectAppt(data)}
-                  className="border-b border-gray-200 py-2 last:border-none flex gap-6 items-center cursor-pointer hover:bg-gray-50 ">
-                  <p className="text-xs font-bold">{index + 1}</p>
-                  <div className="flex flex-col gap-1">
-                    <p className="text-sm">{`${data.firstname} ${data.lastname}`}</p>
-                    <p className="text-xs text-gray-500">
-                      {`${format(new Date(data.date), "EEEE, MMMM d")} - ${
-                        data.time
-                      }`}
-                    </p>
-                    <p className="text-xxs bg-emerald-600/10 text-emerald-600 px-2 rounded-full w-fit">
-                      {data.selectedServices.join(", ")}
-                    </p>
-                  </div>
-                </div>
-              )
-            )}
-          </div>
-
-          {/* <div className="absolute inset-0 p-4">
-            {isAllApptsLoading ? (
+            {isCategorizedApptsLoading ? (
               <>
                 {Array.from({ length: 5 }).map((_, index) => (
                   <div
@@ -93,13 +62,13 @@ function ApppointmentRequests() {
                   </div>
                 ))}
               </>
-            ) : allApptsError ? (
+            ) : categorizedApptsError ? (
               <p className="text-red-500 text-sm">
-                {allApptsError.response.data.message}
+                {categorizedApptsError.response.data.message}
               </p>
             ) : (
               <>
-                {allApptsData.pending.map((data, index) => (
+                {categorizedApptsData.pending.map((data, index) => (
                   <div
                     key={index}
                     onClick={() => handleSelectAppt(data)}
@@ -120,7 +89,7 @@ function ApppointmentRequests() {
                 ))}
               </>
             )}
-          </div> */}
+          </div>
         </div>
       </div>
 
@@ -129,7 +98,7 @@ function ApppointmentRequests() {
         handleCloseModal={handleCloseModal}
         appt={selectedAppointment}
         handleApprove={handleApprove}
-        isLoading={dummyLoading}
+        isLoading={isLoading}
       />
     </>
   );

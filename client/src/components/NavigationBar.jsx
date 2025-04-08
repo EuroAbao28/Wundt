@@ -25,7 +25,7 @@ function NavigationBar() {
   return (
     <div
       className={classNames(
-        " bg-white top-0 left-0 right-0 z-20 shadow-card2 px-4 sm:px-6 lg:px-12",
+        " bg-white top-0 left-0 right-0 z-10 shadow-card2 px-4 sm:px-6 lg:px-12",
         {
           fixed: location.pathname === "/",
           sticky: location.pathname !== "/",
@@ -62,7 +62,7 @@ function NavigationBar() {
               <Link
                 to={"/appointment"}
                 onClick={() => setDropDownOpen(!isDropDownOpen)}
-                className="bg-radial-[at_-50%_-50%] from-green-500 to-emerald-600 to-75% text-sm text-white  p-2 px-3 rounded ml-4 whitespace-nowrap">
+                className="bg-radial-[at_-50%_-50%] from-green-500 to-emerald-600 to-75% text-sm text-white  p-2 px-3 rounded ml-4 whitespace-nowrap active:scale-95 transition">
                 Get Appointment
               </Link>
             </nav>

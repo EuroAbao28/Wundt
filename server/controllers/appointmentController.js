@@ -2,7 +2,7 @@ const Appointment = require("../models/appointmentModel");
 const sendApprovalEmail = require("../utils/emailService");
 const { validateFields } = require("../utils/validationField");
 const createError = require("http-errors");
-const nodemailer = require("nodemailer");
+const { parseISO, isBefore, addMinutes, format } = require("date-fns");
 
 const createAppointment = async (req, res, next) => {
   try {
@@ -33,8 +33,35 @@ const createAppointment = async (req, res, next) => {
 
     console.log(req.body);
 
+    // combine date and time into a single string
+    const appointmentDateTimeString = `${date}T${time.split(" ")[0]}:00`;
+
+    // parse the date and time string into a Date object
+    const appointmentDateTime = parseISO(appointmentDateTimeString);
+
+    // adjust the appointment time to the local time zone
+    const localDateTime = addMinutes(
+      appointmentDateTime,
+      appointmentDateTime.getTimezoneOffset()
+    );
+
+    // get the current time and adjust to local time zone
+    const currentLocalTime = addMinutes(
+      new Date(),
+      new Date().getTimezoneOffset()
+    );
+
+    console.log("String", appointmentDateTimeString);
+    console.log("Appointment Date Object", appointmentDateTime);
+    console.log("Adjusted Appointment Time (Local)", localDateTime);
+    console.log("Current Local Time", currentLocalTime);
+
+    // SO BASICALLY THE CODE ABOVE IS COMBINING THE DATE AND TIME FROM REQ.BODY
+    // FORMTTED TO A DATE OBJECT
+    // SO WE CAN COMPARE IT CURRENT DATE AND TIME IF ITS IN THE FUTURE
+
     // ensure appointment date is in the future
-    if (new Date(date) < new Date()) {
+    if (isBefore(localDateTime, currentLocalTime)) {
       return next(createError(400, "Appointment date must be in the future"));
     }
 
@@ -74,7 +101,7 @@ const createAppointment = async (req, res, next) => {
   }
 };
 
-const getAllAppointments = async (req, res, next) => {
+const getCategorizedAppointments = async (req, res, next) => {
   try {
     const today = new Date();
     today.setHours(0, 0, 0, 0);
@@ -82,15 +109,15 @@ const getAllAppointments = async (req, res, next) => {
     const tomorrow = new Date(today);
     tomorrow.setDate(tomorrow.getDate() + 1);
 
+    // returns an array
     const appointments = await Appointment.aggregate([
       {
         $facet: {
-          pending: [{ $match: { status: "pending" } }],
-          canceled: [{ $match: { status: "canceled" } }],
+          completed: [{ $match: { status: "completed" } }],
           today: [
             {
               $match: {
-                status: "confirmed",
+                status: "approved",
                 date: { $gte: today, $lt: tomorrow },
               },
             },
@@ -98,50 +125,140 @@ const getAllAppointments = async (req, res, next) => {
           upcoming: [
             {
               $match: {
-                status: "confirmed",
+                status: "approved",
                 date: { $gte: tomorrow },
               },
             },
           ],
+          pending: [{ $match: { status: "pending" } }],
+          canceled: [{ $match: { status: "canceled" } }],
+          declined: [{ $match: { status: "declined" } }],
+          total: [{ $count: "count" }],
         },
       },
     ]);
 
-    res.status(200).json(appointments[0]);
+    const result = appointments[0];
+    result.total = result.total[0]?.count || 0;
+
+    res.status(200).json(result);
   } catch (error) {
     next(createError(500, "Failed to retrieve appointments"));
   }
 };
 
-const approveAppointment = async (req, res) => {
+const getAllAppointments = async (req, res, next) => {
+  try {
+    const { status, time, date, createdAt, sort, search, page = 1 } = req.query;
+
+    const query = {};
+
+    // filters
+    if (status) query.status = status;
+    if (time) query.time = time;
+    if (date) query.date = date;
+    if (createdAt) {
+      const start = new Date(createdAt);
+      const end = new Date(createdAt);
+      end.setDate(end.getDate() + 1);
+      query.createdAt = {
+        $gte: start,
+        $lt: end,
+      };
+    }
+
+    // search
+    if (search) {
+      const regex = { $regex: search, $options: "i" };
+      query.$or = [
+        { firstname: regex },
+        { lastname: regex },
+        { selectedServices: regex },
+        { email: regex },
+        { phone: regex },
+      ];
+    }
+
+    // pagination
+    const limit = 20;
+    const skip = (parseInt(page) - 1) * limit;
+
+    // sort
+    let sortQuery = {};
+    if (sort) {
+      if (sort === "oldest") {
+        sortQuery.createdAt = 1;
+      } else if (sort === "latest") {
+        sortQuery.createdAt = -1;
+      } else if (sort === "a-z") {
+        sortQuery.firstname = 1;
+      } else if (sort === "z-a") {
+        sortQuery.firstname = -1;
+      }
+    }
+
+    // query database
+    const [total, appointments] = await Promise.all([
+      Appointment.countDocuments(query),
+      Appointment.find(query).skip(skip).limit(limit).sort(sortQuery),
+    ]);
+
+    console.log(query);
+
+    res.status(200).json({
+      total,
+      page: Number(page),
+      totalPages: Math.ceil(total / limit),
+      appointments,
+    });
+  } catch (error) {
+    console.log(error);
+    next(createError(500, "Failed to retrieve appointments"));
+  }
+};
+
+const updateAppointmentStatus = async (req, res, next) => {
   try {
     const { id } = req.params;
+    const { updatedStatus } = req.body;
 
-    // Find appointment
+    // check if the updatedStatus is valid
+    if (!["approved", "declined", "canceled"].includes(updatedStatus)) {
+      return next(createError(400, "Invalid status value"));
+    }
+
+    // find the appointment
     const appointment = await Appointment.findById(id);
     if (!appointment) {
-      return res.status(404).json({ message: "Appointment not found" });
+      return next(createError(404, "Appointment not found"));
     }
 
-    // Check if already confirmed
-    if (appointment.status === "confirmed") {
-      return res
-        .status(400)
-        .json({ message: "Appointment is already confirmed" });
+    // check if the appointment is already in the desired status
+    if (appointment.status === updatedStatus) {
+      return next(createError(400, `Appointment is already ${updatedStatus}`));
     }
 
-    // Update status to "confirmed"
-    appointment.status = "confirmed";
+    // update the appointment status
+    appointment.status = updatedStatus;
     await appointment.save();
 
-    // Send email notification
-    await sendApprovalEmail(appointment);
+    // send an email for approval
+    if (updatedStatus === "approved") {
+      await sendApprovalEmail(appointment);
+    }
 
-    res.status(200).json({ message: "Appointment approved successfully" });
+    res
+      .status(200)
+      .json({ message: `Appointment ${updatedStatus} successfully` });
   } catch (error) {
-    console.error(error);
+    console.log(error);
     next(error);
   }
 };
 
-module.exports = { createAppointment, getAllAppointments, approveAppointment };
+module.exports = {
+  createAppointment,
+  getCategorizedAppointments,
+  getAllAppointments,
+  updateAppointmentStatus,
+};
