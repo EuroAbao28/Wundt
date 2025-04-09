@@ -1,6 +1,7 @@
 import { format, parse } from "date-fns";
 import { Dialog, DialogBackdrop, DialogPanel } from "@headlessui/react";
 import classNames from "classnames";
+import { useAppointmentContext } from "../contexts/AppointmentContext";
 
 const AppointmentModal = ({
   isModalOpen,
@@ -11,7 +12,11 @@ const AppointmentModal = ({
   isDeclineLoading,
   isCancelLoading,
 }) => {
+  const { categorizedAppts } = useAppointmentContext();
+
   if (!appointment) return null;
+
+  const currentDate = new Date();
 
   return (
     <Dialog
@@ -74,8 +79,8 @@ const AppointmentModal = ({
                 className={classNames(
                   "border-b border-gray-300 capitalize font-semibold",
                   {
-                    "text-emerald-600": appointment.status === "completed",
-                    "text-blue-600": appointment.status === "approved",
+                    "text-sky-600": appointment.status === "completed",
+                    "text-emerald-600": appointment.status === "approved",
                     "text-orange-500": appointment.status === "pending",
                     "text-red-600": appointment.status === "canceled",
                   }
@@ -93,30 +98,31 @@ const AppointmentModal = ({
               </p>
             </section>
 
-            {appointment.status === "approved" && (
-              <>
-                <section className="flex flex-col">
-                  <span className="uppercase text-xs font-semibold">
-                    Approved By
-                  </span>
-                  <p className="border-b border-gray-300 capitalize">
-                    Elon Musk
-                  </p>
-                </section>
+            {appointment.status === "approved" ||
+              (appointment.status === "completed" && (
+                <>
+                  <section className="flex flex-col">
+                    <span className="uppercase text-xs font-semibold">
+                      Approved By
+                    </span>
+                    <p className="border-b border-gray-300 capitalize">
+                      Elon Musk
+                    </p>
+                  </section>
 
-                <section className="flex flex-col">
-                  <span className="uppercase text-xs font-semibold">
-                    Approved On
-                  </span>
-                  <p className="border-b border-gray-300 capitalize">
-                    {format(
-                      new Date(appointment.updatedAt),
-                      "MMMM d, yyyy - h:mm a"
-                    )}
-                  </p>
-                </section>
-              </>
-            )}
+                  <section className="flex flex-col">
+                    <span className="uppercase text-xs font-semibold">
+                      Approved On
+                    </span>
+                    <p className="border-b border-gray-300 capitalize">
+                      {format(
+                        new Date(appointment.updatedAt),
+                        "MMMM d, yyyy - h:mm a"
+                      )}
+                    </p>
+                  </section>
+                </>
+              ))}
           </div>
 
           <div className="flex gap-4 justify-center mt-10">
@@ -138,9 +144,27 @@ const AppointmentModal = ({
                       Canceling
                     </>
                   ) : (
-                    "Cancel Appointment"
+                    "Cancel"
                   )}
                 </button>
+
+                {categorizedAppts.today.some(
+                  (appt) => appt._id === appointment._id
+                ) && (
+                  <button
+                    onClick={() => handleUpdateStatus("canceled")}
+                    disabled={isCancelLoading}
+                    className="bg-radial-[at_-50%_-50%] from-sky-500 to-sky-600 to-75% text-white rounded py-2 px-8 font-semibold uppercase active:scale-95 transition-all text-sm max-sm:flex-1 flex gap-2 items-center cursor-pointer">
+                    {isCancelLoading ? (
+                      <>
+                        <span className="loading loading-spinner loading-xs"></span>
+                        Canceling
+                      </>
+                    ) : (
+                      "Complete"
+                    )}
+                  </button>
+                )}
               </>
             )}
 

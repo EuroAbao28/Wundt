@@ -5,6 +5,7 @@ import { URL_APPTS } from "../utils/APIRuotes";
 const useGetAllAppts = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [data, setData] = useState(null);
 
   const getAllApptsFunction = async (filters = {}) => {
     setIsLoading(true);
@@ -24,7 +25,7 @@ const useGetAllAppts = () => {
 
       console.log("ALL APPTS", response.data);
 
-      return response.data;
+      setData(response.data);
     } catch (error) {
       console.log(error);
       setError(error);
@@ -33,7 +34,7 @@ const useGetAllAppts = () => {
     }
   };
 
-  return { getAllApptsFunction, isLoading, error };
+  return { getAllApptsFunction, isLoading, error, data };
 };
 
 export default useGetAllAppts;

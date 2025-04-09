@@ -31,13 +31,12 @@ function AllAppointments() {
   const location = useLocation();
 
   const {
-    fetchAllAppts,
-    allAppts,
-    isAllApptsLoading,
-    allApptsError,
-    filters,
-    setFilters,
-  } = useAppointmentContext();
+    getAllApptsFunction,
+    isLoading: isAllApptsLoading,
+    error: allApptsError,
+    data: allApptsData,
+  } = useGetAllAppts();
+
   const {
     approveApptFunction,
     isApproveLoading,
@@ -48,6 +47,15 @@ function AllAppointments() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedAppointment, setSelectedAppointment] = useState(null);
 
+  const [filters, setFilters] = useState({
+    status: "",
+    sort: "latest",
+    time: "",
+    date: "",
+    createdAt: "",
+    search: "",
+    page: 1,
+  });
   const [tempFilters, setTempFilters] = useState({
     status: "",
     sort: "latest",
@@ -66,7 +74,6 @@ function AllAppointments() {
   const handleApplyFilters = (e) => {
     e.preventDefault();
 
-    // console.log(tempFilters);
     setFilters(tempFilters);
   };
 
@@ -90,7 +97,7 @@ function AllAppointments() {
   const handleChangePage = (direction) => {
     if (direction === "prev" && filters.page > 1) {
       setFilters((prev) => ({ ...prev, page: prev.page - 1 }));
-    } else if (direction === "next" && filters.page < allAppts.totalPages) {
+    } else if (direction === "next" && filters.page < allApptsData.totalPages) {
       setFilters((prev) => ({ ...prev, page: prev.page + 1 }));
     }
   };
@@ -121,22 +128,9 @@ function AllAppointments() {
     }
   };
 
-  // re-fetch the all appts when unmount
   useEffect(() => {
-    // check if filters are already in default state
-    const isDefault = Object.keys(defaultFilters).every(
-      (key) => tempFilters[key] === defaultFilters[key]
-    );
-
-    return () => {
-      console.log(location);
-      fetchAllAppts();
-    };
-  }, [location]);
-
-  // TODO
-  // TO AVOID UNECESSARY FETCHING
-  // ONLY FETCH THE ALL APPOINTMENTS WHEN IN THIS PAGE
+    getAllApptsFunction(filters);
+  }, [filters]);
 
   return (
     <>
@@ -237,29 +231,15 @@ function AllAppointments() {
                 <button
                   onClick={handleResetFilters}
                   disabled={isAllApptsLoading}
-                  className="bg-radial-[at_-50%_-50%] from-gray-400 to-gray-500 to-75% text-white  rounded py-2 px-8 font-semibold uppercase active:scale-95 transition-all flex gap-2 items-center justify-center text-sm cursor-pointer">
-                  {isAllApptsLoading ? (
-                    <>
-                      <span className="loading loading-spinner loading-xs"></span>
-                      Resetting
-                    </>
-                  ) : (
-                    "Reset"
-                  )}
+                  className="bg-radial-[at_-50%_-50%] from-gray-400 to-gray-500 to-75% text-white  rounded py-2 px-8 font-semibold uppercase active:scale-95 transition-all text-sm cursor-pointer">
+                  Reset
                 </button>
 
                 <button
                   onClick={handleApplyFilters}
                   disabled={isAllApptsLoading}
-                  className="bg-radial-[at_-50%_-50%] from-green-500 to-emerald-600 to-75% text-white rounded py-2 px-8 font-semibold uppercase active:scale-95 transition-all text-sm flex gap-2 items-center justify-center cursor-pointer">
-                  {isAllApptsLoading ? (
-                    <>
-                      <span className="loading loading-spinner loading-xs"></span>
-                      Applying
-                    </>
-                  ) : (
-                    "Apply"
-                  )}
+                  className="bg-radial-[at_-50%_-50%] from-green-500 to-emerald-600 to-75% text-white rounded py-2 px-8 font-semibold uppercase active:scale-95 transition-all text-sm cursor-pointer">
+                  Apply
                 </button>
               </div>
             </div>
@@ -303,8 +283,10 @@ function AllAppointments() {
 
               <p className="text-sm">
                 {`Page ${
-                  allAppts?.total > 0 ? allAppts?.page : allAppts?.total
-                } of ${allAppts?.totalPages}`}
+                  allApptsData?.total > 0
+                    ? allApptsData?.page
+                    : allApptsData?.total
+                } of ${allApptsData?.totalPages}`}
               </p>
 
               <button
@@ -376,8 +358,14 @@ function AllAppointments() {
                       </p>
                     </td>
                   </tr>
+                ) : allApptsData.appointments.length === 0 ? (
+                  <tr>
+                    <td colSpan={3} className="">
+                      No appointments found.
+                    </td>
+                  </tr>
                 ) : (
-                  allAppts.appointments?.map((appt, index) => (
+                  allApptsData.appointments?.map((appt, index) => (
                     <tr
                       key={index}
                       onClick={() => handleShowModal(appt)}
@@ -402,7 +390,7 @@ function AllAppointments() {
                           className={classNames(
                             "rounded-full w-fit px-2 py-1 text-xs capitalize",
                             {
-                              "text-blue-500 bg-blue-500/10":
+                              "text-sky-500 bg-sky-500/10":
                                 appt?.status === "completed",
                               "text-emerald-600 bg-emerald-500/10":
                                 appt?.status === "approved",

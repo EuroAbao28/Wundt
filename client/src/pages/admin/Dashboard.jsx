@@ -60,14 +60,14 @@ function Dashboard() {
             icon={<TbCalendarUp />}
             title={"Total Appointments"}
             count={categorizedAppts?.total || 0}
-            color={"blue"}
+            color={"emerald"}
           />
 
           <SummaryCard
             icon={<TbCalendarCheck />}
             title={"Completed Sessions"}
             count={categorizedAppts?.completed?.length || 0}
-            color={"emerald"}
+            color={"sky"}
           />
 
           <SummaryCard
@@ -130,7 +130,7 @@ const SummaryCard = ({ icon, title, count, color }) => {
     <div className="flex items-center gap-4 rounded shadow-sm p-4 flex-1">
       <p
         className={classNames("text-4xl p-2 rounded-md", {
-          "text-blue-600 bg-blue-100": color === "blue",
+          "text-sky-600 bg-sky-100": color === "sky",
           "text-emerald-600 bg-emerald-100": color === "emerald",
           "text-orange-500 bg-orange-100": color === "orange",
           "text-red-600 bg-red-100": color === "red",
