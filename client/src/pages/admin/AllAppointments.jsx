@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { format } from "date-fns";
+import { format, parse } from "date-fns";
 import { DUMMY_APPOINTMENTS } from "../../utils/DummyAppts";
 import classNames from "classnames";
 import { FaFilter, FaSearch, FaTimes } from "react-icons/fa";
@@ -282,11 +282,13 @@ function AllAppointments() {
               </button>
 
               <p className="text-sm">
-                {`Page ${
-                  allApptsData?.total > 0
-                    ? allApptsData?.page
-                    : allApptsData?.total
-                } of ${allApptsData?.totalPages}`}
+                {isAllApptsLoading
+                  ? ""
+                  : `Page ${
+                      allApptsData?.total > 0
+                        ? allApptsData?.page
+                        : allApptsData?.total
+                    } of ${allApptsData?.totalPages}`}
               </p>
 
               <button
@@ -370,7 +372,9 @@ function AllAppointments() {
                       key={index}
                       onClick={() => handleShowModal(appt)}
                       className="border-b border-gray-200 last:border-none hover:bg-gray-50 cursor-pointer">
-                      <td className="text-xs font-bold">{index + 1}</td>
+                      <td className="text-xs font-bold">
+                        {(allApptsData.page - 1) * 20 + index + 1}
+                      </td>
                       <td>{`${appt?.firstname} ${appt?.lastname}`}</td>
                       <td>
                         <p className="whitespace-nowrap">{`${format(
@@ -379,7 +383,16 @@ function AllAppointments() {
                         )}`}</p>
                       </td>
                       <td>
-                        <p className="whitespace-nowrap">{appt?.time}</p>
+                        <p className="whitespace-nowrap">
+                          {format(
+                            parse(
+                              appt?.time.replace(/(AM|PM)/gi, "").trim(),
+                              "HH:mm",
+                              new Date()
+                            ),
+                            "h:mm a"
+                          )}
+                        </p>
                       </td>
                       <td>{appt?.selectedServices}</td>
 

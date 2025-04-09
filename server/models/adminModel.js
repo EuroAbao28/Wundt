@@ -43,9 +43,14 @@ const adminSchema = new mongoose.Schema(
     },
     role: {
       type: String,
-      enum: ["admin", "super_admin"],
+      enum: ["admin", "head_admin"],
       default: "admin",
     },
+    // branch: {
+    //   type: String,
+    //   required: [true, "Branch is required"],
+    //   enum: ["Dagupan City", "Vigan City", "Urdaneta City", "Mangaldan", "All"],
+    // },
     profilePic: {
       type: String,
       default: "", // Cloudinary URL will be stored here

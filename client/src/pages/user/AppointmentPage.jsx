@@ -62,17 +62,17 @@ function AppointmentPage() {
     console.log(result);
 
     if (result.success) {
-      // setFormData({
-      //   firstname: "",
-      //   lastname: "",
-      //   phone: "",
-      //   email: "",
-      //   date: "",
-      //   time: "",
-      //   branch: "",
-      //   selectedServices: [],
-      //   comments: "",
-      // });
+      setFormData({
+        firstname: "",
+        lastname: "",
+        phone: "",
+        email: "",
+        date: "",
+        time: "",
+        branch: "",
+        selectedServices: [],
+        comments: "",
+      });
 
       toast.success(result.data.message);
       setModalOpen(false);

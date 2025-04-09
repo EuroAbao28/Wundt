@@ -6,6 +6,7 @@ const useUpdateStatusAppt = () => {
   const [isApproveLoading, setIsApproveLoading] = useState(false);
   const [isDeclineLoading, setIsDeclineLoading] = useState(false);
   const [isCancelLoading, setIsCancelLoading] = useState(false);
+  const [isCompleteLoading, setIsCompleteLoading] = useState(false);
 
   const approveApptFunction = async (id, updatedStatus) => {
     const token = sessionStorage.getItem("adminToken");
@@ -15,6 +16,7 @@ const useUpdateStatusAppt = () => {
     if (updatedStatus === "approved") setIsApproveLoading(true);
     else if (updatedStatus === "declined") setIsDeclineLoading(true);
     else if (updatedStatus === "canceled") setIsCancelLoading(true);
+    else if (updatedStatus === "completed") setIsCompleteLoading(true);
 
     try {
       const response = await axios.patch(
@@ -36,6 +38,7 @@ const useUpdateStatusAppt = () => {
       setIsApproveLoading(false);
       setIsDeclineLoading(false);
       setIsCancelLoading(false);
+      setIsCompleteLoading(false);
     }
   };
 
@@ -44,6 +47,7 @@ const useUpdateStatusAppt = () => {
     isApproveLoading,
     isDeclineLoading,
     isCancelLoading,
+    isCompleteLoading,
   };
 };
 

@@ -223,7 +223,9 @@ const updateAppointmentStatus = async (req, res, next) => {
     const { updatedStatus } = req.body;
 
     // check if the updatedStatus is valid
-    if (!["approved", "declined", "canceled"].includes(updatedStatus)) {
+    if (
+      !["approved", "declined", "canceled", "completed"].includes(updatedStatus)
+    ) {
       return next(createError(400, "Invalid status value"));
     }
 

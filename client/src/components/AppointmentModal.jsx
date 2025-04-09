@@ -11,6 +11,7 @@ const AppointmentModal = ({
   isApproveLoading,
   isDeclineLoading,
   isCancelLoading,
+  isCompleteLoading,
 }) => {
   const { categorizedAppts } = useAppointmentContext();
 
@@ -152,13 +153,13 @@ const AppointmentModal = ({
                   (appt) => appt._id === appointment._id
                 ) && (
                   <button
-                    onClick={() => handleUpdateStatus("canceled")}
-                    disabled={isCancelLoading}
+                    onClick={() => handleUpdateStatus("completed")}
+                    disabled={isCompleteLoading}
                     className="bg-radial-[at_-50%_-50%] from-sky-500 to-sky-600 to-75% text-white rounded py-2 px-8 font-semibold uppercase active:scale-95 transition-all text-sm max-sm:flex-1 flex gap-2 items-center cursor-pointer">
-                    {isCancelLoading ? (
+                    {isCompleteLoading ? (
                       <>
                         <span className="loading loading-spinner loading-xs"></span>
-                        Canceling
+                        Completing
                       </>
                     ) : (
                       "Complete"

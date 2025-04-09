@@ -15,7 +15,7 @@ const validateFields = (fields, isStrict = true) => {
 };
 
 const validateRole = (role = "admin") => {
-  if (!["admin", "super_admin"].includes(role)) {
+  if (!["admin", "head_admin"].includes(role)) {
     throw createError(400, "Invalid role value");
   }
 };
