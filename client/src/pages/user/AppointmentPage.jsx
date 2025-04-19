@@ -294,7 +294,7 @@ function AppointmentPage() {
                           services.details.map((detail, detailIndex) => (
                             <label
                               key={detailIndex}
-                              className="flex items-center gap-2">
+                              className="flex items-center gap-2 text-xs md:text-base">
                               <input
                                 type="checkbox"
                                 value={detail}

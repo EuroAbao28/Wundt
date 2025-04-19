@@ -19,9 +19,9 @@ function NavigationBar() {
   const location = useLocation();
   const path = location.pathname.replace("/", "");
 
-  // useEffect(() => {
-  //   console.log(path);
-  // }, [path]);
+  useEffect(() => {
+    setDropDownOpen(false);
+  }, [path]);
 
   return (
     <div
