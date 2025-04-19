@@ -32,7 +32,7 @@ function AdminLogin() {
   return (
     <div
       style={{ backgroundImage: `url(${bgGradient})` }}
-      className="h-screen flex items-center justify-center text-gray-600 bg-cover bg-center">
+      className="h-screen flex items-center justify-center text-gray-800 bg-cover bg-center">
       <div className="bg-white flex rounded overflow-hidden">
         <div
           style={{ backgroundImage: `url(${b1})` }}

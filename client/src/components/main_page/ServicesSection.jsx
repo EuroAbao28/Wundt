@@ -53,7 +53,7 @@ const contents = [
 
 function ServicesSection() {
   useEffect(() => {
-    AOS.init({ duration: 1000 });
+    AOS.init({ duration: 1000, once: true });
   }, []);
 
   return (
@@ -65,20 +65,19 @@ function ServicesSection() {
           {contents.map((content, index) => (
             <div
               key={index}
-              className="p-8 rounded flex flex-col  text-gray-500 shadow-card2 transition-all hover:shadow-card duration-500"
-            >
+              className="p-8 rounded-md flex flex-col shadow-card2 transition-all hover:shadow-card duration-500">
               <div className="flex md:flex-col gap-4 items-start md:items-center">
                 <p className="text-4xl text-emerald-600">{content.icon}</p>
                 <div className="md:text-center md:mt-2">
-                  <h3 className="font-semibold text-gray-600 text-base md:text-lg">
+                  <h3 className="font-semibold text-base md:text-lg">
                     {content.title}
                   </h3>
-                  <p className="text-xs md:text-sm italic">
+                  <p className="text-xs md:text-sm italic text-gray-600">
                     {content.subtitle}
                   </p>
                 </div>
               </div>
-              <p className="mt-6 text-xs md:text-sm md:text-center">
+              <p className="mt-6 text-xs md:text-sm md:text-center text-gray-600">
                 {content.desc}
               </p>
             </div>
@@ -87,8 +86,7 @@ function ServicesSection() {
 
         <Link
           to={"services"}
-          className="bg-white outline outline-emerald-600 text-emerald-600 flex items-center gap-4 text-sm   font-semibold  px-4 py-2 rounded mt-12 mx-auto w-fit"
-        >
+          className="bg-white outline outline-emerald-600 text-emerald-600 flex items-center gap-4 text-sm   font-semibold  px-8 py-3 active:scale-95 transition-all uppercase rounded-md mt-12 mx-auto w-fit">
           See More
         </Link>
       </div>

@@ -134,7 +134,7 @@ const SummaryCard = ({ icon, title, count, color }) => {
           "text-emerald-600 bg-emerald-100": color === "emerald",
           "text-orange-500 bg-orange-100": color === "orange",
           "text-red-600 bg-red-100": color === "red",
-          "text-gray-600 bg-gray-100": color === "gray",
+          "text-gray-800 bg-gray-100": color === "gray",
         })}>
         {icon}
       </p>

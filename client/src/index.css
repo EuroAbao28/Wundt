@@ -23,4 +23,16 @@
   nocompatible: true;
 }
 
-/* sa loob to ng scrollbar - preferredstrategy: "pseudoelements";    */
+/* div {
+  outline: 1px solid black;
+} */
+
+/* Customize the color of the pagination bullets */
+.swiper-pagination-bullet {
+  background-color: #ffffff !important;
+}
+
+/* Customize the color of the active pagination bullet */
+.swiper-pagination-bullet-active {
+  background-color: #ffffff !important;
+}

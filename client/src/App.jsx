@@ -17,6 +17,8 @@ import { AdminProvider } from "./contexts/AdminContext";
 import AllAppointments from "./pages/admin/AllAppointments";
 import ActivityLogs from "./pages/admin/ActivityLogs";
 import { AppointmentProvider } from "./contexts/AppointmentContext";
+import ScrollToTop from "./components/ScrollToTop";
+import AboutPageV2 from "./pages/user/AboutPageV2";
 
 function App() {
   return (
@@ -24,9 +26,11 @@ function App() {
       <Toaster
         position="top-right"
         toastOptions={{
-          className: "font-poppins text-gray-600 text-sm",
+          className: "font-poppins text-gray-800 text-sm",
         }}
       />
+      {/* auto scroll to top when route is changed */}
+      <ScrollToTop />
 
       <Routes>
         {/* user route */}
@@ -34,6 +38,7 @@ function App() {
           <Route path="/" element={<MainPage />} />
           <Route path="/services" element={<ServicesPage />} />
           <Route path="/about" element={<AboutPage />} />
+          <Route path="/aboutv2" element={<AboutPageV2 />} />
           <Route path="/gallery" element={<GalleryPage />} />
           <Route path="/news" element={<NewsPage />} />
           <Route path="/appointment" element={<AppointmentPage />} />

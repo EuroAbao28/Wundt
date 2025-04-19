@@ -9,15 +9,14 @@ import "aos/dist/aos.css";
 
 function AboutPage() {
   useEffect(() => {
-    AOS.init({ duration: 1000 });
+    AOS.init({ duration: 1000, once: true });
   }, []);
 
   return (
     <div
       data-aos="fade-up"
       style={{ backgroundImage: `url(${b1})` }}
-      className=" bg-center bg-cover flex-1"
-    >
+      className=" bg-center bg-cover flex-1">
       <div className="p-6 lg:p-10 bg-radial-[at_-35%_15%] from-green-500/90 to-emerald-600/90 to-75%">
         <div className=" max-w-7xl mx-auto">
           <SectionHeader title={"About us"} colorMode={"white"} />
@@ -28,8 +27,7 @@ function AboutPage() {
               <div className="flex flex-col flex-1 gap-4">
                 <div
                   style={{ backgroundImage: `url(${s1})` }}
-                  className="bg-center bg-cover grid grid-rows-2 rounded overflow-hidden flex-1"
-                >
+                  className="bg-center bg-cover grid grid-rows-2 rounded overflow-hidden flex-1">
                   <div className="h-full p-4 bg-white/80 text-emerald-800 backdrop-blur-sm text-xs md:text-sm row-start-2">
                     <h3 className="font-semibold uppercase">Compassion</h3>
                     <p className="mt-4">
@@ -41,8 +39,7 @@ function AboutPage() {
 
                 <div
                   style={{ backgroundImage: `url(${b1})` }}
-                  className="bg-center bg-cover grid grid-rows-2 rounded overflow-hidden flex-1"
-                >
+                  className="bg-center bg-cover grid grid-rows-2 rounded overflow-hidden flex-1">
                   <div className="h-full p-4 bg-white/80 text-emerald-800 backdrop-blur-sm text-xs md:text-sm row-start-2">
                     <h3 className="font-semibold uppercase">Accessibility</h3>
                     <p className="mt-4">Bring services closer to clients.</p>
@@ -54,8 +51,7 @@ function AboutPage() {
               <div className="flex flex-col flex-1 gap-4">
                 <div
                   style={{ backgroundImage: `url(${s2})` }}
-                  className="bg-center bg-cover grid grid-rows-2 rounded overflow-hidden flex-1"
-                >
+                  className="bg-center bg-cover grid grid-rows-2 rounded overflow-hidden flex-1">
                   <div className="h-full p-4 bg-white/80 text-emerald-800 backdrop-blur-sm text-xs md:text-sm row-start-2">
                     <h3 className="font-semibold uppercase">Responsibility</h3>
                     <p className="mt-4">
@@ -68,8 +64,7 @@ function AboutPage() {
 
                 <div
                   style={{ backgroundImage: `url(${s5})` }}
-                  className="bg-center bg-cover grid grid-rows-2 rounded overflow-hidden flex-1"
-                >
+                  className="bg-center bg-cover grid grid-rows-2 rounded overflow-hidden flex-1">
                   <div className="h-full p-4 bg-white/80 text-emerald-800 backdrop-blur-sm text-xs md:text-sm row-start-2">
                     <h3 className="font-semibold uppercase">Excellence</h3>
                     <p className="mt-4">
@@ -110,8 +105,7 @@ function AboutPage() {
                 <div className="flex flex-col flex-1 gap-4">
                   <div
                     style={{ backgroundImage: `url(${s1})` }}
-                    className="bg-center bg-cover grid grid-rows-2 rounded overflow-hidden flex-1"
-                  >
+                    className="bg-center bg-cover grid grid-rows-2 rounded overflow-hidden flex-1">
                     <div className="h-full p-4 bg-white/80 text-emerald-800 backdrop-blur-sm text-xs md:text-sm row-start-2">
                       <h3 className="font-semibold uppercase">Compassion</h3>
                       <p className="mt-4">
@@ -123,8 +117,7 @@ function AboutPage() {
 
                   <div
                     style={{ backgroundImage: `url(${b1})` }}
-                    className="bg-center bg-cover grid grid-rows-2 rounded overflow-hidden flex-1"
-                  >
+                    className="bg-center bg-cover grid grid-rows-2 rounded overflow-hidden flex-1">
                     <div className="h-full p-4 bg-white/80 text-emerald-800 backdrop-blur-sm text-xs md:text-sm row-start-2">
                       <h3 className="font-semibold uppercase">Accessibility</h3>
                       <p className="mt-4">Bring services closer to clients.</p>
@@ -136,8 +129,7 @@ function AboutPage() {
                 <div className="flex flex-col flex-1 gap-4">
                   <div
                     style={{ backgroundImage: `url(${s2})` }}
-                    className="bg-center bg-cover grid grid-rows-2 rounded overflow-hidden flex-1"
-                  >
+                    className="bg-center bg-cover grid grid-rows-2 rounded overflow-hidden flex-1">
                     <div className="h-full p-4 bg-white/80 text-emerald-800 backdrop-blur-sm text-xs md:text-sm row-start-2">
                       <h3 className="font-semibold uppercase">
                         Responsibility
@@ -152,8 +144,7 @@ function AboutPage() {
 
                   <div
                     style={{ backgroundImage: `url(${s5})` }}
-                    className="bg-center bg-cover grid grid-rows-2 rounded overflow-hidden flex-1"
-                  >
+                    className="bg-center bg-cover grid grid-rows-2 rounded overflow-hidden flex-1">
                     <div className="h-full p-4 bg-white/80 text-emerald-800 backdrop-blur-sm text-xs md:text-sm row-start-2">
                       <h3 className="font-semibold uppercase">Excellence</h3>
                       <p className="mt-4">

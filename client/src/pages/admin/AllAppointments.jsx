@@ -411,7 +411,7 @@ function AllAppointments() {
                                 appt?.status === "pending",
                               "text-red-600 bg-red-500/10":
                                 appt?.status === "canceled",
-                              "text-gray-600 bg-gray-500/10":
+                              "text-gray-800 bg-gray-500/10":
                                 appt?.status === "declined",
                             }
                           )}>

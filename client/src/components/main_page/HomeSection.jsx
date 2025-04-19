@@ -6,7 +6,7 @@ import { Link } from "react-router";
 
 function HomeSection() {
   useEffect(() => {
-    AOS.init({ duration: 1000 });
+    AOS.init({ duration: 1000, once: true });
   }, []);
 
   return (

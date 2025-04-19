@@ -3,7 +3,7 @@ import loading_logout from "../assets/loading_logout.svg";
 
 function LoaderLogout() {
   return (
-    <div className="h-screen flex items-center justify-center flex-col gap-4 text-gray-600">
+    <div className="h-screen flex items-center justify-center flex-col gap-4 text-gray-800">
       <img src={loading_logout} alt="Loading Image" className="w-sm" />
       <div className="flex gap-4 items-center">
         <span className="loading loading-spinner loading-xs"></span>

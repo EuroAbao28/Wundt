@@ -56,15 +56,14 @@ const contents = [
 
 function NewsPage() {
   useEffect(() => {
-    AOS.init({ duration: 1000 });
+    AOS.init({ duration: 1000, once: true });
   }, []);
 
   return (
     <div
       data-aos="fade-up"
       style={{ backgroundImage: `url(${b1})` }}
-      className="mt-10 mb-16  bg-center bg-cover"
-    >
+      className="mt-10 mb-16  bg-center bg-cover">
       <div className="px-6 pb-6 lg:px-12 lg:pb-12 bg-gradient-to-b from-white from-5% to-emerald-600/60 backdrop-blur-sm">
         <div className=" max-w-7xl mx-auto">
           <SectionHeader title={"Latest News & Updates"} />
@@ -73,8 +72,7 @@ function NewsPage() {
             {contents.map((content, index) => (
               <div
                 key={index}
-                className="rounded overflow-hidden aspect-square relative group transition-all hover:-translate-y-1 duration-500 w-[16rem] md:w-[20rem] shrink-0 snap-center"
-              >
+                className="rounded overflow-hidden aspect-square relative group transition-all hover:-translate-y-1 duration-500 w-[16rem] md:w-[20rem] shrink-0 snap-center">
                 <img
                   src={content.image}
                   alt=""

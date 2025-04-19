@@ -8,15 +8,16 @@ const INSTRUCTIONS_CONSTANTS = [
     desc: "Choose your preferred appointment schedule.",
   },
   {
-    header: "Choose a Service",
-    desc: "Select at least one service that suits your needs.",
-  },
-  {
-    header: "Add Additional Notes",
+    header: "Add Additional Notes (optional)",
     desc: " Specify any concerns or special requests.",
   },
   {
-    header: "Submit Your Form",
+    header: "Choose a Service",
+    desc: "Select at least one service that suits your needs.",
+  },
+
+  {
+    header: "Submit & Review Your Form",
     desc: " Click the submit to complete your appointment request.",
   },
   {

@@ -27,7 +27,7 @@ const AppointmentModal = ({
       className="relative z-10">
       <DialogBackdrop className="fixed inset-0 bg-black/30" />
       <div className="fixed inset-0 flex w-screen items-center justify-center p-4">
-        <DialogPanel className="bg-white font-poppins rounded-lg max-w-2xl w-full text-gray-600 p-6 shadow">
+        <DialogPanel className="bg-white font-poppins rounded-lg max-w-2xl w-full text-gray-800 p-6 shadow">
           <div className="flex justify-between items-center pb-6">
             <h2 className="font-semibold text-lg">Appointment Details</h2>
           </div>

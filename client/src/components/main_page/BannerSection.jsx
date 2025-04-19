@@ -6,7 +6,7 @@ import "aos/dist/aos.css";
 
 function BannerSection() {
   useEffect(() => {
-    AOS.init({ duration: 1000 });
+    AOS.init({ duration: 1000, once: true });
   }, []);
 
   return (
@@ -23,7 +23,7 @@ function BannerSection() {
         </p>
         <Link
           to={"/appointment"}
-          className="bg-white text-emerald-600 text-sm md:text-base font-semibold  px-8 py-4 rounded mt-12 active:scale-95 transition-all">
+          className="bg-white text-emerald-600 text-sm md:text-base font-semibold  px-8 py-4 rounded-md mt-12 active:scale-95 transition-all">
           Book an Appointment
         </Link>
       </div>

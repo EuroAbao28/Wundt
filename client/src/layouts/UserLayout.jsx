@@ -1,14 +1,20 @@
-import React from "react";
-import { Outlet } from "react-router";
+import React, { useEffect } from "react";
+import { Outlet, useLocation } from "react-router";
 import NavigationBar from "../components/NavigationBar";
 import Footer from "../components/Footer";
 
 function UserLayout() {
+  const location = useLocation();
+
+  useEffect(() => {
+    console.log(location.pathname);
+  }, [location]);
   return (
-    <div className="font-poppins text-gray-600 flex flex-col min-h-screen">
+    <div className="font-poppins text-gray-800 flex flex-col min-h-screen">
       <NavigationBar />
       <Outlet />
-      <Footer />
+
+      {location.pathname !== "/appointment" && <Footer />}
     </div>
   );
 }

@@ -73,7 +73,7 @@ function AdminTopbar() {
         <DialogBackdrop className="fixed inset-0 bg-black/30" />
 
         <div className="fixed inset-0 flex w-screen items-center justify-center p-4">
-          <DialogPanel className="bg-white font-poppins rounded-lg max-w-md w-full text-gray-600 p-6 shadow">
+          <DialogPanel className="bg-white font-poppins rounded-lg max-w-md w-full text-gray-800 p-6 shadow">
             <header className="border-b border-gray-300 pb-3 font-semibold text-emerald-600 text-lg">
               Confirm Logout
             </header>

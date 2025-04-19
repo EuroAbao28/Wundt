@@ -21,8 +21,7 @@ const contents = [
         style={{ border: 0 }}
         allowFullScreen=""
         loading="lazy"
-        referrerPolicy="no-referrer-when-downgrade"
-      ></iframe>
+        referrerPolicy="no-referrer-when-downgrade"></iframe>
     ),
   },
   {
@@ -39,8 +38,7 @@ const contents = [
         style={{ border: 0 }}
         allowFullScreen=""
         loading="lazy"
-        referrerPolicy="no-referrer-when-downgrade"
-      ></iframe>
+        referrerPolicy="no-referrer-when-downgrade"></iframe>
     ),
   },
   {
@@ -57,8 +55,7 @@ const contents = [
         style={{ border: 0 }}
         allowFullScreen=""
         loading="lazy"
-        referrerPolicy="no-referrer-when-downgrade"
-      ></iframe>
+        referrerPolicy="no-referrer-when-downgrade"></iframe>
     ),
   },
   {
@@ -75,8 +72,7 @@ const contents = [
         style={{ border: 0 }}
         allowFullScreen=""
         loading="lazy"
-        referrerPolicy="no-referrer-when-downgrade"
-      ></iframe>
+        referrerPolicy="no-referrer-when-downgrade"></iframe>
     ),
   },
 ];
@@ -85,7 +81,7 @@ function ContactsSection() {
   const [selectedLocation, setSelectionLocation] = useState(0);
 
   useEffect(() => {
-    AOS.init({ duration: 1000 });
+    AOS.init({ duration: 1000, once: true });
   }, []);
 
   return (
@@ -101,12 +97,11 @@ function ContactsSection() {
                 onClick={() => setSelectionLocation(index)}
                 className={`outline outline-gray-300 p-4 rounded cursor-pointer hover: transition-all relative  ${
                   index === selectedLocation && " shadow-card2"
-                }`}
-              >
+                }`}>
                 <h3 className="font-semibold text-xs sm:text-sm">
                   {content.header}
                 </h3>
-                <div className="mt-2 text-gray-500 flex flex-col gap-1">
+                <div className="mt-2 text-gray-600 flex flex-col gap-1">
                   <div className="flex items-center  text-xs sm:text-sm">
                     <span className="text-emerald-600 text-base sticky start-0 bg-white pr-3 sm:pr-4">
                       <BiSolidPhone />
