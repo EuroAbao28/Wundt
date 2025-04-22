@@ -44,29 +44,33 @@ function WhyUsSection() {
 
   return (
     <section className="py-16 bg-gray-50">
-      <div className="max-w-7xl mx-auto px-6 lg:px-8 space-y-12">
+      <div className="max-w-7xl mx-auto px-6 lg:px-8">
         <header className="text-center">
           <Badge
             label={"Why Choose Us"}
             className="text-therapy-blue bg-therapy-blue/10"
           />
 
-          <h2 className="text-3xl font-bold text-gray-900 mt-4">
+          <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mt-4">
             The <span className="text-jungle">Wundt</span> Difference
           </h2>
 
           <GradientLine />
         </header>
 
-        <div className="flex flex-wrap gap-8">
+        <div className="flex flex-wrap gap-8 mt-12">
           {CONTENTS.map((content, index) => (
             <div
               key={index}
               data-aos="fade-up"
               data-aos-delay={index * 100}
               className="bg-white p-8 flex flex-col rounded-xl shadow-sm relative hover:shadow-md transition-all flex-1 min-w-xs overflow-hidden border border-gray-200">
-              <h3 className="text-xl font-semibold mb-2">{content.title}</h3>
-              <p className="flex-1 mb-4 text-gray-600">{content.description}</p>
+              <h3 className="text-lg sm:text-xl font-semibold mb-2">
+                {content.title}
+              </h3>
+              <p className="text-sm sm:text-base flex-1 mb-4 text-gray-600">
+                {content.description}
+              </p>
               <p className="text-sm font-medium text-therapy-blue">
                 {content.stats}
               </p>
@@ -77,13 +81,15 @@ function WhyUsSection() {
           ))}
         </div>
 
-        <div className="bg-white p-8 flex max-sm:flex-col max-sm:items-center items-start gap-6 rounded-xl shadow-sm hover:shadow-md border border-gray-200">
-          <div className="text-4xl text-jungle bg-jungle/10 p-4 rounded-2xl flex justify-center items-center">
+        <div className="bg-white p-8 flex max-sm:flex-col max-sm:items-center items-start gap-6 rounded-xl shadow-sm hover:shadow-md border border-gray-200  mt-16">
+          <div className="text-3xl sm:text-4xl text-jungle bg-jungle/10 p-3 rounded-full flex justify-center items-center">
             <TbCertificate />
           </div>
           <div className="space-y-2 max-sm:text-center">
-            <h3 className="text-xl font-semibold">Fully Accredited Practice</h3>
-            <p className="text-gray-600">
+            <h3 className="text-lg sm:text-xl font-semibold">
+              Fully Accredited Practice
+            </h3>
+            <p className="text-sm sm:text-base text-gray-600">
               Recognized by the Professional Regulation Commission (Permit No.
               03) and member of the Philippine Psychological Association
             </p>
