@@ -90,7 +90,9 @@ function ContactsSection() {
           <GradientLine />
         </header>
 
-        <div className="mt-12 grid grid-cols-1 lg:grid-cols-2 gap-8">
+        <div
+          data-aos="fade-up"
+          className="mt-12 grid grid-cols-1 lg:grid-cols-2 gap-8">
           {/* location cards */}
           <div className="grid grid-cols-1 gap-4 order-2 lg:order-1">
             {CONTENTS.map((content, index) => (
@@ -113,17 +115,34 @@ function ContactsSection() {
                     <p className="text-gray-600">{content.phone}</p>
                   </div>
 
-                  <div className="bg-jungle/10 p-2 rounded-full text-jungle flex items-center justify-center text-lg">
+                  <a
+                    href={content.facebookUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    title="Facebook"
+                    className="bg-jungle/10 p-2 rounded-full text-jungle flex items-center justify-center text-lg">
                     <FaFacebookF />
-                  </div>
+                  </a>
 
-                  <div className="bg-jungle/10 p-2 rounded-full text-jungle flex items-center justify-center text-lg">
+                  <a
+                    href={`https://mail.google.com/mail/?view=cm&fs=1&to=${content.email}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    title="Open Gmail"
+                    className="bg-jungle/10 p-2 rounded-full text-jungle flex items-center justify-center text-lg">
                     <BiLogoGmail />
-                  </div>
+                  </a>
 
-                  <div className="bg-jungle/10 p-2 rounded-full text-jungle flex items-center justify-center text-lg">
+                  <a
+                    href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
+                      CONTENTS[selectedLocation].address
+                    )}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    title="Open in Google Maps"
+                    className="bg-jungle/10 p-2 rounded-full text-jungle flex items-center justify-center text-lg">
                     <HiLocationMarker />
-                  </div>
+                  </a>
                 </div>
               </div>
             ))}
