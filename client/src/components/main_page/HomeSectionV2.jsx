@@ -83,7 +83,7 @@ function HomeSectionV2() {
             </h1>
 
             {/* desc */}
-            <p className="text-base md:text-lg text-white/90 mb-8 max-w-lg">
+            <p className="text-sm sm:text-base max-sm:text-center md:text-lg text-white/90 mb-8 max-w-lg">
               PRC-certified psychologists providing compassionate, personalized
               therapy using scientifically validated approaches.
             </p>
@@ -92,11 +92,11 @@ function HomeSectionV2() {
             <div className="flex flex-col sm:flex-row gap-4 font-medium">
               <Link
                 to="/appointment"
-                className="flex items-center justify-center gap-3 rounded-md bg-gradient-to-r from-jungle to-therapy-blue px-8 py-3 hover:shadow-lg hover:brightness-105 transition-all max-sm:flex-1">
+                className="flex items-center justify-center text-sm sm:text-base gap-3 rounded-lg bg-gradient-to-r from-jungle to-therapy-blue px-8 py-3 hover:shadow-lg hover:brightness-105 transition-all max-sm:flex-1">
                 Get Appointment <TbArrowRight />
               </Link>
 
-              <Link className="px-8 py-3 border-2 border-white rounded-lg text-center hover:bg-white/10 hover:shadow-lg transition-all max-sm:flex-1">
+              <Link className="px-8 py-3 outline-2 outline-white rounded-lg text-center text-sm sm:text-base hover:bg-white/10 hover:shadow-lg transition-all max-sm:flex-1">
                 Our Services
               </Link>
             </div>
@@ -117,10 +117,10 @@ function HomeSectionV2() {
 const Emblem = ({ icon, text }) => {
   return (
     <div className="flex items-center gap-3 bg-white/10 backdrop-blur-sm p-3 flex-1 rounded-lg">
-      <div className="bg-jungle/10 p-2 rounded-lg text-emerald-300 text-xl">
+      <div className="bg-jungle/10 p-2 rounded-lg text-emerald-300 text-lg sm:text-xl">
         {icon}
       </div>
-      <span className="text-sm font-medium">{text}</span>
+      <span className="text-xs sm:text-sm font-medium">{text}</span>
     </div>
   );
 };
