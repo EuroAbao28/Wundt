@@ -33,7 +33,7 @@ function BannerSection() {
           Your Path to Growth and Well-Being
         </h1>
 
-        <p className="text-base sm:text-lg text-white mt-4">
+        <p className="text-sm sm:text-lg text-white mt-4">
           Professional psychological services tailored to your unique needs
         </p>
 
