@@ -294,7 +294,7 @@ function AppointmentPage() {
                           services.details.map((detail, detailIndex) => (
                             <label
                               key={detailIndex}
-                              className="flex items-center gap-2 text-xs md:text-base">
+                              className="flex items-center gap-2 ">
                               <input
                                 type="checkbox"
                                 value={detail}
@@ -302,13 +302,17 @@ function AppointmentPage() {
                                   detail
                                 )}
                                 onChange={handleChange}
-                                className="w-4 h-4 accent-emerald-600"
+                                className="w-4 h-4 accent-emerald-600 "
                               />
-                              {detail}
+                              <span className="flex-1 text-xs md:text-sm">
+                                {detail}
+                              </span>
                             </label>
                           ))
                         ) : (
-                          <div>No specific items under this category </div>
+                          <div className="text-xs md:text-sm">
+                            No specific items under this category
+                          </div>
                         )}
                       </div>
                     </div>

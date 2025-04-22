@@ -3,16 +3,31 @@
 @import "tailwindcss";
 
 @theme {
+  /* Custom Colors */
+  --color-jungle: #29ab87; /* #29AB87 - Primary green */
+  --color-therapy-blue: #2563eb; /* #2563EB - Complementary blue */
+  --color-mindful-gray: #6b7280; /* #6B7280 - Neutral gray */
+
+  /* Your existing colors */
+  --color-midnight: #121063;
+  --color-tahiti: #3ab7bf;
+  --color-bermuda: #78dcca;
+
+  /* Font families */
   --font-poppins: "Poppins", serif;
   --font-notoserif: "Noto Serif HK", serif;
   --font-cardo: "cardo", serif;
+
+  /* Shadows */
   --shadow-card: 0px 2px 4px rgba(0, 0, 0, 0.4),
     0px 3px 3px -3px rgba(0, 0, 0, 0.3), 0px -3px 0px inset rgba(0, 0, 0, 0.2);
   --shadow-card2: rgba(0, 0, 0, 0.1) 0px 0px 5px 0px,
     rgba(0, 0, 0, 0.1) 0px 0px 1px 0px;
   --shadow-bottom: rgba(17, 17, 26, 0.1) 0px 1px 0px;
-  --text-xxs: 0.65rem;
   --shadow-card3: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px;
+
+  /* Text sizes */
+  --text-xxs: 0.65rem;
 }
 
 @plugin "daisyui" {
@@ -23,16 +38,11 @@
   nocompatible: true;
 }
 
-/* div {
-  outline: 1px solid black;
-} */
-
-/* Customize the color of the pagination bullets */
 .swiper-pagination-bullet {
-  background-color: #ffffff !important;
+  background-color: #ffffff !important; /* emerald-600 */
+  opacity: 1;
 }
 
-/* Customize the color of the active pagination bullet */
 .swiper-pagination-bullet-active {
-  background-color: #ffffff !important;
+  background-color: #ffffff !important; /* emerald-500 */
 }

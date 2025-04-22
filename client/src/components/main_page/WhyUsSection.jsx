@@ -1,77 +1,96 @@
 import React, { useEffect } from "react";
-import { TbHeartHandshake, TbShieldCheck, TbUsers } from "react-icons/tb";
+import {
+  TbCertificate,
+  TbHeartHandshake,
+  TbShieldCheck,
+  TbUsers,
+} from "react-icons/tb";
 import s2 from "../../assets/s2.jpg";
 import SectionHeader from "../SectionHeader";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import b1 from "../../assets/s2.jpg";
+import Badge from "../Badge";
+import GradientLine from "../GradientLine";
+
+const CONTENTS = [
+  {
+    icon: <TbShieldCheck />,
+    title: "Licensed Professionals",
+    description:
+      "PRC-certified psychologists with specialized training in evidence-based therapies",
+    stats: "15+ Certified Experts",
+  },
+  {
+    icon: <TbHeartHandshake />,
+    title: "Personalized Care",
+    description:
+      "Tailored treatment plans for individuals, couples, and families",
+    stats: "10,000+ Clients Served",
+  },
+  {
+    icon: <TbUsers />,
+    title: "Community Focus",
+    description:
+      "Affordable services with outreach programs for underserved populations",
+    stats: "5 Branch Locations",
+  },
+];
 
 function WhyUsSection() {
-  const contents = [
-    {
-      icon: <TbShieldCheck />,
-      title: "Licensed Professionals",
-      desc: "Experienced and certified experts providing ethical and reliable care.",
-    },
-    {
-      icon: <TbHeartHandshake />,
-      title: "Client-Centered Approach",
-      desc: "Personalized services tailored to meet every client’s unique needs.",
-    },
-    {
-      icon: <TbUsers />,
-      title: "Accessible for All",
-      desc: "Making psychological services affordable and accessible for everyone.",
-    },
-  ];
-
   useEffect(() => {
-    AOS.init({ duration: 1000, once: true });
+    AOS.init({ duration: 800, once: true });
   }, []);
 
   return (
-    <div
-      data-aos="fade-up"
-      // style={{ backgroundImage: `url(${b1})` }}
-      className="mt-20 bg-cover bg-top">
-      <div className="px-6 lg:px-12  max-w-7xl mx-auto ">
-        <SectionHeader title={"Why Choose Wundt Psychological Institute?"} />
+    <section className="py-16 bg-gray-50">
+      <div className="max-w-7xl mx-auto px-6 lg:px-8 space-y-12">
+        <header className="text-center">
+          <Badge
+            label={"Why Choose Us"}
+            className="text-therapy-blue bg-therapy-blue/10"
+          />
 
-        <div className="flex max-sm:flex-col-reverse mt-12 gap-10">
-          <div
-            data-aos="fade-right"
-            className="flex-1 flex flex-col gap-8 justify-center">
-            {contents.map((content, index) => (
-              <div key={index} className="flex items-start gap-4 ">
-                <div className="text-emerald-600 text-3xl sm:text-4xl   ">
-                  {content.icon}
-                </div>
-                <div>
-                  <h3 className="text-base md:text-lg font-semibold">
-                    {content.title}
-                  </h3>
-                  <p className="text-xs md:text-sm text-gray-600">
-                    {content.desc}
-                  </p>
-                </div>
+          <h2 className="text-3xl font-bold text-gray-900 mt-4">
+            The <span className="text-jungle">Wundt</span> Difference
+          </h2>
+
+          <GradientLine />
+        </header>
+
+        <div className="flex flex-wrap gap-8">
+          {CONTENTS.map((content, index) => (
+            <div
+              key={index}
+              data-aos="fade-up"
+              data-aos-delay={index * 100}
+              className="bg-white p-8 flex flex-col rounded-xl shadow-sm relative hover:shadow-md transition-all flex-1 min-w-xs overflow-hidden border border-gray-200">
+              <h3 className="text-xl font-semibold mb-2">{content.title}</h3>
+              <p className="flex-1 mb-4 text-gray-600">{content.description}</p>
+              <p className="text-sm font-medium text-therapy-blue">
+                {content.stats}
+              </p>
+              <div className="rounded-full p-3 bg-jungle/10 w-fit text-8xl text-white absolute -right-4 -bottom-4">
+                {content.icon}
               </div>
-            ))}
-          </div>
+            </div>
+          ))}
+        </div>
 
-          <div
-            data-aos="fade-left"
-            className="flex-1 h-[20rem] rounded-md relative">
-            <img
-              src={s2}
-              alt=""
-              loading="lazy"
-              className="w-full h-full object-cover rounded-md"
-            />
-            <span className="absolute inset-0 bg-emerald-600 -z-10 translate-y-2 translate-x-2 rounded-md"></span>
+        <div className="bg-white p-8 flex max-sm:flex-col max-sm:items-center items-start gap-6 rounded-xl shadow-sm hover:shadow-md border border-gray-200">
+          <div className="text-4xl text-jungle bg-jungle/10 p-4 rounded-2xl flex justify-center items-center">
+            <TbCertificate />
+          </div>
+          <div className="space-y-2 max-sm:text-center">
+            <h3 className="text-xl font-semibold">Fully Accredited Practice</h3>
+            <p className="text-gray-600">
+              Recognized by the Professional Regulation Commission (Permit No.
+              03) and member of the Philippine Psychological Association
+            </p>
           </div>
         </div>
       </div>
-    </div>
+    </section>
   );
 }
 

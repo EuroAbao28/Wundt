@@ -5,6 +5,7 @@ import { MdLocationOn, MdOutlineFacebook } from "react-icons/md";
 import SectionHeader from "../SectionHeader";
 import AOS from "aos";
 import "aos/dist/aos.css";
+import classNames from "classnames";
 
 const contents = [
   {
@@ -95,9 +96,12 @@ function ContactsSection() {
               <div
                 key={index}
                 onClick={() => setSelectionLocation(index)}
-                className={`outline outline-gray-300 p-4 rounded cursor-pointer hover: transition-all relative  ${
-                  index === selectedLocation && " shadow-card2"
-                }`}>
+                className={classNames(
+                  "p-4 rounded cursor-pointer shadow-card2 relative bg-white",
+                  {
+                    "outline-gray-300 outline-1": index === selectedLocation,
+                  }
+                )}>
                 <h3 className="font-semibold text-xs sm:text-sm">
                   {content.header}
                 </h3>

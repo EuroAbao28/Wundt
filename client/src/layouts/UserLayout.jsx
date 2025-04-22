@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { Outlet, useLocation } from "react-router";
 import NavigationBar from "../components/NavigationBar";
 import Footer from "../components/Footer";
+import b1 from "../assets/wundt_logo.png";
 
 function UserLayout() {
   const location = useLocation();
@@ -10,11 +11,13 @@ function UserLayout() {
     console.log(location.pathname);
   }, [location]);
   return (
-    <div className="font-poppins text-gray-800 flex flex-col min-h-screen">
-      <NavigationBar />
-      <Outlet />
+    <div className="font-poppins min-h-screen">
+      <div className="text-gray-900">
+        {/* <NavigationBar /> */}
+        <Outlet />
 
-      {location.pathname !== "/appointment" && <Footer />}
+        {location.pathname !== "/appointment" && <Footer />}
+      </div>
     </div>
   );
 }

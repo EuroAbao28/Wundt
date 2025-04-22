@@ -1,6 +1,7 @@
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay } from "swiper/modules";
+import { Autoplay, EffectFade } from "swiper/modules";
 import "swiper/css";
+import "swiper/css/effect-fade";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import d1 from "../../assets/d1.jpg";
@@ -11,109 +12,115 @@ import { Link } from "react-router";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import { useEffect } from "react";
-import {
-  FaUniversity,
-  FaHandsHelping,
-  FaNewspaper,
-  FaCalendarCheck,
-} from "react-icons/fa";
-
-const images = [d1, d2, d3, d4];
+import { TbArrowRight } from "react-icons/tb";
+import { FaShieldAlt, FaUsers, FaCalendarAlt } from "react-icons/fa";
+import Badge from "../Badge";
 
 function HomeSectionV2() {
   useEffect(() => {
-    AOS.init({ duration: 1000, once: true });
+    AOS.init({
+      duration: 1000,
+      once: true,
+      easing: "ease-out-cubic",
+    });
   }, []);
 
+  const slides = [
+    { image: d1, alt: "Professional counseling session" },
+    { image: d2, alt: "Educational assessment" },
+    { image: d3, alt: "Therapy session" },
+    { image: d4, alt: "Mental health support" },
+  ];
+
   return (
-    <>
-      <div data-aos="fade-down" className="w-full h-[35rem] relative -z-10">
-        <div className="bg-black/50 flex flex-col justify-center absolute z-10 inset-0">
-          <div className="max-w-7xl mx-auto  px-6 lg:px-12">
-            <div className="  text-white flex flex-col justify-center items-center text-center">
-              <h1 className="font-bold text-2xl sm:text-4xl">
-                Premiere Provider of{" "}
-                <span className="underline underline-offset-4 decoration-emerald-600">
-                  Psychological Counseling
-                </span>{" "}
-                <br></br> &{" "}
-                <span className="underline underline-offset-4 decoration-emerald-600">
-                  {" "}
-                  Educational Services
-                </span>{" "}
-              </h1>
-
-              <p className="mt-4 text-xs sm:text-base">
-                Professional Regulation Commission - Board of Psychology Permit
-                to Operate No. 03
-              </p>
-
-              <Link
-                to={"/appointment"}
-                className="bg-radial-[at_-50%_-50%] from-green-500 to-emerald-600 to-75% text-sm text-white px-8 py-4 font-semibold rounded-md active:scale-95 transition mt-8 uppercase">
-                Get Appointment
-              </Link>
-            </div>
-          </div>
-        </div>
-
+    <section className="h-screen w-full relative">
+      {/* sliding image & gradient */}
+      <div className="absolute inset-0 z-0">
         <Swiper
-          modules={[Autoplay]}
-          autoplay={{ delay: 4000, disableOnInteraction: false }}
+          modules={[Autoplay, EffectFade]}
+          effect="fade"
           loop
-          speed={2500}
-          className="w-full h-full -z-10">
-          {images.map((img, index) => (
+          speed={1500}
+          autoplay={{
+            delay: 5000,
+            disableOnInteraction: false,
+          }}
+          className="h-full w-full">
+          {slides.map((slide, index) => (
             <SwiperSlide key={index}>
-              <img
-                src={img}
-                alt={`slide-${index}`}
-                className="w-full h-full object-cover object-top"
-              />
+              <div className="relative h-full w-full">
+                <img
+                  src={slide.image}
+                  alt={slide.alt}
+                  loading={index === 0 ? "eager" : "lazy"}
+                  className="h-full w-full object-cover object-top"
+                />
+
+                {/* gradient */}
+                <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/40 max-sm:via-60% to-transparent"></div>
+              </div>
             </SwiperSlide>
           ))}
         </Swiper>
       </div>
 
-      {/* <div className="px-6 lg:px-12 -mt-12">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 max-w-7xl mx-auto">
-          <Card
-            header="About Us"
-            body="Founded in 2015, Wundt aims to make psychological services more accessible and affordable."
-            Icon={FaUniversity}
-          />
+      <div className="absolute inset-0 z-10">
+        <div className="max-w-7xl px-6 lg:px-8 mx-auto h-full flex items-center ">
+          <div className="text-white w-full sm:max-w-2xl">
+            {/* badge */}
+            <div className="mb-6 flex max-sm:justify-center">
+              <Badge
+                label={"Licensed Professionals"}
+                className="text-emerald-300 bg-white/20"
+              />
+            </div>
 
-          <Card
-            header="Our Services"
-            body="We offer testing, counseling, therapy, review classes, seminars, and more for all age groups."
-            Icon={FaHandsHelping}
-          />
+            {/* header */}
+            <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold mb-6 leading-tight max-sm:text-center">
+              <span className="text-emerald-300">Evidence-Based </span>
+              <br />
+              Psychological Care
+            </h1>
 
-          <Card
-            header="News & Updates"
-            body="New branches opened in 2023 and 2024, with more events and programs coming soon."
-            Icon={FaNewspaper}
-          />
+            {/* desc */}
+            <p className="text-base md:text-lg text-white/90 mb-8 max-w-lg">
+              PRC-certified psychologists providing compassionate, personalized
+              therapy using scientifically validated approaches.
+            </p>
 
-          <Card
-            header="Appointments"
-            body="Clients may book online or visit any of our branches across Northern and Central Luzon."
-            Icon={FaCalendarCheck}
-          />
+            {/* buttons */}
+            <div className="flex flex-col sm:flex-row gap-4 font-medium">
+              <Link
+                to="/appointment"
+                className="flex items-center justify-center gap-3 rounded-md bg-gradient-to-r from-jungle to-therapy-blue px-8 py-3 hover:shadow-lg hover:brightness-105 transition-all max-sm:flex-1">
+                Get Appointment <TbArrowRight />
+              </Link>
+
+              <Link className="px-8 py-3 border-2 border-white rounded-lg text-center hover:bg-white/10 hover:shadow-lg transition-all max-sm:flex-1">
+                Our Services
+              </Link>
+            </div>
+
+            {/* emblem */}
+            <div className="mt-12 flex flex-wrap gap-4 sm:w-[85%]">
+              <Emblem icon={<FaShieldAlt />} text={"PRC Certified"} />
+              <Emblem icon={<FaUsers />} text={"15+ Experts"} />
+              <Emblem icon={<FaCalendarAlt />} text={"10+ Years"} />
+            </div>
+          </div>
         </div>
-      </div> */}
-    </>
+      </div>
+    </section>
   );
 }
 
-const Card = ({ header, body, Icon }) => {
+const Emblem = ({ icon, text }) => {
   return (
-    <div
-      data-aos="fade-up"
-      className="flex-1 flex flex-col gap-4 bg-radial-[at_-50%_-50%] from-green-500  to-emerald-600 to-75% text-white p-8 rounded relative">
-      <h3 className="font-semibold text-lg">{header}</h3>
-      <p className="text-sm flex-1">{body}</p>
-      <Icon className="absolute -bottom-6 -right-6 text-9xl text-white/20" />
+    <div className="flex items-center gap-3 bg-white/10 backdrop-blur-sm p-3 flex-1 rounded-lg">
+      <div className="bg-jungle/10 p-2 rounded-lg text-emerald-300 text-xl">
+        {icon}
+      </div>
+      <span className="text-sm font-medium">{text}</span>
     </div>
   );
 };

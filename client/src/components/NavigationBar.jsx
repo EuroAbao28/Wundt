@@ -14,43 +14,58 @@ const navContents = [
 ];
 
 function NavigationBar() {
-  const [isDropDownOpen, setDropDownOpen] = useState(false);
-
   const location = useLocation();
   const path = location.pathname.replace("/", "");
+
+  const [isDropDownOpen, setDropDownOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  const isHomePage = location.pathname === "/";
 
   useEffect(() => {
     setDropDownOpen(false);
   }, [path]);
 
+  useEffect(() => {
+    if (!isHomePage) return;
+
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 10);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [isHomePage]);
+
   return (
     <div
       className={classNames(
-        " bg-white top-0 left-0 right-0 z-40 sticky shadow-card2 px-4 sm:px-6 lg:px-12",
+        "    top-0 left-0 right-0 z-40 px-4 sm:px-6 lg:px-12 transition-colors duration-300",
         {
-          // fixed: location.pathname === "/",
-          // sticky: location.pathname !== "/",
+          fixed: location.pathname === "/",
+          sticky: location.pathname !== "/",
+          "bg-white/100 text-gray-800 shadow-card2": !isHomePage || scrolled,
+          "bg-white/0 text-white": isHomePage && !scrolled,
         }
       )}>
       <header>
         <div className=" max-w-7xl mx-auto ">
-          <div className="py-2 sm:py-4 flex justify-between gap-8">
+          <div className="py-2 sm:py-4 flex justify-between items-center gap-8">
             {/* logo */}
             <div className=" flex items-center gap-2 max-sm:pl-2  ">
-              <img src={logo} alt="logo" className="w-8 sm:w-10 rounded-full" />
-              <h1 className="font-black text-emerald-600 uppercase font-cardo text-sm sm:text-lg leading-4 hidden sm:block">
-                Wundt Psychological Institute
+              <img src={logo} alt="logo" className="w-8 sm:w-14 rounded-full" />
+              <h1 className="font-black text-white uppercase font-cardo text-sm sm:text-lg leading-4 hidden sm:block">
+                {/* Wundt Psychological Institute */}
               </h1>
             </div>
 
             {/* nav for big screen */}
-            <nav className="hidden lg:flex gap-2 text-sm  ">
+            <nav className="hidden lg:flex gap-2 text-base  ">
               {navContents.map((content, index) => (
                 <Link
                   to={`/${content.name === "home" ? "" : content.name}`}
                   key={index}
                   className="list-none relative group py-2 px-4 cursor-pointer">
-                  <p className="group-hover:text-emerald-600 transition-all duration-500 capitalize">
+                  <p className="group-hover:text-emerald-600 transition-all duration-500 capitalize ">
                     {content.name}
                   </p>
                   {(path === content.name ||
@@ -63,7 +78,7 @@ function NavigationBar() {
               <Link
                 to={"/appointment"}
                 onClick={() => setDropDownOpen(!isDropDownOpen)}
-                className="bg-radial-[at_-50%_-50%] from-green-500 to-emerald-600 to-75% text-sm text-white  p-2 px-3 rounded-md ml-4 whitespace-nowrap active:scale-95 transition">
+                className="bg-radial-[at_-50%_-50%] from-green-500 to-emerald-600 to-75% text-sm uppercase font-semibold text-white  p-3 px-3 rounded-md ml-4 whitespace-nowrap active:scale-95 transition">
                 Get Appointment
               </Link>
             </nav>
