@@ -3,28 +3,45 @@ import b1 from "../../assets/b1.jpg";
 import { Link } from "react-router";
 import AOS from "aos";
 import "aos/dist/aos.css";
+import Badge from "../Badge";
+import { TbArrowRight } from "react-icons/tb";
 
 function BannerSection() {
   useEffect(() => {
-    AOS.init({ duration: 1000, once: true });
+    AOS.init({
+      duration: 1000,
+      once: true,
+      easing: "ease-out-cubic",
+    });
   }, []);
 
   return (
-    <div
-      data-aos="fade-up"
-      style={{ backgroundImage: `url(${b1})` }}
-      className="mt-40 bg-center bg-cover">
-      <div className="px-6 py-12 lg:p-20 bg-radial-[at_-35%_15%] from-green-500/80 to-emerald-600/80 to-75% flex flex-col items-center justify-center text-center">
-        <h1 className="text-white text-xl md:text-2xl font-semibold ">
-          Your Path to Growth and Well-Being Starts Here
+    <div data-aos="fade-up" className="relative bg-jungle py-20">
+      {/* background image with gradient */}
+      <div
+        style={{ backgroundImage: `url(${b1})` }}
+        className="absolute inset-0 bg-cover bg-center -z-10">
+        <div className="absolute inset-0 bg-gradient-to-t from-jungle/90 to-therapy-blue/50"></div>
+      </div>
+
+      <div className="z-10 flex flex-col items-center justify-center px-6 lg:px-8 text-center">
+        <Badge
+          label={"Begin Your Journey"}
+          className="text-white bg-white/20"
+        />
+        <h1 className="text-3xl sm:text-4xl font-bold mt-4 text-white">
+          Your Path to Growth and Well-Being
         </h1>
-        <p className="text-white text-xs md:text-sm italic mt-2 w-[80%]">
-          Psychological, Counseling, and Educational Services Tailored for You
+
+        <p className="text-base sm:text-lg text-white mt-4">
+          Professional psychological services tailored to your unique needs
         </p>
+
         <Link
-          to={"/appointment"}
-          className="bg-white text-emerald-600 text-sm md:text-base font-semibold  px-8 py-4 rounded-md mt-12 active:scale-95 transition-all">
+          to="/appointment"
+          className="inline-flex text-sm sm:text-base items-center px-8 py-3 border-2 border-white backdrop-blur-sm text-white mt-8 font-medium rounded-lg hover:backdrop-blur-lg transition-all ">
           Book an Appointment
+          <TbArrowRight className="ml-2" />
         </Link>
       </div>
     </div>

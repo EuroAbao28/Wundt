@@ -11,86 +11,106 @@ import SectionHeader from "../SectionHeader";
 import { Link } from "react-router";
 import AOS from "aos";
 import "aos/dist/aos.css";
+import Badge from "../Badge";
+import { TbArrowRight } from "react-icons/tb";
+import GradientLine from "../GradientLine";
 
-const contents = [
+const CONTENTS = [
   {
     icon: <TbHeartRateMonitor />,
-    title: "Psychological & Psychiatric Testing",
-    subtitle: "For Employment, Legal, Clinical, and Academic Purposes",
-    desc: " Comprehensive assessments tailored for employment screenings, academic needs, clinical diagnostics, and legal cases.",
+    title: "Psychological Testing",
+    description:
+      "Comprehensive assessments for employment, academic, clinical, and legal purposes.",
   },
   {
     icon: <TbBrain />,
-    title: "Child & Adolescent Assessments",
-    subtitle: "Supporting Young Minds with Care",
-    desc: "Specialized therapy for behavioral issues, developmental concerns, intellectual evaluations, and emotional quotient assessments.",
+    title: "Child Assessments",
+    description:
+      "Specialized evaluations for behavioral and developmental concerns.",
   },
   {
     icon: <TbUsersGroup />,
-    title: "Clinical Consultation & Counseling",
-    subtitle: "Personalized Care for Mental Well-being",
-    desc: "Address interpersonal, marital, and trauma-related concerns through professional counseling and interventions.",
+    title: "Clinical Counseling",
+    description:
+      "Personalized therapy for individuals, couples, and trauma recovery.",
   },
   {
     icon: <TbBook />,
-    title: "Tutorial & Review Classes",
-    subtitle: "Guiding Future Professionals",
-    desc: "Prepare for PRC Board Examinations with expert-led tutorials in psychology, psychometrics, and education.",
+    title: "Review Classes",
+    description: "Preparation for PRC Board Examinations in psychology.",
   },
   {
     icon: <TbClipboardList />,
-    title: "Program Development & Administration",
-    subtitle: "For Students, Employees, and Organizations",
-    desc: "Tailored programs fostering growth through psychological insights and strategic development plans.",
+    title: "Program Development",
+    description:
+      "Customized programs for students, employees and organizations.",
   },
   {
     icon: <TbPresentation />,
-    title: "Trainings & Workshops",
-    subtitle: "Building Stronger Teams and Communities",
-    desc: "Engage in seminars, workshops, and team-building activities promoting mental wellness and harmony.",
+    title: "Workshops",
+    description: "Seminars and team-building activities for mental wellness.",
   },
 ];
 
 function ServicesSection() {
   useEffect(() => {
-    AOS.init({ duration: 1000, once: true });
+    AOS.init({
+      duration: 1000,
+      once: true,
+      easing: "ease-out-cubic",
+    });
   }, []);
 
   return (
-    <div data-aos="fade-left" className="mt-20 sm:mt-40 px-6 lg:px-12">
-      <div className="max-w-7xl mx-auto">
-        <SectionHeader title={"Comprehensive Services We Offer"} />
+    <section className="py-16 bg-white">
+      <div className="max-w-7xl mx-auto px-6 lg:px-8">
+        <header data-aos="fade-up" className="text-center">
+          <Badge
+            label={"Our Services"}
+            className="text-therapy-blue bg-therapy-blue/10"
+          />
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-12">
-          {contents.map((content, index) => (
+          <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mt-4">
+            Comprehensive
+            <span className="text-therapy-blue"> Psychological</span> Services
+          </h2>
+
+          <GradientLine type="blue-to-jungle" />
+        </header>
+
+        <div className="mt-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {CONTENTS.map((content, index) => (
             <div
               key={index}
-              className="p-8 rounded-md flex flex-col shadow-card2 transition-all hover:shadow-card duration-500 bg-white">
-              <div className="flex md:flex-col gap-4 items-start md:items-center">
-                <p className="text-4xl text-emerald-600">{content.icon}</p>
-                <div className="md:text-center md:mt-2">
-                  <h3 className="font-semibold text-base md:text-lg">
-                    {content.title}
-                  </h3>
-                  <p className="text-xs md:text-sm italic text-gray-600">
-                    {content.subtitle}
-                  </p>
-                </div>
+              data-aos="fade-up"
+              data-aos-delay={index * 100}
+              className="bg-white p-6 shadow-sm hover:shadow-md border border-gray-100 rounded-xl group transition-all">
+              <div className="text-therapy-blue text-2xl p-3 rounded-lg bg-therapy-blue/10 w-fit">
+                {content.icon}
               </div>
-              <p className="mt-6 text-xs md:text-sm md:text-center text-gray-600">
-                {content.desc}
+              <h3 className="mt-4 text-lg font-semibold">{content.title}</h3>
+              <p className="mt-4 text-gray-600 text-sm">
+                {content.description}
               </p>
+
+              <Link className="text-sm flex items-center text-jungle mt-6 gap-2 group-hover:underline underline-offset-2 font-medium w-fit">
+                Learn more
+                <TbArrowRight className="group-hover:ml-1 transition-all" />
+              </Link>
             </div>
           ))}
         </div>
 
-        <Link
-          to={"services"}
-          className="bg-white outline outline-emerald-600 text-emerald-600 flex items-center gap-4 text-sm   font-semibold  px-8 py-3 active:scale-95 transition-all uppercase rounded-md mt-12 mx-auto w-fit">
-          See More
-        </Link>
+        <div data-aos="fade-up" className="mt-12 text-center">
+          <Link
+            to="/services"
+            className="inline-flex items-center text-sm sm:text-base px-6 py-3 bg-gradient-to-r from-jungle to-jungle/80 text-white font-medium rounded-lg hover:shadow-lg transition-all hover:brightness-105">
+            View All Services
+            <TbArrowRight className="ml-2" />
+          </Link>
+        </div>
       </div>
-    </div>
+    </section>
   );
 }
 

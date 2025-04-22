@@ -85,67 +85,7 @@ function ContactsSection() {
     AOS.init({ duration: 1000, once: true });
   }, []);
 
-  return (
-    <div data-aos="fade-up" className="mt-20 sm:mt-40 px-6 lg:px-12">
-      <div className=" mb-12  max-w-7xl mx-auto">
-        <SectionHeader title={"Reach Out to Us"} />
-
-        <div className="mt-12 flex max-lg:flex-col-reverse gap-4">
-          <div className="flex flex-col gap-2  flex-1">
-            {contents.map((content, index) => (
-              <div
-                key={index}
-                onClick={() => setSelectionLocation(index)}
-                className={classNames(
-                  "p-4 rounded cursor-pointer shadow-card2 relative bg-white",
-                  {
-                    "outline-gray-300 outline-1": index === selectedLocation,
-                  }
-                )}>
-                <h3 className="font-semibold text-xs sm:text-sm">
-                  {content.header}
-                </h3>
-                <div className="mt-2 text-gray-600 flex flex-col gap-1">
-                  <div className="flex items-center  text-xs sm:text-sm">
-                    <span className="text-emerald-600 text-base sticky start-0 bg-white pr-3 sm:pr-4">
-                      <BiSolidPhone />
-                    </span>
-                    {content.phoneNo}
-                  </div>
-                  <div className="flex items-center text-xs sm:text-sm overflow-x-auto scrollbar-none">
-                    <span className="text-emerald-600 text-base sticky start-0 bg-white pr-3 sm:pr-4">
-                      <MdOutlineFacebook />
-                    </span>
-                    {content.fb}
-                  </div>
-                  <div className="flex items-center  text-xs sm:text-sm">
-                    <span className="text-emerald-600 text-base sticky start-0 bg-white pr-3 sm:pr-4">
-                      <TbMailFilled />
-                    </span>
-                    {content.email}
-                  </div>
-                  <div className="flex items-start text-xs sm:text-sm">
-                    <span className="text-emerald-600 text-base sticky start-0 bg-white pr-3 sm:pr-4">
-                      <MdLocationOn />
-                    </span>
-                    {content.loc}
-                  </div>
-                </div>
-
-                {selectedLocation === index && (
-                  <div className="w-3 aspect-square rounded-full bg-emerald-600 absolute top-4 right-4 shadow-card"></div>
-                )}
-              </div>
-            ))}
-          </div>
-
-          <div className="flex-1 max-lg:aspect-video outline outline-gray-300 rounded overflow-hidden">
-            {contents[selectedLocation].map}
-          </div>
-        </div>
-      </div>
-    </div>
-  );
+  return <section>ff</section>;
 }
 
 export default ContactsSection;

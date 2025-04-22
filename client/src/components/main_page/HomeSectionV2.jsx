@@ -64,7 +64,7 @@ function HomeSectionV2() {
         </Swiper>
       </div>
 
-      <div className="absolute inset-0 z-10">
+      <div data-aos="fade-right" className="absolute inset-0 z-10">
         <div className="max-w-7xl px-6 lg:px-8 mx-auto h-full flex items-center ">
           <div className="text-white w-full sm:max-w-2xl">
             {/* badge */}

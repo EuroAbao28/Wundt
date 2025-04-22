@@ -39,13 +39,17 @@ const CONTENTS = [
 
 function WhyUsSection() {
   useEffect(() => {
-    AOS.init({ duration: 800, once: true });
+    AOS.init({
+      duration: 1000,
+      once: true,
+      easing: "ease-out-cubic",
+    });
   }, []);
 
   return (
     <section className="py-16 bg-gray-50">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
-        <header className="text-center">
+        <header data-aos="fade-up" className="text-center">
           <Badge
             label={"Why Choose Us"}
             className="text-therapy-blue bg-therapy-blue/10"
@@ -74,14 +78,16 @@ function WhyUsSection() {
               <p className="text-sm font-medium text-therapy-blue">
                 {content.stats}
               </p>
-              <div className="rounded-full p-3 bg-jungle/10 w-fit text-8xl text-white absolute -right-4 -bottom-4">
+              <div className="rounded-full p-3 bg-jungle/10 w-fit text-8xl text-white absolute -right-4 -bottom-4 -z-10">
                 {content.icon}
               </div>
             </div>
           ))}
         </div>
 
-        <div className="bg-white p-8 flex max-sm:flex-col max-sm:items-center items-start gap-6 rounded-xl shadow-sm hover:shadow-md border border-gray-200  mt-16">
+        <div
+          data-aos="fade-up"
+          className="bg-white p-8 flex max-sm:flex-col max-sm:items-center items-start gap-6 rounded-xl shadow-sm hover:shadow-md border border-gray-200  mt-16">
           <div className="text-3xl sm:text-4xl text-jungle bg-jungle/10 p-3 rounded-full flex justify-center items-center">
             <TbCertificate />
           </div>
