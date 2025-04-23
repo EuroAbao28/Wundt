@@ -3,122 +3,98 @@ import logo from "../assets/wundt_logo.png";
 import { MdMenu } from "react-icons/md";
 import classNames from "classnames";
 import { Link, useLocation } from "react-router";
+import { TbArrowRight, TbMenu2, TbX } from "react-icons/tb";
 
-const navContents = [
-  { name: "home" },
-  { name: "services" },
-  { name: "about" },
-  { name: "aboutv2" },
-  { name: "gallery" },
-  { name: "news" },
+const NAV_CONTENTS = [
+  { name: "Home", path: "/" },
+  { name: "Services", path: "/services" },
+  { name: "About", path: "/about" },
+  { name: "Gallery", path: "/gallery" },
+  { name: "News", path: "/news" },
 ];
 
 function NavigationBar() {
   const location = useLocation();
-  const path = location.pathname.replace("/", "");
 
-  const [isDropDownOpen, setDropDownOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
-  const isHomePage = location.pathname === "/";
+  const [showNav, setShowNav] = useState(false);
+  const [isMobileNavOpen, setIsMobileNavOpen] = useState(false);
 
   useEffect(() => {
-    setDropDownOpen(false);
-  }, [path]);
+    if (isMobileNavOpen) return setIsMobileNavOpen(false);
 
-  useEffect(() => {
-    if (!isHomePage) return;
+    if (location.pathname !== "/") {
+      setShowNav(true); // Always visible on non-home pages
+      return;
+    }
 
     const handleScroll = () => {
-      setScrolled(window.scrollY > 10);
+      if (window.scrollY > 100) {
+        setShowNav(true);
+      } else {
+        setShowNav(false);
+      }
     };
+
+    // Initially run the scroll logic in case the user is already scrolled
+    handleScroll();
 
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
-  }, [isHomePage]);
+  }, [location.pathname]);
 
   return (
-    <div
+    <nav
       className={classNames(
-        "    top-0 left-0 right-0 z-40 px-4 sm:px-6 lg:px-12 transition-colors duration-300",
+        "top-0 left-0 right-0 z-40 transition-transform duration-300 bg-white shadow",
         {
+          "translate-y-0": showNav,
+          "-translate-y-full": !showNav,
           fixed: location.pathname === "/",
           sticky: location.pathname !== "/",
-          "bg-white/100 text-gray-800 shadow-card2": !isHomePage || scrolled,
-          "bg-white/0 text-white": isHomePage && !scrolled,
         }
       )}>
-      <header>
-        <div className=" max-w-7xl mx-auto ">
-          <div className="py-2 sm:py-4 flex justify-between items-center gap-8">
-            {/* logo */}
-            <div className=" flex items-center gap-2 max-sm:pl-2  ">
-              <img src={logo} alt="logo" className="w-8 sm:w-14 rounded-full" />
-              <h1 className="font-black text-white uppercase font-cardo text-sm sm:text-lg leading-4 hidden sm:block">
-                {/* Wundt Psychological Institute */}
-              </h1>
-            </div>
+      <div className="max-w-7xl mx-auto flex items-center justify-between px-6 lg:px-8 py-4">
+        <div className="font-bold text-xl">Wundt Institute</div>
 
-            {/* nav for big screen */}
-            <nav className="hidden lg:flex gap-2 text-base  ">
-              {navContents.map((content, index) => (
-                <Link
-                  to={`/${content.name === "home" ? "" : content.name}`}
-                  key={index}
-                  className="list-none relative group py-2 px-4 cursor-pointer">
-                  <p className="group-hover:text-emerald-600 transition-all duration-500 capitalize ">
-                    {content.name}
-                  </p>
-                  {(path === content.name ||
-                    (path === "" && content.name === "home")) && (
-                    <span className="absolute left-0 bottom-0 right-0 h-0.5 transition-all  bg-emerald-600 rounded-full"></span>
-                  )}
-                </Link>
-              ))}
-
-              <Link
-                to={"/appointment"}
-                onClick={() => setDropDownOpen(!isDropDownOpen)}
-                className="bg-radial-[at_-50%_-50%] from-green-500 to-emerald-600 to-75% text-sm uppercase font-semibold text-white  p-3 px-3 rounded-md ml-4 whitespace-nowrap active:scale-95 transition">
-                Get Appointment
-              </Link>
-            </nav>
-
-            {/* button nav for small screen */}
-            <div
-              onClick={() => setDropDownOpen(!isDropDownOpen)}
-              className=" flex lg:hidden justify-center items-center rounded active:scale-95 transition-all active:bg-gray-800/5">
-              <MdMenu className="text-3xl m-1" />
-            </div>
-          </div>
+        {/* desktop nav */}
+        <div className="hidden md:flex items-center gap-6">
+          {NAV_CONTENTS.map((content, index) => (
+            <Link key={index} to={content.path}>
+              <p className="text-base font-medium">{content.name}</p>
+            </Link>
+          ))}
         </div>
-      </header>
 
-      {/* dropdown menu */}
+        {/* mobile nav button */}
+        <div
+          onClick={() => setIsMobileNavOpen((prev) => !prev)}
+          className="block md:hidden text-xl p-2 rounded-lg active:bg-gray-50 transition-all cursor-pointer">
+          {isMobileNavOpen ? <TbX /> : <TbMenu2 />}
+        </div>
+      </div>
+
+      {/* mobile nav dropdown */}
       <div
         className={classNames(
-          " text-center overflow-hidden text-sm transition-all shadow-bottom duration-300 flex lg:hidden flex-col absolute left-0 right-0  bg-white",
+          "absolute left-0 right-0 flex md:hidden bg-white flex-col  transition-all overflow-hidden",
           {
-            "max-h-0": !isDropDownOpen,
-            "max-h-[100rem]": isDropDownOpen,
+            "max-h-96": isMobileNavOpen,
+            "max-h-0": !isMobileNavOpen,
           }
         )}>
-        {navContents.map((content, index) => (
-          <Link
-            key={index}
-            to={`/${content.name === "home" ? "" : content.name}`}
-            onClick={() => setDropDownOpen(!isDropDownOpen)}
-            className="py-3 capitalize active:bg-gray-800/5 rounded active:scale-95 transition-all">
+        {NAV_CONTENTS.map((content, index) => (
+          <Link key={index} to={content.path} className="p-2 px-6 text-center">
             {content.name}
           </Link>
         ))}
+
         <Link
-          to={"/appointment"}
-          onClick={() => setDropDownOpen(!isDropDownOpen)}
-          className="py-3 capitalize active:bg-gray-800/5 rounded w-full active:scale-95 transition-all text-emerald-600 mx-auto mb-4">
-          Get an Appointment
+          to="/appointment"
+          className="mx-6 flex items-center justify-center text-sm sm:text-base gap-3 rounded-lg bg-gradient-to-r from-jungle to-therapy-blue py-3 hover:shadow-lg hover:brightness-105 transition-all max-sm:flex-1 text-white font-medium mt-2 mb-4">
+          Get Appointment <TbArrowRight />
         </Link>
       </div>
-    </div>
+    </nav>
   );
 }
 

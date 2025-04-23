@@ -12,8 +12,8 @@ function UserLayout() {
   }, [location]);
   return (
     <div className="font-poppins min-h-screen">
-      <div className="text-gray-900">
-        {/* <NavigationBar /> */}
+      <div className="text-gray-900 relative">
+        <NavigationBar />
         <Outlet />
 
         {location.pathname !== "/appointment" && <Footer />}
