@@ -15,12 +15,13 @@ const NAV_CONTENTS = [
 
 function NavigationBar() {
   const location = useLocation();
+  const pathname = location.pathname;
 
   const [showNav, setShowNav] = useState(false);
   const [isMobileNavOpen, setIsMobileNavOpen] = useState(false);
 
   useEffect(() => {
-    if (location.pathname === "/") {
+    if (pathname === "/") {
       const handleScroll = () => {
         setShowNav(window.scrollY > 10);
       };
@@ -30,24 +31,24 @@ function NavigationBar() {
     } else {
       setShowNav(false);
     }
-  }, [location.pathname]);
+  }, [pathname]);
 
   useEffect(() => {
     if (isMobileNavOpen) return setIsMobileNavOpen(false);
-  }, [location.pathname]);
+  }, [pathname]);
 
   return (
     <nav
       className={classNames(
         "top-0 left-0 right-0 z-40 transition-transform duration-300 bg-white shadow",
         {
-          "translate-y-0": showNav || location.pathname !== "/", // show
+          "translate-y-0": showNav || pathname !== "/", // show
           "-translate-y-full": !showNav, // hide
-          fixed: location.pathname === "/",
-          sticky: location.pathname !== "/",
+          fixed: pathname === "/",
+          sticky: pathname !== "/",
         }
       )}>
-      <div className="max-w-7xl mx-auto flex items-center justify-between px-6 lg:px-8 py-4">
+      <div className="max-w-7xl mx-auto flex items-center justify-between px-6 lg:px-8 py-3">
         <div className="font-bold text-xl">Wundt Institute</div>
 
         {/* desktop nav */}
@@ -62,7 +63,7 @@ function NavigationBar() {
         {/* mobile nav button */}
         <div
           onClick={() => setIsMobileNavOpen((prev) => !prev)}
-          className="block md:hidden text-xl p-2 rounded-lg active:bg-gray-50 transition-all cursor-pointer">
+          className="block md:hidden text-2xl p-2 rounded-lg active:bg-gray-100 transition-all cursor-pointer -mr-3">
           {isMobileNavOpen ? <TbX /> : <TbMenu2 />}
         </div>
       </div>
@@ -80,7 +81,9 @@ function NavigationBar() {
           <Link
             key={index}
             to={content.path}
-            className="text-sm sm:text-base p-2 px-6 text-center">
+            className={classNames("text-sm sm:text-base p-2 px-6 text-center", {
+              "bg-gray-50": content.path === pathname,
+            })}>
             {content.name}
           </Link>
         ))}
