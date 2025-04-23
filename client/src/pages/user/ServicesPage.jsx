@@ -88,123 +88,53 @@ function ServicesPage() {
   }, []);
 
   return (
-    <div className="min-h-screen pb-16">
-      <div
-        data-aos="fade-down"
-        style={{ backgroundImage: `url(${b1})` }}
-        className="bg-cover bg-center">
-        <div className="bg-black/50 p-16">
-          <SectionHeader title={"Our Services"} colorMode={"dual"} />
-        </div>
+    <div>
+      <div className="py-12 px-6">
+        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quia quas
+        labore quisquam vero adipisci repellendus maiores, corporis numquam odio
+        inventore architecto magnam dignissimos? Enim debitis vero accusantium
+        quas, et maxime? Ea optio temporibus, ipsa laboriosam, accusantium
+        itaque reiciendis id sunt dolorem expedita totam iusto facere saepe
+        doloremque esse, architecto laudantium velit maxime officia. Magni
+        accusantium repellat hic quod, fugiat voluptate itaque voluptatum
+        temporibus placeat eum laborum odit error exercitationem quas numquam
+        atque ipsam, libero illo incidunt dicta consequuntur. Fugit alias
+        perferendis quis quasi nihil maiores, enim nemo animi numquam ex
+        praesentium excepturi commodi assumenda neque blanditiis exercitationem
+        atque illum similique!
       </div>
 
-      <div className="flex-1 px-6 lg:px-12 mt-6 sm:mt-12  ">
-        <div className="flex  flex-col max-w-7xl w-full mx-auto gap-16">
-          {servicesOffered.map((service, index) => (
-            <div
-              key={index}
-              data-aos={index % 2 === 1 ? "fade-left" : "fade-right"}
-              className="flex max-lg:flex-col lg:odd:flex-row-reverse drop-shadow-md bg-white rounded-xl overflow-hidden group">
-              {/* Image */}
-              <div className="h-auto lg:w-[40%] overflow-hidden">
-                <Swiper
-                  spaceBetween={10}
-                  pagination={{ clickable: true }}
-                  modules={[Pagination]}
-                  className="w-full h-full">
-                  {service.image.map((img, idx) => (
-                    <SwiperSlide key={idx}>
-                      <img
-                        src={img}
-                        alt={`${service.category} ${idx + 1}`}
-                        className="w-full h-full object-cover object-center transition-all duration-500 group-hover:scale-105"
-                      />
-                    </SwiperSlide>
-                  ))}
-                </Swiper>
-              </div>
+      <div className="py-12 px-6">
+        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quia quas
+        labore quisquam vero adipisci repellendus maiores, corporis numquam odio
+        inventore architecto magnam dignissimos? Enim debitis vero accusantium
+        quas, et maxime? Ea optio temporibus, ipsa laboriosam, accusantium
+        itaque reiciendis id sunt dolorem expedita totam iusto facere saepe
+        doloremque esse, architecto laudantium velit maxime officia. Magni
+        accusantium repellat hic quod, fugiat voluptate itaque voluptatum
+        temporibus placeat eum laborum odit error exercitationem quas numquam
+        atque ipsam, libero illo incidunt dicta consequuntur. Fugit alias
+        perferendis quis quasi nihil maiores, enim nemo animi numquam ex
+        praesentium excepturi commodi assumenda neque blanditiis exercitationem
+        atque illum similique!
+      </div>
 
-              {/* Content */}
-              <div className="flex-1 flex flex-col gap-6 p-6 lg:p-12 ">
-                <h2 className="text-lg md:text-xl lg:text-2xl font-semibold ">
-                  {service.category}
-                </h2>
-
-                <ul className="text-xs md:text-sm list-disc marker:text-emerald-600 pl-5 flex flex-col gap-2 text-gray-600">
-                  {service.details.map((detail, i) => (
-                    <li key={i} className="leading-relaxed">
-                      {detail}
-                    </li>
-                  ))}
-                </ul>
-
-                <Link
-                  to="/appointment"
-                  className="bg-radial-[at_-50%_-50%] from-green-500 to-emerald-600 to-75% px-6 py-3 w-fit rounded-md text-white text-sm transition-all active:scale-95">
-                  Get Appointment
-                </Link>
-              </div>
-            </div>
-          ))}
-        </div>
+      <div className="py-12 px-6">
+        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quia quas
+        labore quisquam vero adipisci repellendus maiores, corporis numquam odio
+        inventore architecto magnam dignissimos? Enim debitis vero accusantium
+        quas, et maxime? Ea optio temporibus, ipsa laboriosam, accusantium
+        itaque reiciendis id sunt dolorem expedita totam iusto facere saepe
+        doloremque esse, architecto laudantium velit maxime officia. Magni
+        accusantium repellat hic quod, fugiat voluptate itaque voluptatum
+        temporibus placeat eum laborum odit error exercitationem quas numquam
+        atque ipsam, libero illo incidunt dicta consequuntur. Fugit alias
+        perferendis quis quasi nihil maiores, enim nemo animi numquam ex
+        praesentium excepturi commodi assumenda neque blanditiis exercitationem
+        atque illum similique!
       </div>
     </div>
   );
 }
 
 export default ServicesPage;
-
-//  <div className="pb-16 min-h-screen">
-//     <div
-//       data-aos="fade-down"
-//       style={{ backgroundImage: `url(${b1})` }}
-//       className="bg-cover bg-center">
-//       <div className="bg-black/50 p-16">
-//         <SectionHeader title={"Our Services"} colorMode={"dual"} />
-//       </div>
-//     </div>
-
-//     <div data-aos="fade-up" className="mt-6 sm:mt-12 ">
-//       <div className="flex-1 px-6 lg:px-12  ">
-//         <div className="max-w-7xl w-full mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3  ">
-//           {servicesOffered.map((service, index) => (
-//             <div
-//               key={index}
-//               className={classNames(
-//                 "sm:px-6 py-6 flex max-sm:border-b max-sm:last:border-none gap-4 border-gray-300",
-//                 {
-//                   "sm:max-lg:border-b": index < servicesOffered.length - 2,
-//                   "sm:max-lg:border-r": index % 2 === 0,
-//                   "lg:border-r": (index + 1) % 3 !== 0,
-//                   "lg:border-b": index < servicesOffered.length - 3,
-//                 }
-//               )}>
-//               <p className="text-3xl md:text-4xl text-emerald-600 mt-1">
-//                 {service.icon}
-//               </p>
-//               <div className="flex-1">
-//                 <h2 className="text-sm md:text-base font-semibold ">
-//                   {service.category}
-//                 </h2>
-//                 <ul className="text-sm mt-6 list-disc marker:text-emerald-600 flex flex-col gap-2">
-//                   {service.details.map((detail, index) => (
-//                     <li key={index} className="text-xs md:text-sm">
-//                       {detail}
-//                     </li>
-//                   ))}
-//                 </ul>
-//               </div>
-//             </div>
-//           ))}
-//         </div>
-
-//         <div className="flex justify-center mt-12">
-//           <Link
-//             to={"/appointment"}
-//             className="bg-radial-[at_-50%_-50%] from-green-500 to-emerald-600 to-75% text-sm text-white px-8 py-2 sm:py-4 max-sm:flex-1 text-center font-semibold rounded active:scale-95 transition uppercase">
-//             Book an Appointment
-//           </Link>
-//         </div>
-//       </div>
-//     </div>
-//   </div>

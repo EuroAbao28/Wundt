@@ -15,42 +15,38 @@ const NAV_CONTENTS = [
 
 function NavigationBar() {
   const location = useLocation();
+
+  const [showNav, setShowNav] = useState(false);
   const [isMobileNavOpen, setIsMobileNavOpen] = useState(false);
-  const [isScrolled, setIsScrolled] = useState(false);
 
   useEffect(() => {
-    setIsMobileNavOpen(false); // Close mobile menu on route change
-
     if (location.pathname === "/") {
       const handleScroll = () => {
-        setIsScrolled(window.scrollY > 20);
+        setShowNav(window.scrollY > 100);
       };
-
-      // Check initial scroll position
-      handleScroll();
 
       window.addEventListener("scroll", handleScroll);
       return () => window.removeEventListener("scroll", handleScroll);
+    } else {
+      setShowNav(false);
     }
   }, [location.pathname]);
 
-  // On home page: hide until scrolled, fixed positioning
-  // On other pages: always visible, sticky positioning
-  const isHome = location.pathname === "/";
-  const shouldShow = !isHome || isScrolled;
+  useEffect(() => {
+    if (isMobileNavOpen) return setIsMobileNavOpen(false);
+  }, [location.pathname]);
 
   return (
     <nav
       className={classNames(
         "top-0 left-0 right-0 z-40 transition-transform duration-300 bg-white shadow",
         {
-          fixed: isHome,
-          sticky: !isHome,
-          "translate-y-0": shouldShow,
-          "-translate-y-full": isHome && !isScrolled,
+          "translate-y-0": showNav || location.pathname !== "/", // show
+          "-translate-y-full": !showNav, // hide
+          fixed: location.pathname === "/",
+          sticky: location.pathname !== "/",
         }
       )}>
-      {/* Rest of your navigation content remains the same */}
       <div className="max-w-7xl mx-auto flex items-center justify-between px-6 lg:px-8 py-4">
         <div className="font-bold text-xl">Wundt Institute</div>
 
@@ -74,7 +70,7 @@ function NavigationBar() {
       {/* mobile nav dropdown */}
       <div
         className={classNames(
-          "absolute left-0 right-0 flex md:hidden bg-white flex-col transition-all overflow-hidden",
+          "absolute left-0 right-0 flex md:hidden bg-white flex-col  transition-all overflow-hidden",
           {
             "max-h-96": isMobileNavOpen,
             "max-h-0": !isMobileNavOpen,
