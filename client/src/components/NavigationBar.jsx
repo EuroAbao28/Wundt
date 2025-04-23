@@ -39,7 +39,7 @@ function NavigationBar() {
   return (
     <nav
       className={classNames(
-        "top-0 left-0 right-0 z-40 transition-transform duration-300 bg-white shadow",
+        "top-0 left-0 right-0 z-40 transition-transform duration-300 bg-red-50 shadow",
         {
           "translate-y-0": showNav || location.pathname !== "/", // show
           "-translate-y-full": !showNav, // hide
@@ -70,7 +70,7 @@ function NavigationBar() {
       {/* mobile nav dropdown */}
       <div
         className={classNames(
-          "absolute left-0 right-0 flex md:hidden bg-white flex-col  transition-all overflow-hidden",
+          "absolute left-0 right-0 flex md:hidden bg-white flex-col  transition-all overflow-hidden shadow",
           {
             "max-h-96": isMobileNavOpen,
             "max-h-0": !isMobileNavOpen,
