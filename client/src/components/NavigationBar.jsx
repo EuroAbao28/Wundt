@@ -15,44 +15,42 @@ const NAV_CONTENTS = [
 
 function NavigationBar() {
   const location = useLocation();
-
-  const [showNav, setShowNav] = useState(false);
   const [isMobileNavOpen, setIsMobileNavOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
 
   useEffect(() => {
-    if (isMobileNavOpen) return setIsMobileNavOpen(false);
+    setIsMobileNavOpen(false); // Close mobile menu on route change
 
-    if (location.pathname !== "/") {
-      setShowNav(true); // Always visible on non-home pages
-      return;
+    if (location.pathname === "/") {
+      const handleScroll = () => {
+        setIsScrolled(window.scrollY > 20);
+      };
+
+      // Check initial scroll position
+      handleScroll();
+
+      window.addEventListener("scroll", handleScroll);
+      return () => window.removeEventListener("scroll", handleScroll);
     }
-
-    const handleScroll = () => {
-      if (window.scrollY > 100) {
-        setShowNav(true);
-      } else {
-        setShowNav(false);
-      }
-    };
-
-    // Initially run the scroll logic in case the user is already scrolled
-    handleScroll();
-
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
   }, [location.pathname]);
+
+  // On home page: hide until scrolled, fixed positioning
+  // On other pages: always visible, sticky positioning
+  const isHome = location.pathname === "/";
+  const shouldShow = !isHome || isScrolled;
 
   return (
     <nav
       className={classNames(
         "top-0 left-0 right-0 z-40 transition-transform duration-300 bg-white shadow",
         {
-          "translate-y-0": showNav,
-          "-translate-y-full": !showNav,
-          fixed: location.pathname === "/",
-          sticky: location.pathname !== "/",
+          fixed: isHome,
+          sticky: !isHome,
+          "translate-y-0": shouldShow,
+          "-translate-y-full": isHome && !isScrolled,
         }
       )}>
+      {/* Rest of your navigation content remains the same */}
       <div className="max-w-7xl mx-auto flex items-center justify-between px-6 lg:px-8 py-4">
         <div className="font-bold text-xl">Wundt Institute</div>
 
@@ -76,7 +74,7 @@ function NavigationBar() {
       {/* mobile nav dropdown */}
       <div
         className={classNames(
-          "absolute left-0 right-0 flex md:hidden bg-white flex-col  transition-all overflow-hidden",
+          "absolute left-0 right-0 flex md:hidden bg-white flex-col transition-all overflow-hidden",
           {
             "max-h-96": isMobileNavOpen,
             "max-h-0": !isMobileNavOpen,
