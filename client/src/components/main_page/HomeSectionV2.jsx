@@ -33,7 +33,7 @@ function HomeSectionV2() {
   ];
 
   return (
-    <section className="h-screen w-full relative">
+    <section className="h-svh w-full relative">
       {/* sliding image & gradient */}
       <div className="absolute inset-0 z-0">
         <Swiper
