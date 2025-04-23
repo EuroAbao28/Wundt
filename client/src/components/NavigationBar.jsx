@@ -39,7 +39,7 @@ function NavigationBar() {
   return (
     <nav
       className={classNames(
-        "top-0 left-0 right-0 z-40 transition-transform duration-300 bg-red-50 shadow",
+        "top-0 left-0 right-0 z-40 transition-transform duration-300 bg-white shadow",
         {
           "translate-y-0": showNav || location.pathname !== "/", // show
           "-translate-y-full": !showNav, // hide
@@ -77,7 +77,10 @@ function NavigationBar() {
           }
         )}>
         {NAV_CONTENTS.map((content, index) => (
-          <Link key={index} to={content.path} className="p-2 px-6 text-center">
+          <Link
+            key={index}
+            to={content.path}
+            className="text-sm sm:text-base p-2 px-6 text-center">
             {content.name}
           </Link>
         ))}
