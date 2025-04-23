@@ -22,7 +22,7 @@ function NavigationBar() {
   useEffect(() => {
     if (location.pathname === "/") {
       const handleScroll = () => {
-        setShowNav(window.scrollY > 100);
+        setShowNav(window.scrollY > 10);
       };
 
       window.addEventListener("scroll", handleScroll);
