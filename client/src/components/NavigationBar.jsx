@@ -81,9 +81,12 @@ function NavigationBar() {
           <Link
             key={index}
             to={content.path}
-            className={classNames("text-sm sm:text-base p-2 px-6 text-center", {
-              "bg-gray-50": content.path === pathname,
-            })}>
+            className={classNames(
+              "text-sm sm:text-base p-2 px-6 text-center active:scale-95 transition-all active:bg-gray-50",
+              {
+                "bg-gray-50 text-jungle": content.path === pathname,
+              }
+            )}>
             {content.name}
           </Link>
         ))}
