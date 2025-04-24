@@ -140,7 +140,7 @@ function ServicesPage() {
                       <img
                         src={image}
                         alt={`${service.category} ${idx + 1}`}
-                        className="w-full h-full object-cover object-center group-hover:scale-105 transition-all duration-500"
+                        className="w-full h-full object-cover object-center lg:group-hover:scale-105 transition-all duration-500"
                       />
                     </div>
                   </SwiperSlide>
