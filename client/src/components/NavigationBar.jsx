@@ -48,7 +48,7 @@ function NavigationBar() {
           sticky: pathname !== "/",
         }
       )}>
-      <div className="max-w-7xl mx-auto flex flex-wrap gap-y-4 items-center justify-between px-6 lg:px-8 py-5">
+      <div className="max-w-7xl mx-auto flex flex-wrap gap-y-4 items-center justify-between px-6 lg:px-8 py-3 sm:py-5">
         <Link to="/" className="flex gap-2 items-center">
           <img src={logo} alt="logo" className="w-7 sm:w-9 aspect-square" />
           <span className="font-bold text-xl sm:text-2xl bg-clip-text text-transparent bg-gradient-to-r from-jungle to-therapy-blue/80 ">
