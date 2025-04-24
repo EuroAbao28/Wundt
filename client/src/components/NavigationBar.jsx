@@ -121,6 +121,10 @@ function NavigationBar() {
         </Link>
       </div>
     </nav>
+
+    // <div className="py-4 bg-red-400 sticky top-0 left-0 right-0 z-40">
+    //   tanga ka ba
+    // </div>
   );
 }
 

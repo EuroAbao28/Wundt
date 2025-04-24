@@ -101,7 +101,7 @@ function ServicesPage() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-50 overflow-hidden">
       {/* Hero Section */}
       <div className="relative h-[400px] md:h-[500px] w-full overflow-hidden">
         {/* Background with layered gradient overlay */}

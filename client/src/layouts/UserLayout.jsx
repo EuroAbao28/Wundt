@@ -11,7 +11,7 @@ function UserLayout() {
     console.log(location.pathname);
   }, [location]);
   return (
-    <div className="font-poppins min-h-screen">
+    <div className="font-poppins bg-amber-400">
       <div className="text-gray-900 relative">
         <NavigationBar />
         <Outlet />
