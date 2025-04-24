@@ -48,16 +48,39 @@ function NavigationBar() {
           sticky: pathname !== "/",
         }
       )}>
-      <div className="max-w-7xl mx-auto flex items-center justify-between px-6 lg:px-8 py-3">
-        <div className="font-bold text-xl">Wundt Institute</div>
+      <div className="max-w-7xl mx-auto flex flex-wrap gap-y-4 items-center justify-between px-6 lg:px-8 py-5">
+        <Link to="/" className="flex gap-2 items-center">
+          <img src={logo} alt="logo" className="w-9 aspect-square" />
+          <span className="font-bold text-2xl bg-clip-text text-transparent bg-gradient-to-r from-jungle to-therapy-blue/80 ">
+            Wundt Institute
+          </span>
+        </Link>
 
         {/* desktop nav */}
-        <div className="hidden md:flex items-center gap-6">
+        <div className="hidden md:flex items-center max-lg:justify-center gap-4 max-lg:w-full">
           {NAV_CONTENTS.map((content, index) => (
             <Link key={index} to={content.path}>
-              <p className="text-base font-medium">{content.name}</p>
+              <p
+                className={classNames(
+                  "text-base font-medium text-gray-600 px-4 py-2 hover:text-jungle relative",
+                  {
+                    "text-jungle": content.path === pathname,
+                  }
+                )}>
+                {content.name}
+
+                {content.path === pathname && (
+                  <span className="absolute h-0.5 bg-gradient-to-r from-jungle to-therapy-blue/80 left-0 right-0 bottom-1 w-[60%] mx-auto"></span>
+                )}
+              </p>
             </Link>
           ))}
+
+          <Link
+            to="/appointment"
+            className="text-sm sm:text-base ml-4 rounded-lg bg-gradient-to-r from-jungle to-jungle/80 px-5 py-2 hover:brightness-105 transition-all text-white font-medium whitespace-nowrap">
+            Get Appointment
+          </Link>
         </div>
 
         {/* mobile nav button */}

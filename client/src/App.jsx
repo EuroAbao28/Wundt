@@ -37,7 +37,7 @@ function App() {
         <Route element={<UserLayout />}>
           <Route path="/" element={<MainPage />} />
           <Route path="/services" element={<ServicesPage />} />
-          <Route path="/about" element={<AboutPage />} />
+          <Route path="/about" element={<AboutPageV2 />} />
           <Route path="/aboutv2" element={<AboutPageV2 />} />
           <Route path="/gallery" element={<GalleryPage />} />
           <Route path="/news" element={<NewsPage />} />
