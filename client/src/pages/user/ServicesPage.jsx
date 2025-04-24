@@ -21,8 +21,9 @@ import d1 from "../../assets/d1.jpg";
 import d2 from "../../assets/d2.jpg";
 import d3 from "../../assets/d3.jpg";
 import d4 from "../../assets/d4.jpg";
+import Badge from "../../components/Badge";
 
-const servicesOffered = [
+const SERVICES_OFFERED = [
   {
     icon: <TbHeartRateMonitor size={24} />,
     category: "Psychological & Psychiatric Testing/Assessments",
@@ -37,7 +38,8 @@ const servicesOffered = [
   },
   {
     icon: <TbBrain size={24} />,
-    category: "Assessment and Therapy for Children with Special Needs",
+    category:
+      "Assessment and Therapy for Children with Special Needs and Concerns",
     details: [
       "Behavioral Concerns (e.g., Conduct Disorder, ADHD, etc.)",
       "Developmental Concerns (ASD, GDD, etc.)",
@@ -49,7 +51,8 @@ const servicesOffered = [
   },
   {
     icon: <TbUsersGroup size={24} />,
-    category: "Clinical Consultation & Counseling",
+    category:
+      "Clinical Consultation, Counseling, Psycho-social Interventions, and Referrals",
     details: [
       "Interpersonal and interpersonal concerns",
       "Marital and parenting concerns",
@@ -70,23 +73,16 @@ const servicesOffered = [
   },
   {
     icon: <TbClipboardList size={24} />,
-    category: "Program Development for Organizations",
-    details: [
-      "Customized mental health programs",
-      "Employee wellness initiatives",
-      "Student support systems",
-    ],
+    category:
+      "Program Development and Administration for Students, Employees, and Organizations",
+    details: [],
     images: [d1, d3, d4],
   },
   {
     icon: <TbPresentation size={24} />,
-    category: "Workshops & Team Building Activities",
-    details: [
-      "Mental wellness seminars",
-      "Stress management workshops",
-      "Leadership development programs",
-      "Team cohesion activities",
-    ],
+    category:
+      "Trainings, Seminars, Workshops, Recollection, and Team Building Organizing and Facilitating",
+    details: [],
     images: [d2, d4, d1],
   },
 ];
@@ -101,123 +97,77 @@ function ServicesPage() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-gray-50 overflow-hidden">
-      {/* Hero Section */}
-      <div className="relative h-[400px] md:h-[500px] w-full overflow-hidden">
-        {/* Background with layered gradient overlay */}
-        <div className="absolute inset-0 z-0">
-          <div className="absolute inset-0 bg-gradient-to-br from-jungle/90 via-jungle/70 to-therapy-blue/50 z-10"></div>
-          <img
-            src={d1}
-            alt="Psychological services background"
-            className="w-full h-full object-cover object-center"
-            loading="eager"
-          />
-        </div>
+    <div className="bg-white overflow-hidden min-h-screen w-full">
+      <div
+        style={{ backgroundImage: `url(${d1})` }}
+        className="relative bg-center bg-cover h-[20rem]">
+        <div className="absolute inset-0 bg-gradient-to-r from-jungle/90 via-jungle/70 to-therapy-blue/50 overflow-hidden">
+          <div
+            data-aos="fade-down"
+            className="max-w-7xl mx-auto px-6 lg:px-8 flex flex-col items-center justify-center h-full text-center">
+            <Badge
+              label={"Professional Care"}
+              className="bg-white/20 text-white"
+            />
 
-        {/* Centered content container */}
-        <div className="relative z-10 h-full flex flex-col items-center justify-center text-center">
-          <div className="max-w-2xl px-6 lg:px-8">
-            <span className="inline-block px-4 py-1.5 mb-6 text-xs font-medium tracking-widest text-white uppercase rounded-full bg-white/20 backdrop-blur-sm">
-              Professional Care
-            </span>
-            <h1 className="text-4xl md:text-5xl font-bold text-white mb-4 leading-tight">
-              Our
-              <span className="text-emerald-300 ml-2">Services</span>
+            <h1 className="text-4xl md:text-5xl font-bold mt-6 text-white">
+              Our <span className="text-emerald-300">Services</span>
             </h1>
+
+            <p className="mt-4 text-base md:text-lg text-white/90 sm:mx-12 md:mx-32 lg:mx-60">
+              Comprehensive psychological services tailored to your unique needs
+              and circumstances.
+            </p>
           </div>
-
-          <p className="text-lg text-white/90 md:pr-12">
-            Comprehensive psychological services tailored to your unique
-            <br />
-            needs and circumstances.
-          </p>
         </div>
-
-        {/* Subtle bottom gradient fade */}
-        <div className="absolute bottom-0 left-0 right-0 h-20 bg-gradient-to-t from-gray-900/10 to-transparent z-10"></div>
       </div>
 
-      {/* Services List */}
-      <div className="py-16 px-6 lg:px-8 max-w-7xl mx-auto">
-        <div className="grid gap-12">
-          {servicesOffered.map((service, index) => (
-            <div
-              key={index}
-              data-aos={index % 2 === 0 ? "fade-right" : "fade-left"}
-              data-aos-delay={index * 100}
-              className="flex flex-col lg:flex-row gap-8 bg-white rounded-xl shadow-md overflow-hidden group hover:shadow-lg transition-all duration-300">
-              {/* Image Slider */}
-              <div className="lg:w-1/2 h-64 md:h-80 lg:h-auto overflow-hidden">
-                <Swiper
-                  modules={[Pagination]}
-                  pagination={{ clickable: true }}
-                  className="h-full">
-                  {service.images.map((img, idx) => (
-                    <SwiperSlide key={idx}>
-                      <div className="relative h-full w-full">
-                        <img
-                          src={img}
-                          alt={`${service.category} ${idx + 1}`}
-                          className="w-full h-full object-cover transition-all duration-500 group-hover:scale-105"
-                        />
-                      </div>
-                    </SwiperSlide>
-                  ))}
-                </Swiper>
-              </div>
-
-              {/* Content */}
-              <div className="lg:w-1/2 p-6 md:p-8 flex flex-col">
-                <div className="flex items-center mb-4">
-                  <div className="bg-jungle/10 p-3 rounded-lg mr-4">
-                    {service.icon}
-                  </div>
-                  <h2 className="text-xl md:text-2xl font-bold text-gray-900">
-                    {service.category}
-                  </h2>
-                </div>
-
-                <ul className="flex-1 space-y-3 text-gray-600 mb-6">
-                  {service.details.map((detail, i) => (
-                    <li key={i} className="flex items-start">
-                      <span className="inline-block w-1.5 h-1.5 bg-jungle rounded-full mt-2 mr-2"></span>
-                      <span>{detail}</span>
-                    </li>
-                  ))}
-                </ul>
-
-                <div className="mt-auto">
-                  <Link
-                    to="/appointment"
-                    className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-jungle to-therapy-blue text-white font-medium rounded-md hover:shadow-lg transition-all hover:brightness-105">
-                    Book This Service
-                    <TbArrowRight className="ml-2" />
-                  </Link>
-                </div>
-              </div>
+      <div className="max-w-7xl mx-auto px-6 lg:px-8 py-16 space-y-12">
+        {SERVICES_OFFERED.map((service, index) => (
+          <div
+            key={index}
+            data-aos="fade-up"
+            data-aos-delay={index * 100}
+            className="bg-white shadow-md rounded-xl flex flex-col lg:flex-row overflow-hidden lg:odd:flex-row-reverse group">
+            <div className="lg:w-1/2 h-64 md:h-80 lg:h-auto overflow-hidden">
+              <Swiper
+                modules={[Pagination]}
+                pagination={{ clickable: true }}
+                className="h-full">
+                {service.images.map((image, idx) => (
+                  <SwiperSlide key={idx} className="h-full">
+                    <div className="h-full w-full overflow-hidden">
+                      <img
+                        src={image}
+                        alt={`${service.category} ${idx + 1}`}
+                        className="w-full h-full object-cover object-center group-hover:scale-105 transition-all duration-500"
+                      />
+                    </div>
+                  </SwiperSlide>
+                ))}
+              </Swiper>
             </div>
-          ))}
-        </div>
 
-        {/* CTA Section */}
-        <div
-          className="mt-16 bg-gradient-to-r from-jungle to-therapy-blue rounded-xl p-8 md:p-12 text-center"
-          data-aos="fade-up">
-          <h3 className="text-2xl md:text-3xl font-bold text-white mb-4">
-            Not Sure Which Service You Need?
-          </h3>
-          <p className="text-white/90 mb-6 max-w-2xl mx-auto">
-            Our team can help assess your needs and recommend the most
-            appropriate services for your situation.
-          </p>
-          <Link
-            to="/contact"
-            className="inline-flex items-center px-8 py-3 bg-white text-jungle font-medium rounded-md hover:shadow-lg transition-all hover:brightness-105">
-            Contact Our Team
-            <TbArrowRight className="ml-2" />
-          </Link>
-        </div>
+            <div className="flex-1 py-8 px-12 flex flex-col">
+              <h2 className="text-xl md:text-2xl font-bold">
+                {service.category}
+              </h2>
+
+              <ul className="space-y-2 mt-4 flex-1 list-disc marker:text-jungle ml-4">
+                {service.details.map((detail, id) => (
+                  <li className="text-gray-600">{detail}</li>
+                ))}
+              </ul>
+
+              <Link
+                to="/appointment"
+                className="w-fit flex items-center text-sm sm:text-base px-6 py-3 bg-gradient-to-r from-jungle to-jungle/80 text-white font-medium rounded-lg hover:shadow-lg transition-all hover:brightness-105 mt-4">
+                View All Services
+                <TbArrowRight className="ml-2" />
+              </Link>
+            </div>
+          </div>
+        ))}
       </div>
     </div>
   );
