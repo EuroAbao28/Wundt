@@ -30,7 +30,7 @@ function AboutPageV2() {
   }, []);
 
   return (
-    <div className="bg-white">
+    <div className="bg-white overflow-hidden">
       {/* Hero Section */}
       <div className="relative h-96 md:h-[500px] w-full overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-r from-jungle/90 to-therapy-blue/90 z-10"></div>

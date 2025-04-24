@@ -96,7 +96,7 @@ function AppointmentPage() {
     <>
       <div
         data-aos="fade-up"
-        className="flex-1 sm:mt-6 md:mt-10 sm:mb-16 sm:px-6 lg:px-12">
+        className="flex-1 sm:mt-6 md:mt-10 sm:mb-16 sm:px-6 lg:px-12 overflow-hidden">
         <div className="max-w-7xl w-full mx-auto flex lg:items-start max-lg:flex-col gap-6 relative">
           {/* instructions */}
           <div

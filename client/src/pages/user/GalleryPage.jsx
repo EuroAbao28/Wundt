@@ -17,7 +17,9 @@ function GalleryPage() {
   }, []);
 
   return (
-    <div data-aos="fade-up" className=" px-6 lg:px-12 mt-10 mb-16">
+    <div
+      data-aos="fade-up"
+      className=" px-6 lg:px-12 mt-10 mb-16 overflow-hidden">
       <div className="  max-w-7xl mx-auto">
         <SectionHeader title={"Our gallery"} />
 

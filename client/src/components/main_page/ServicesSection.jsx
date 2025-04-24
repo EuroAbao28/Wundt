@@ -62,7 +62,7 @@ function ServicesSection() {
   }, []);
 
   return (
-    <section className="py-16 bg-white">
+    <section className="py-16 bg-white overflow-hidden">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         <header data-aos="fade-up" className="text-center">
           <Badge
