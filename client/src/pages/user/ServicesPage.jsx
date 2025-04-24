@@ -148,14 +148,16 @@ function ServicesPage() {
               </Swiper>
             </div>
 
-            <div className="flex-1 py-8 px-12 flex flex-col">
+            <div className="flex-1 py-6 lg:py-8 px-8 lg:px-12 flex flex-col">
               <h2 className="text-xl md:text-2xl font-bold">
                 {service.category}
               </h2>
 
               <ul className="space-y-2 mt-4 flex-1 list-disc marker:text-jungle ml-4">
                 {service.details.map((detail, id) => (
-                  <li className="text-gray-600">{detail}</li>
+                  <li className="text-gray-600 text-sm md:text-base">
+                    {detail}
+                  </li>
                 ))}
               </ul>
 
