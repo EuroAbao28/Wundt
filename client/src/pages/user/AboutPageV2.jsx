@@ -334,7 +334,7 @@ function AboutPageV2() {
             <span className="text-jungle"> Experts </span>
           </h2>
 
-          <p className="mt-4 text-gray-600 max-w-2xl mx-auto">
+          <p className="mt-4 text-gray-600 max-w-2xl mx-auto text-sm sm:text-base">
             A multidisciplinary team offering comprehensive assessments and
             therapies - from child development to organizational mental health
             programs.
