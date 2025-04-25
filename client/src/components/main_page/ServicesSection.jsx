@@ -101,10 +101,10 @@ function ServicesSection() {
           ))}
         </div>
 
-        <div data-aos="fade-up" className="mt-12 text-center">
+        <div data-aos="fade-up" className="mt-12 flex justify-center">
           <Link
             to="/services"
-            className="inline-flex items-center text-sm sm:text-base px-6 py-3 bg-gradient-to-r from-jungle to-jungle/80 text-white font-medium rounded-lg hover:shadow-lg transition-all hover:brightness-105">
+            className="flex items-center text-sm sm:text-base px-6 py-3 bg-gradient-to-r from-jungle to-jungle/80 text-white font-medium rounded-lg hover:shadow-lg transition-all hover:brightness-105">
             View All Services
             <TbArrowRight className="ml-2" />
           </Link>

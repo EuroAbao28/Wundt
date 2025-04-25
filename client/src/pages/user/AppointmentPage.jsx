@@ -96,13 +96,13 @@ function AppointmentPage() {
     <>
       <div
         data-aos="fade-up"
-        className="flex-1 sm:mt-6 md:mt-10 sm:mb-16 sm:px-6 lg:px-12 overflow-hidden">
-        <div className="max-w-7xl w-full mx-auto flex lg:items-start max-lg:flex-col gap-6 relative">
+        className="flex-1   sm:pt-6 md:pt-8 lg:pt-12 sm:pb-16  overflow-hidden">
+        <div className="max-w-7xl w-full mx-auto flex lg:items-start max-lg:flex-col gap-6 sm:px-6 lg:px-8">
           {/* instructions */}
           <div
             style={{ backgroundImage: `url(${b1})` }}
-            className="w-full lg:w-1/3 bg-center bg-cover sm:shadow-card2 sm:rounded overflow-hidden lg:sticky lg:top-28.5">
-            <div className="p-6 lg:p-8 bg-radial-[at_-35%_15%] from-green-500/90 to-emerald-600/90 to-75% h-full text-white flex flex-col">
+            className="w-full lg:w-[35%] bg-center bg-cover sm:shadow-sm sm:rounded-xl overflow-hidden">
+            <div className="p-6 lg:p-8 bg-gradient-to-br from-jungle/90 via-jungle/80 to-therapy-blue/90 h-full text-white flex flex-col">
               <h1 className="text-2xl font-semibold">Appointment Guidelines</h1>
               <div className="flex flex-col gap-6 lg:gap-8 mt-8 flex-1">
                 {INSTRUCTIONS_CONSTANTS.map((insruction, index) => (
@@ -123,7 +123,7 @@ function AppointmentPage() {
           </div>
 
           {/* form */}
-          <div className="flex-1 px-6 md:px-12 py-8 sm:shadow-card2 sm:rounded ">
+          <div className="flex-1 px-6 md:px-12 py-8 sm:shadow-sm sm:rounded-xl border border-gray-100">
             <h1 className="text-2xl font-semibold">Appointment Form</h1>
             <form
               onSubmit={handleSubmit}
@@ -322,7 +322,7 @@ function AppointmentPage() {
 
               <button
                 type="submit"
-                className="bg-radial-[at_-50%_-50%] from-green-500 to-emerald-600 to-75% text-white rounded w-full sm:w-fit py-2 px-8 mt-4 font-semibold uppercase active:scale-95 transition-all focus:outline-emerald-700 col-span-full cursor-pointer">
+                className="bg-gradient-to-r from-jungle to-jungle/80 text-white rounded w-full sm:w-fit py-2 px-8 mt-8 font-semibold uppercase active:scale-95 transition-all focus:outline-emerald-700 col-span-full cursor-pointer">
                 Submit Form
               </button>
             </form>
