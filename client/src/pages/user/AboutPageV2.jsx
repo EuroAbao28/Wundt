@@ -60,7 +60,7 @@ function AboutPageV2() {
       {/* founder  */}
       <div className="max-w-7xl mx-auto px-6 lg:px-8 py-16 ">
         {/* founder section */}
-        <div className="rounded-xl shadow-sm p-8 flex flex-col lg:flex-row gap-12 border border-gray-100">
+        <div className="rounded-xl sm:shadow-sm sm:p-8 flex flex-col lg:flex-row gap-12 sm:border border-gray-100">
           {/* image */}
           <div className="max-lg:mx-auto max-w-[20rem] lg:w-[35%] flex justify-center items-center">
             <div className="relative rounded-2xl overflow-hidden shadow-lg border-4 border-white">
@@ -75,14 +75,16 @@ function AboutPageV2() {
 
           {/* description */}
           <div className="flex-1 space-y-6">
-            <Badge
-              label={"Our Founder"}
-              className="text-therapy-blue bg-therapy-blue/10"
-            />
+            <div className="space-y-6 flex flex-col items-center lg:items-start">
+              <Badge
+                label={"Our Founder"}
+                className="text-therapy-blue bg-therapy-blue/10"
+              />
 
-            <h1 className="text-2xl md:text-3xl font-bold">
-              Visionary Leadership
-            </h1>
+              <h1 className="text-2xl md:text-3xl font-bold">
+                Visionary Leadership
+              </h1>
+            </div>
 
             <div className="text-gray-600 space-y-4 text-sm md:text-base">
               <p>
@@ -143,12 +145,16 @@ function AboutPageV2() {
 
                   {/* max sm screen */}
                   <div className="max-sm:flex hidden gap-4 items-start">
-                    <div className="rounded-full p-2 bg-jungle/20 text-jungle text-xl mt-1">
+                    <div className="rounded-full p-2 bg-jungle/20 text-jungle text-lg sm:text-xl mt-1">
                       {item.icon}
                     </div>
                     <div className="flex-1">
-                      <p className="font-bold text-jungle">{item.year}</p>
-                      <p className="text-sm text-gray-600">{item.event}</p>
+                      <p className="font-bold text-jungle text-sm sm:text-base">
+                        {item.year}
+                      </p>
+                      <p className="text-xs sm:text-sm text-gray-600">
+                        {item.event}
+                      </p>
                     </div>
                   </div>
                 </div>
