@@ -144,7 +144,7 @@ function NewsPage() {
                   className="h-full w-full object-center object-cover group-hover:scale-105 transition-all duration-300"
                 />
 
-                <p className="bg-jungle text-white absolute left-4 bottom-4 text-xs px-2 py-1 rounded">
+                <p className="bg-jungle text-white absolute left-4 bottom-4 text-xxs md:text-xs px-2 py-1 rounded">
                   {item.category}
                 </p>
               </div>
