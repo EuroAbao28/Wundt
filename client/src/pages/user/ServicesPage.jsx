@@ -22,6 +22,7 @@ import d2 from "../../assets/d2.jpg";
 import d3 from "../../assets/d3.jpg";
 import d4 from "../../assets/d4.jpg";
 import Badge from "../../components/Badge";
+import PageHeader from "../../components/PageHeader";
 
 const SERVICES_OFFERED = [
   {
@@ -98,29 +99,14 @@ function ServicesPage() {
 
   return (
     <div className="bg-white overflow-hidden">
-      <div
-        style={{ backgroundImage: `url(${d1})` }}
-        className="bg-center bg-cover">
-        <div className="py-16 bg-gradient-to-br from-jungle/90 via-jungle/70 to-therapy-blue/50 overflow-hidden">
-          <div
-            data-aos="fade-down"
-            className="max-w-7xl mx-auto px-6 lg:px-8 flex flex-col items-center justify-center h-full text-center">
-            <Badge
-              label={"Professional Care"}
-              className="bg-white/20 text-white"
-            />
-
-            <h1 className="text-4xl md:text-5xl font-bold mt-6 text-white">
-              Our <span className="text-emerald-300">Services</span>
-            </h1>
-
-            <p className="mt-4 text-base md:text-lg text-white/90 sm:mx-12 md:mx-32 lg:mx-60">
-              Comprehensive psychological services tailored to your unique needs
-              and circumstances.
-            </p>
-          </div>
-        </div>
-      </div>
+      <PageHeader
+        badge={"Professional Care"}
+        title={"Our"}
+        titleHighlight={"Services"}
+        desc={
+          "Comprehensive psychological services tailored to your unique needs and circumstances."
+        }
+      />
 
       <div className="max-w-7xl mx-auto px-6 lg:px-8 py-16 space-y-12">
         {SERVICES_OFFERED.map((service, index) => (

@@ -1,98 +1,174 @@
 import React, { useEffect } from "react";
+import { TbArrowRight } from "react-icons/tb";
 import s3 from "../../assets/s3.jpg";
 import s2 from "../../assets/s2.jpg";
 import s7 from "../../assets/s7.jpg";
 import s9 from "../../assets/s9.jpg";
 import b1 from "../../assets/b1.jpg";
-import SectionHeader from "../../components/SectionHeader";
+import Badge from "../../components/Badge";
+import GradientLine from "../../components/GradientLine";
 import AOS from "aos";
 import "aos/dist/aos.css";
+import PageHeader from "../../components/PageHeader";
+import { Link } from "react-router";
 
-const contents = [
+const NEWS_ITEMS = [
   {
+    id: 1,
     image: s9,
-    title: "Lorem ipsum dolor sit Molestiae, sit.",
-    desc: " Lorem ipsum dolor sit, amet consectetur adipisicing elit. Facilis rem eos ratione explicabo earum dignissimos laudantium dolorum assumenda animi.",
+    title: "New Mental Health Workshop Series",
+    date: "May 15, 2023",
+    desc: "Join our monthly workshop series focusing on stress management techniques and mindfulness practices for better mental health.",
+    category: "Workshops",
   },
   {
+    id: 2,
     image: s7,
-    title:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae, sit.",
-    desc: " Lorem ipsum dolor sit, amet consectetur adipisicing elit. Facilis rem eos ratione explicabo earum dignissimos laudantium dolorum assumenda animi.",
+    title: "Expansion to New Location in Urdaneta",
+    date: "April 28, 2023",
+    desc: "We're excited to announce the opening of our new branch in Urdaneta City, making our services more accessible to the community.",
+    category: "Announcements",
   },
   {
+    id: 3,
     image: s2,
-    title:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae, sit.",
-    desc: " Lorem ipsum dolor sit, amet consectetur adipisicing elit. Facilis rem eos ratione explicabo earum dignissimos laudantium dolorum assumenda animi.",
+    title: "Child Psychology Seminar Success",
+    date: "March 10, 2023",
+    desc: "Our recent seminar on child development and behavioral interventions was attended by over 150 participants.",
+    category: "Events",
   },
   {
+    id: 4,
     image: s3,
-    title: "Lorem ipsum dolor sit amet consectetur adipisicing",
-    desc: " Lorem ipsum dolor sit, amet consectetur adipisicing elit. Facilis rem eos ratione explicabo earum dignissimos laudantium dolorum assumenda animi.",
+    title: "New PRC Board Exam Review Schedule",
+    date: "February 22, 2023",
+    desc: "Registration is now open for our intensive review program for the upcoming Psychology board examinations.",
+    category: "Programs",
   },
   {
+    id: 5,
     image: s9,
-    title:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae, sit.",
-    desc: " Lorem ipsum dolor sit, amet consectetur adipisicing elit. Facilis rem eos ratione explicabo earum dignissimos laudantium dolorum assumenda animi.",
+    title: "Community Outreach Program Results",
+    date: "January 18, 2023",
+    desc: "Our free counseling initiative served over 200 individuals in underserved communities last quarter.",
+    category: "Community",
   },
   {
+    id: 6,
     image: s7,
-    title: "Lorem  adipisicing elit. Molestiae, sit.",
-    desc: " Lorem ipsum dolor sit, amet consectetur adipisicing elit. Facilis rem eos ratione explicabo earum dignissimos laudantium dolorum assumenda animi.",
-  },
-  {
-    image: s9,
-    title: "Lorem ipsum dolo  adipisicing elit. Molestiae, sit.",
-    desc: " Lorem ipsum dolor sit, amet consectetur adipisicing elit. Facilis rem eos ratione explicabo earum dignissimos laudantium dolorum assumenda animi.",
-  },
-  {
-    image: s2,
-    title: "Lorem ipsum dolor sit amet   adipisicing elit. Molestiae, sit.",
-    desc: " Lorem ipsum dolor sit, amet consectetur adipisicing elit. Facilis rem eos ratione explicabo earum dignissimos laudantium dolorum assumenda animi.",
+    title: "Team Building Workshop for Educators",
+    date: "December 5, 2022",
+    desc: "Specialized workshop designed to help teachers manage classroom stress and improve student engagement.",
+    category: "Workshops",
   },
 ];
 
 function NewsPage() {
   useEffect(() => {
-    AOS.init({ duration: 1000, once: true });
+    AOS.init({
+      duration: 1000,
+      once: true,
+      easing: "ease-out-cubic",
+    });
   }, []);
 
   return (
-    <div
-      data-aos="fade-up"
-      style={{ backgroundImage: `url(${b1})` }}
-      className="mt-10 mb-16  bg-center bg-cover overflow-hidden">
-      <div className="px-6 pb-6 lg:px-12 lg:pb-12 bg-gradient-to-b from-white from-5% to-emerald-600/60 backdrop-blur-sm">
-        <div className=" max-w-7xl mx-auto">
-          <SectionHeader title={"Latest News & Updates"} />
+    <div className="bg-white overflow-hidden">
+      <PageHeader
+        badge={"News & Updates"}
+        title={"Latest"}
+        titleHighlight={"News"}
+        desc={
+          "Stay updated with our announcements, events, and mental health insights"
+        }
+      />
 
-          <div className="mt-12 flex gap-2 snap-x snap-mandatory overflow-x-auto pt-2 scroll-smooth scrollbar scrollbar-thumb-white scrollbar-track-white/30 scrollbar-thin scrollbar-thumb-rounded-full scrollbar-track-rounded-full pb-6">
-            {contents.map((content, index) => (
+      {/* News Content */}
+      {/* <div className="py-16">
+        <div className="max-w-7xl mx-auto px-6 lg:px-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {NEWS_ITEMS.map((item, index) => (
               <div
-                key={index}
-                className="rounded overflow-hidden aspect-square relative group transition-all hover:-translate-y-1 duration-500 w-[16rem] md:w-[20rem] shrink-0 snap-center">
-                <img
-                  src={content.image}
-                  alt=""
-                  loading="lazy"
-                  className="object-center object-cover h-full w-full"
-                />
-                <div className="absolute inset-0 flex flex-col justify-end p-2  gap-2 bg-gradient-to-b from-black/10 to-black/80 group-hover:to-black/90 transition-all duration-500">
-                  <p className="text-xs md:text-sm text-white font-semibold">
-                    {content.title}
-                  </p>
-                  <p className="text-white/80 text-xs md:text-sm line-clamp-3">
-                    {content.desc}
-                  </p>
-                  <button className="text-center py-2 text-xs md:text-sm font-semibold bg-emerald-600 text-white rounded">
+                key={item.id}
+                data-aos="fade-up"
+                data-aos-delay={index * 100}
+                className="bg-white rounded-xl shadow-sm hover:shadow-md border border-gray-100 overflow-hidden group transition-all">
+                <div className="relative h-48 overflow-hidden">
+                  <img
+                    src={item.image}
+                    alt={item.title}
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                  />
+                  <div className="absolute bottom-4 left-4 bg-jungle text-white text-xs px-2 py-1 rounded">
+                    {item.category}
+                  </div>
+                </div>
+
+                <div className="p-6 flex flex-col">
+                  <p className="text-sm text-gray-500">{item.date}</p>
+                  <h3 className="text-lg font-semibold text-gray-900 mt-2">
+                    {item.title}
+                  </h3>
+                  <p className="text-gray-600 text-sm mt-3">{item.desc}</p>
+
+                  <button className="flex items-center text-sm text-jungle font-medium group-hover:underline underline-offset-2 mt-4">
                     Read more
+                    <TbArrowRight className="ml-1 group-hover:ml-2 transition-all" />
                   </button>
                 </div>
               </div>
             ))}
           </div>
+
+          <div data-aos="fade-up" className="mt-12 text-center">
+            <button className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-jungle to-jungle/80 text-white font-medium rounded-lg hover:shadow-lg transition-all hover:brightness-105">
+              Load More Articles
+              <TbArrowRight className="ml-2" />
+            </button>
+          </div>
+        </div>
+      </div> */}
+
+      <div className="max-w-7xl mx-auto px-6 lg:px-8 py-16">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {NEWS_ITEMS.map((item, index) => (
+            <div
+              key={item.id}
+              data-aos="fade-up"
+              data-aos-delay={index * 100}
+              className="flex flex-col border border-gray-200 shadow-sm hover:shadow-md overflow-hidden rounded-xl group">
+              <div className="h-48 overflow-hidden relative">
+                <img
+                  src={item.image}
+                  alt={item.title}
+                  className="h-full w-full object-center object-cover group-hover:scale-105 transition-all duration-300"
+                />
+
+                <p className="bg-jungle text-white absolute left-4 bottom-4 text-xs px-2 py-1 rounded">
+                  {item.category}
+                </p>
+              </div>
+
+              <div className="p-6 flex-1 relative pb-16">
+                <p className="text-sm text-gray-500">{item.date}</p>
+
+                <h3 className="text-lg font-semibold mt-2 line-clamp-2">
+                  {item.title} Lorem ipsum dolor sit amet consectetur,
+                  adipisicing elit. Molestiae, id!
+                </h3>
+
+                <p className="text-gray-600 text-sm mt-3 line-clamp-3">
+                  {item.desc} Lorem ipsum dolor, sit amet consectetur
+                  adipisicing elit. Ipsa, quasi?
+                </p>
+
+                <Link className="flex items-center text-sm text-jungle font-medium group-hover:underline underline-offset-2 mt-2 w-fit pt-2 pr-2 absolute bottom-6">
+                  Read more
+                  <TbArrowRight className="ml-1 group-hover:ml-2 transition-all" />
+                </Link>
+              </div>
+            </div>
+          ))}
         </div>
       </div>
     </div>

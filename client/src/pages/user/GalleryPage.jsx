@@ -13,6 +13,7 @@ import Badge from "../../components/Badge";
 import classNames from "classnames";
 import { Link } from "react-router";
 import { TbArrowRight } from "react-icons/tb";
+import PageHeader from "../../components/PageHeader";
 
 const GALLERY_ITEMS = [
   { image: d1, alt: "Psychological assessment session" },
@@ -36,27 +37,14 @@ function GalleryPage() {
 
   return (
     <div className="bg-white overflow-hidden">
-      <div
-        style={{ backgroundImage: `url(${s3})` }}
-        className="bg-center bg-cover">
-        <div className="py-16 bg-gradient-to-br from-jungle/90 via-jungle/70 to-therapy-blue/50 overflow-hidden">
-          <div
-            data-aos="fade-down"
-            className="max-w-7xl mx-auto px-6 lg:px-8 flex flex-col items-center justify-center h-full text-center">
-            <Badge label={"Our Moments"} className="bg-white/20 text-white" />
-
-            <h1 className="text-4xl md:text-5xl font-bold mt-6 text-white">
-              Impactful
-              <span className="text-emerald-300"> Events</span>
-            </h1>
-
-            <p className="mt-4 text-base md:text-lg text-white/90 sm:mx-12 md:mx-32 lg:mx-60">
-              Explore highlights from our counseling sessions, training
-              programs, and mental health awareness events across Luzon.
-            </p>
-          </div>
-        </div>
-      </div>
+      <PageHeader
+        badge={"Our Moments"}
+        title={"Impactful"}
+        titleHighlight={"Events"}
+        desc={
+          "Explore highlights from our counseling sessions, training programs, and mental health awareness events across Luzon."
+        }
+      />
 
       <div className="max-w-7xl mx-auto px-6 lg:px-8 py-16">
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2">
