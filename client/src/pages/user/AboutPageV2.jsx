@@ -60,7 +60,9 @@ function AboutPageV2() {
       {/* founder  */}
       <div className="max-w-7xl mx-auto px-6 lg:px-8 py-16 ">
         {/* founder section */}
-        <div className="rounded-xl sm:shadow-sm sm:p-8 flex flex-col lg:flex-row gap-12 sm:border border-gray-100">
+        <div
+          data-aos="fade-up"
+          className="rounded-xl sm:shadow-sm sm:p-8 flex flex-col lg:flex-row gap-12 sm:border border-gray-100">
           {/* image */}
           <div className="max-lg:mx-auto max-w-[20rem] lg:w-[35%] flex justify-center items-center">
             <div className="relative rounded-2xl overflow-hidden shadow-lg border-4 border-white">
@@ -384,6 +386,8 @@ function AboutPageV2() {
           ].map((item, index) => (
             <div
               key={index}
+              data-aos="fade-up"
+              data-aos-delay={index * 100}
               className="border border-gray-200 shadow-sm hover:shadow-md group rounded-xl overflow-hidden">
               <div className="h-[14rem] overflow-hidden">
                 <img
