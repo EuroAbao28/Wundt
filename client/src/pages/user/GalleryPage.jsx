@@ -59,11 +59,13 @@ function GalleryPage() {
       </div>
 
       <div className="max-w-7xl mx-auto px-6 lg:px-8 py-16">
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2">
           {GALLERY_ITEMS.map((item, index) => (
             <div
               key={index}
-              className={classNames("rounded overflow-hidden h-60")}>
+              className={classNames(
+                "rounded overflow-hidden max-sm:h-40 h-60"
+              )}>
               <img
                 src={item.image}
                 alt={item.alt}
