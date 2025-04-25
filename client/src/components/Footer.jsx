@@ -19,7 +19,7 @@ function Footer() {
           {/* Quick Links */}
           <div className="space-y-4">
             <h3 className="text-lg font-bold">Quick Links</h3>
-            <ul className="space-y-2">
+            <ul className="space-y-3">
               <li>
                 <Link
                   to="/"
@@ -79,7 +79,7 @@ function Footer() {
           </div>
 
           {/* Locations */}
-          <div className="space-y-4">
+          <div className="space-y-3">
             <h3 className="text-lg font-bold">Our Locations</h3>
             <div className="flex items-center">
               <TbMapPin className="mr-2" />
