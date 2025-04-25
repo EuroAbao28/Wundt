@@ -130,7 +130,7 @@ function NewsPage() {
       </div> */}
 
       <div className="max-w-7xl mx-auto px-6 lg:px-8 py-16">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
           {NEWS_ITEMS.map((item, index) => (
             <div
               key={item.id}
@@ -150,13 +150,13 @@ function NewsPage() {
               </div>
 
               <div className="p-6 flex-1 relative pb-16">
-                <p className="text-sm text-gray-500">{item.date}</p>
+                <p className="text-xs md:text-sm text-gray-500">{item.date}</p>
 
-                <h3 className="text-lg font-semibold mt-2 line-clamp-2">
+                <h3 className="text-base md:text-lg font-semibold mt-2 line-clamp-2">
                   {item.title}
                 </h3>
 
-                <p className="text-gray-600 text-sm mt-3 line-clamp-3">
+                <p className="text-gray-600 text-xs md:text-sm mt-3 line-clamp-3">
                   {item.desc}
                 </p>
 
@@ -167,6 +167,13 @@ function NewsPage() {
               </div>
             </div>
           ))}
+        </div>
+
+        <div data-aos="fade-up" className="mt-12 text-center">
+          <Link className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-jungle to-jungle/80 text-white font-medium rounded-lg hover:shadow-lg transition-all hover:brightness-105">
+            Load More Articles
+            <TbArrowRight className="ml-2" />
+          </Link>
         </div>
       </div>
     </div>
