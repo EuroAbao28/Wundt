@@ -172,7 +172,7 @@ function NewsPage() {
         </div>
 
         <div data-aos="fade-up" className="mt-12 text-center">
-          <Link className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-jungle to-jungle/80 text-white font-medium rounded-lg hover:shadow-lg transition-all hover:brightness-105">
+          <Link className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-jungle to-jungle/80 text-white font-medium rounded-lg hover:shadow-lg transition-all hover:brightness-105 text-sm md:text-base">
             Load More Articles
             <TbArrowRight className="ml-2" />
           </Link>
