@@ -153,13 +153,11 @@ function NewsPage() {
                 <p className="text-sm text-gray-500">{item.date}</p>
 
                 <h3 className="text-lg font-semibold mt-2 line-clamp-2">
-                  {item.title} Lorem ipsum dolor sit amet consectetur,
-                  adipisicing elit. Molestiae, id!
+                  {item.title}
                 </h3>
 
                 <p className="text-gray-600 text-sm mt-3 line-clamp-3">
-                  {item.desc} Lorem ipsum dolor, sit amet consectetur
-                  adipisicing elit. Ipsa, quasi?
+                  {item.desc}
                 </p>
 
                 <Link className="flex items-center text-sm text-jungle font-medium group-hover:underline underline-offset-2 mt-2 w-fit pt-2 pr-2 absolute bottom-6">
