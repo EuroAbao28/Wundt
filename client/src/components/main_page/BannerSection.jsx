@@ -16,12 +16,12 @@ function BannerSection() {
   }, []);
 
   return (
-    <div data-aos="fade-up" className="relative bg-jungle py-20">
+    <div data-aos="fade-up" className="relative py-20">
       {/* background image with gradient */}
       <div
         style={{ backgroundImage: `url(${b1})` }}
         className="absolute inset-0 bg-cover bg-center -z-10">
-        <div className="absolute inset-0 bg-gradient-to-t from-jungle/90 to-therapy-blue/50"></div>
+        <div className="absolute inset-0 bg-gradient-to-t from-jungle/90 to-therapy-blue/90 backdrop-blur-sm"></div>
       </div>
 
       <div className="z-10 flex flex-col items-center justify-center px-6 lg:px-8 text-center">

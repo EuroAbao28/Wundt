@@ -97,11 +97,11 @@ function ServicesPage() {
   }, []);
 
   return (
-    <div className="bg-white overflow-hidden min-h-screen w-full">
+    <div className="bg-white overflow-hidden">
       <div
         style={{ backgroundImage: `url(${d1})` }}
-        className="relative bg-center bg-cover h-[20rem]">
-        <div className="absolute inset-0 bg-gradient-to-r from-jungle/90 via-jungle/70 to-therapy-blue/50 overflow-hidden">
+        className="bg-center bg-cover">
+        <div className="py-16 bg-gradient-to-br from-jungle/90 via-jungle/70 to-therapy-blue/50 overflow-hidden">
           <div
             data-aos="fade-down"
             className="max-w-7xl mx-auto px-6 lg:px-8 flex flex-col items-center justify-center h-full text-center">
@@ -128,7 +128,7 @@ function ServicesPage() {
             key={index}
             data-aos="fade-up"
             data-aos-delay={index * 100}
-            className="bg-white shadow-md rounded-xl flex flex-col lg:flex-row overflow-hidden lg:odd:flex-row-reverse group">
+            className="bg-white shadow-md rounded-xl flex flex-col lg:flex-row overflow-hidden lg:odd:flex-row-reverse group ">
             <div className="lg:w-1/2 h-64 md:h-80 lg:h-auto overflow-hidden">
               <Swiper
                 modules={[Pagination]}
@@ -155,7 +155,7 @@ function ServicesPage() {
 
               <ul className="space-y-2 mt-4 flex-1 list-disc marker:text-jungle ml-4">
                 {service.details.map((detail, id) => (
-                  <li className="text-gray-600 text-sm md:text-base">
+                  <li key={id} className="text-gray-600 text-sm md:text-base">
                     {detail}
                   </li>
                 ))}
@@ -164,7 +164,7 @@ function ServicesPage() {
               <Link
                 to="/appointment"
                 className="w-fit flex items-center text-sm sm:text-base px-6 py-3 bg-gradient-to-r from-jungle to-jungle/80 text-white font-medium rounded-lg hover:shadow-lg transition-all hover:brightness-105 mt-4">
-                View All Services
+                Get Appointment
                 <TbArrowRight className="ml-2" />
               </Link>
             </div>
