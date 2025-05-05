@@ -68,17 +68,17 @@ function AppointmentPage() {
     console.log(result);
 
     if (result.success) {
-      setFormData({
-        firstname: "",
-        lastname: "",
-        phone: "",
-        email: "",
-        date: "",
-        time: "",
-        branch: "",
-        selectedServices: [],
-        comments: "",
-      });
+      // setFormData({
+      //   firstname: "",
+      //   lastname: "",
+      //   phone: "",
+      //   email: "",
+      //   date: "",
+      //   time: "",
+      //   branch: "",
+      //   selectedServices: [],
+      //   comments: "",
+      // });
 
       toast.success(result.data.message);
       setModalOpen(false);
@@ -135,7 +135,7 @@ function AppointmentPage() {
                 value={formData.firstname}
                 type="text"
                 minLength={2}
-                maxLength={50}
+                maxLength={30}
                 placeholder="Juan"
                 onChange={handleChange}
                 required
@@ -148,7 +148,7 @@ function AppointmentPage() {
                 value={formData.lastname}
                 type="text"
                 minLength={2}
-                maxLength={50}
+                maxLength={30}
                 placeholder="Dela Cruz"
                 onChange={handleChange}
                 required
@@ -174,7 +174,7 @@ function AppointmentPage() {
                 name="email"
                 value={formData.email}
                 type="email"
-                pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$"
+                pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
                 placeholder="juan@gmail.com"
                 onChange={handleChange}
                 required
@@ -265,7 +265,7 @@ function AppointmentPage() {
                   onChange={handleChange}
                   rows={1}
                   required
-                  className="outline outline-gray-300 py-2 px-4 resize-none rounded flex-1 scrollbar-thin focus:outline-gray-400 transition-all"
+                  className="outline outline-gray-300 py-2 px-4  rounded scrollbar-thin focus:outline-gray-400 transition-all"
                 />
               </label>
 

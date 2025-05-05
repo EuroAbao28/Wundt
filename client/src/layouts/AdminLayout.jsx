@@ -4,7 +4,7 @@ import AdminTopbar from "../components/AdminTopbar";
 
 function AdminLayout() {
   return (
-    <div className="h-screen flex bg-gray-50 font-poppins text-gray-800">
+    <div className="h-screen flex bg-gray-50 font-poppins text-gray-900">
       <AdminSidebar />
 
       <div className="flex-1 flex flex-col ">

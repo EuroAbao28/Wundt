@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { format, parse } from "date-fns";
+import { format, parseISO } from "date-fns";
 import { DUMMY_APPOINTMENTS } from "../../utils/DummyAppts";
 import classNames from "classnames";
 import { FaFilter, FaSearch, FaTimes } from "react-icons/fa";
@@ -9,13 +9,13 @@ import {
 } from "react-icons/md";
 import { IoClose } from "react-icons/io5";
 import useGetAllAppts from "../../hooks/useGetAllAppts";
-import { useAdminContext } from "../../contexts/AdminContext";
 import { useAppointmentContext } from "../../contexts/AppointmentContext";
 import TIME_CONSTANTS from "../../constants/TIME_CONSTANTS.JS";
-import AppointmentModal from "../../components/AppointmentModal";
 import useUpdateStatusAppt from "../../hooks/useUpdateStatusAppt";
 import toast from "react-hot-toast";
 import { useLocation } from "react-router";
+import AppointmentDetailsModal from "../../components/AppointmentDetailsModal";
+import AppointmentConfirmationModal from "../../components/AppointmentConfirmationModal";
 
 const defaultFilters = {
   status: "",
@@ -24,6 +24,7 @@ const defaultFilters = {
   date: "",
   createdAt: "",
   search: "",
+  perPage: 20,
   page: 1,
 };
 
@@ -44,8 +45,15 @@ function AllAppointments() {
     isCancelLoading,
   } = useUpdateStatusAppt();
 
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [selectedAppointment, setSelectedAppointment] = useState(null);
+  const {
+    isApptDetailsModalOpen,
+    setIsApptDetailsModalOpen,
+    selectedAppointment,
+    setSelectedAppointment,
+    isApptConfirmationModalOpen,
+    setIsApptConfirmationModalOpen,
+    handleCloseApproveModal,
+  } = useAppointmentContext();
 
   const [filters, setFilters] = useState({
     status: "",
@@ -54,6 +62,7 @@ function AllAppointments() {
     date: "",
     createdAt: "",
     search: "",
+    perPage: 20,
     page: 1,
   });
   const [tempFilters, setTempFilters] = useState({
@@ -63,6 +72,7 @@ function AllAppointments() {
     date: "",
     createdAt: "",
     search: "",
+    perPage: 20,
     page: 1,
   });
 
@@ -104,12 +114,7 @@ function AllAppointments() {
 
   const handleShowModal = (data) => {
     setSelectedAppointment(data);
-    setIsModalOpen(true);
-  };
-
-  const handleCloseModal = () => {
-    setSelectedAppointment(null);
-    setIsModalOpen(false);
+    setIsApptDetailsModalOpen(true);
   };
 
   const handleUpdateStatus = async (updatedStatus) => {
@@ -122,7 +127,8 @@ function AllAppointments() {
 
     if (result.success) {
       toast.success(result.data.message);
-      handleCloseModal();
+
+      setIsApptDetailsModalOpen(false);
     } else {
       toast.error(result.error);
     }
@@ -136,11 +142,11 @@ function AllAppointments() {
     <>
       <div className="h-full flex flex-col gap-6">
         <div className="flex justify-between gap-4 max-xl:flex-col">
-          <h1 className="font-semibold textarea-lg mr-auto">
+          <h1 className="font-semibold mr-auto text-nowrap">
             All Appointments
           </h1>
 
-          <div className="flex gap-4">
+          <div className="flex flex-wrap gap-4">
             {/* filter */}
             <div className="dropdown dropdown-center">
               <div
@@ -154,19 +160,18 @@ function AllAppointments() {
               <div
                 tabIndex={0}
                 className="dropdown-content grid grid-cols-2 gap-4 p-6 mt-3 bg-white shadow-sm rounded w-sm ring-1 ring-gray-300">
-                <label className="flex items-center text-sm outline outline-gray-200 rounded py-2 px-3 gap-2">
-                  <p className="font-semibold">Status</p>
+                <label className="flex items-center justify-between text-sm outline outline-gray-200 rounded py-2 px-3 gap-3">
+                  <p className="font-semibold whitespace-nowrap">Per Page</p>
                   <select
-                    name="status"
-                    value={tempFilters.status}
+                    name="perPage"
+                    value={tempFilters.perPage}
                     onChange={handleChangeFilter}
-                    className="w-full focus:outline-none px-1">
-                    <option value="">All</option>
-                    <option value="completed">Completed</option>
-                    <option value="approved">Approved</option>
-                    <option value="pending">Pending</option>
-                    <option value="canceled">Canceled</option>
-                    <option value="declined">Declined</option>
+                    className="w-full focus:outline-none">
+                    <option value="20">20</option>
+                    <option value="40">40</option>
+                    <option value="60">60</option>
+                    <option value="80">80</option>
+                    <option value="100">100</option>
                   </select>
                 </label>
 
@@ -184,10 +189,24 @@ function AllAppointments() {
                   </select>
                 </label>
 
-                <label className="flex items-center  justify-between col-span-2 text-sm outline outline-gray-200 rounded py-2 px-3 gap-3">
-                  <p className="font-semibold whitespace-nowrap">
-                    Appointment Time
-                  </p>
+                <label className="flex items-center text-sm outline outline-gray-200 rounded py-2 px-3 gap-2">
+                  <p className="font-semibold">Status</p>
+                  <select
+                    name="status"
+                    value={tempFilters.status}
+                    onChange={handleChangeFilter}
+                    className="w-full focus:outline-none px-1">
+                    <option value="">All</option>
+                    <option value="completed">Completed</option>
+                    <option value="approved">Approved</option>
+                    <option value="pending">Pending</option>
+                    <option value="canceled">Canceled</option>
+                    <option value="declined">Declined</option>
+                  </select>
+                </label>
+
+                <label className="flex items-center  justify-between text-sm outline outline-gray-200 rounded py-2 px-3 gap-3">
+                  <p className="font-semibold whitespace-nowrap">Appt Time</p>
                   <select
                     name="time"
                     value={tempFilters.time}
@@ -281,14 +300,13 @@ function AllAppointments() {
                 <MdOutlineKeyboardArrowLeft />
               </button>
 
-              <p className="text-sm">
-                {isAllApptsLoading
-                  ? ""
-                  : `Page ${
-                      allApptsData?.total > 0
-                        ? allApptsData?.page
-                        : allApptsData?.total
-                    } of ${allApptsData?.totalPages}`}
+              <p className="text-sm min-w-18">
+                {allApptsData &&
+                  `Page ${
+                    allApptsData?.total > 0
+                      ? allApptsData?.page
+                      : allApptsData?.total
+                  } of ${allApptsData?.totalPages}`}
               </p>
 
               <button
@@ -307,14 +325,18 @@ function AllAppointments() {
             <table className="table table-md table-pin-rows table-pin-cols">
               <thead>
                 <tr className="bg-white border-b border-gray-200">
-                  <th></th>
+                  <td>
+                    <p className="text-gray-600 text-xs font-bold">
+                      {allApptsData?.total}
+                    </p>
+                  </td>
                   <td>Name</td>
                   <td>Date</td>
                   <td>Time</td>
-                  <td>Service Selected</td>
+                  <td>Status</td>
                   <td>Phone No.</td>
                   <td>Email</td>
-                  <td>Status</td>
+                  <td>Service Selected</td>
                 </tr>
               </thead>
               <tbody>
@@ -372,51 +394,44 @@ function AllAppointments() {
                       key={index}
                       onClick={() => handleShowModal(appt)}
                       className="border-b border-gray-200 last:border-none hover:bg-gray-50 cursor-pointer">
-                      <td className="text-xs font-bold">
-                        {(allApptsData.page - 1) * 20 + index + 1}
+                      <td className="text-xs font-bold text-gray-600">
+                        {(allApptsData.page - 1) * filters.perPage + index + 1}
                       </td>
                       <td>{`${appt?.firstname} ${appt?.lastname}`}</td>
                       <td>
-                        <p className="whitespace-nowrap">{`${format(
-                          new Date(appt?.date),
-                          "EEEE, MMMM d"
-                        )}`}</p>
+                        <p className="whitespace-nowrap">
+                          {format(parseISO(appt.dateTime), "MMM d, yyyy")}
+                        </p>
                       </td>
                       <td>
                         <p className="whitespace-nowrap">
-                          {format(
-                            parse(
-                              appt?.time.replace(/(AM|PM)/gi, "").trim(),
-                              "HH:mm",
-                              new Date()
-                            ),
-                            "h:mm a"
-                          )}
+                          {format(parseISO(appt.dateTime), " h:mm a")}
                         </p>
                       </td>
-                      <td>{appt?.selectedServices}</td>
-
-                      <td>{appt?.phone}</td>
-                      <td>{appt?.email}</td>
                       <td>
                         <p
                           className={classNames(
-                            "rounded-full w-fit px-2 py-1 text-xs capitalize",
+                            "rounded-full w-fit px-2 py-1 text-xs capitalize font-medium",
                             {
-                              "text-sky-500 bg-sky-500/10":
+                              "text-therapy-blue bg-therapy-blue/10":
                                 appt?.status === "completed",
-                              "text-emerald-600 bg-emerald-500/10":
+                              "text-jungle bg-jungle/10":
                                 appt?.status === "approved",
-                              "text-amber-600 bg-amber-500/10":
+                              "text-orange-500 bg-amber-500/10":
                                 appt?.status === "pending",
-                              "text-red-600 bg-red-500/10":
+                              "text-red-500 bg-red-500/10":
                                 appt?.status === "canceled",
-                              "text-gray-800 bg-gray-500/10":
+                              "text-gray-500 bg-gray-500/10":
                                 appt?.status === "declined",
                             }
                           )}>
                           {appt?.status}
                         </p>
+                      </td>
+                      <td>{appt?.phone}</td>
+                      <td>{appt?.email}</td>
+                      <td className="max-w-80 truncate">
+                        {appt?.selectedServices.join(", ")}
                       </td>
                     </tr>
                   ))
@@ -427,15 +442,17 @@ function AllAppointments() {
         </div>
       </div>
 
-      <AppointmentModal
-        isModalOpen={isModalOpen}
+      <AppointmentDetailsModal
+        isOpen={isApptDetailsModalOpen}
+        onClose={() => setIsApptDetailsModalOpen(false)}
         appointment={selectedAppointment}
-        handleCloseModal={handleCloseModal}
         handleUpdateStatus={handleUpdateStatus}
         isApproveLoading={isApproveLoading}
         isDeclineLoading={isDeclineLoading}
         isCancelLoading={isCancelLoading}
       />
+
+      <AppointmentConfirmationModal isOpen={isApptConfirmationModalOpen} />
     </>
   );
 }

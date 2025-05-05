@@ -7,14 +7,14 @@ const appointmentSchema = new mongoose.Schema(
       required: [true, "Firstname is required"],
       trim: true,
       minlength: [2, "Firstname must be at least 2 characters long"],
-      maxlength: [50, "Firstname cannot exceed 50 characters"],
+      maxlength: [30, "Firstname cannot exceed 30 characters"],
     },
     lastname: {
       type: String,
       required: [true, "Lastname is required"],
       trim: true,
       minlength: [2, "Lastname must be at least 2 characters long"],
-      maxlength: [50, "Lastname cannot exceed 50 characters"],
+      maxlength: [30, "Lastname cannot exceed 30 characters"],
     },
     phone: {
       type: String,
@@ -29,14 +29,9 @@ const appointmentSchema = new mongoose.Schema(
       lowercase: true,
       match: [/^\S+@\S+\.\S+$/, "Invalid email format"],
     },
-    date: {
+    dateTime: {
       type: Date,
       required: [true, "Appointment date is required"],
-    },
-    time: {
-      type: String,
-      required: [true, "Appointment time is required"],
-      trim: true,
     },
     branch: {
       type: String,
@@ -57,6 +52,45 @@ const appointmentSchema = new mongoose.Schema(
       type: String,
       enum: ["completed", "approved", "pending", "declined", "canceled"],
       default: "pending",
+    },
+
+    // for tracking the status
+    tracking: {
+      approved: {
+        by: {
+          type: mongoose.Schema.Types.ObjectId,
+          ref: "Admin",
+          default: null,
+        },
+        at: { type: Date, default: null },
+        message: { type: String, trim: true, default: null },
+      },
+      declined: {
+        by: {
+          type: mongoose.Schema.Types.ObjectId,
+          ref: "Admin",
+          default: null,
+        },
+        at: { type: Date, default: null },
+        message: { type: String, trim: true, default: null },
+      },
+      canceled: {
+        by: {
+          type: mongoose.Schema.Types.ObjectId,
+          ref: "Admin",
+          default: null,
+        },
+        at: { type: Date, default: null },
+        message: { type: String, trim: true, default: null },
+      },
+      completed: {
+        by: {
+          type: mongoose.Schema.Types.ObjectId,
+          ref: "Admin",
+          default: null,
+        },
+        at: { type: Date, default: null },
+      },
     },
   },
   { timestamps: true }

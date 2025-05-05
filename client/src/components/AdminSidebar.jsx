@@ -45,8 +45,11 @@ function AdminSidebar() {
     <div className="min-w-64 bg-white shadow-card3">
       <div className="flex items-center gap-2 py-4 px-6">
         <img src={logo} alt="" className="w-12 rounded-full" />
-        <h1 className="font-semibold text-sm text-emerald-600">
-          Wundt Psychological <br></br> Institute
+        <h1 className="font-semibold text-sm text-jungle">
+          Wundt Psych <br></br> Institute{" "}
+          <span className="text-xs text-white bg-jungle rounded-lg px-2">
+            Admin
+          </span>
         </h1>
       </div>
 

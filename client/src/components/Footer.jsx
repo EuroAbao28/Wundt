@@ -38,14 +38,21 @@ function Footer() {
                 <Link
                   to="/about"
                   className="text-sm text-white/90 hover:text-white hover:underline">
-                  About Us
+                  About
                 </Link>
               </li>
               <li>
                 <Link
-                  to="/contact"
+                  to="/gallery"
                   className="text-sm text-white/90 hover:text-white hover:underline">
-                  Contact
+                  Gallery
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to="/news"
+                  className="text-sm text-white/90 hover:text-white hover:underline">
+                  News
                 </Link>
               </li>
             </ul>

@@ -1,24 +1,29 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
-import { URL_APPTS } from "../utils/APIRuotes";
+import { useState } from "react";
+import { URL_ADMIN } from "../utils/APIRuotes";
 
-const useGetCategorizedAppts = () => {
+const useGetAllAdmins = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
   const [data, setData] = useState(null);
 
-  const getCategorizedApptsFunction = async () => {
+  const getAllAdminsFunction = async (filters = {}) => {
+    setIsLoading(true);
+
     const token = sessionStorage.getItem("adminToken");
 
     try {
-      const response = await axios.get(`${URL_APPTS}/categorized`, {
-        headers: { Authorization: `Bearer ${token}` },
+      const response = await axios.get(`${URL_ADMIN}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+        params: filters,
       });
 
       // 🕒 Delay 3 seconds before returning the data
       // await new Promise((resolve) => setTimeout(resolve, 3000));
 
-      console.log("CATEG APPTS", response.data);
+      console.log("ALLL ADMINS", response.data);
 
       setData(response.data);
     } catch (error) {
@@ -29,7 +34,7 @@ const useGetCategorizedAppts = () => {
     }
   };
 
-  return { getCategorizedApptsFunction, isLoading, error, data };
+  return { getAllAdminsFunction, isLoading, error, data };
 };
 
-export default useGetCategorizedAppts;
+export default useGetAllAdmins;

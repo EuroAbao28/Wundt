@@ -13,8 +13,8 @@ const authenticateToken = async (req, res, next) => {
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
 
     // attach the decoded token which is the (id, role) to the req
-    // to access it in the controller (req.user)
-    req.user = decoded;
+    // to access it in the controller (req.admin)
+    req.admin = decoded;
 
     // proceed to the next middleware or route handler
     next();

@@ -1,4 +1,4 @@
-import { format, isToday, parse } from "date-fns";
+import { format, parseISO } from "date-fns";
 
 const ApptsListContainer = ({
   title,
@@ -48,21 +48,13 @@ const ApptsListContainer = ({
                 <div className="flex flex-col gap-1">
                   <p className="text-sm">{`${data.firstname} ${data.lastname}`}</p>
                   <p className="text-xs text-gray-500">
-                    {format(new Date(data.date), "MMMM d, yyyy")} -{" "}
-                    {format(
-                      parse(
-                        data.time.replace(/(AM|PM)/gi, "").trim(),
-                        "HH:mm",
-                        new Date()
-                      ),
-                      "h:mm a"
-                    )}
+                    {format(parseISO(data.dateTime), "MMM d - h:mm a")}
                   </p>
                   <div className="flex gap-2 flex-wrap">
                     {data.selectedServices.map((data, index) => (
                       <p
                         key={index}
-                        className="text-xxs text-emerald-600 bg-emerald-100/50 px-2 rounded-full w-fit">
+                        className="text-xxs text-jungle bg-jungle/5 px-2 rounded-full w-fit">
                         {data}
                       </p>
                     ))}

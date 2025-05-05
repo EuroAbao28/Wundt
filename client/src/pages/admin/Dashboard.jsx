@@ -7,17 +7,28 @@ import {
 import { useEffect, useState } from "react";
 import classNames from "classnames";
 import ApptsListContainer from "../../components/ApptsListContainer";
-import AppointmentModal from "../../components/AppointmentModal";
 import toast from "react-hot-toast";
 import useUpdateStatusAppt from "../../hooks/useUpdateStatusAppt";
 import { useAppointmentContext } from "../../contexts/AppointmentContext";
+import useGetCategorizedAppts from "../../hooks/useGetCategorizedAppts";
+import AppointmentDetailsModal from "../../components/AppointmentDetailsModal";
+import AppointmentConfirmationModal from "../../components/AppointmentConfirmationModal";
 
 function Dashboard() {
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [selectedAppointment, setSelectedAppointment] = useState(null);
+  const {
+    isApptDetailsModalOpen,
+    setIsApptDetailsModalOpen,
+    selectedAppointment,
+    setSelectedAppointment,
+    isApptConfirmationModalOpen,
+  } = useAppointmentContext();
 
-  const { categorizedAppts, isCategorizedApptsLoading, categorizedApptsError } =
-    useAppointmentContext();
+  const {
+    getCategorizedApptsFunction,
+    isLoading: isCategorizedApptsLoading,
+    error: categorizedApptsError,
+    data: categorizedAppts,
+  } = useGetCategorizedAppts();
 
   const {
     approveApptFunction,
@@ -28,12 +39,7 @@ function Dashboard() {
 
   const handleShowModal = (data) => {
     setSelectedAppointment(data);
-    setIsModalOpen(true);
-  };
-
-  const handleCloseModal = () => {
-    setSelectedAppointment(null);
-    setIsModalOpen(false);
+    setIsApptDetailsModalOpen(true);
   };
 
   const handleUpdateStatus = async (updatedStatus) => {
@@ -46,11 +52,16 @@ function Dashboard() {
 
     if (result.success) {
       toast.success(result.data.message);
-      handleCloseModal();
+
+      setIsApptDetailsModalOpen(false);
     } else {
       toast.error(result.error);
     }
   };
+
+  useEffect(() => {
+    getCategorizedApptsFunction();
+  }, []);
 
   return (
     <>
@@ -60,14 +71,14 @@ function Dashboard() {
             icon={<TbCalendarUp />}
             title={"Total Appointments"}
             count={categorizedAppts?.total || 0}
-            color={"emerald"}
+            color={"jungle"}
           />
 
           <SummaryCard
             icon={<TbCalendarCheck />}
             title={"Completed Sessions"}
             count={categorizedAppts?.completed?.length || 0}
-            color={"sky"}
+            color={"therapy-blue"}
           />
 
           <SummaryCard
@@ -112,15 +123,17 @@ function Dashboard() {
         </div>
       </div>
 
-      <AppointmentModal
-        isModalOpen={isModalOpen}
+      <AppointmentDetailsModal
+        isOpen={isApptDetailsModalOpen}
+        onClose={() => setIsApptDetailsModalOpen(false)}
         appointment={selectedAppointment}
-        handleCloseModal={handleCloseModal}
         handleUpdateStatus={handleUpdateStatus}
         isApproveLoading={isApproveLoading}
         isDeclineLoading={isDeclineLoading}
         isCancelLoading={isCancelLoading}
       />
+
+      <AppointmentConfirmationModal isOpen={isApptConfirmationModalOpen} />
     </>
   );
 }
@@ -130,11 +143,11 @@ const SummaryCard = ({ icon, title, count, color }) => {
     <div className="flex items-center gap-4 rounded shadow-sm p-4 flex-1">
       <p
         className={classNames("text-4xl p-2 rounded-md", {
-          "text-sky-600 bg-sky-100": color === "sky",
-          "text-emerald-600 bg-emerald-100": color === "emerald",
-          "text-orange-500 bg-orange-100": color === "orange",
-          "text-red-600 bg-red-100": color === "red",
-          "text-gray-800 bg-gray-100": color === "gray",
+          "text-therapy-blue bg-therapy-blue/5": color === "therapy-blue",
+          "text-jungle bg-jungle/5": color === "jungle",
+          "text-orange-500 bg-orange-500/5": color === "orange",
+          "text-red-600 bg-red-500/5": color === "red",
+          "text-gray-800 bg-gray-800/5": color === "gray",
         })}>
         {icon}
       </p>

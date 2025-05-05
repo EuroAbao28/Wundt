@@ -14,13 +14,31 @@ const validateFields = (fields, isStrict = true) => {
   }
 };
 
-const validateRole = (role = "admin") => {
-  if (!["admin", "head_admin"].includes(role)) {
+const validateRole = (role) => {
+  if (!["author", "admin", "head_admin"].includes(role)) {
     throw createError(400, "Invalid role value");
+  }
+};
+
+const validateStatus = (status) => {
+  if (!["active", "inactive"].includes(status)) {
+    throw createError(400, "Invalid status value");
+  }
+};
+
+const validateBranch = (branch) => {
+  if (
+    !["Dagupan City", "Vigan City", "Urdaneta City", "Mangaldan"].includes(
+      branch
+    )
+  ) {
+    throw createError(400, "Invalid branch value");
   }
 };
 
 module.exports = {
   validateFields,
   validateRole,
+  validateStatus,
+  validateBranch,
 };

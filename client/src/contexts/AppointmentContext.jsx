@@ -1,40 +1,45 @@
-import { createContext, useContext, useEffect, useState } from "react";
-import useGetAllAppts from "../hooks/useGetAllAppts";
-import { useAdminContext } from "./AdminContext";
-import useGetCategorizedAppts from "../hooks/useGetCategorizedAppts";
+import { createContext, useContext, useState } from "react";
 
 const AppointmentContext = createContext();
 
 export const AppointmentProvider = ({ children }) => {
-  const { adminData } = useAdminContext();
+  const [selectedAppointment, setSelectedAppointment] = useState(null);
 
-  const [allAppts, setAllAppts] = useState(null);
-  const [categorizedAppts, setCategorizedAppts] = useState(null);
+  const [isApptDetailsModalOpen, setIsApptDetailsModalOpen] = useState(false);
+  const [isApptConfirmationModalOpen, setIsApptConfirmationModalOpen] =
+    useState(false);
+  const [confirmationModalType, setConfirmationModalType] = useState(null);
 
-  const {
-    getCategorizedApptsFunction,
-    isLoading: isCategorizedApptsLoading,
-    error: categorizedApptsError,
-  } = useGetCategorizedAppts();
+  const handleOpenApproveModal = () => {
+    setIsApptDetailsModalOpen(false);
+    setIsApptConfirmationModalOpen(true);
+  };
 
-  // categorized appts
-  useEffect(() => {
-    const fetchCategorizedAppts = async () => {
-      const data = await getCategorizedApptsFunction();
-      if (data) setCategorizedAppts(data);
-    };
+  const handleCloseApproveModal = () => {
+    setIsApptDetailsModalOpen(true);
+    setIsApptConfirmationModalOpen(false);
+  };
 
-    if (adminData) {
-      fetchCategorizedAppts();
-    }
-  }, [adminData]);
+  const handleCloseBothModal = () => {
+    setIsApptDetailsModalOpen(false);
+    setIsApptConfirmationModalOpen(false);
+  };
 
   return (
     <AppointmentContext.Provider
       value={{
-        categorizedAppts,
-        isCategorizedApptsLoading,
-        categorizedApptsError,
+        isApptDetailsModalOpen,
+        setIsApptDetailsModalOpen,
+        selectedAppointment,
+        setSelectedAppointment,
+        isApptConfirmationModalOpen,
+        setIsApptConfirmationModalOpen,
+        confirmationModalType,
+        setConfirmationModalType,
+
+        handleOpenApproveModal,
+        handleCloseApproveModal,
+        handleCloseBothModal,
       }}>
       {children}
     </AppointmentContext.Provider>

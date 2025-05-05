@@ -3,6 +3,7 @@ const sendApprovalEmail = require("../utils/emailService");
 const { validateFields } = require("../utils/validationField");
 const createError = require("http-errors");
 const { parseISO, isBefore, addMinutes, format } = require("date-fns");
+const { formatInTimeZone, toZonedTime } = require("date-fns-tz");
 
 const createAppointment = async (req, res, next) => {
   try {
@@ -18,6 +19,8 @@ const createAppointment = async (req, res, next) => {
       comments,
     } = req.body;
 
+    console.log(req.body);
+
     // specified field, might change later to req.body for scalability
     validateFields({
       firstname,
@@ -31,53 +34,53 @@ const createAppointment = async (req, res, next) => {
       comments,
     });
 
-    console.log(req.body);
+    const combinedDateAndTimeString = `${date}T${time}:00`;
 
-    // combine date and time into a single string
-    const appointmentDateTimeString = `${date}T${time.split(" ")[0]}:00`;
-
-    // parse the date and time string into a Date object
-    const appointmentDateTime = parseISO(appointmentDateTimeString);
-
-    // adjust the appointment time to the local time zone
-    const localDateTime = addMinutes(
-      appointmentDateTime,
-      appointmentDateTime.getTimezoneOffset()
+    const appointmentDateAndTime = toZonedTime(
+      new Date(combinedDateAndTimeString),
+      "Asia/Manila"
     );
 
-    // get the current time and adjust to local time zone
-    const currentLocalTime = addMinutes(
-      new Date(),
-      new Date().getTimezoneOffset()
-    );
+    const manilaDateAndTimeNow = toZonedTime(new Date(), "Asia/Manila");
 
-    console.log("String", appointmentDateTimeString);
-    console.log("Appointment Date Object", appointmentDateTime);
-    console.log("Adjusted Appointment Time (Local)", localDateTime);
-    console.log("Current Local Time", currentLocalTime);
+    console.log("combinedDateAndTimeString", combinedDateAndTimeString);
+    console.log("appointmentDateAndTime", appointmentDateAndTime);
+    console.log("manilaDateAndTimeNow", manilaDateAndTimeNow);
 
-    // SO BASICALLY THE CODE ABOVE IS COMBINING THE DATE AND TIME FROM REQ.BODY
-    // FORMTTED TO A DATE OBJECT
-    // SO WE CAN COMPARE IT CURRENT DATE AND TIME IF ITS IN THE FUTURE
-
-    // ensure appointment date is in the future
-    if (isBefore(localDateTime, currentLocalTime)) {
-      return next(createError(400, "Appointment date must be in the future"));
+    // just accept the future date
+    if (appointmentDateAndTime <= manilaDateAndTimeNow) {
+      return next(createError(400, "Appointment must be in the future"));
     }
 
-    // check if an appointment with the same details already exists
-    // const existingAppointment = await Appointment.findOne({
-    //   email,
-    //   firstname,
-    //   lastname,
-    //   date,
-    //   time,
-    // });
-    // if (existingAppointment) {
-    //   return next(
-    //     createError(409, "An appointment with the same details already exists")
-    //   );
-    // }
+    //  duplicate check (timezone-aware)
+    const manilaDate = toZonedTime(new Date(date), "Asia/Manila");
+    const startOfDay = new Date(manilaDate.setHours(0, 0, 0, 0));
+    const endOfDay = new Date(manilaDate.setHours(23, 59, 59, 999));
+
+    const existingAppointment = await Appointment.findOne({
+      email,
+      firstname,
+      lastname,
+      dateTime: {
+        $gte: startOfDay,
+        $lt: endOfDay,
+      },
+      selectedServices: { $in: selectedServices },
+      status: { $nin: ["canceled", "declined"] },
+    });
+
+    if (existingAppointment) {
+      const formattedDate = format(
+        new Date(existingAppointment.dateTime),
+        "MMMM d, yyyy"
+      );
+      return next(
+        createError(
+          409,
+          `Already have a ${existingAppointment.status} appointment for these services on ${formattedDate}`
+        )
+      );
+    }
 
     // create new appointment
     const newAppointment = await Appointment.create({
@@ -85,8 +88,7 @@ const createAppointment = async (req, res, next) => {
       lastname,
       phone,
       email,
-      date,
-      time,
+      dateTime: appointmentDateAndTime,
       branch,
       selectedServices,
       comments,
@@ -103,14 +105,30 @@ const createAppointment = async (req, res, next) => {
 
 const getCategorizedAppointments = async (req, res, next) => {
   try {
-    const today = new Date();
-    today.setHours(0, 0, 0, 0);
+    const branchCondition =
+      req.admin.role === "head_admin"
+        ? {}
+        : { branch: req.admin.branchLocated };
 
-    const tomorrow = new Date(today);
-    tomorrow.setDate(tomorrow.getDate() + 1);
+    // Get current Manila time
+    const nowInManila = toZonedTime(new Date(), "Asia/Manila");
+
+    // Set up date ranges in Manila time
+    const todayStart = new Date(nowInManila);
+    todayStart.setHours(0, 0, 0, 0);
+
+    const todayEnd = new Date(todayStart);
+    todayEnd.setDate(todayEnd.getDate() + 1);
+    todayEnd.setHours(0, 0, 0, -1); // 23:59:59.999 of current day
+
+    const tomorrowStart = new Date(todayStart);
+    tomorrowStart.setDate(tomorrowStart.getDate() + 1);
 
     // returns an array
     const appointments = await Appointment.aggregate([
+      {
+        $match: branchCondition, //  match by branch globally FIRST
+      },
       {
         $facet: {
           completed: [{ $match: { status: "completed" } }],
@@ -118,16 +136,25 @@ const getCategorizedAppointments = async (req, res, next) => {
             {
               $match: {
                 status: "approved",
-                date: { $gte: today, $lt: tomorrow },
+                dateTime: {
+                  $gte: todayStart,
+                  $lt: todayEnd,
+                },
               },
+            },
+            {
+              $sort: { dateTime: 1 },
             },
           ],
           upcoming: [
             {
               $match: {
                 status: "approved",
-                date: { $gte: tomorrow },
+                dateTime: { $gte: tomorrowStart },
               },
+            },
+            {
+              $sort: { dateTime: 1 },
             },
           ],
           pending: [{ $match: { status: "pending" } }],
@@ -149,9 +176,24 @@ const getCategorizedAppointments = async (req, res, next) => {
 
 const getAllAppointments = async (req, res, next) => {
   try {
-    const { status, time, date, createdAt, sort, search, page = 1 } = req.query;
+    const {
+      status,
+      sort,
+      time,
+      date,
+      createdAt,
+      search,
+      perPage,
+      page = 1,
+    } = req.query;
 
     const query = {};
+
+    // always filter by branchLocated from the token
+    // if the branchLocated is "all", then dont filter by branch
+    if (req.admin.branchLocated !== "all") {
+      query.branch = req.admin.branchLocated;
+    }
 
     // filters
     if (status) query.status = status;
@@ -180,27 +222,33 @@ const getAllAppointments = async (req, res, next) => {
     }
 
     // pagination
-    const limit = 20;
+    const limit = parseInt(perPage);
     const skip = (parseInt(page) - 1) * limit;
 
-    // sort
-    let sortQuery = {};
-    if (sort) {
-      if (sort === "oldest") {
-        sortQuery.createdAt = 1;
-      } else if (sort === "latest") {
-        sortQuery.createdAt = -1;
-      } else if (sort === "a-z") {
-        sortQuery.firstname = 1;
-      } else if (sort === "z-a") {
-        sortQuery.firstname = -1;
-      }
-    }
+    // Ssrting
+    const sortOptions = {
+      oldest: { createdAt: 1 },
+      latest: { createdAt: -1 },
+      "a-z": { firstname: 1 },
+      "z-a": { firstname: -1 },
+    };
+
+    const sortQuery = sortOptions[sort] || sortOptions.latest;
 
     // query database
     const [total, appointments] = await Promise.all([
       Appointment.countDocuments(query),
-      Appointment.find(query).skip(skip).limit(limit).sort(sortQuery),
+      Appointment.find(query)
+        .skip(skip)
+        .limit(limit)
+        .sort(sortQuery)
+        .populate([
+          { path: "tracking.approved.by", select: "firstname lastname" },
+          { path: "tracking.declined.by", select: "firstname lastname" },
+          { path: "tracking.canceled.by", select: "firstname lastname" },
+          { path: "tracking.completed.by", select: "firstname lastname" },
+        ]),
+      ,
     ]);
 
     console.log(query);
@@ -220,7 +268,9 @@ const getAllAppointments = async (req, res, next) => {
 const updateAppointmentStatus = async (req, res, next) => {
   try {
     const { id } = req.params;
-    const { updatedStatus } = req.body;
+    const { updatedStatus, additionalNote } = req.body;
+
+    console.log(req.body);
 
     // check if the updatedStatus is valid
     if (
@@ -237,24 +287,75 @@ const updateAppointmentStatus = async (req, res, next) => {
 
     // check if the appointment is already in the desired status
     if (appointment.status === updatedStatus) {
-      return next(createError(400, `Appointment is already ${updatedStatus}`));
+      return next(
+        createError(400, `Appointment has already been ${updatedStatus}.`)
+      );
     }
+
+    // TESTING: Force error right before the actual update
+    // throw new Error("Forced error for testing - DB update failed");
 
     // update the appointment status
     appointment.status = updatedStatus;
-    await appointment.save();
 
-    // send an email for approval
-    if (updatedStatus === "approved") {
-      await sendApprovalEmail(appointment);
+    const nowInManila = toZonedTime(new Date(), "Asia/Manila");
+
+    switch (updatedStatus) {
+      case "approved":
+        await sendApprovalEmail({ appointment, additionalNote });
+        appointment.tracking.approved = {
+          by: req.admin.id,
+          at: nowInManila,
+          message: additionalNote,
+        };
+        break;
+
+      case "declined":
+        // await sendApprovalEmail({ appointment, additionalNote });
+        appointment.tracking.declined = {
+          by: req.admin.id,
+          at: nowInManila,
+          message: additionalNote,
+        };
+        break;
+
+      case "canceled":
+        // await sendApprovalEmail({ appointment, additionalNote });
+        appointment.tracking.canceled = {
+          by: req.admin.id,
+          at: nowInManila,
+          message: additionalNote,
+        };
+        break;
+
+      case "completed":
+        appointment.tracking.completed = {
+          by: req.admin.id,
+          at: nowInManila,
+        };
+        break;
     }
+
+    await appointment.save();
 
     res
       .status(200)
-      .json({ message: `Appointment ${updatedStatus} successfully` });
+      .json({ message: `Appointment has been successfully ${updatedStatus}.` });
   } catch (error) {
     console.log(error);
-    next(error);
+
+    const convertedStatus = {
+      approved: "approving",
+      declined: "declining",
+      canceled: "canceling",
+      completed: "completing",
+    };
+
+    const newStatus = convertedStatus[req.body.updatedStatus] || "updating";
+
+    next(
+      createError(500, `An error occurred while ${newStatus} the appointment.`)
+    );
   }
 };
 

@@ -26,6 +26,7 @@ function App() {
       <Toaster
         position="top-right"
         toastOptions={{
+          duration: 5000,
           className: "font-poppins text-gray-800 text-sm",
         }}
       />

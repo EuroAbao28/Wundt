@@ -43,14 +43,19 @@ const adminSchema = new mongoose.Schema(
     },
     role: {
       type: String,
-      enum: ["admin", "head_admin"],
+      enum: ["admin", "head_admin", "author"],
       default: "admin",
     },
-    // branch: {
-    //   type: String,
-    //   required: [true, "Branch is required"],
-    //   enum: ["Dagupan City", "Vigan City", "Urdaneta City", "Mangaldan", "All"],
-    // },
+    branchLocated: {
+      type: String,
+      required: [true, "Branch is required"],
+      enum: ["Dagupan City", "Vigan City", "Urdaneta City", "Mangaldan", "All"],
+    },
+    status: {
+      type: String,
+      enum: ["active", "inactive"],
+      default: "active",
+    },
     profilePic: {
       type: String,
       default: "", // Cloudinary URL will be stored here

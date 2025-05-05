@@ -1,7 +1,8 @@
 import React from "react";
+import EmailPreview from "../../components/EmailPreview";
 
 function ActivityLogs() {
-  return <div>ActivityLog</div>;
+  return <EmailPreview />;
 }
 
 export default ActivityLogs;

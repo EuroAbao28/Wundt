@@ -9,6 +9,7 @@ import toast from "react-hot-toast";
 import { useNavigate } from "react-router";
 import { useAdminContext } from "../../contexts/AdminContext";
 import useLogin from "../../hooks/useLogin";
+import { FaLock, FaEnvelope, FaUserShield } from "react-icons/fa";
 
 function AdminLogin() {
   const navigate = useNavigate();
@@ -30,87 +31,82 @@ function AdminLogin() {
   };
 
   return (
-    <div
-      style={{ backgroundImage: `url(${bgGradient})` }}
-      className="h-screen flex items-center justify-center text-gray-800 bg-cover bg-center">
-      <div className="bg-white flex rounded overflow-hidden">
-        <div
-          style={{ backgroundImage: `url(${b1})` }}
-          className=" bg-center bg-cover w-[20rem]">
-          <div className="bg-radial-[at_-50%_-50%] from-green-500/90 to-emerald-600/90 to-75% text-white p-8 pt-12 flex flex-col items-center h-full">
-            <img src={logo} alt="" className="w-36 rounded-full" />
-            <h1 className="font-cardo text-2xl font-black text-center mt-6">
-              Wundt Psychological Institute
-            </h1>
-          </div>
+    <div className="min-h-screen p-6 bg-gray-50 text-gray-900 flex flex-col justify-center items-center">
+      {/* header */}
+      <div className="flex flex-col items-center">
+        <div className="flex items-center justify-center p-4 bg-white rounded-full shadow-sm">
+          <img src={logo} alt="logo" className="w-18" />
         </div>
 
-        <div className="w-[25rem] px-8 py-20 relative overflow-hidden">
-          <svg
-            className="absolute top-0 -right-3 w-20 scale-y-[-1]"
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 1000 500">
-            <path
-              d="M426.8 227.6c41.1 27.1 37.7 25 42.5 27.7a1021 1021 0 0 1-73-6.1 49.1 49.1 0 0 1-10.3-4c-47.7-30.5-97.9-70.7-134.6-114.5-24-32.9-31.9-44.1-41.7-51.2-10.3-7.7-21.5-5.6-15.8 8.6 4.1 9.7 7.2 12.1 42.8 55.3a543.4 543.4 0 0 0 120.6 100.4c-76.1-12.2-151.9-33.4-218.6-72-7.7-4.5-15.2-8.6-22-13.3a7.2 7.2 0 0 0-10 1.5 7.2 7.2 0 0 0 1.5 10c59.4 49.3 152.9 77.9 228.1 92.5-82.8 5.5-252.2-2.3-275.7-7.9-10-2.4-14.3 8.1-6 14.4 49 22.1 262.9 17.4 319.5 0 25.7 3.9 52 6.8 78.6 8.7-8.8 3.3-20.5 10-60.3 26.8-54.4 22.8-96.7 34.5-152.6 26.3-9.3-1.4-19-2.9-28.7-5.6a8.3 8.3 0 1 0-5.1 15.9c30.5 11.8 60.9 16.5 104.8 9.2 53.9-9.3 99.3-33.6 143.7-57.9 10-5.6 22.3-8.3 33.5-12.8 22.5.8 42.4.9 62.6.5-34.6 26.7-78.6 70-121.5 96.5-18.4 11.4-46.9 24.4-67.8 24.6a8.8 8.8 0 0 0-9.3 8.4 8.8 8.8 0 0 0 8.4 9.3c29.2 3 54.5-8.5 79.5-24.8 45.3-29.1 90.4-77.1 130.2-114.5 35.8-1.5 73.9-4.8 113.9-11.2-64.5 67.8-161.5 150.2-175.6 153.3a8.5 8.5 0 0 0 2.5 16.7c39.9-3.9 167-137.2 194.4-173.6a716.6 716.6 0 0 0 80.6-19.5C645.4 416.2 641.1 418.9 639.4 431.7c-.6 11.3 12.2 14.4 18.4 8 63.4-65.6 112.7-146.7 149.5-201.4C938 193 985.7 121.6 922.8 161.6a503.4 503.4 0 0 1-107.3 50.5c-10.8-4.6-28-12.5-31.5-13.9-36.4-14.4-151.6-71.3-182.5-108.2-3.4-3.5-5.4-8.1-9.3-11.2-8-6.4-16.7 2.4-15.1 11.7 8.5 46.6 155 109.9 200.9 123.7l14.4 5.4c-20.5 6.3-42.3 12-69.6 17.6-38.1-18.3-110.4-45.7-171.8-89-20.2-14.2-48.2-49-58.4-53-19-7.4-25.1 3.3-10.9 18.3 22.6 20.9 40 39.4 58 51.5 49.1 33.1 99.6 54.9 158.6 77a975 975 0 0 1-108.5 12.7C530 222.3 428.7 132.4 400.7 72a6 6 0 1 0-11.3 4.1c3.4 11 8.9 23.4 17.2 36.1C439.9 163.6 513.4 225.3 566 256c-18.1.7-32.9.9-47.8.9-38.3-8.8-39.1-12.9-80.9-42.9-22.8-17.2-113.5-104.6-140-146.4-2.3-3.9-4.6-9-9.4-10.1-2.9-.5-5.6 1.8-6.4 5.4-.8 3.8 0 7.8.7 11.6 9.9 34.7 115.4 132.3 144.9 153.5Z"
-              fill="#167364"></path>
-          </svg>
+        <h1 className="font-semibold mt-4 text-2xl">
+          <span className="text-jungle ">Wundt</span> Admin Portal
+        </h1>
 
-          <h1 className="text-xl font-bold">Admin Login</h1>
-
-          <form
-            onSubmit={handleSubmit}
-            className="text-sm flex flex-col gap-4 mt-6">
-            <label className="flex flex-col gap-2">
-              <span className="uppercase text-xs font-semibold">Email</span>
-              <input
-                type="email"
-                name="email"
-                value={formData.email}
-                pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
-                onChange={handleChange}
-                maxLength={50}
-                required
-                className="outline outline-gray-300 py-2 px-4 rounded focus:outline-gray-400 transition-all"
-              />
-            </label>
-
-            <label className="flex flex-col gap-2">
-              <span className="uppercase text-xs font-semibold">Password</span>
-              <input
-                type="password"
-                name="password"
-                value={formData.password}
-                onChange={handleChange}
-                required
-                className="outline outline-gray-300 py-2 px-4 rounded focus:outline-gray-400 transition-all"
-              />
-            </label>
-
-            <button
-              type="submit"
-              disabled={isLoading}
-              className="bg-radial-[at_-50%_-50%] from-green-500 to-emerald-600 to-75% text-white rounded py-2 px-8 mt-4 font-semibold uppercase active:to-95% transition-all focus:outline-emerald-700 flex cursor-pointer justify-center items-center gap-2">
-              {isLoading ? (
-                <>
-                  <span className="loading loading-spinner loading-xs"></span>
-                  Loading
-                </>
-              ) : (
-                "Login"
-              )}
-            </button>
-          </form>
-
-          <svg
-            className="absolute bottom-0 -left-3 w-20 scale-[-1] -rotate-12"
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 1000 500">
-            <path
-              d="M426.8 227.6c41.1 27.1 37.7 25 42.5 27.7a1021 1021 0 0 1-73-6.1 49.1 49.1 0 0 1-10.3-4c-47.7-30.5-97.9-70.7-134.6-114.5-24-32.9-31.9-44.1-41.7-51.2-10.3-7.7-21.5-5.6-15.8 8.6 4.1 9.7 7.2 12.1 42.8 55.3a543.4 543.4 0 0 0 120.6 100.4c-76.1-12.2-151.9-33.4-218.6-72-7.7-4.5-15.2-8.6-22-13.3a7.2 7.2 0 0 0-10 1.5 7.2 7.2 0 0 0 1.5 10c59.4 49.3 152.9 77.9 228.1 92.5-82.8 5.5-252.2-2.3-275.7-7.9-10-2.4-14.3 8.1-6 14.4 49 22.1 262.9 17.4 319.5 0 25.7 3.9 52 6.8 78.6 8.7-8.8 3.3-20.5 10-60.3 26.8-54.4 22.8-96.7 34.5-152.6 26.3-9.3-1.4-19-2.9-28.7-5.6a8.3 8.3 0 1 0-5.1 15.9c30.5 11.8 60.9 16.5 104.8 9.2 53.9-9.3 99.3-33.6 143.7-57.9 10-5.6 22.3-8.3 33.5-12.8 22.5.8 42.4.9 62.6.5-34.6 26.7-78.6 70-121.5 96.5-18.4 11.4-46.9 24.4-67.8 24.6a8.8 8.8 0 0 0-9.3 8.4 8.8 8.8 0 0 0 8.4 9.3c29.2 3 54.5-8.5 79.5-24.8 45.3-29.1 90.4-77.1 130.2-114.5 35.8-1.5 73.9-4.8 113.9-11.2-64.5 67.8-161.5 150.2-175.6 153.3a8.5 8.5 0 0 0 2.5 16.7c39.9-3.9 167-137.2 194.4-173.6a716.6 716.6 0 0 0 80.6-19.5C645.4 416.2 641.1 418.9 639.4 431.7c-.6 11.3 12.2 14.4 18.4 8 63.4-65.6 112.7-146.7 149.5-201.4C938 193 985.7 121.6 922.8 161.6a503.4 503.4 0 0 1-107.3 50.5c-10.8-4.6-28-12.5-31.5-13.9-36.4-14.4-151.6-71.3-182.5-108.2-3.4-3.5-5.4-8.1-9.3-11.2-8-6.4-16.7 2.4-15.1 11.7 8.5 46.6 155 109.9 200.9 123.7l14.4 5.4c-20.5 6.3-42.3 12-69.6 17.6-38.1-18.3-110.4-45.7-171.8-89-20.2-14.2-48.2-49-58.4-53-19-7.4-25.1 3.3-10.9 18.3 22.6 20.9 40 39.4 58 51.5 49.1 33.1 99.6 54.9 158.6 77a975 975 0 0 1-108.5 12.7C530 222.3 428.7 132.4 400.7 72a6 6 0 1 0-11.3 4.1c3.4 11 8.9 23.4 17.2 36.1C439.9 163.6 513.4 225.3 566 256c-18.1.7-32.9.9-47.8.9-38.3-8.8-39.1-12.9-80.9-42.9-22.8-17.2-113.5-104.6-140-146.4-2.3-3.9-4.6-9-9.4-10.1-2.9-.5-5.6 1.8-6.4 5.4-.8 3.8 0 7.8.7 11.6 9.9 34.7 115.4 132.3 144.9 153.5Z"
-              fill="#167364"></path>
-          </svg>
-        </div>
+        <p className="mt-2 text-gray-500 text-sm">
+          Access your psychological services dashboard
+        </p>
       </div>
+
+      {/* form */}
+      <form
+        onSubmit={handleSubmit}
+        className="mt-6 rounded-xl shadow-sm bg-white p-8 max-w-md w-full">
+        <p className="flex items-center justify-center gap-2 text-jungle bg-jungle/10 rounded-md text-sm font-medium text-center p-2">
+          <span className="text-base">
+            <FaUserShield />
+          </span>
+          Restricted Access
+        </p>
+
+        <label className="flex flex-col gap-1 mt-8">
+          <span className="text-gray-600 text-sm font-medium">
+            Email Address
+          </span>
+          <div className="group flex items-center gap-3 border border-gray-200 rounded-lg px-4 py-3 focus-within:border-white focus-within:ring-jungle/50 focus-within:ring-2 transition-all shadow-sm">
+            <FaEnvelope className="text-gray-400 group-focus-within:text-jungle transition-all" />
+            <input
+              type="email"
+              name="email"
+              value={formData.email}
+              onChange={handleChange}
+              required
+              className="focus:outline-none w-full"
+            />
+          </div>
+        </label>
+
+        <label className="flex flex-col gap-1 mt-4">
+          <span className="text-gray-600 text-sm font-medium">Password</span>
+          <div className="group flex items-center gap-3 border border-gray-200 rounded-lg px-4 py-3 focus-within:border-white focus-within:ring-jungle/50 focus-within:ring-2 transition-all shadow-sm">
+            <FaLock className="text-gray-400 group-focus-within:text-jungle transition-all" />
+            <input
+              type="password"
+              name="password"
+              value={formData.password}
+              onChange={handleChange}
+              required
+              className="focus:outline-none w-full"
+            />
+          </div>
+        </label>
+
+        <button
+          type="submit"
+          className="bg-jungle text-white w-full mt-9 rounded-lg py-3 font-medium shadow-sm flex items-center gap-2 justify-center">
+          {isLoading ? (
+            <>
+              <span className="loading loading-spinner loading-sm"></span>
+              <span>Authenticating...</span>
+            </>
+          ) : (
+            "Sign In"
+          )}
+        </button>
+
+        <p className="text-center text-xs text-gray-500 mt-6">
+          © 2025 Wundt Psychological Institute. All rights reserved.
+        </p>
+      </form>
     </div>
   );
 }

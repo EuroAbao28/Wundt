@@ -8,7 +8,11 @@ const useUpdateStatusAppt = () => {
   const [isCancelLoading, setIsCancelLoading] = useState(false);
   const [isCompleteLoading, setIsCompleteLoading] = useState(false);
 
-  const approveApptFunction = async (id, updatedStatus) => {
+  const approveApptFunction = async (
+    id,
+    updatedStatus,
+    additionalNote = ""
+  ) => {
     const token = sessionStorage.getItem("adminToken");
 
     console.log(updatedStatus);
@@ -23,12 +27,14 @@ const useUpdateStatusAppt = () => {
         `${URL_APPROVE_APPT}/${id}`,
         {
           updatedStatus,
+          additionalNote,
         },
         { headers: { Authorization: `Bearer ${token}` } }
       );
 
       return { success: true, data: response.data, error: null };
     } catch (error) {
+      console.log(error);
       return {
         success: false,
         data: null,
