@@ -63,8 +63,10 @@ function AppointmentReviewModal({ isOpen, onClose, formData }) {
           leaveTo="opacity-0 -translate-y-8">
           <DialogPanel className="bg-white font-poppins rounded-xl max-w-3xl w-full text-gray-900 p-4 md:py-6 md:px-8 shadow relative">
             <div className="flex flex-col justify-center items-center text-center">
-              <h2 className="font-semibold text-2xl">Review Details</h2>
-              <p className="text-jungle">
+              <h2 className="font-semibold text-lg md:text-2xl">
+                Review Details
+              </h2>
+              <p className="text-jungle text-sm md:text-base">
                 Confirm your details before submitting
               </p>
             </div>
@@ -98,7 +100,7 @@ function AppointmentReviewModal({ isOpen, onClose, formData }) {
                     {formData.selectedServices.map((item, index) => (
                       <p
                         key={index}
-                        className="px-3 py-1 bg-gray-100 rounded text-xs md:text-sm shadow-sm">
+                        className="px-3 py-1 bg-gray-100 rounded-sm text-xs md:text-sm shadow-sm">
                         {item}
                       </p>
                     ))}
@@ -110,7 +112,7 @@ function AppointmentReviewModal({ isOpen, onClose, formData }) {
                 <span className="uppercase text-xs font-semibold text-gray-500">
                   Special Requests / Notes
                 </span>
-                <div className="outline outline-gray-200 rounded px-3 py-2 max-sm:max-h-16 md:h-20 overflow-auto scrollbar-thin">
+                <div className="outline outline-gray-200 rounded px-3 py-2 max-sm:max-h-16 md:h-20 overflow-auto scrollbar-thin text-sm md:text-base">
                   {formData.comments}
                 </div>
               </section>
