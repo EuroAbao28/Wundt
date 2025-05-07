@@ -63,15 +63,15 @@ function AppointmentReviewModal({ isOpen, onClose, formData }) {
           leaveTo="opacity-0 -translate-y-8">
           <DialogPanel className="bg-white font-poppins rounded-xl max-w-3xl w-full text-gray-900 p-4 md:py-6 md:px-8 shadow relative">
             <div className="flex flex-col justify-center items-center text-center">
-              <h2 className="font-semibold text-lg md:text-2xl">
+              <h2 className="font-semibold text-base md:text-2xl">
                 Review Details
               </h2>
-              <p className="text-jungle text-sm md:text-base">
+              <p className="text-jungle text-xs md:text-base">
                 Confirm your details before submitting
               </p>
             </div>
 
-            <div className="grid grid-cols-2 gap-x-6 gap-y-2 md:gap-y-4 mt-10">
+            <div className="grid grid-cols-2 gap-x-4 md:gap-x-6 gap-y-2 md:gap-y-4 mt-10">
               <DataField label="Firstname" value={formData.firstname} />
               <DataField label="Lastname" value={formData.lastname} />
               <DataField label="Email" value={formData.email} colSpan={2} />
@@ -152,7 +152,7 @@ const DataField = ({ label, value, colSpan = 1 }) => {
       <span className="uppercase text-xxs md:text-xs font-semibold text-gray-500">
         {label}
       </span>
-      <p className="px-3 py-2 outline outline-gray-200 rounded text-sm md:text-base">
+      <p className="py-1.5 px-2 md:px-3 md:py-2 outline outline-gray-200 rounded text-sm md:text-base">
         {value}
       </p>
     </section>
