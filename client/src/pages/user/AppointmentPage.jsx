@@ -20,7 +20,7 @@ import { format } from "date-fns";
 import AppointmentReviewModal from "../../components/AppointmentReviewModal";
 
 function AppointmentPage() {
-  const [isModalOpen, setIsModalOpen] = useState(true);
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const [formData, setFormData] = useState({
     firstname: "",
     lastname: "",
@@ -32,7 +32,6 @@ function AppointmentPage() {
     selectedServices: [],
     comments: "",
   });
-  const [isServicesModalOpen, setIsServicesModalOpen] = useState(false);
 
   const { createNewApptFunction, isLoading, error } = useCreateNewAppt();
 
