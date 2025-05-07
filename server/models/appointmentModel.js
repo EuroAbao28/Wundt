@@ -29,6 +29,16 @@ const appointmentSchema = new mongoose.Schema(
       lowercase: true,
       match: [/^\S+@\S+\.\S+$/, "Invalid email format"],
     },
+    date: {
+      type: String,
+      required: [true, "Appointment date is required"],
+      trim: true,
+    },
+    time: {
+      type: String,
+      required: [true, "Appointment time is required"],
+      trim: true,
+    },
     dateTime: {
       type: Date,
       required: [true, "Appointment date is required"],

@@ -20,6 +20,8 @@ const useGetAllAppts = () => {
         params: filters,
       });
 
+      console.log(filters);
+
       // 🕒 Delay 3 seconds before returning the data
       // await new Promise((resolve) => setTimeout(resolve, 3000));
 

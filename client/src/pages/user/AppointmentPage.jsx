@@ -17,9 +17,10 @@ import { MdKeyboardArrowDown, MdKeyboardArrowUp } from "react-icons/md";
 import { FiCheck } from "react-icons/fi";
 import SERVICES_OFFERED from "../../constants/SERVICES_OFFERED.JS";
 import { format } from "date-fns";
+import AppointmentReviewModal from "../../components/AppointmentReviewModal";
 
 function AppointmentPage() {
-  const [isModalOpen, setModalOpen] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(true);
   const [formData, setFormData] = useState({
     firstname: "",
     lastname: "",
@@ -57,35 +58,9 @@ function AppointmentPage() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setModalOpen(true);
+    setIsModalOpen(true);
 
     console.log(formData);
-  };
-
-  const handleConfirmSubmit = async () => {
-    const result = await createNewApptFunction(formData);
-
-    console.log(result);
-
-    if (result.success) {
-      // setFormData({
-      //   firstname: "",
-      //   lastname: "",
-      //   phone: "",
-      //   email: "",
-      //   date: "",
-      //   time: "",
-      //   branch: "",
-      //   selectedServices: [],
-      //   comments: "",
-      // });
-
-      toast.success(result.data.message);
-      setModalOpen(false);
-    } else {
-      toast.error(result.error);
-      setModalOpen(false);
-    }
   };
 
   useEffect(() => {
@@ -302,7 +277,7 @@ function AppointmentPage() {
                                   detail
                                 )}
                                 onChange={handleChange}
-                                className="w-4 h-4 accent-emerald-600 "
+                                className="w-4 h-4 accent-therapy-blue"
                               />
                               <span className="flex-1 text-xs md:text-sm">
                                 {detail}
@@ -330,98 +305,11 @@ function AppointmentPage() {
         </div>
       </div>
 
-      <Dialog
-        open={isModalOpen}
-        as="div"
-        onClose={() => setModalOpen(false)}
-        className="relative z-10 font-poppins">
-        <DialogBackdrop className="fixed inset-0 bg-black/30 backdrop-blur-xs" />
-        <div className="fixed inset-0 flex w-screen items-center justify-center p-4">
-          <DialogPanel className="bg-white rounded-lg max-w-2xl w-full text-gray-800 p-6 shadow">
-            <h3 className="text-2xl font-semibold  text-center">
-              Review Details
-            </h3>
-            <h5 className="text-sm italic  pb-6 text-emerald-600 text-center">
-              Confirm your details before submission.
-            </h5>
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 mt-6 gap-4 sm:gap-6 rounded">
-              <ReviewDetailsSection
-                label="Fullname"
-                value={`${formData.firstname} ${formData.lastname}`}
-              />
-
-              {/* <ReviewDetailsSection
-                label="Lastname"
-                value={formData.lastname}
-              /> */}
-
-              <ReviewDetailsSection label="Phone No." value={formData.phone} />
-
-              <ReviewDetailsSection label="Email" value={formData.email} />
-
-              <ReviewDetailsSection
-                label="Date & Time"
-                value={
-                  formData.date &&
-                  `${format(new Date(formData.date), "MMMM d, yyyy")} - ${
-                    formData.time
-                  }`
-                }
-              />
-
-              <ReviewDetailsSection label="Branch" value={formData.branch} />
-
-              <section className=" flex flex-col gap-2 col-span-full">
-                <p className="font-semibold uppercase text-xs">
-                  Comments / Notes
-                </p>
-                <p className="text-sm sm:text-base flex-1 -mt-1 border border-gray-300 py-1 px-2 rounded max-h-16 sm:max-h-20 overflow-y-auto scrollbar-thin">
-                  {formData.comments} i need some milk
-                </p>
-              </section>
-
-              <section className="text-xs sm:text-sm flex flex-col gap-1 col-span-full">
-                <p className="font-semibold text-nowrap capitalize">
-                  Selected Services
-                </p>
-                <div className="flex gap-1 sm:gap-2 flex-wrap max-h-32 overflow-y-auto scrollbar-thin">
-                  {formData.selectedServices.map((service, index) => (
-                    <p
-                      key={index}
-                      className="bg-gray-100 rounded py-1 px-2 w-fit text-xs sm:text-sm">
-                      {service}
-                    </p>
-                  ))}
-                </div>
-              </section>
-            </div>
-
-            <div className="flex gap-4 items-center justify-center mt-10">
-              <button
-                disabled={isLoading}
-                onClick={() => setModalOpen(false)}
-                className="bg-radial-[at_-50%_-50%] from-gray-400 to-gray-500 to-75% text-white rounded py-2 px-8 font-semibold uppercase active:scale-95 transition-all text-sm max-sm:flex-1 cursor-pointer">
-                Cancel
-              </button>
-
-              <button
-                onClick={handleConfirmSubmit}
-                disabled={isLoading}
-                className="bg-radial-[at_-50%_-50%] from-green-500 to-emerald-600 to-75% text-white rounded py-2 px-8 font-semibold uppercase active:scale-95 transition-all text-sm max-sm:flex-1 flex gap-2 items-center justify-center cursor-pointer">
-                {isLoading ? (
-                  <>
-                    <span className="loading loading-spinner loading-xs"></span>
-                    Submitting
-                  </>
-                ) : (
-                  "Confirm"
-                )}
-              </button>
-            </div>
-          </DialogPanel>
-        </div>
-      </Dialog>
+      <AppointmentReviewModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        formData={formData}
+      />
     </>
   );
 }

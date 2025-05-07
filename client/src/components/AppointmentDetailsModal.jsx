@@ -13,7 +13,6 @@ function AppointmentDetailsModal({
   isOpen,
   onClose,
   appointment,
-  handleUpdateStatus,
   isApproveLoading,
   isDeclineLoading,
   isCancelLoading,

@@ -88,6 +88,8 @@ const createAppointment = async (req, res, next) => {
       lastname,
       phone,
       email,
+      date,
+      time,
       dateTime: appointmentDateAndTime,
       branch,
       selectedServices,

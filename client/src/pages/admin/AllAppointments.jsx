@@ -51,8 +51,6 @@ function AllAppointments() {
     selectedAppointment,
     setSelectedAppointment,
     isApptConfirmationModalOpen,
-    setIsApptConfirmationModalOpen,
-    handleCloseApproveModal,
   } = useAppointmentContext();
 
   const [filters, setFilters] = useState({
@@ -250,14 +248,14 @@ function AllAppointments() {
                 <button
                   onClick={handleResetFilters}
                   disabled={isAllApptsLoading}
-                  className="bg-radial-[at_-50%_-50%] from-gray-400 to-gray-500 to-75% text-white  rounded py-2 px-8 font-semibold uppercase active:scale-95 transition-all text-sm cursor-pointer">
+                  className="bg-gray-200 text-gray-600 rounded py-2 px-8 font-semibold uppercase active:scale-95 transition-all text-sm cursor-pointer">
                   Reset
                 </button>
 
                 <button
                   onClick={handleApplyFilters}
                   disabled={isAllApptsLoading}
-                  className="bg-radial-[at_-50%_-50%] from-green-500 to-emerald-600 to-75% text-white rounded py-2 px-8 font-semibold uppercase active:scale-95 transition-all text-sm cursor-pointer">
+                  className="bg-jungle text-white rounded py-2 px-8 font-semibold uppercase active:scale-95 transition-all text-sm cursor-pointer">
                   Apply
                 </button>
               </div>
