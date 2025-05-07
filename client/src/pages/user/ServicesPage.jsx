@@ -149,7 +149,7 @@ function ServicesPage() {
 
               <Link
                 to="/appointment"
-                className="w-fit flex items-center text-sm sm:text-base px-6 py-3 bg-gradient-to-r from-jungle to-jungle/80 text-white font-medium rounded-lg hover:shadow-lg transition-all hover:brightness-105 mt-4">
+                className="w-fit flex items-center text-xs sm:text-base px-6 py-3 bg-gradient-to-r from-jungle to-jungle/80 text-white font-medium rounded-lg hover:shadow-lg transition-all hover:brightness-105 mt-8 md:mt-4">
                 Get Appointment
                 <TbArrowRight className="ml-2" />
               </Link>
