@@ -134,8 +134,8 @@ function ServicesPage() {
               </Swiper>
             </div>
 
-            <div className="flex-1 py-6 lg:py-8 px-8 lg:px-12 flex flex-col">
-              <h2 className="text-xl md:text-2xl font-bold">
+            <div className="flex-1 py-4 px-6 md:py-6 lg:py-8 md:px-8 lg:px-12 flex flex-col">
+              <h2 className="text-lg md:text-xl lg:text-2xl font-bold">
                 {service.category}
               </h2>
 
