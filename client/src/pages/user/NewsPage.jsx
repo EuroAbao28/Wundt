@@ -83,52 +83,6 @@ function NewsPage() {
         }
       />
 
-      {/* News Content */}
-      {/* <div className="py-16">
-        <div className="max-w-7xl mx-auto px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {NEWS_ITEMS.map((item, index) => (
-              <div
-                key={item.id}
-                data-aos="fade-up"
-                data-aos-delay={index * 100}
-                className="bg-white rounded-xl shadow-sm hover:shadow-md border border-gray-100 overflow-hidden group transition-all">
-                <div className="relative h-48 overflow-hidden">
-                  <img
-                    src={item.image}
-                    alt={item.title}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                  />
-                  <div className="absolute bottom-4 left-4 bg-jungle text-white text-xs px-2 py-1 rounded">
-                    {item.category}
-                  </div>
-                </div>
-
-                <div className="p-6 flex flex-col">
-                  <p className="text-sm text-gray-500">{item.date}</p>
-                  <h3 className="text-lg font-semibold text-gray-900 mt-2">
-                    {item.title}
-                  </h3>
-                  <p className="text-gray-600 text-sm mt-3">{item.desc}</p>
-
-                  <button className="flex items-center text-sm text-jungle font-medium group-hover:underline underline-offset-2 mt-4">
-                    Read more
-                    <TbArrowRight className="ml-1 group-hover:ml-2 transition-all" />
-                  </button>
-                </div>
-              </div>
-            ))}
-          </div>
-
-          <div data-aos="fade-up" className="mt-12 text-center">
-            <button className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-jungle to-jungle/80 text-white font-medium rounded-lg hover:shadow-lg transition-all hover:brightness-105">
-              Load More Articles
-              <TbArrowRight className="ml-2" />
-            </button>
-          </div>
-        </div>
-      </div> */}
-
       <div className="max-w-7xl mx-auto px-6 lg:px-8 py-16">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
           {NEWS_ITEMS.map((item, index) => (

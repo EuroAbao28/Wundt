@@ -105,14 +105,18 @@ function ContactsSection() {
                     "bg-jungle/10 border-jungle": selectedLocation === index,
                   }
                 )}>
-                <h3 className="text-lg font-semibold">{content.city}</h3>
+                <h3 className="text-sm md:text-base lg:text-lg font-semibold">
+                  {content.city}
+                </h3>
 
                 <div className="flex items-center gap-2 mt-4">
                   <div className="flex items-center gap-4 flex-1">
                     <div className="bg-jungle/10 p-2 rounded-full text-jungle hidden sm:flex items-center justify-center text-lg">
                       <FaPhoneAlt />
                     </div>
-                    <p className="text-gray-600">{content.phone}</p>
+                    <p className="text-sm md:text-base text-gray-600">
+                      {content.phone}
+                    </p>
                   </div>
 
                   <a
@@ -120,7 +124,7 @@ function ContactsSection() {
                     target="_blank"
                     rel="noopener noreferrer"
                     title="Facebook"
-                    className="bg-jungle/10 p-2 rounded-full text-jungle flex items-center justify-center text-lg">
+                    className="bg-jungle/10 p-2 rounded-full text-jungle flex items-center justify-center text-sm md:text-lg">
                     <FaFacebookF />
                   </a>
 
@@ -129,7 +133,7 @@ function ContactsSection() {
                     target="_blank"
                     rel="noopener noreferrer"
                     title="Open Gmail"
-                    className="bg-jungle/10 p-2 rounded-full text-jungle flex items-center justify-center text-lg">
+                    className="bg-jungle/10 p-2 rounded-full text-jungle flex items-center justify-center text-sm md:text-lg">
                     <BiLogoGmail />
                   </a>
 
@@ -140,7 +144,7 @@ function ContactsSection() {
                     target="_blank"
                     rel="noopener noreferrer"
                     title="Open in Google Maps"
-                    className="bg-jungle/10 p-2 rounded-full text-jungle flex items-center justify-center text-lg">
+                    className="bg-jungle/10 p-2 rounded-full text-jungle flex items-center justify-center text-sm md:text-lg">
                     <HiLocationMarker />
                   </a>
                 </div>

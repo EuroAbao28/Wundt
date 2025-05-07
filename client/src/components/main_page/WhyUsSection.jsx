@@ -5,11 +5,8 @@ import {
   TbShieldCheck,
   TbUsers,
 } from "react-icons/tb";
-import s2 from "../../assets/s2.jpg";
-import SectionHeader from "../SectionHeader";
 import AOS from "aos";
 import "aos/dist/aos.css";
-import b1 from "../../assets/s2.jpg";
 import Badge from "../Badge";
 import GradientLine from "../GradientLine";
 
@@ -69,13 +66,13 @@ function WhyUsSection() {
               data-aos="fade-up"
               data-aos-delay={index * 100}
               className="bg-white p-8 flex flex-col rounded-xl shadow-sm relative hover:shadow-md transition-all flex-1 min-w-xs overflow-hidden border border-gray-200">
-              <h3 className="text-lg sm:text-xl font-semibold mb-2">
+              <h3 className="text-base md:text-lg lg:text-xl font-semibold mb-2">
                 {content.title}
               </h3>
-              <p className="text-sm sm:text-base flex-1 mb-4 text-gray-600">
+              <p className="text-xs md:text-sm lg:text-base flex-1 mb-4 text-gray-600">
                 {content.description}
               </p>
-              <p className="text-sm font-medium text-therapy-blue">
+              <p className="text-xs md:text-sm lg:text-base font-medium text-therapy-blue">
                 {content.stats}
               </p>
               <div className="rounded-full p-3 bg-jungle/10 w-fit text-8xl text-white absolute -right-4 -bottom-4 -z-10">
@@ -92,10 +89,10 @@ function WhyUsSection() {
             <TbCertificate />
           </div>
           <div className="space-y-2 max-sm:text-center">
-            <h3 className="text-lg sm:text-xl font-semibold">
+            <h3 className="text-base md:text-lg lg:text-xl font-semibold">
               Fully Accredited Practice
             </h3>
-            <p className="text-sm sm:text-base text-gray-600">
+            <p className="text-xs md:text-sm lg:text-base text-gray-600">
               Recognized by the Professional Regulation Commission (Permit No.
               03) and member of the Philippine Psychological Association
             </p>
